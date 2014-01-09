@@ -3,9 +3,6 @@ package storm2014;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import storm2014.utilities.Target;
 
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
 public class OI {    
