@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import storm2014.commands.TakeItBackNowYall;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
@@ -32,8 +33,8 @@ public class Robot extends IterativeRobot {
         oi         = new OI();
 
         // The names, and corresponding Commands of our autonomous modes
-        autonomiceNames = new String[]{};
-        autonomice = new Command[]{};
+        autonomiceNames = new String[]{"TakeItBackNowYall"};
+        autonomice = new Command[]{new TakeItBackNowYall(0.6, 1000)};
 
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard
