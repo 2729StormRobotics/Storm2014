@@ -8,7 +8,7 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
- * @author Jeff Kiesel
+ * @author Storm
  */
 public class TriangleMovement extends CommandGroup {
     

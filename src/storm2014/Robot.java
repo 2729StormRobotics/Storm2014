@@ -33,8 +33,8 @@ public class Robot extends IterativeRobot {
         oi         = new OI();
 
         // The names, and corresponding Commands of our autonomous modes
-        autonomiceNames = new String[]{"TakeItBackNowYall"};
-        autonomice = new Command[]{new TakeItBackNowYall(0.6, 1000)};
+        autonomiceNames = new String[]{"ForwardDriveByDistance"};
+        autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000)};
 
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard

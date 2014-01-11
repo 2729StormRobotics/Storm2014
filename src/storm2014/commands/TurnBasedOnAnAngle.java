@@ -29,7 +29,11 @@ public class TurnBasedOnAnAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        if (_angle>0){
         Robot.driveTrain.tankDrive(0.5,-0.5);
+        }else{
+          Robot.driveTrain.tankDrive(-0.5,0.5);  
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
