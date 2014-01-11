@@ -17,6 +17,7 @@ public class RobotMap {
     
     public static final int PORT_MOTOR_DRIVE_LEFT     = 1;
     public static final int PORT_MOTOR_DRIVE_RIGHT    = 10;
+    public static final int PORT_MOTOR_SHOOTER        = 3;
     
     public static final int PORT_ENCODER_LEFT_1       = 3;
     public static final int PORT_ENCODER_LEFT_2       = 4;
@@ -24,4 +25,5 @@ public class RobotMap {
     public static final int PORT_ENCODER_RIGHT_2      = 1;
     
     public static final int PORT_SENSOR_GYRO          = 1;
+    public static final int PORT_SENSOR_HALL_EFFECT   = 5;
 }
