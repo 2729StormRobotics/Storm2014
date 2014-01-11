@@ -12,13 +12,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class TriangleMovement extends CommandGroup {
     
-    public TriangleMovement() {
-        addSequential(new ForwardDriveByDistance(0.5,500));
-        addSequential(new TurnBasedOnAnAngle(0.6));
-        addSequential(new ForwardDriveByDistance(0.5,500));
-        addSequential(new TurnBasedOnAnAngle(0.6));
-        addSequential(new ForwardDriveByDistance(0.5,500));
-        addSequential(new TurnBasedOnAnAngle(0.6));
+    public TriangleMovement(double sideLength) {
+        addSequential(new ForwardDriveByDistance(0.5,sideLength));
+        addSequential(new TurnBasedOnAnAngle(60, 0.5));
+        
+        addSequential(new ForwardDriveByDistance(0.5,sideLength));
+        addSequential(new TurnBasedOnAnAngle(60, 0.5));
+        
+        addSequential(new ForwardDriveByDistance(0.5,sideLength));
+        addSequential(new TurnBasedOnAnAngle(60, 0.5));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
