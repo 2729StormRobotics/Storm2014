@@ -15,12 +15,12 @@ import storm2014.Robot;
  *
  * @author Storm
  */
-public class TakeItBackNowYall extends Command {
+public class ForwardDriveByDistance extends Command {
     
     double _power;
     double _distance;
        
-    public TakeItBackNowYall(double power, double distance) {
+    public ForwardDriveByDistance(double power, double distance) {
         requires(Robot.driveTrain);
         _power = power;
         _distance = distance;
