@@ -24,7 +24,7 @@ public class TurnBasedOnAnAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.driveTrain.clearEncoder();
+        Robot.driveTrain.clearGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,9 +34,17 @@ public class TurnBasedOnAnAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(Robot.driveTrain.getGyroAngle()>_angle-5 && Robot.driveTrain.getGyroAngle()<_angle+5){
-            return true;
+        if(Robot.driveTrain.getGyroAngle()>0){
+         if(Robot.driveTrain.getGyroAngle()>_angle){
+                return true;
+            }   
+        }else{
+            
+            if(Robot.driveTrain.getGyroAngle()<_angle){
+                return true;
+            } 
         }
+        
         return false;
     }
 
