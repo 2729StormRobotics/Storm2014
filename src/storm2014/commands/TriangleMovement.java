@@ -13,14 +13,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class TriangleMovement extends CommandGroup {
     
     public TriangleMovement(double sideLength) {
-        addSequential(new ForwardDriveByDistance(0.5,sideLength));
-        addSequential(new TurnBasedOnAnAngle(60, 0.5));
+        addSequential(new ForwardDriveByDistance(0.6,sideLength));
+        addSequential(new TurnBasedOnAnAngle(60, 0.6));
          
-        addSequential(new ForwardDriveByDistance(0.5,sideLength));
-        addSequential(new TurnBasedOnAnAngle(60, 0.5));
+        addSequential(new ForwardDriveByDistance(0.6,sideLength));
+        addSequential(new TurnBasedOnAnAngle(60, 0.6));
         
-        addSequential(new ForwardDriveByDistance(0.5,sideLength));
-        addSequential(new TurnBasedOnAnAngle(60, 0.5));
+        addSequential(new ForwardDriveByDistance(0.6,sideLength));
+        addSequential(new TurnBasedOnAnAngle(60, 0.6));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -39,6 +39,7 @@ public class TriangleMovement extends CommandGroup {
     }
 
     protected void interrupted() {
+        System.out.println("Interrupted");
         end(); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.ForwardDriveByDistance;
+import storm2014.commands.TriangleMovement;
 import storm2014.subsystems.Shooter;
 
 /** 
@@ -40,8 +41,8 @@ public class Robot extends IterativeRobot {
         oi         = new OI();
 
         // The names, and corresponding Commands of our autonomous modes
-        autonomiceNames = new String[]{"TakeItBackNowYall"};
-        autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000)};
+        autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement"};
+        autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000),new TriangleMovement(1000)};
 
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard

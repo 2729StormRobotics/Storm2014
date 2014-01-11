@@ -24,6 +24,7 @@ public class DriveTrain extends Subsystem {
     Encoder _rightEncoder = new Encoder(RobotMap.PORT_ENCODER_RIGHT_1, RobotMap.PORT_ENCODER_RIGHT_2);
      
     Gyro _gyro = new Gyro(RobotMap.PORT_SENSOR_GYRO);
+    double _gyroOffset = 0;
     
     public DriveTrain() {
 	
@@ -69,9 +70,13 @@ public class DriveTrain extends Subsystem {
         _rightEncoder.reset();
     }
     
-    /** Resets the gyro. */
-    public void clearGyro(){
+    /** Resets the gyro. May take a while */
+    public void resetGyro(){
         _gyro.reset();
+    }
+    /** Makes gyro readings  */
+    public void clearGyro(){
+        _gyroOffset = _gyro.getAngle();
     }
     
     /**
@@ -79,7 +84,7 @@ public class DriveTrain extends Subsystem {
      * - = counterclockwise).
      */
     public double getGyroAngle(){
-        return _gyro.getAngle();
+        return _gyro.getAngle()-_gyroOffset;
     }
     
     /** Reads the [-1,1] value set for the left wheels. */
