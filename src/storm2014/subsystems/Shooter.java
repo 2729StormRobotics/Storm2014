@@ -8,16 +8,17 @@ import storm2014.utilities.HallEffectSpeedSensor;
 
 
 public class Shooter extends PIDSubsystem{
+    private static final double SCALE = 10000;
     //declares variables
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT);
     private Jaguar _wheelMotor = new Jaguar(RobotMap.PORT_MOTOR_SHOOTER);
     
     
     public Shooter(){
-        super("shooter",0,0,0,0);
+        super("shooter",0,0.032,0,0.27);
         _speedSensor.setMinSpeedRpm(200);
         SmartDashboard.putData("Shooter wheel PID",getPIDController());
-        getPIDController().setOutputRange(-1000, 1000);
+        getPIDController().setOutputRange(-SCALE, SCALE);
     }
     
     //gets current speed of motor
@@ -38,7 +39,7 @@ public class Shooter extends PIDSubsystem{
     }
 
     protected void usePIDOutput(double output) {
-        _wheelMotor.set(output/1000);
+        _wheelMotor.set(output/SCALE);
     }
 
     protected void initDefaultCommand() {
