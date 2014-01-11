@@ -8,7 +8,7 @@ import storm2014.utilities.HallEffectSpeedSensor;
 
 
 public class Shooter extends PIDSubsystem{
-    
+    //declares variables
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT);
     private Jaguar _wheelMotor = new Jaguar(RobotMap.PORT_MOTOR_SHOOTER);
     
