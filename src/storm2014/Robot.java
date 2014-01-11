@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.ForwardDriveByDistance;
+import storm2014.subsystems.Shooter;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
@@ -16,6 +17,7 @@ public class Robot extends IterativeRobot {
     // All subsystems are accessible by Robot.name
     public static OI         oi;
     public static DriveTrain driveTrain;
+    public static Shooter shooter;
     
     Command teleop;
     String[] autonomiceNames;
@@ -24,11 +26,16 @@ public class Robot extends IterativeRobot {
     Command autonomouse;
     
     private void sendSensorData() {
+        SmartDashboard.putNumber("Wheel Speed RPM", shooter.getSpeedRPM());
+        SmartDashboard.putBoolean("Shooter enabled", shooter.getPIDController().isEnable());
+        SmartDashboard.putNumber("Shooter val", shooter.getMotorRawVal());
+//        System.out.println("hi");
     }
     
     /** Called on robot boot. */
     public void robotInit() {
         driveTrain = new DriveTrain();
+        shooter    = new Shooter();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
 
@@ -62,6 +69,8 @@ public class Robot extends IterativeRobot {
                 end();
             }
         }.start();
+//        System.out.println("Thingy");
+//        SmartDashboard.putData("Shooter PID 2",shooter.getPIDController());
     }
 
     /** Called at the start of autonomous mode. */

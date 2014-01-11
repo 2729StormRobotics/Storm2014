@@ -16,7 +16,8 @@ public class Shooter extends PIDSubsystem{
     public Shooter(){
         super("shooter",0,0,0,0);
         _speedSensor.setMinSpeedRpm(200);
-        SmartDashboard.putData(this);
+        SmartDashboard.putData("Shooter wheel PID",getPIDController());
+        getPIDController().setOutputRange(-1000, 1000);
     }
     
     //gets current speed of motor
@@ -37,7 +38,7 @@ public class Shooter extends PIDSubsystem{
     }
 
     protected void usePIDOutput(double output) {
-        _wheelMotor.set(output);
+        _wheelMotor.set(output/1000);
     }
 
     protected void initDefaultCommand() {
