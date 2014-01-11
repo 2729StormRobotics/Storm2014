@@ -15,7 +15,7 @@ public class TriangleMovement extends CommandGroup {
     public TriangleMovement(double sideLength) {
         addSequential(new ForwardDriveByDistance(0.5,sideLength));
         addSequential(new TurnBasedOnAnAngle(60, 0.5));
-        
+         
         addSequential(new ForwardDriveByDistance(0.5,sideLength));
         addSequential(new TurnBasedOnAnAngle(60, 0.5));
         
@@ -37,4 +37,13 @@ public class TriangleMovement extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     }
+
+    protected void interrupted() {
+        end(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    protected void end() {
+        System.out.println("Command ended");
+    }
+    
 }
