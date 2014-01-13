@@ -17,8 +17,8 @@ import storm2014.Robot;
  */
 public class ForwardDriveByDistance extends Command {
     
-    double _power;
-    double _distance;
+    final double _power;
+    final double _distance;
        
     public ForwardDriveByDistance(double power, double distance) {
         requires(Robot.driveTrain);

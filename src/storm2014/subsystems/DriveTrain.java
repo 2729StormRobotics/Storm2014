@@ -73,6 +73,7 @@ public class DriveTrain extends Subsystem {
     /** Resets the gyro. May take a while */
     public void resetGyro(){
         _gyro.reset();
+        clearGyro();
     }
     /** Makes gyro readings  */
     public void clearGyro(){
