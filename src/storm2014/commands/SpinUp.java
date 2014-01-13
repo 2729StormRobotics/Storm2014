@@ -37,7 +37,6 @@ public class SpinUp extends Command{
     }
 
     protected void end() {
-        Robot.shooter.setMotorRawVal(0);
     }
 
     protected void interrupted() {
