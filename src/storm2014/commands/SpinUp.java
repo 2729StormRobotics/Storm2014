@@ -8,7 +8,6 @@ public class SpinUp extends Command{
     private static final double THRESHOLD_PID = .95;
     private static final double THRESHOLD_ERR = .02;
     private double _speed;
-    private double currentSpeed;
     
     public SpinUp(double speed){
         requires(Robot.shooter);
@@ -21,7 +20,7 @@ public class SpinUp extends Command{
     }
 
     protected void execute() {
-      if(currentSpeed/_speed < THRESHOLD_PID ){ //if the motor is less then the threshold gun the motor =
+      if(Robot.shooter.getSpeedRPM()/_speed < THRESHOLD_PID ){ //if the motor is less then the threshold gun the motor =
          
           if(Robot.shooter.getPIDController().isEnable()){
                Robot.shooter.getPIDController().disable();   
