@@ -43,7 +43,7 @@ public class TriangleMovement extends CommandGroup {
 
     protected void interrupted() {
         System.out.println("Interrupted");
-        end(); //To change body of generated methods, choose Tools | Templates.
+        end(); 
     }
 
     protected void end() {

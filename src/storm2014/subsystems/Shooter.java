@@ -19,8 +19,8 @@ public class Shooter extends PIDSubsystem{
         _speedSensor.setMinSpeedRpm(200);
         SmartDashboard.putData("Shooter wheel PID",getPIDController());
         getPIDController().setOutputRange(-SCALE, SCALE);
+        getPIDController().setPercentTolerance(5);
     }
-    
     //gets current speed of motor
     public double getSpeedRPM(){
         return _speedSensor.getSpeedRpm();
@@ -29,11 +29,12 @@ public class Shooter extends PIDSubsystem{
     public double getMotorRawVal(){
         return _wheelMotor.get();
     }
+    
     //sets the speed of the motor
     public void setMotorRawVal(double speed){
         _wheelMotor.set(speed);
     }
-
+    
     protected double returnPIDInput() {
           return _speedSensor.getSpeedRpm();
     }
