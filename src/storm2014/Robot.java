@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.ForwardDriveByDistance;
+import storm2014.commands.SpinUp;
 import storm2014.commands.TriangleMovement;
 import storm2014.subsystems.Shooter;
 
@@ -69,6 +70,7 @@ public class Robot extends IterativeRobot {
         }.start();
 //        System.out.println("Thingy");
 //        SmartDashboard.putData("Shooter PID 2",shooter.getPIDController());
+          SmartDashboard.putData(new SpinUp(1500));
     }
 
     /** Called at the start of autonomous mode. */

@@ -17,6 +17,7 @@ public class SpinUp extends Command{
 
     protected void initialize() {
       Robot.shooter.getPIDController().setSetpoint(_speed); //sets wanted speed to wanted speed
+      Robot.shooter.setMotorRawVal(1);
     }
 
     protected void execute() {
@@ -42,22 +43,6 @@ public class SpinUp extends Command{
     protected void interrupted() {
         end();
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 }
