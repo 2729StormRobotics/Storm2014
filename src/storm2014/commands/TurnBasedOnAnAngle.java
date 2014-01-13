@@ -40,7 +40,7 @@ public class TurnBasedOnAnAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(Robot.driveTrain.getGyroAngle()>0){
+        if(_angle>0){
          if(Robot.driveTrain.getGyroAngle()>_angle){
                 return true;
             }   

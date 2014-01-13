@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement"};
-        autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000),new TriangleMovement(1000)};
+        autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000),new TriangleMovement(1500)};
 
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard
@@ -51,6 +51,7 @@ public class Robot extends IterativeRobot {
             chooser.addObject(autonomiceNames[i], autonomice[i]);
         }
         SmartDashboard.putData("Which Autonomouse?", chooser);
+        SmartDashboard.putData(Scheduler.getInstance());
         
         // Send sensor info to the SmartDashboard periodically
         new Command("Sensor feedback") {
