@@ -21,11 +21,19 @@ public class SpinUp extends Command{
     }
 
     protected void execute() {
-      if(currentSpeed/_speed < THRESHOLD_PID ){ //if the motor is less then the threshold gun the motor 
-        Robot.shooter.getPIDController().disable(); 
+      if(currentSpeed/_speed < THRESHOLD_PID ){ //if the motor is less then the threshold gun the motor =
+         
+          if(Robot.shooter.getPIDController().isEnable()){
+               Robot.shooter.getPIDController().disable();   
+          }
+          
+          Robot.shooter.setMotorRawVal(1);
+                  
       } else {
           Robot.shooter.getPIDController().enable(); //else change to more precise
       }
+      
+      
       
     }
 
