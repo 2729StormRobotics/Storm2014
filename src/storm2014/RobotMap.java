@@ -8,7 +8,8 @@ public class RobotMap {
                             PORT_JOYSTICK_SHOOT = 2,
                             PORT_JOYSTICK_DEBUG = 3;
     
-    public static final int JOYDRIVE_BUTTON_SLOW            = 5;
+    public static final int JOYDRIVE_BUTTON_SLOW  = 5;
+    public static final int JOYDRIVE_BUTTON_SPINUP  = 3;
     
     public static final int JOYDEBUG_BUTTON_CONTROLSHOOT = 10;
     
