@@ -5,8 +5,7 @@ import storm2014.Robot;
 
 
 public class SpinUp extends Command{
-    private static final double THRESHOLD_PID = .95;
-    private static final double THRESHOLD_ERR = .02;
+    private static final double THRESHOLD_PID = .50;
     private double _speed;
     
     public SpinUp(double speed){
@@ -16,7 +15,7 @@ public class SpinUp extends Command{
 
     protected void initialize() {
       Robot.shooter.getPIDController().setSetpoint(_speed); //sets wanted speed to wanted speed
-      Robot.shooter.setMotorRawVal(1);
+      Robot.shooter.setMotorRawVal(-1);
     }
 
     protected void execute() {
@@ -31,9 +30,7 @@ public class SpinUp extends Command{
       } else {
           Robot.shooter.getPIDController().enable(); //else change to more precise
       }
-      
-      
-      
+         
     }
 
     //if % error is less then 1% return 
