@@ -45,10 +45,9 @@ public class TurnBasedOnAnAngle extends Command {
                 return true;
             }   
         }else{
-            
-            if(Robot.driveTrain.getGyroAngle()<_angle){
+             if(Robot.driveTrain.getGyroAngle()<_angle){
                 return true;
-            } 
+            }
         }
         
         return false;

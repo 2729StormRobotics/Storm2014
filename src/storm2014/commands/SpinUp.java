@@ -8,7 +8,6 @@ public class SpinUp extends Command{
     private static final double THRESHOLD_PID = .95;
     private static final double THRESHOLD_ERR = .02;
     private double _speed;
-    private double currentSpeed;
     
     public SpinUp(double speed){
         requires(Robot.shooter);
@@ -17,14 +16,23 @@ public class SpinUp extends Command{
 
     protected void initialize() {
       Robot.shooter.getPIDController().setSetpoint(_speed); //sets wanted speed to wanted speed
+      Robot.shooter.setMotorRawVal(1);
     }
 
     protected void execute() {
-      if(currentSpeed/_speed < THRESHOLD_PID ){ //if the motor is less then the threshold gun the motor 
-        Robot.shooter.getPIDController().disable(); 
+      if(Robot.shooter.getSpeedRPM()/_speed < THRESHOLD_PID ){ //if the motor is less then the threshold gun the motor =
+         
+          if(Robot.shooter.getPIDController().isEnable()){
+               Robot.shooter.getPIDController().disable();   
+          }
+          
+          Robot.shooter.setMotorRawVal(1);
+                  
       } else {
           Robot.shooter.getPIDController().enable(); //else change to more precise
       }
+      
+      
       
     }
 
@@ -42,22 +50,6 @@ public class SpinUp extends Command{
     protected void interrupted() {
         end();
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 }

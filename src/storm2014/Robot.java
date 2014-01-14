@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.ForwardDriveByDistance;
+import storm2014.commands.SpinUp;
 import storm2014.commands.TriangleMovement;
 import storm2014.subsystems.Shooter;
 
@@ -42,7 +43,7 @@ public class Robot extends IterativeRobot {
 
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement"};
-        autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000),new TriangleMovement(1000)};
+        autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000),new TriangleMovement(1500)};
 
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard
@@ -51,6 +52,7 @@ public class Robot extends IterativeRobot {
             chooser.addObject(autonomiceNames[i], autonomice[i]);
         }
         SmartDashboard.putData("Which Autonomouse?", chooser);
+        SmartDashboard.putData(Scheduler.getInstance());
         
         // Send sensor info to the SmartDashboard periodically
         new Command("Sensor feedback") {
@@ -68,6 +70,7 @@ public class Robot extends IterativeRobot {
         }.start();
 //        System.out.println("Thingy");
 //        SmartDashboard.putData("Shooter PID 2",shooter.getPIDController());
+          SmartDashboard.putData(new SpinUp(1500));
     }
 
     /** Called at the start of autonomous mode. */
