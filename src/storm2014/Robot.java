@@ -1,7 +1,11 @@
 package storm2014;
 
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
+
+import edu.wpi.first.wpilibj.ADXL345_I2C;
+
 import storm2014.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -18,6 +22,7 @@ import storm2014.subsystems.Shooter;
 /** 
  * This is the robot's "Main class" which is run by the VM.
  */
+//create allcellaromiter class, send data to dashboard in send sensor method in robot.java
 public class Robot extends IterativeRobot {
     // All subsystems are accessible by Robot.name
     public static OI         oi;
@@ -33,10 +38,16 @@ public class Robot extends IterativeRobot {
     Solenoid solenoid1, solenoid2;
     DigitalInput digiInput;
     
+    ADXL345_I2C accelerometer;
+    
     private void sendSensorData() {
         SmartDashboard.putNumber("Wheel Speed RPM", shooter.getSpeedRPM());
         SmartDashboard.putBoolean("Shooter enabled", shooter.getPIDController().isEnable());
         SmartDashboard.putNumber("Shooter val", shooter.getMotorRawVal());
+        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kX));
+        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
+        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kZ));
+
 //        System.out.println("hi");
     }
     
@@ -61,7 +72,9 @@ public class Robot extends IterativeRobot {
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement"};
         autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000),new TriangleMovement(1500)};
-
+        
+        accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
+        
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard
         System.out.println(autonomice.length);
