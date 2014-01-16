@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.ForwardDriveByDistance;
 import storm2014.commands.SpinUp;
 import storm2014.commands.TriangleMovement;
+import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
 
 /** 
@@ -23,6 +24,7 @@ public class Robot extends IterativeRobot {
     public static OI         oi;
     public static DriveTrain driveTrain;
     public static Shooter shooter;
+    public static LEDStrip leds;
     
     Command teleop;
     String[] autonomiceNames;
@@ -49,6 +51,7 @@ public class Robot extends IterativeRobot {
         shooter    = new Shooter();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
+        leds       = new LEDStrip();
 
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement"};
