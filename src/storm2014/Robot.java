@@ -1,9 +1,14 @@
 package storm2014;
 
+
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
+
 import edu.wpi.first.wpilibj.ADXL345_I2C;
-import edu.wpi.first.wpilibj.Accelerometer;
+
 import storm2014.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -31,6 +36,9 @@ public class Robot extends IterativeRobot {
     Command[] autonomice;
     SendableChooser chooser = new SendableChooser();
     Command autonomouse;
+    Compressor compressor;
+    Solenoid solenoid1, solenoid2;
+    DigitalInput digiInput;
     
     ADXL345_I2C accelerometer;
     
@@ -47,11 +55,22 @@ public class Robot extends IterativeRobot {
     
     /** Called on robot boot. */
     public void robotInit() {
+
+        
         driveTrain = new DriveTrain();
         shooter    = new Shooter();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         leds       = new LEDStrip();
+
+        compressor = new Compressor(RobotMap.Port_Compressor_SwitchChannel,RobotMap.Port_Compressor_RelayChannel);
+        solenoid1 = new Solenoid(RobotMap.Port_Solenoid1_Channel);
+        solenoid2 = new Solenoid(RobotMap.Port_Solenoid2_Channel);
+        digiInput = new DigitalInput(RobotMap.Port_DigitalInput_Channel);
+        LiveWindow.addActuator("Pneumatics", "compressor", compressor);
+        LiveWindow.addActuator("Pneumatics","solenoid1", solenoid1);
+        LiveWindow.addActuator("Pneumatics","solenoid2", solenoid2);
+        LiveWindow.addSensor("Pneumatics","digiInput", digiInput);
 
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement"};
