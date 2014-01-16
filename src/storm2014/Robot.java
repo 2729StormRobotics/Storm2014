@@ -53,10 +53,10 @@ public class Robot extends IterativeRobot {
         solenoid1 = new Solenoid(RobotMap.Port_Solenoid1_Channel);
         solenoid2 = new Solenoid(RobotMap.Port_Solenoid2_Channel);
         digiInput = new DigitalInput(RobotMap.Port_DigitalInput_Channel);
-        LiveWindow.addActuator("Compressor", "compressor", compressor);
-        LiveWindow.addActuator("Solenoid","solenoid1", solenoid1);
-        LiveWindow.addActuator("Solenoid","solenoid2", solenoid2);
-        LiveWindow.addSensor("DigitalInput","digiInput", digiInput);
+        LiveWindow.addActuator("Pneumatics", "compressor", compressor);
+        LiveWindow.addActuator("Pneumatics","solenoid1", solenoid1);
+        LiveWindow.addActuator("Pneumatics","solenoid2", solenoid2);
+        LiveWindow.addSensor("Pneumatics","digiInput", digiInput);
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement"};
