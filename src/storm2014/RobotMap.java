@@ -8,10 +8,13 @@ public class RobotMap {
                             PORT_JOYSTICK_SHOOT = 2,
                             PORT_JOYSTICK_DEBUG = 3;
     
-    public static final int JOYDRIVE_BUTTON_SLOW  = 5;
+    public static final int JOYDRIVE_BUTTON_SLOW    = 5;
     public static final int JOYDRIVE_BUTTON_SPINUP  = 3;
+    public static final int JOYDRIVE_BUTTON_CHANGELED  = 4;
+    
     
     public static final int JOYDEBUG_BUTTON_CONTROLSHOOT = 10;
+    
     
     public static final int JOYDRIVE_AXIS_DRIVE_LEFT  = 2,
                             JOYDRIVE_AXIS_DRIVE_RIGHT = 4;
@@ -27,4 +30,12 @@ public class RobotMap {
     
     public static final int PORT_SENSOR_GYRO          = 1;
     public static final int PORT_SENSOR_HALL_EFFECT   = 5;
+    
+    public static final int Port_Compressor_SwitchChannel = 5;
+    public static final int Port_Compressor_RelayChannel  = 2;
+    
+    public static final int Port_Solenoid1_Channel = 1;
+    public static final int Port_Solenoid2_Channel = 2;
+    
+    public static final int Port_DigitalInput_Channel = 1;
 }
