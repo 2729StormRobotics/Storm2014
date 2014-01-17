@@ -9,9 +9,10 @@ import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.util.Timer;
 import java.util.TimerTask;
+import storm2014.Robot;
 
+public class BangBangController implements LiveWindowSendable {
 
-public class BangBangController implements LiveWindowSendable{
     
     //if less then set point gun it if you are greater drop down to 0 or drop down to lower value
     private class _bgTask extends TimerTask {
@@ -81,7 +82,6 @@ public class BangBangController implements LiveWindowSendable{
                 if (_speed != ((Double) value).doubleValue())
                     setSetpoint(((Double) value).doubleValue());
                 else if (key.equals("enabled")) {
-                    
                     if (_enabled != ((Boolean) value).booleanValue()) {
                         if (((Boolean) value).booleanValue()) {
                             enable();
@@ -98,6 +98,7 @@ public class BangBangController implements LiveWindowSendable{
     
     //adds a table to smart dashboard
     private ITable table;
+  
     public void initTable(ITable table){
         
         if(this.table!=null)
@@ -113,6 +114,21 @@ public class BangBangController implements LiveWindowSendable{
     
     public ITable getTable(){
         return table;
+    }
+    
+    public void updateTable() {
+       
+    }
+
+    public void startLiveWindowMode() {
+        disable();
+    }
+    public void stopLiveWindowMode() {
+       
+    }
+
+    public String getSmartDashboardType() {
+        return "BangBangController";
     }
     
 }
