@@ -20,6 +20,7 @@ public class Shooter extends PIDSubsystem{
         bangbangcontroller = new BangBangController(_wheelMotor, _speedSensor,1,1500);
         _speedSensor.setMinSpeedRpm(200);
         SmartDashboard.putData("Shooter wheel PID",getPIDController());
+        SmartDashboard.putData("Bang Bang Controller",bangbangcontroller);
         getPIDController().setOutputRange(-SCALE, SCALE);
         getPIDController().setPercentTolerance(5);
          
