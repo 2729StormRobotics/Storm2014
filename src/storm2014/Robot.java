@@ -19,6 +19,7 @@ import storm2014.commands.SpinUp;
 import storm2014.commands.TriangleMovement;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
+import storm2014.utilities.BangBangController;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
@@ -36,15 +37,17 @@ public class Robot extends IterativeRobot {
     Command[] autonomice;
     SendableChooser chooser = new SendableChooser();
     Command autonomouse;
-    Compressor compressor;
-    Solenoid solenoid1, solenoid2;
-    DigitalInput digiInput;
+    
+//    Compressor compressor;
+//    Solenoid solenoid1, solenoid2;
+//    DigitalInput digiInput;
     
     ADXL345_I2C accelerometer;
     
     private void sendSensorData() {
         SmartDashboard.putNumber("Wheel Speed RPM", shooter.getSpeedRPM());
-        SmartDashboard.putBoolean("Shooter enabled", shooter.getPIDController().isEnable());
+//        SmartDashboard.putBoolean("Shooter enabled", shooter.getPIDController().isEnable());
+        SmartDashboard.putBoolean("bangbang enabled?", shooter.isBangBangControllerEnabled());
         SmartDashboard.putNumber("Shooter val", shooter.getMotorRawVal());
         SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kX));
         SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
@@ -62,15 +65,15 @@ public class Robot extends IterativeRobot {
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         leds       = new LEDStrip();
-
-        compressor = new Compressor(RobotMap.Port_Compressor_SwitchChannel,RobotMap.Port_Compressor_RelayChannel);
-        solenoid1 = new Solenoid(RobotMap.Port_Solenoid1_Channel);
-        solenoid2 = new Solenoid(RobotMap.Port_Solenoid2_Channel);
-        digiInput = new DigitalInput(RobotMap.Port_DigitalInput_Channel);
-        LiveWindow.addActuator("Pneumatics", "compressor", compressor);
-        LiveWindow.addActuator("Pneumatics","solenoid1", solenoid1);
-        LiveWindow.addActuator("Pneumatics","solenoid2", solenoid2);
-        LiveWindow.addSensor("Pneumatics","digiInput", digiInput);
+       
+//       compressor = new Compressor(RobotMap.Port_Compressor_SwitchChannel,RobotMap.Port_Compressor_RelayChannel);
+//        solenoid1 = new Solenoid(RobotMap.Port_Solenoid1_Channel);
+//        solenoid2 = new Solenoid(RobotMap.Port_Solenoid2_Channel);
+//        digiInput = new DigitalInput(RobotMap.Port_DigitalInput_Channel);
+//        LiveWindow.addActuator("Pneumatics", "compressor", compressor);
+//        LiveWindow.addActuator("Pneumatics","solenoid1", solenoid1);
+//        LiveWindow.addActuator("Pneumatics","solenoid2", solenoid2);
+//        LiveWindow.addSensor("Pneumatics","digiInput", digiInput);
 
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement"};

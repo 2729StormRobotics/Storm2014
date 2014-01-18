@@ -2,6 +2,7 @@ package storm2014.utilities;
 
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.tables.ITable;
 
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.tables.ITable;
  * of a wheel.
  * @author Joe
  */
-public class HallEffectSpeedSensor implements LiveWindowSendable {
+public class HallEffectSpeedSensor implements LiveWindowSendable,PIDSource {
     private DigitalInput _hallEffect;
     private Counter _counter;
 
@@ -64,4 +65,9 @@ public class HallEffectSpeedSensor implements LiveWindowSendable {
 
     public void startLiveWindowMode() {}
     public void stopLiveWindowMode() {}
+
+    public double pidGet() {
+      return getSpeedRpm();
+        
+    }
 }
