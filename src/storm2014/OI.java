@@ -19,7 +19,7 @@ public class OI {
     
     public OI() {
         spinUp.whenPressed(new SpinUp(1500.0));
-        changeLed.whenPressed(new SetLEDMode((Robot.leds.currentMode + 1) % 7));
+        changeLed.whenPressed(new SetLEDMode());
     }
     
     // When a joystick is in its zero position, it will not necessarily read
