@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package storm2014.commands;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
@@ -14,30 +15,11 @@ public class AutonomousDance extends CommandGroup {
                                 DRIVE_SPEED = 0.6,
                                 TURN_SPEED  = 0.7;
     public AutonomousDance(double sideLength) {
-        addSequential(new Dance(DRIVE_SPEED,sideLength));
+        addSequential(new ForwardDriveByDistance(DRIVE_SPEED,sideLength));
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
-    }
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
-
-    // Called once after isFinished returns true
-    protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
 }
