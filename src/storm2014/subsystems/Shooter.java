@@ -2,13 +2,14 @@ package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.RobotMap;
 import storm2014.utilities.BangBangController;
 import storm2014.utilities.HallEffectSpeedSensor;
 
 
-public class Shooter extends PIDSubsystem{
+public class Shooter extends Subsystem{
     private static final double SCALE = 10000;
     //declares variables
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT);
@@ -16,13 +17,13 @@ public class Shooter extends PIDSubsystem{
     BangBangController bangbangcontroller;
     
     public Shooter(){
-        super("shooter",0,0.032,0,0.27);
-        bangbangcontroller = new BangBangController(_wheelMotor, _speedSensor,1,1500);
+        super("shooter");//,0,0.032,0,0.27);
+        bangbangcontroller = new BangBangController(_wheelMotor, _speedSensor,1.0/100,1500);
         _speedSensor.setMinSpeedRpm(200);
-        SmartDashboard.putData("Shooter wheel PID",getPIDController());
+//        SmartDashboard.putData("Shooter wheel PID",getPIDController());
         SmartDashboard.putData("Bang Bang Controller",bangbangcontroller);
-        getPIDController().setOutputRange(-SCALE, SCALE);
-        getPIDController().setPercentTolerance(5);
+//        getPIDController().setOutputRange(-SCALE, SCALE);
+//        getPIDController().setPercentTolerance(5);
          
     }
     //gets current speed of motor
@@ -48,6 +49,10 @@ public class Shooter extends PIDSubsystem{
     }
 
     protected void initDefaultCommand() {
+    }
+    
+    public boolean isBangBangControllerEnabled(){
+        return bangbangcontroller.isEnable();
     }
 
 }

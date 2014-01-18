@@ -46,7 +46,8 @@ public class Robot extends IterativeRobot {
     
     private void sendSensorData() {
         SmartDashboard.putNumber("Wheel Speed RPM", shooter.getSpeedRPM());
-        SmartDashboard.putBoolean("Shooter enabled", shooter.getPIDController().isEnable());
+//        SmartDashboard.putBoolean("Shooter enabled", shooter.getPIDController().isEnable());
+        SmartDashboard.putBoolean("bangbang enabled?", shooter.isBangBangControllerEnabled());
         SmartDashboard.putNumber("Shooter val", shooter.getMotorRawVal());
         SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kX));
         SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
