@@ -22,6 +22,9 @@ public class Dance extends Command {
         // eg. requires(chassis);
     }
 
+    Dance(double DRIVE_SPEED, double sideLength) {
+    }
+
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.driveTrain.clearEncoder();
@@ -32,16 +35,25 @@ public class Dance extends Command {
     protected void execute() {
         if (_angle>0){
         Robot.driveTrain.tankDrive(_power,-_power);
-        Robot.driveTrain.tankDrive(_power, _distance);
-            if (_distance>100){
-                end();
-                Robot.driveTrain.tankDrive(-_power, -_distance);
-                Robot.driveTrain.tankDrive(-_power, _power);
-            }
         }else{
           Robot.driveTrain.tankDrive(-_power,_power);  
         }
+        Robot.driveTrain.tankDrive(_power, _power);
+            if (_distance>100){
+                _power = 0;
+             if (Robot.driveTrain.tankDrive.getLeftDistance() > 1000 &&
+                Robot.driveTrain.tankDrive.getRightDistance() > 1000){
+                   if (_angle>140){
+                       Robot.driveTrain.tankDrive(_power, _distance);
+            }}
+        }else{
+          Robot.driveTrain.tankDrive(-_power,_power);  
+          
+        }
     }
+    }
+                
+                
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

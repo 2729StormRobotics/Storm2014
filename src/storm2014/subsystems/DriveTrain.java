@@ -25,6 +25,7 @@ public class DriveTrain extends Subsystem {
      
     Gyro _gyro = new Gyro(RobotMap.PORT_SENSOR_GYRO);
     double _gyroOffset = 0;
+    public Object tankDrive;
     
     public DriveTrain() {
 	

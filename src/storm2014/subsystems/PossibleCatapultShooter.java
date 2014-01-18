@@ -19,7 +19,7 @@ public abstract class PossibleCatapultShooter extends PIDSubsystem{
     private PIDSource _pidsourceRelease;
     
     public PossibleCatapultShooter(){
-        super("shooter",0,0.032,0,0.27);
+        super("shooter",0,0,0,0);
         //_shotsensor 
         SmartDashboard.putData("Catapult PID",getPIDController());
         getPIDController().setOutputRange(-SCALE, SCALE);
