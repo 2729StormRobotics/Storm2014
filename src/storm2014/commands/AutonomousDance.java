@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousDance extends CommandGroup {
      private static final double ANGLE       = 30,
                                 DRIVE_SPEED = 0.6,
-                                TURN_SPEED  = 0.9;
+                                TURN_SPEED  = 0.7;
     public AutonomousDance(double sideLength) {
         addSequential(new ForwardDriveByDistance(DRIVE_SPEED,sideLength));
         
@@ -21,8 +21,10 @@ public class AutonomousDance extends CommandGroup {
         addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
         
         addSequential(new ForwardDriveByDistance(-DRIVE_SPEED,sideLength));
         
@@ -30,10 +32,15 @@ public class AutonomousDance extends CommandGroup {
         addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
         
         addSequential(new ForwardDriveByDistance(DRIVE_SPEED,sideLength));
+        
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
