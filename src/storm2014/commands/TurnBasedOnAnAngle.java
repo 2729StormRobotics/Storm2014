@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
 public class TurnBasedOnAnAngle extends Command {
-    
+
     double _angle;
     double _power;
-  
+
     public TurnBasedOnAnAngle(double angle, double power) {
         requires(Robot.driveTrain);
         _angle = angle;
@@ -31,25 +31,24 @@ public class TurnBasedOnAnAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (_angle>0){
-        Robot.driveTrain.tankDrive(_power,-_power);
-        }else{
-          Robot.driveTrain.tankDrive(-_power,_power);  
+        if (_angle > 0){
+            Robot.driveTrain.tankDrive(_power,-_power);
+        } else {
+            Robot.driveTrain.tankDrive(-_power,_power);
         }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         if(_angle>0){
-         if(Robot.driveTrain.getGyroAngle()>_angle){
-                return true;
-            }   
-        }else{
-             if(Robot.driveTrain.getGyroAngle()<_angle){
+            if(Robot.driveTrain.getGyroAngle()>_angle){
                 return true;
             }
+        } else {
+             if(Robot.driveTrain.getGyroAngle()<_angle){
+                return true;
+             }
         }
-        
         return false;
     }
 
