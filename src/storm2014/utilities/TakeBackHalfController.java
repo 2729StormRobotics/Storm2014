@@ -17,11 +17,12 @@ public class TakeBackHalfController implements LiveWindowSendable {
         public void run(){
             
             if(_enabled){
+                System.out.println("Is running");
                 _currentSpeed = _pidSource.pidGet(); //updates current speed.
                 
                 _motorOutput = _motorOutput + (_gain * _period * (_setPoint - _currentSpeed)); //take back half formula. ravioli ravioli give me the formuoli.
                 
-                _pidOutput.pidWrite(_motorOutput); 
+                _pidOutput.pidWrite(_motorOutput * MULTIPLIER); 
             }
         }
     }
@@ -35,8 +36,9 @@ public class TakeBackHalfController implements LiveWindowSendable {
     private Timer _timer  = new Timer();
     private double _period;
     private boolean _enabled;
+    public final double MULTIPLIER = .01;
     
-    public TakeBackHalfController(PIDSource pidsource, PIDOutput pidoutput, double period){
+    public TakeBackHalfController(PIDOutput pidoutput, PIDSource pidsource, double period){
         
         _pidSource = pidsource;
         _pidOutput = pidoutput;

@@ -20,7 +20,7 @@ public class Shooter extends Subsystem{
     public Shooter(){
         super("shooter");//,0,0.032,0,0.27);
         bangbangcontroller = new BangBangController(_wheelMotor, _speedSensor,1.0/100);
-        takeBackHalfController = new TakeBackHalfController(_speedSensor, _wheelMotor, 1.0/100);
+        takeBackHalfController = new TakeBackHalfController(_wheelMotor, _speedSensor, 1.0/100);
         _speedSensor.setMinSpeedRpm(200);
 //        SmartDashboard.putData("Shooter wheel PID",getPIDController());
         SmartDashboard.putData("Bang Bang Controller", bangbangcontroller); //adds bangbang to smartdashboard
