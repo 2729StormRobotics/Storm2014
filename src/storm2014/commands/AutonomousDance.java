@@ -11,10 +11,24 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * @author Erik
  */
 public class AutonomousDance extends CommandGroup {
-     private static final double ANGLE       = 75,
+     private static final double ANGLE       = 30,
                                 DRIVE_SPEED = 0.6,
                                 TURN_SPEED  = 0.7;
     public AutonomousDance(double sideLength) {
+        addSequential(new ForwardDriveByDistance(DRIVE_SPEED,sideLength));
+        
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
+        
+        addSequential(new ForwardDriveByDistance(-DRIVE_SPEED,sideLength));
+        
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
+        
         addSequential(new ForwardDriveByDistance(DRIVE_SPEED,sideLength));
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

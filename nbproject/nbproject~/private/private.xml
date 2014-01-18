@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/Robot.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/commands/TankDrive.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/subsystems/Launcher.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/commands/AutonomousDance.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/subsystems/Shooter.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/commands/TurnBasedOnAnAngle.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/commands/Dance.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/subsystems/DriveTrain.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/commands/Launch.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/commands/ForwardDriveByDistance.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/subsystems/PossibleCatapultShooter.java</file>
+            <file>file:/C:/Users/Erik/Desktop/Storm2014/src/storm2014/commands/TriangleMovement.java</file>
+        </group>
+    </open-files>
+</project-private>

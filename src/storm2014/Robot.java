@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import storm2014.commands.AutonomousDance;
 import storm2014.commands.ForwardDriveByDistance;
 import storm2014.commands.SpinUp;
 import storm2014.commands.TriangleMovement;
@@ -76,8 +77,8 @@ public class Robot extends IterativeRobot {
 //        LiveWindow.addSensor("Pneumatics","digiInput", digiInput);
 
         // The names, and corresponding Commands of our autonomous modes
-        autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement"};
-        autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000),new TriangleMovement(1500)};
+        autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance"};
+        autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0)};
         
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
         
