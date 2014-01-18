@@ -4,12 +4,9 @@
  * and open the template in the editor.
  */
 package storm2014.subsystems;
-import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import storm2014.RobotMap;
-import storm2014.utilities.HallEffectSpeedSensor;
 /**
  *
  * @author Erik
