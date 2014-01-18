@@ -3,6 +3,7 @@ package storm2014;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import storm2014.commands.SetLEDMode;
 import storm2014.commands.SpinUp;
 
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
@@ -14,9 +15,11 @@ public class OI {
     private final Button slowModeButton      = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SLOW);
     
     private final Button spinUp = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SPINUP);
+    private final Button changeLed = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_CHANGELED);
     
     public OI() {
         spinUp.whenPressed(new SpinUp(1500.0));
+        changeLed.whenPressed(new SetLEDMode());
     }
     
     // When a joystick is in its zero position, it will not necessarily read

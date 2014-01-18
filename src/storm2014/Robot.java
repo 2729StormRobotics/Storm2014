@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.ForwardDriveByDistance;
 import storm2014.commands.SpinUp;
 import storm2014.commands.TriangleMovement;
+import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
 
 /** 
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot {
     public static OI         oi;
     public static DriveTrain driveTrain;
     public static Shooter shooter;
+    public static LEDStrip leds;
     
     Command teleop;
     String[] autonomiceNames;
@@ -59,7 +61,8 @@ public class Robot extends IterativeRobot {
         shooter    = new Shooter();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
-        
+        leds       = new LEDStrip();
+
         compressor = new Compressor(RobotMap.Port_Compressor_SwitchChannel,RobotMap.Port_Compressor_RelayChannel);
         solenoid1 = new Solenoid(RobotMap.Port_Solenoid1_Channel);
         solenoid2 = new Solenoid(RobotMap.Port_Solenoid2_Channel);
@@ -68,7 +71,7 @@ public class Robot extends IterativeRobot {
         LiveWindow.addActuator("Pneumatics","solenoid1", solenoid1);
         LiveWindow.addActuator("Pneumatics","solenoid2", solenoid2);
         LiveWindow.addSensor("Pneumatics","digiInput", digiInput);
-        
+
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement"};
         autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000),new TriangleMovement(1500)};
