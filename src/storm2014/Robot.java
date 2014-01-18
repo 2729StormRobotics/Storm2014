@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.AutonomousDance;
@@ -108,6 +109,7 @@ public class Robot extends IterativeRobot {
 //        System.out.println("Thingy");
 //        SmartDashboard.putData("Shooter PID 2",shooter.getPIDController());
           SmartDashboard.putData(new SpinUp(1500));
+          leds.initTable(NetworkTable.getTable("SmartDashboard"));
     }
 
     /** Called at the start of autonomous mode. */

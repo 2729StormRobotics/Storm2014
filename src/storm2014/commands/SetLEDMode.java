@@ -19,7 +19,6 @@ public class SetLEDMode extends Command {
     protected void initialize() {
         _mode = (Robot.leds.currentMode + 1) % 8;
         Robot.leds.setMode(_mode);
-        System.out.println("ran");
     }
     protected void execute() {}
     protected boolean isFinished() {
