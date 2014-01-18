@@ -18,7 +18,7 @@ import javax.microedition.io.SocketConnection;
  *
  * @author evan1026
  */
-public class LEDStrip extends Subsystem implements Sendable {
+public class LEDStrip extends Subsystem implements NamedSendable {
     
     public static final int SolidWhiteMode        = 0;
     public static final int MarqueeMode           = 1;
@@ -47,19 +47,14 @@ public class LEDStrip extends Subsystem implements Sendable {
             SocketConnection sc = (SocketConnection) Connector.open("socket://10.27.29.100:1025");
             OutputStream os = sc.openOutputStream();
             os.write(mode);
-            os.close();
-            sc.close();
             if (mode == SetColorMode){
-                //Because it was easier to program reconnection
-                sc = (SocketConnection) Connector.open("socket://10.27.29.100:1025");
-                os = sc.openOutputStream();
                 os.write(red);
                 os.write(green);
                 os.write(blue);
-                os.close();
-                sc.close();
             }
             
+            os.close();
+            sc.close();
             currentMode = mode;
             System.out.println("Mode is now " + currentMode);
         } catch (IOException ex) {
@@ -68,7 +63,7 @@ public class LEDStrip extends Subsystem implements Sendable {
     }
     
     public String getSmartDashboardType(){
-        return "PIDSubsystem";
+        return "LEDStrip";
     }
     
     public void initTable(ITable table){
@@ -78,6 +73,7 @@ public class LEDStrip extends Subsystem implements Sendable {
             table.putNumber("Red", 0);
             table.putNumber("Green", 0);
             table.putNumber("Blue", 0);
+            table.addTableListener(listener);
         }
     }
     
@@ -101,6 +97,24 @@ public class LEDStrip extends Subsystem implements Sendable {
                     if (blue < 0)   blue = 0;
                     
                     setMode(newMode, (byte) red, (byte) green, (byte) blue);
+                }
+            }
+            if (key.equals("Red") || key.equals("Green") || key.equals("Blue")){
+                if ((int) table.getNumber("Mode") == SetColorMode){
+                    int red    = (int) table.getNumber("Red");
+                    int green  = (int) table.getNumber("Green");
+                    int blue   = (int) table.getNumber("Blue");
+                    
+                    if (red > 255) red = 255;
+                    if (red < 0)   red = 0;
+                    
+                    if (green > 255) green = 255;
+                    if (green < 0)   green = 0;
+                    
+                    if (blue > 255) blue = 255;
+                    if (blue < 0)   blue = 0;
+                    
+                    setMode(SetColorMode, (byte) red, (byte) green, (byte) blue);
                 }
             }
         }
