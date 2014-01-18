@@ -10,55 +10,57 @@ import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class BangBangController implements LiveWindowSendable {
+public class TakeBackHalfController implements LiveWindowSendable {
     
-    
-    //if less then set point gun it if you are greater drop down to 0 or drop down to lower value
     private class _bgTask extends TimerTask {
         
-        public void run() {
+        public void run(){
             
             if(_enabled){
-                System.out.println("bg task is running");
-                curSpeed = _pidSource.pidGet(); //sets current speed to what the sensor is reading
-                if(curSpeed < _setPoint){
-                    _pidOutput.pidWrite(1);
-                }
-                else{
-                    _pidOutput.pidWrite(0);
-                }
+                _currentSpeed = _pidSource.pidGet(); //updates current speed.
+                
+                _motorOutput = _motorOutput + (_gain * _period * (_setPoint - _currentSpeed)); //take back half formula. ravioli ravioli give me the formuoli.
+                
+                _pidOutput.pidWrite(_motorOutput); 
             }
-            
         }
     }
     
-    private Timer _timer = new Timer();
-    private  double _period;
-    private  double _setPoint;
-    private double curSpeed;
-    private  PIDOutput _pidOutput;
-    private  PIDSource _pidSource;
+    private PIDSource _pidSource;
+    private PIDOutput _pidOutput;
+    private double _setPoint;
+    private double _currentSpeed;
+    private double _gain = 0;
+    private double _motorOutput;
+    private Timer _timer  = new Timer();
+    private double _period;
+    private boolean _enabled;
     
-    private boolean _enabled = false;
-    
-    public BangBangController (PIDOutput pidOutput, PIDSource pidSource, double period){
-        _pidSource = pidSource;
-        _pidOutput = pidOutput;
-        _period = period;
+    public TakeBackHalfController(PIDSource pidsource, PIDOutput pidoutput, double period){
+        
+        _pidSource = pidsource;
+        _pidOutput = pidoutput;
         _setPoint = 0;
-        _timer.schedule(new _bgTask(), 0, (long) (1000*_period));
+        _period = period;
+        
+        _timer.schedule(new _bgTask(), 0, (long) (1000 * _period));
     }
+    
     
     //sets speed
     private void setSetpoint(double setPoint) {
         _setPoint = setPoint;
     }
+    //sets gain
+    private void setGain(double gain){
+        _gain = gain;
+    }
     
-    //returns if the bangbangcontroller is enabled
+    //returns if the takebackcontroller is enabled
     public boolean isEnable() {
         return _enabled;
     }
-    //disables bangbangcontroller
+    //disables takebackcontroller
     public void disable() {
         _pidOutput.pidWrite(0);
         _enabled = false;
@@ -67,7 +69,7 @@ public class BangBangController implements LiveWindowSendable {
             table.putBoolean("enabled", false);
         }
     }
-    //enables bang bang controller
+    //enables takebackcontroller
     public void enable() {
         _enabled = true;
         
@@ -76,7 +78,7 @@ public class BangBangController implements LiveWindowSendable {
         }
     }
     
-    //updates values when user changes them
+    //updates changes from smart dashboard
     private ITableListener listener = new ITableListener() {
         public void valueChanged(ITable table, String key, Object value, boolean isNew){
             
@@ -92,26 +94,29 @@ public class BangBangController implements LiveWindowSendable {
                         disable();
                     }
                 }
-                
+            }
+            else if (key.equals("p")) {
+                if(_gain != ((Double) value).doubleValue()){ 
+                    setGain(((Double) value).doubleValue());
+                }    
             }
         }
-        
     };
     
-    //adds a table to smart dashboard
-    private ITable table;
     
+    private ITable table;
     public void initTable(ITable table){
         
         if(this.table!=null)
             this.table.removeTableListener(listener);
         this.table = table;
         if(table!=null){
-            
-            table.putNumber("setpoint", 0);
+            table.putNumber("setpoint", _setPoint);
             table.putBoolean("enabled", isEnable());
+            table.putNumber("p", _gain);
             table.addTableListener(listener, false);
         }
+        
     }
     
     public ITable getTable(){
@@ -134,4 +139,3 @@ public class BangBangController implements LiveWindowSendable {
     }
     
 }
-
