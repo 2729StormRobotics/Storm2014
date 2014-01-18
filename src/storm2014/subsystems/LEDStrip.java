@@ -29,9 +29,9 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public static final int BounceMode            = 6;
     public static final int USAMode               = 7;
     public static final int SetColorMode          = 8;
+    public static final int ParticleCollisionMode = 9;
     
-    private static final String serverIP   = "10.27.29.100";
-    private static final int    serverPort = 1025;
+    private static final String serverIP   = "socket://10.27.29.100:1025";
     
     public static int currentMode = 0;
     
@@ -44,7 +44,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     }
     public void setMode(int mode, byte red, byte green, byte blue){
         try {
-            SocketConnection sc = (SocketConnection) Connector.open("socket://10.27.29.100:1025");
+            SocketConnection sc = (SocketConnection) Connector.open(serverIP);
             OutputStream os = sc.openOutputStream();
             os.write(mode);
             if (mode == SetColorMode){
