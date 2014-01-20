@@ -24,7 +24,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
                 
                 //lowers the overshoot of motor output.
                 if((_oldSpeed < _setPoint && _currentSpeed > _setPoint) ||
-                   (_oldSpeed > _setPoint && _currentSpeed < _setPoint )){
+                        (_oldSpeed > _setPoint && _currentSpeed < _setPoint )){
                     
                     _motorOutput = (_motorOutput + _oldMotorOutput)/2;
                     _oldMotorOutput = _motorOutput;
@@ -33,11 +33,11 @@ public class TakeBackHalfController implements LiveWindowSendable {
                 _motorOutput = _motorOutput + (_gain * _period * (_setPoint - _currentSpeed)); //tbh formula. ravioli ravioli give me the formuoli.
                 
                 
-                if(_motorOutput > _max/MULTIPLIER){
-                    _motorOutput = _max;
+                if(_motorOutput > _max/Math.abs(MULTIPLIER)){
+                    _motorOutput = _max/Math.abs(MULTIPLIER);
                 }
-                if(_motorOutput < _min/MULTIPLIER){
-                    _motorOutput = _min;
+                if(_motorOutput < _min/Math.abs(MULTIPLIER)){
+                    _motorOutput = _min/Math.abs(MULTIPLIER);
                 }
                 
                 _oldSpeed = _currentSpeed;
@@ -59,7 +59,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
     private Timer _timer  = new Timer();
     private double _period;
     private boolean _enabled;
-    public final double MULTIPLIER = .01;
+    public final double MULTIPLIER = -.01;
     
     public TakeBackHalfController(PIDOutput pidoutput, PIDSource pidsource, double period, double max, double min){
         
@@ -93,6 +93,8 @@ public class TakeBackHalfController implements LiveWindowSendable {
     }
     //disables takebackcontroller
     public void disable() {
+        _oldMotorOutput = 0;
+        _motorOutput = 0;
         _pidOutput.pidWrite(0);
         _enabled = false;
         Robot.leds.setMode(LEDStrip.ColorCycleMode);
@@ -104,7 +106,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
     //enables takebackcontroller
     public void enable() {
         _enabled = true;
-        Robot.leds.setMode(LEDStrip.USAMode);
+        Robot.leds.setMode(LEDStrip.Pile);
         
         if (table != null) {
             table.putBoolean("enabled", true);
@@ -134,7 +136,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
                 }
             }
         }
-    }; 
+    };
     
     private ITable table;
     public void initTable(ITable table){
