@@ -36,6 +36,7 @@ public class AutonomousDance extends CommandGroup {
         addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
         
         addSequential(new ForwardDriveByDistance(DRIVE_SPEED,sideLength));
         
@@ -47,6 +48,11 @@ public class AutonomousDance extends CommandGroup {
         addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
         addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
+        addSequential(new TurnBasedOnAnAngle(-ANGLE, TURN_SPEED));
+        
+        addSequential(new ForwardDriveByDistance(DRIVE_SPEED,sideLength));
+        addSequential(new ForwardDriveByDistance(-DRIVE_SPEED,sideLength));
+        
         
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
