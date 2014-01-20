@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.util.Timer;
 import java.util.TimerTask;
+import storm2014.Robot;
+import storm2014.subsystems.LEDStrip;
 
 public class TakeBackHalfController implements LiveWindowSendable {
     
@@ -31,11 +33,11 @@ public class TakeBackHalfController implements LiveWindowSendable {
                 _motorOutput = _motorOutput + (_gain * _period * (_setPoint - _currentSpeed)); //tbh formula. ravioli ravioli give me the formuoli.
                 
                 
-                if(_motorOutput > 1/MULTIPLIER){
-                    _motorOutput = 1/MULTIPLIER;
+                if(_motorOutput > _max/MULTIPLIER){
+                    _motorOutput = _max;
                 }
-                if(_motorOutput < -1/MULTIPLIER){
-                    _motorOutput = -1/MULTIPLIER;
+                if(_motorOutput < _min/MULTIPLIER){
+                    _motorOutput = _min;
                 }
                 
                 _oldSpeed = _currentSpeed;
@@ -52,18 +54,21 @@ public class TakeBackHalfController implements LiveWindowSendable {
     private double _oldMotorOutput = 0;
     private double _gain = 0;
     private double _motorOutput;
+    private double _min;
+    private double _max;
     private Timer _timer  = new Timer();
     private double _period;
     private boolean _enabled;
     public final double MULTIPLIER = .01;
     
-    public TakeBackHalfController(PIDOutput pidoutput, PIDSource pidsource, double period){
+    public TakeBackHalfController(PIDOutput pidoutput, PIDSource pidsource, double period, double max, double min){
         
         _pidSource = pidsource;
         _pidOutput = pidoutput;
         _setPoint = 0;
         _period = period;
-        
+        _max = max;
+        _min = min;
         _timer.schedule(new _bgTask(), 0, (long) (1000 * _period));
     }
     
@@ -77,6 +82,11 @@ public class TakeBackHalfController implements LiveWindowSendable {
         _gain = gain;
     }
     
+    public void setOutputRange(double min, double max){
+        _min = min;
+        _max = max;
+    }
+    
     //returns if the takebackcontroller is enabled
     public boolean isEnable() {
         return _enabled;
@@ -85,6 +95,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
     public void disable() {
         _pidOutput.pidWrite(0);
         _enabled = false;
+        Robot.leds.setMode(LEDStrip.ColorCycleMode);
         
         if (table != null) {
             table.putBoolean("enabled", false);
@@ -93,6 +104,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
     //enables takebackcontroller
     public void enable() {
         _enabled = true;
+        Robot.leds.setMode(LEDStrip.USAMode);
         
         if (table != null) {
             table.putBoolean("enabled", true);
