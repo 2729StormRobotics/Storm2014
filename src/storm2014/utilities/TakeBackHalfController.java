@@ -17,12 +17,29 @@ public class TakeBackHalfController implements LiveWindowSendable {
         public void run(){
             
             if(_enabled){
-                System.out.println("Is running");
+                
                 _currentSpeed = _pidSource.pidGet(); //updates current speed.
                 
-                _motorOutput = _motorOutput + (_gain * _period * (_setPoint - _currentSpeed)); //take back half formula. ravioli ravioli give me the formuoli.
+                //lowers the overshoot of motor output.
+                if((_oldSpeed < _setPoint && _currentSpeed > _setPoint) ||
+                   (_oldSpeed > _setPoint && _currentSpeed < _setPoint )){
+                    
+                    _motorOutput = (_motorOutput + _oldMotorOutput)/2;
+                    _oldMotorOutput = _motorOutput;
+                }
                 
-                _pidOutput.pidWrite(_motorOutput * MULTIPLIER); 
+                _motorOutput = _motorOutput + (_gain * _period * (_setPoint - _currentSpeed)); //tbh formula. ravioli ravioli give me the formuoli.
+                
+                
+                if(_motorOutput > 1){
+                    _motorOutput = 1;
+                }
+                if(_motorOutput < -1){
+                    _motorOutput = -1;
+                }
+                _motorOutput = _motorOutput * MULTIPLIER; //lowers output
+                _oldSpeed = _currentSpeed;
+                _pidOutput.pidWrite(_motorOutput);
             }
         }
     }
@@ -31,6 +48,8 @@ public class TakeBackHalfController implements LiveWindowSendable {
     private PIDOutput _pidOutput;
     private double _setPoint;
     private double _currentSpeed;
+    private double _oldSpeed;
+    private double _oldMotorOutput = 0;
     private double _gain = 0;
     private double _motorOutput;
     private Timer _timer  = new Timer();
@@ -98,13 +117,12 @@ public class TakeBackHalfController implements LiveWindowSendable {
                 }
             }
             else if (key.equals("p")) {
-                if(_gain != ((Double) value).doubleValue()){ 
+                if(_gain != ((Double) value).doubleValue()){
                     setGain(((Double) value).doubleValue());
-                }    
+                }
             }
         }
-    };
-    
+    }; 
     
     private ITable table;
     public void initTable(ITable table){
