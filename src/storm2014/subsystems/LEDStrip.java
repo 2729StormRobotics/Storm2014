@@ -20,7 +20,7 @@ import javax.microedition.io.SocketConnection;
  */
 public class LEDStrip extends Subsystem implements NamedSendable {
     
-    public static final int SolidWhiteMode        = 0;
+    public static final int FlashWhiteMode        = 0;
     public static final int MarqueeMode           = 1;
     public static final int ColorCycleMode        = 2;
     public static final int PewMode               = 3;
@@ -56,6 +56,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
             os.close();
             sc.close();
             currentMode = mode;
+            table.putNumber("Mode", currentMode);
             System.out.println("Mode is now " + currentMode);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -69,7 +70,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public void initTable(ITable table){
         this.table = table;
         if(table!=null){
-            table.putNumber("Mode", SolidWhiteMode);
+            table.putNumber("Mode", FlashWhiteMode);
             table.putNumber("Red", 0);
             table.putNumber("Green", 0);
             table.putNumber("Blue", 0);
