@@ -21,7 +21,6 @@ import storm2014.commands.SpinUp;
 import storm2014.commands.TriangleMovement;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
-import storm2014.utilities.BangBangController;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
