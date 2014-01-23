@@ -21,6 +21,8 @@ public class TakeBackHalfController implements LiveWindowSendable {
             if(_enabled){
                 
                 _currentSpeed = _pidSource.pidGet(); //updates current speed.
+                err = _setPoint - _currentSpeed;
+                _totalErr = _oldErr + err;
                 
                 //lowers the overshoot of motor output.
                 if((_oldSpeed < _setPoint && _currentSpeed > _setPoint) ||
@@ -30,8 +32,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
                     _oldMotorOutput = _motorOutput;
                 }
                 
-                _motorOutput = _motorOutput + (_gain * _period * (_setPoint - _currentSpeed)); //tbh formula. ravioli ravioli give me the formuoli.
-                
+                _motorOutput = _motorOutput + ((_gain * (_totalErr * _period ) + _gain * err )); //tbh formula. ravioli ravioli give me the formuoli.
                 
                 if(_motorOutput > _max/Math.abs(MULTIPLIER)){
                     _motorOutput = _max/Math.abs(MULTIPLIER);
@@ -41,6 +42,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
                 }
                 
                 _oldSpeed = _currentSpeed;
+                _oldErr = err;
                 _pidOutput.pidWrite(_motorOutput * MULTIPLIER );
             }
         }
@@ -60,6 +62,9 @@ public class TakeBackHalfController implements LiveWindowSendable {
     private double _period;
     private boolean _enabled;
     public final double MULTIPLIER = -.01;
+    private double err;
+    private double _totalErr;
+    private double _oldErr;
     
     public TakeBackHalfController(PIDOutput pidoutput, PIDSource pidsource, double period, double max, double min){
         
