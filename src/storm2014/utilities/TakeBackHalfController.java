@@ -21,29 +21,28 @@ public class TakeBackHalfController implements LiveWindowSendable {
             if(_enabled){
                 
                 _currentSpeed = _pidSource.pidGet(); //updates current speed.
-                err = _setPoint - _currentSpeed;
-                _totalErr = _oldErr + err;
+                _err = _setPoint - _currentSpeed;
+               
                 
                 //lowers the overshoot of motor output.
                 if((_oldSpeed < _setPoint && _currentSpeed > _setPoint) ||
                         (_oldSpeed > _setPoint && _currentSpeed < _setPoint )){
                     
-                    _motorOutput = (_motorOutput + _oldMotorOutput)/2;
-                    _oldMotorOutput = _motorOutput;
+                    _integral = (_integral + _oldMotorOutput)/2;
+                    _oldMotorOutput = _integral;
                 }
                 
-                _motorOutput = _motorOutput + ((_gain * (_totalErr * _period ) + _gain * err )); //tbh formula. ravioli ravioli give me the formuoli.
+                _integral = _integral + _gain * _err * _period ; //tbh formula.
                 
-                if(_motorOutput > _max/Math.abs(MULTIPLIER)){
-                    _motorOutput = _max/Math.abs(MULTIPLIER);
+                if(_integral > _max/Math.abs(MULTIPLIER)){
+                    _integral = _max/Math.abs(MULTIPLIER);
                 }
-                if(_motorOutput < _min/Math.abs(MULTIPLIER)){
-                    _motorOutput = _min/Math.abs(MULTIPLIER);
+                if(_integral < _min/Math.abs(MULTIPLIER)){
+                    _integral = _min/Math.abs(MULTIPLIER);
                 }
                 
                 _oldSpeed = _currentSpeed;
-                _oldErr = err;
-                _pidOutput.pidWrite(_motorOutput * MULTIPLIER );
+                _pidOutput.pidWrite( MULTIPLIER * (_integral + _propGain * _err)); //integral * multiplier 
             }
         }
     }
@@ -55,16 +54,16 @@ public class TakeBackHalfController implements LiveWindowSendable {
     private double _oldSpeed = 0;
     private double _oldMotorOutput = 0;
     private double _gain = 0;
-    private double _motorOutput;
+    private double _integral;
     private double _min;
     private double _max;
     private Timer _timer  = new Timer();
     private double _period;
     private boolean _enabled;
     public final double MULTIPLIER = -.01;
-    private double err;
-    private double _totalErr;
-    private double _oldErr;
+    private double _err;
+    private double _propGain;
+   
     
     public TakeBackHalfController(PIDOutput pidoutput, PIDSource pidsource, double period, double max, double min){
         
@@ -87,6 +86,10 @@ public class TakeBackHalfController implements LiveWindowSendable {
         _gain = gain;
     }
     
+    private void setPropGain(double propGain){
+        _propGain = propGain;
+    }
+    
     public void setOutputRange(double min, double max){
         _min = min;
         _max = max;
@@ -99,7 +102,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
     //disables takebackcontroller
     public void disable() {
         _oldMotorOutput = 0;
-        _motorOutput = 0;
+        _integral = 0;
         _pidOutput.pidWrite(0);
         _enabled = false;
         Robot.leds.setMode(LEDStrip.ColorCycleMode);
@@ -140,6 +143,13 @@ public class TakeBackHalfController implements LiveWindowSendable {
                     setGain(((Double) value).doubleValue());
                 }
             }
+            
+            else if (key.equals("d")) {
+                if(_propGain != ((Double) value).doubleValue()){
+                    setPropGain(((Double) value).doubleValue());
+                }
+            }
+            
         }
     };
     
@@ -153,6 +163,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
             table.putNumber("setpoint", _setPoint);
             table.putBoolean("enabled", isEnable());
             table.putNumber("p", _gain);
+            table.putNumber("d", _propGain);
             table.addTableListener(listener, false);
         }
         
