@@ -111,7 +111,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
     //enables takebackcontroller
     public void enable() {
         _enabled = true;
-        Robot.leds.setMode(LEDStrip.Pile);
+        Robot.leds.setMode(LEDStrip.PileMode);
         
         if (table != null) {
             table.putBoolean("enabled", true);
