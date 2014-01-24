@@ -6,31 +6,40 @@
 
 package storm2014.subsystems;
 import storm2014.Robot;
-import edu.wpi.first.wpilibj.Jaguar;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import storm2014.RobotMap;
-import storm2014.utilities.BangBangController;
-import storm2014.utilities.HallEffectSpeedSensor;
-import storm2014.utilities.TakeBackHalfController;
+
 /**
  *
  * @author Erik
  */
 public class VisionSystem {
  
-
 public static double getXTarget() {
     return SmartDashboard.getNumber("Target X position ", 0);
 }
 public static double getYTarget() {
     return SmartDashboard.getNumber("Target Y position ", 0);
 }
+public static double getXBall() {
+    return SmartDashboard.getNumber("Ball X position", 0);
+}
+public static double getYBall() {
+    return SmartDashboard.getNumber("Ball Y position", 0);
+}
 public static double getXAngle() {
    return SmartDashboard.getNumber("Target horizontal angle", 0);
 }
 public static double getYAngle() {
     return SmartDashboard.getNumber("Target vertical angle", 0);
+}
+public static double getBallXAngle() {
+    return SmartDashboard.getNumber("Ball horizontal angle", 0);
+}
+public static double getBallYAngle() {
+    return SmartDashboard.getNumber("Ball vertical angle", 0);
+}
+public static boolean foundBall() {
+    return SmartDashboard.getBoolean("Found ball", false);
 }
 public static boolean foundTarget() {
     return SmartDashboard.getBoolean("Found target ", false);
