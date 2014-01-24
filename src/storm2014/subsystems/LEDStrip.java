@@ -20,16 +20,17 @@ import javax.microedition.io.SocketConnection;
  */
 public class LEDStrip extends Subsystem implements NamedSendable {
     
-    public static final int SolidWhiteMode        = 0;
-    public static final int MarqueeMode           = 1;
-    public static final int ColorCycleMode        = 2;
-    public static final int PewMode               = 3;
-    public static final int RainbowDancePartyMode = 4;
-    public static final int StormSpiritMode       = 5;
-    public static final int BounceMode            = 6;
-    public static final int USAMode               = 7;
-    public static final int SetColorMode          = 8;
-    public static final int ParticleCollisionMode = 9;
+    public static final int FlashWhiteMode        =  0;
+    public static final int MarqueeMode           =  1;
+    public static final int ColorCycleMode        =  2;
+    public static final int PewMode               =  3;
+    public static final int RainbowDancePartyMode =  4;
+    public static final int StormSpiritMode       =  5;
+    public static final int BounceMode            =  6;
+    public static final int USAMode               =  7;
+    public static final int SetColorMode          =  8;
+    public static final int ParticleCollisionMode =  9;
+    public static final int Pile                  = 10;
     
     private static final String serverIP   = "socket://10.27.29.100:1025";
     
@@ -56,6 +57,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
             os.close();
             sc.close();
             currentMode = mode;
+            table.putNumber("Mode", currentMode);
             System.out.println("Mode is now " + currentMode);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -69,7 +71,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public void initTable(ITable table){
         this.table = table;
         if(table!=null){
-            table.putNumber("Mode", SolidWhiteMode);
+            table.putNumber("Mode", FlashWhiteMode);
             table.putNumber("Red", 0);
             table.putNumber("Green", 0);
             table.putNumber("Blue", 0);

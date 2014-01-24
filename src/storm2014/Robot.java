@@ -21,7 +21,6 @@ import storm2014.commands.SpinUp;
 import storm2014.commands.TriangleMovement;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
-import storm2014.utilities.BangBangController;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
@@ -123,6 +122,7 @@ public class Robot extends IterativeRobot {
         if (autonomouse != null) {
             autonomouse.start();
         }
+        leds.setMode(LEDStrip.MarqueeMode);
     }
 
     /**
@@ -143,6 +143,7 @@ public class Robot extends IterativeRobot {
         if (teleop != null) {
             teleop.start();
         }
+        leds.setMode(LEDStrip.ColorCycleMode);
     }
 
     /**
@@ -177,7 +178,7 @@ public class Robot extends IterativeRobot {
         if(teleop != null) {
             teleop.cancel();
         }
-        leds.setMode(LEDStrip.ColorCycleMode);
+        leds.setMode(LEDStrip.FlashWhiteMode);
     }
     /**
      * Called during disabled whenever a new driver station packet arrives
