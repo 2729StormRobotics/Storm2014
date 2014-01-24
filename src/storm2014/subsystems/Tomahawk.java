@@ -15,7 +15,7 @@ public class Tomahawk extends Subsystem {
     protected void initDefaultCommand() {
         
     }
-    public boolean getStatus(){
+    public boolean isForward(){
         return _ir.get();
     }
     

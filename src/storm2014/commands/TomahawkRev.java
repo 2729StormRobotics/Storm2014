@@ -7,9 +7,8 @@ import storm2014.Robot;
 
 public class TomahawkRev extends Command {
     
-    private int _revs = 0;
-    private boolean _initial;
     private double _speed;
+    private boolean _hasBeenForward = false;
     
     
     public TomahawkRev(double speed){
@@ -17,29 +16,18 @@ public class TomahawkRev extends Command {
     }
     
     protected void initialize() {
-        _initial = Robot.tomahawk.getStatus();
         Robot.tomahawk.setMotorRaw(_speed);
     }
     
     protected void execute() {
         
-        if(_initial){
-            if(Robot.tomahawk.getStatus() == true){
-                _revs = _revs + 1;
-            }
-            
-        } else{
-            if(Robot.tomahawk.getStatus() == false){
-                _revs = _revs + 1;
-            }
+        if (!_hasBeenForward ){
+            _hasBeenForward = Robot.tomahawk.isForward();        
         }
     }
     
-    
     protected boolean isFinished() {
-        if(_revs == 2){
-            return true;
-        } else return false;
+        return _hasBeenForward && 
     }
     
     protected void end() {
