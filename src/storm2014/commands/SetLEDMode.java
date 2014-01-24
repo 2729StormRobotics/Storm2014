@@ -15,11 +15,11 @@ public class SetLEDMode extends Command {
 
     private int _mode;
     
-    public SetLEDMode(){}
+    public SetLEDMode(int mode){
+        _mode = mode;
+    }
     protected void initialize() {
-        _mode = (Robot.leds.currentMode + 1) % 8;
         Robot.leds.setMode(_mode);
-        System.out.println("ran");
     }
     protected void execute() {}
     protected boolean isFinished() {
@@ -27,5 +27,12 @@ public class SetLEDMode extends Command {
     }
     protected void end() {}
     protected void interrupted() {}
+    
+    public void setMode(int mode){
+        _mode = mode;
+    }
+    public int getMode(){
+        return _mode;
+    }
     
 }

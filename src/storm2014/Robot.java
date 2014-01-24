@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.AutonomousDance;
@@ -20,7 +21,6 @@ import storm2014.commands.SpinUp;
 import storm2014.commands.TriangleMovement;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
-import storm2014.utilities.BangBangController;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
@@ -49,6 +49,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Wheel Speed RPM", shooter.getSpeedRPM());
 //        SmartDashboard.putBoolean("Shooter enabled", shooter.getPIDController().isEnable());
         SmartDashboard.putBoolean("bangbang enabled?", shooter.isBangBangControllerEnabled());
+        SmartDashboard.putBoolean("takeback enabled?", shooter.isTakeBackEnabled());
         SmartDashboard.putNumber("Shooter val", shooter.getMotorRawVal());
         SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kX));
         SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
@@ -108,6 +109,7 @@ public class Robot extends IterativeRobot {
 //        System.out.println("Thingy");
 //        SmartDashboard.putData("Shooter PID 2",shooter.getPIDController());
           SmartDashboard.putData(new SpinUp(1500));
+          leds.initTable(NetworkTable.getTable("SmartDashboard"));
     }
 
     /** Called at the start of autonomous mode. */
@@ -120,6 +122,7 @@ public class Robot extends IterativeRobot {
         if (autonomouse != null) {
             autonomouse.start();
         }
+        leds.setMode(LEDStrip.MarqueeMode);
     }
 
     /**
@@ -140,6 +143,7 @@ public class Robot extends IterativeRobot {
         if (teleop != null) {
             teleop.start();
         }
+        leds.setMode(LEDStrip.ColorCycleMode);
     }
 
     /**
@@ -174,6 +178,7 @@ public class Robot extends IterativeRobot {
         if(teleop != null) {
             teleop.cancel();
         }
+        leds.setMode(LEDStrip.DisabledMode);
     }
     /**
      * Called during disabled whenever a new driver station packet arrives

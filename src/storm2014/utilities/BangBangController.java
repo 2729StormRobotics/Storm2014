@@ -2,7 +2,6 @@
 
 package storm2014.utilities;
 
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
@@ -10,7 +9,6 @@ import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.util.Timer;
 import java.util.TimerTask;
-import storm2014.Robot;
 
 public class BangBangController implements LiveWindowSendable {
     
@@ -23,7 +21,7 @@ public class BangBangController implements LiveWindowSendable {
             if(_enabled){
                 System.out.println("bg task is running");
                 curSpeed = _pidSource.pidGet(); //sets current speed to what the sensor is reading
-                if(curSpeed < _speed){
+                if(curSpeed < _setPoint){
                     _pidOutput.pidWrite(1);
                 }
                 else{
@@ -36,24 +34,24 @@ public class BangBangController implements LiveWindowSendable {
     
     private Timer _timer = new Timer();
     private  double _period;
-    private  double _speed;
+    private  double _setPoint;
     private double curSpeed;
     private  PIDOutput _pidOutput;
     private  PIDSource _pidSource;
     
     private boolean _enabled = false;
     
-    public BangBangController (PIDOutput pidOutput, PIDSource pidSource, double period, double speed){
+    public BangBangController (PIDOutput pidOutput, PIDSource pidSource, double period){
         _pidSource = pidSource;
         _pidOutput = pidOutput;
         _period = period;
-        _speed = speed;
+        _setPoint = 0;
         _timer.schedule(new _bgTask(), 0, (long) (1000*_period));
     }
     
     //sets speed
     private void setSetpoint(double setPoint) {
-        _speed = setPoint;
+        _setPoint = setPoint;
     }
     
     //returns if the bangbangcontroller is enabled
@@ -83,7 +81,7 @@ public class BangBangController implements LiveWindowSendable {
         public void valueChanged(ITable table, String key, Object value, boolean isNew){
             
             if (key.equals("setpoint")) {
-                if (_speed != ((Double) value).doubleValue())
+                if (_setPoint != ((Double) value).doubleValue())
                     setSetpoint(((Double) value).doubleValue());
             }
             else if (key.equals("enabled")) {
