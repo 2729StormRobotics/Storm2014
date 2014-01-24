@@ -18,9 +18,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.AutonomousDance;
 import storm2014.commands.ForwardDriveByDistance;
 import storm2014.commands.SpinUp;
+import storm2014.commands.TomahawkRev;
 import storm2014.commands.TriangleMovement;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
+import storm2014.subsystems.Tomahawk;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
@@ -32,6 +34,7 @@ public class Robot extends IterativeRobot {
     public static DriveTrain driveTrain;
     public static Shooter shooter;
     public static LEDStrip leds;
+    public static Tomahawk tomahawk;
     
     Command teleop;
     String[] autonomiceNames;
@@ -67,6 +70,7 @@ public class Robot extends IterativeRobot {
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         leds       = new LEDStrip();
+        tomahawk = new Tomahawk();
        
 //       compressor = new Compressor(RobotMap.Port_Compressor_SwitchChannel,RobotMap.Port_Compressor_RelayChannel);
 //        solenoid1 = new Solenoid(RobotMap.Port_Solenoid1_Channel);
@@ -109,6 +113,7 @@ public class Robot extends IterativeRobot {
 //        System.out.println("Thingy");
 //        SmartDashboard.putData("Shooter PID 2",shooter.getPIDController());
           SmartDashboard.putData(new SpinUp(1500));
+          SmartDashboard.putData(new TomahawkRev(.5));
           leds.initTable(NetworkTable.getTable("SmartDashboard"));
     }
 
