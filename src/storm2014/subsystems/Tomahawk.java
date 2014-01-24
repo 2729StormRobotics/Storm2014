@@ -9,7 +9,7 @@ import storm2014.RobotMap;
 
 public class Tomahawk extends Subsystem {
     
-    DigitalInput _ir = new DigitalInput(RobotMap.PORT_MOTOR_TOMAHAWK);
+    DigitalInput _ir = new DigitalInput(RobotMap.PORT_SENSOR_TOMAHAWK_IR);
     Victor _motor = new Victor(RobotMap.PORT_MOTOR_TOMAHAWK);
     
     protected void initDefaultCommand() {
