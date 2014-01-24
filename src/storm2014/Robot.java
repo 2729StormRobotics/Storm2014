@@ -178,7 +178,7 @@ public class Robot extends IterativeRobot {
         if(teleop != null) {
             teleop.cancel();
         }
-        leds.setMode(LEDStrip.FlashWhiteMode);
+        leds.setMode(LEDStrip.DisabledMode);
     }
     /**
      * Called during disabled whenever a new driver station packet arrives
