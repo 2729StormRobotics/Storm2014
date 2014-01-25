@@ -42,7 +42,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
                 }
                 
                 _oldSpeed = _currentSpeed;
-                _pidOutput.pidWrite( MULTIPLIER * (_integral + _propGain * _err));
+                _pidOutput.pidWrite( MULTIPLIER * (_integral + _propGain * _err)); //integral * multiplier 
             }
         }
     }
