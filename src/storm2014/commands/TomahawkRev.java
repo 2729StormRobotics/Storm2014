@@ -27,7 +27,8 @@ public class TomahawkRev extends Command {
     }
     
     protected boolean isFinished() {
-        return !Robot.tomahawk.isForward() && _hasBeenForward;
+       return _hasBeenForward && Robot.tomahawk.isForward();
+      
     }
     
     protected void end() {
