@@ -7,18 +7,14 @@ import storm2014.Robot;
 
 public class TomahawkRev extends Command {
     
-    
     private boolean _hasBeenForward = false;
     
     protected void initialize() {
         _hasBeenForward = false;
-        Robot.tomahawk.startMotor();
-        System.out.println("tomahawk start");
+        Robot.tomahawk.startMotor(); 
     }
     
     protected void execute() {
-        System.out.println("tomahawk " + _hasBeenForward + " " + Robot.tomahawk.isForward());
-        
         if (!_hasBeenForward ){
             _hasBeenForward = Robot.tomahawk.isForward();        
         }
@@ -35,8 +31,5 @@ public class TomahawkRev extends Command {
     protected void interrupted() {
         end();
     }
-    
-    
-    
-    
+
 }

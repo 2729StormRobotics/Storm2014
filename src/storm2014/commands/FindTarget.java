@@ -39,10 +39,7 @@ public class FindTarget extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         double X = VisionSystem.getXTarget();
-        if (X<=0.1 && X>=-0.1){
-            return true;  
-        }
-    return false;
+    return X<=0.1 && X>=-0.1;
     }
     // Called once after isFinished returns true
     protected void end() {
