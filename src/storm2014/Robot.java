@@ -113,7 +113,7 @@ public class Robot extends IterativeRobot {
 //        System.out.println("Thingy");
 //        SmartDashboard.putData("Shooter PID 2",shooter.getPIDController());
           SmartDashboard.putData(new SpinUp(1500));
-          SmartDashboard.putData(new TomahawkRev(.5));
+          SmartDashboard.putData(new TomahawkRev(1));
           leds.initTable(NetworkTable.getTable("SmartDashboard"));
     }
 
