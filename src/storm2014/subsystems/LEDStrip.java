@@ -35,6 +35,8 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     private static final String serverIP   = "socket://10.27.29.100:1025";
 
     public static int currentMode = 0;
+    
+    private boolean _connected = true;
 
     private ITable table;
 
@@ -44,6 +46,9 @@ public class LEDStrip extends Subsystem implements NamedSendable {
         setMode(mode, (byte) 0, (byte) 0, (byte) 0);
     }
     public void setMode(int mode, byte red, byte green, byte blue){
+        if(!_connected) {
+            return;
+        }
         try {
             SocketConnection sc = (SocketConnection) Connector.open(serverIP);
             OutputStream os = sc.openOutputStream();
@@ -61,6 +66,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
             System.out.println("Mode is now " + currentMode);
         } catch (IOException ex) {
             ex.printStackTrace();
+            _connected = false;
         }
     }
 

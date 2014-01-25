@@ -25,9 +25,13 @@ public class Tomahawk extends Subsystem {
         return _ir.get();
     }
     
-    public void setMotorRaw(double output){
-        _motor.pidWrite(output);
+    
+    public void startMotor(){
+        _motor.pidWrite(1);
     }
     
+    public void stopMotor(){
+        _motor.pidWrite(0);
+    }
     
 }
