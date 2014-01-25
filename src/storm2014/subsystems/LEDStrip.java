@@ -36,7 +36,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
 
     public static int currentMode = 0;
     
-    private boolean _connected = true;
+    private boolean _connected = false;
 
     private ITable table;
 

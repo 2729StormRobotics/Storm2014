@@ -10,8 +10,9 @@ public class RobotMap {
     
     public static final int JOYDRIVE_BUTTON_SLOW    = 5;
     public static final int JOYDRIVE_BUTTON_SPINUP  = 3;
+    public static final int JOYTOMAHAWK_BUTTON  = 10; //tomahawk button
     
-    public static final int JOYDEBUG_BUTTON_CONTROLSHOOT = 10;
+   // public static final int JOYDEBUG_BUTTON_CONTROLSHOOT = 10;
     
     
     public static final int JOYDRIVE_AXIS_DRIVE_LEFT  = 2,
