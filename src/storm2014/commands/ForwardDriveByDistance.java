@@ -9,12 +9,12 @@ import storm2014.Robot;
  */
 public class ForwardDriveByDistance extends Command {
     
-    final double _power;
+    final double _speed;
     final double _distance;
        
-    public ForwardDriveByDistance(double power, double distance) {
+    public ForwardDriveByDistance(double speed, double distance) {
         requires(Robot.driveTrain);
-        _power = power;
+        _speed = speed;
         _distance = distance;
         
     }
@@ -26,13 +26,13 @@ public class ForwardDriveByDistance extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-       Robot.driveTrain.tankDrive(_power, _power);    
+       Robot.driveTrain.tankDrive(_speed, _speed);    
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (_power >= 0 && Robot.driveTrain.getLeftDistance() >= _distance) || 
-               (_power < 0 && Robot.driveTrain.getLeftDistance() <= -_distance);
+        return (_speed >= 0 && Robot.driveTrain.getLeftDistance() >= _distance) || 
+               (_speed < 0 && Robot.driveTrain.getLeftDistance() <= -_distance);
         
         
     }
