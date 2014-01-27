@@ -14,10 +14,10 @@ import storm2014.Robot;
  *
  * @author Matthew Rassmann
  */
-public class CatapultReload extends Command {
+public class PullBack extends Command {
      double _power;
      double _distance;
-    public CatapultReload(double power, double distance){
+    public PullBack(double power, double distance){
         requires(Robot.catapult);
         _power=power;
         _distance = distance;
