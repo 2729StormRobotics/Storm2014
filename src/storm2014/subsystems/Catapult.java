@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import storm2014.RobotMap;
-import storm2014.commands.CatapultReload;
+import storm2014.commands.PullBack;
 
 /**
  *
@@ -30,7 +30,7 @@ public class Catapult extends Subsystem {
         
     }
     protected void initDefaultCommand() {
-        setDefaultCommand(new CatapultReload(0.0,0.0));
+        setDefaultCommand(new PullBack(0.0,0.0));
     }
     
     public void setWinchRawVal(double winchRawVal){
