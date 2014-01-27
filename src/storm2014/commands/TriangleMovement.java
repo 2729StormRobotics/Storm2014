@@ -16,14 +16,14 @@ public class TriangleMovement extends CommandGroup {
                                 TURN_SPEED  = 0.7;
     
     public TriangleMovement(double sideLength) {
-        addSequential(new ForwardDriveByDistance(DRIVE_SPEED,sideLength));
-        addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
+        addSequential(new DriveForward(DRIVE_SPEED,sideLength));
+        addSequential(new Turn(ANGLE, TURN_SPEED));
         
-        addSequential(new ForwardDriveByDistance(DRIVE_SPEED,sideLength));
-        addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
+        addSequential(new DriveForward(DRIVE_SPEED,sideLength));
+        addSequential(new Turn(ANGLE, TURN_SPEED));
         
-        addSequential(new ForwardDriveByDistance(DRIVE_SPEED,sideLength));
-        addSequential(new TurnBasedOnAnAngle(ANGLE, TURN_SPEED));
+        addSequential(new DriveForward(DRIVE_SPEED,sideLength));
+        addSequential(new Turn(ANGLE, TURN_SPEED));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
