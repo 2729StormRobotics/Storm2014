@@ -21,48 +21,16 @@ public class Catapult extends Subsystem {
     //Encoders
     //Motor Puller back thing/ winch
     //release/Pneumatics
-    Talon _winch;
-    Encoder _winchEncoder =  new Encoder(RobotMap.PORT_ENCODER_RELOADENCODER_1,RobotMap.PORT_ENCODER_RELOADENCODER_2);
-    Solenoid _release = new Solenoid(RobotMap.PORT_SOLENOID_RELEASE_CHANNEL);
-    Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE_CHANNEL);
+    private Talon _winch = new Talon(RobotMap.PORT_MOTOR_WINCH);
+    private Encoder _winchEncoder =  new Encoder(RobotMap.PORT_ENCODER_RELOADENCODER_1,RobotMap.PORT_ENCODER_RELOADENCODER_2);
+    private Solenoid _release = new Solenoid(RobotMap.PORT_SOLENOID_RELEASE_CHANNEL);
+    private Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE_CHANNEL);
     //new talon
     public Catapult(){
-        _winch = new Talon(RobotMap.PORT_MOTOR_WINCH);
+        
     }
     protected void initDefaultCommand() {
         setDefaultCommand(new CatapultReload(0.0,0.0));
-    }
-    
-    public void setWinch(Talon winch){
-        _winch=winch;
-    }
-  
-    public void setWinchEncoder(Encoder winchEncoder){
-        _winchEncoder=winchEncoder;
-    }
-  
-    public void setRelease(Solenoid release){
-        _release=release;
-    }
-   
-    public void setEngage(Solenoid engage){
-        _engage=engage;
-    }
-    
-    public Talon getWinch(){
-        return _winch;
-    }
-  
-    public Encoder getWinchEncoder(){
-        return _winchEncoder;
-    }
-  
-    public Solenoid getRelease(){
-        return _release;
-    }
-   
-    public Solenoid getEngage(){
-        return _engage;
     }
     
     public void setWinchRawVal(double winchRawVal){
@@ -77,11 +45,11 @@ public class Catapult extends Subsystem {
         return _winchEncoder.get();
     }
     
-    public void setReleaseState(boolean release){
+    public void release(boolean release){
         _release.set(release);
     }
     
-    public void setEngageState(boolean engage){
+    public void engage(boolean engage){
         _engage.set(engage);
     }
 }
