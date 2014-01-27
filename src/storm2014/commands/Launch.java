@@ -8,10 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Launch extends Command {
 
-    protected void initialize() {
+    protected void initialize() {   
     }
 
     protected void execute() {
+        
     }
 
     protected boolean isFinished() {
