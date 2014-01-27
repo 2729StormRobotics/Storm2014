@@ -6,20 +6,21 @@
 
 package storm2014.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
 /**
  *
  * @author Matthew Rassmann
  */
-public class ReleaseWinch {
+public class ReleaseWinch extends Command {
      
     public ReleaseWinch(){
-       
+       requires(Robot.catapult);
     }
     // Called just before this Command runs the first time
     protected void initialize() {
-       
+       Robot.catapult.release(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +30,7 @@ public class ReleaseWinch {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-      return false;
+      return true;
     }
 
     // Called once after isFinished returns true
