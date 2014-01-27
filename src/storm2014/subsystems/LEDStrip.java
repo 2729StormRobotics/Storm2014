@@ -35,8 +35,6 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     private static final String serverIP   = "socket://10.27.29.100:1025";
 
     public static int currentMode = 0;
-    
-    private boolean _connected = false;
 
     private ITable table;
 
@@ -45,29 +43,29 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public void setMode(int mode){
         setMode(mode, (byte) 0, (byte) 0, (byte) 0);
     }
-    public void setMode(int mode, byte red, byte green, byte blue){
-        if(!_connected) {
-            return;
-        }
-        try {
-            SocketConnection sc = (SocketConnection) Connector.open(serverIP);
-            OutputStream os = sc.openOutputStream();
-            os.write(mode);
-            if (mode == SetColorMode){
-                os.write(red);
-                os.write(green);
-                os.write(blue);
-            }
+    public void setMode(final int mode, final byte red, final byte green, final byte blue){
+        new Thread() {
+            public void run() {
+                try {
+                    SocketConnection sc = (SocketConnection) Connector.open(serverIP);
+                    OutputStream os = sc.openOutputStream();
+                    os.write(mode);
+                    if (mode == SetColorMode){
+                        os.write(red);
+                        os.write(green);
+                        os.write(blue);
+                    }
 
-            os.close();
-            sc.close();
-            currentMode = mode;
-            table.putNumber("Mode", currentMode);
-            System.out.println("Mode is now " + currentMode);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            _connected = false;
-        }
+                    os.close();
+                    sc.close();
+                    currentMode = mode;
+                    table.putNumber("Mode", currentMode);
+                    System.out.println("Mode is now " + currentMode);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     public String getSmartDashboardType(){
