@@ -19,6 +19,7 @@ import storm2014.commands.AutonomousDance;
 import storm2014.commands.ForwardDriveByDistance;
 import storm2014.commands.SpinUp;
 import storm2014.commands.TriangleMovement;
+import storm2014.subsystems.Catapult;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
 
@@ -32,6 +33,7 @@ public class Robot extends IterativeRobot {
     public static DriveTrain driveTrain;
     public static Shooter shooter;
     public static LEDStrip leds;
+    public static Catapult catapult;
     
     Command teleop;
     String[] autonomiceNames;

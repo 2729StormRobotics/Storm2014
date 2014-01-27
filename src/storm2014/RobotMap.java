@@ -20,6 +20,7 @@ public class RobotMap {
     public static final int PORT_MOTOR_DRIVE_LEFT     = 1;
     public static final int PORT_MOTOR_DRIVE_RIGHT    = 10;
     public static final int PORT_MOTOR_SHOOTER        = 3;
+    public static final int PORT_MOTOR_WINCH          = 2;
     
     public static final int PORT_ENCODER_LEFT_1          = 3;
     public static final int PORT_ENCODER_LEFT_2          = 4;
@@ -34,8 +35,8 @@ public class RobotMap {
 //    public static final int Port_Compressor_SwitchChannel = 5;
 //    public static final int Port_Compressor_RelayChannel  = 2;
 //    
-//    public static final int Port_Solenoid1_Channel = 1;
-//    public static final int Port_Solenoid2_Channel = 2;
+    public static final int PORT_SOLENOID_RELEASE_CHANNEL   = 1;
+    public static final int PORT_SOLENOID_REENGAGE_CHANNEL = 2;
     
  
 }
