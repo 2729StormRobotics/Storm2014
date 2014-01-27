@@ -16,12 +16,14 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.AutonomousDance;
-import storm2014.commands.ForwardDriveByDistance;
+import storm2014.commands.DriveForward;
 import storm2014.commands.SpinUp;
+import storm2014.commands.TomahawkRev;
 import storm2014.commands.TriangleMovement;
 import storm2014.subsystems.Catapult;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
+import storm2014.subsystems.Tomahawk;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
@@ -33,7 +35,11 @@ public class Robot extends IterativeRobot {
     public static DriveTrain driveTrain;
     public static Shooter shooter;
     public static LEDStrip leds;
+
     public static Catapult catapult;
+
+    public static Tomahawk tomahawk;
+
     
     Command teleop;
     String[] autonomiceNames;
@@ -66,9 +72,12 @@ public class Robot extends IterativeRobot {
         
         driveTrain = new DriveTrain();
         shooter    = new Shooter();
+        tomahawk   = new Tomahawk();
+        leds       = new LEDStrip();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
-        leds       = new LEDStrip();
+        
+        
        
 //       compressor = new Compressor(RobotMap.Port_Compressor_SwitchChannel,RobotMap.Port_Compressor_RelayChannel);
 //        solenoid1 = new Solenoid(RobotMap.Port_Solenoid1_Channel);
@@ -81,7 +90,7 @@ public class Robot extends IterativeRobot {
 
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance"};
-        autonomice = new Command[]{new ForwardDriveByDistance(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0)};
+        autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0)};
         
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
         
@@ -111,6 +120,7 @@ public class Robot extends IterativeRobot {
 //        System.out.println("Thingy");
 //        SmartDashboard.putData("Shooter PID 2",shooter.getPIDController());
           SmartDashboard.putData(new SpinUp(1500));
+          SmartDashboard.putData(new TomahawkRev());
           leds.initTable(NetworkTable.getTable("SmartDashboard"));
     }
 

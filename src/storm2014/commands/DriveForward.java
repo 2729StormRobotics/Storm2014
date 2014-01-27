@@ -7,14 +7,14 @@ import storm2014.Robot;
  *
  * @author Storm
  */
-public class ForwardDriveByDistance extends Command {
+public class DriveForward extends Command {
     
-    final double _power;
+    final double _speed;
     final double _distance;
        
-    public ForwardDriveByDistance(double power, double distance) {
+    public DriveForward(double speed, double distance) {
         requires(Robot.driveTrain);
-        _power = power;
+        _speed = speed;
         _distance = distance;
         
     }
@@ -22,16 +22,17 @@ public class ForwardDriveByDistance extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     Robot.driveTrain.clearEncoder();
+    
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-       Robot.driveTrain.tankDrive(_power, _power);    
+       Robot.driveTrain.tankDrive(_speed, _speed);    
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (_power >= 0 && Robot.driveTrain.getLeftDistance() >= _distance) || 
-               (_power < 0 && Robot.driveTrain.getLeftDistance() <= -_distance);
+        return (_speed >= 0 && Robot.driveTrain.getLeftDistance() >= _distance) || 
+               (_speed < 0 && Robot.driveTrain.getLeftDistance() <= -_distance);
         
         
     }
