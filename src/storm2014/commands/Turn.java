@@ -13,12 +13,12 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
-public class TurnBasedOnAnAngle extends Command {
+public class Turn extends Command {
 
     double _angle;
     double _power;
 
-    public TurnBasedOnAnAngle(double angle, double power) {
+    public Turn(double angle, double power) {
         requires(Robot.driveTrain);
         _angle = angle;
         _power = power;

@@ -11,26 +11,25 @@ import storm2014.subsystems.VisionSystem;
  *
  * @author Erik
  */
-public class FindTarget extends Command {     
+public class TurnToTarget extends Command {     
     
      private double _speed;     
-     private double xCord;
+     private double targetX;
      
-    public FindTarget(double speed) {
+    public TurnToTarget(double speed) {
         requires(Robot.driveTrain);
         _speed = speed;
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+      
     }
 
-    // Called just before this Command runs the first time
+   
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
+   
     protected void execute() {
-        xCord = VisionSystem.getXTarget();
-        if (xCord<=0){
+        targetX = VisionSystem.getXTarget();
+        if (targetX<=0){
             Robot.driveTrain.tankDrive(_speed, -_speed );
         }
         else {
@@ -38,16 +37,15 @@ public class FindTarget extends Command {
         }
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    
     protected boolean isFinished() {
-    return xCord<=0.1 && xCord>=-0.1;
+    return targetX<=0.1 && targetX>=-0.1;
     }
-    // Called once after isFinished returns true
+    
     protected void end() {
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    
     protected void interrupted() {
     }
 }
