@@ -79,7 +79,7 @@ public class Catapult extends Subsystem {
         return _winchEncoder.get();
     }
     
-    public void setSolonoidState(boolean release){
+    public void setSolenoidState(boolean release){
         _release.set(release);
     }
 }
