@@ -12,7 +12,7 @@ import java.util.TimerTask;
 import storm2014.Robot;
 import storm2014.subsystems.LEDStrip;
 
-public class TakeBackHalfController implements LiveWindowSendable {
+public class TakeBackHalfPlusPlus implements LiveWindowSendable {
     
     private class _bgTask extends TimerTask {
         
@@ -65,7 +65,7 @@ public class TakeBackHalfController implements LiveWindowSendable {
     private double _propGain;
    
     
-    public TakeBackHalfController(PIDOutput pidoutput, PIDSource pidsource, double period, double max, double min){
+    public TakeBackHalfPlusPlus(PIDOutput pidoutput, PIDSource pidsource, double period, double max, double min){
         
         _pidSource = pidsource;
         _pidOutput = pidoutput;

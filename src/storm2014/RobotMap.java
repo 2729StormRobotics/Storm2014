@@ -34,8 +34,12 @@ public class RobotMap {
     public static final int PORT_SENSOR_GYRO          = 1;
     public static final int PORT_SENSOR_HALL_EFFECT   = 5;
     
+    public static final int PORT_SENSOR_HALL_EFFECT_ROLLER   =7;
+    
+    public static final int PORT_SENSOR_BALL_IR   = 7; 
+    
+    
     public static final int PORT_SENSOR_TOMAHAWK_IR   = 6;
-    public static final int PORT_SENSOR_BALL_IR   = 7;
     public static final int PORT_MOTOR_TOMAHAWK       = 4;
 //    public static final int Port_Compressor_SwitchChannel = 5;
 //    public static final int Port_Compressor_RelayChannel  = 2;

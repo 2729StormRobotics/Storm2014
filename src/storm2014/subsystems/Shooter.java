@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.RobotMap;
 import storm2014.utilities.BangBangController;
 import storm2014.utilities.HallEffectSpeedSensor;
-import storm2014.utilities.TakeBackHalfController;
+import storm2014.utilities.TakeBackHalfPlusPlus;
 
 
 public class Shooter extends Subsystem{
@@ -15,12 +15,12 @@ public class Shooter extends Subsystem{
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT);
     private Jaguar _wheelMotor = new Jaguar(RobotMap.PORT_MOTOR_SHOOTER);
     BangBangController bangbangcontroller;
-    TakeBackHalfController takeBackHalfController;
+    TakeBackHalfPlusPlus takeBackHalfController;
     
     public Shooter(){
         super("shooter");//,0,0.032,0,0.27);
         bangbangcontroller = new BangBangController(_wheelMotor, _speedSensor,1.0/100);
-        takeBackHalfController = new TakeBackHalfController(_wheelMotor, _speedSensor, 1.0/100,1,0);
+        takeBackHalfController = new TakeBackHalfPlusPlus(_wheelMotor, _speedSensor, 1.0/100,1,0);
         _speedSensor.setMinSpeedRpm(200);
 //        SmartDashboard.putData("Shooter wheel PID",getPIDController());
         SmartDashboard.putData("Bang Bang Controller", bangbangcontroller); //adds bangbang to smartdashboard

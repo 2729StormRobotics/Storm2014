@@ -1,14 +1,12 @@
 package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import storm2014.Robot;
 
-/**
- *
- * @author Ginto
- */
 public class Launch extends Command {
 
-    protected void initialize() {   
+    protected void initialize() { 
+      
     }
 
     protected void execute() {
