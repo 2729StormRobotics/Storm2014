@@ -42,7 +42,7 @@ public class RobotMap {
     
 //
     public static final int PORT_SOLENOID_RELEASE_CHANNEL   = 1;
-    public static final int PORT_SOLENOID_REENGAGE_CHANNEL = 2;
+    public static final int PORT_SOLENOID_ENGAGE_CHANNEL = 2;
     
 //
 //    public static final int Port_Solenoid1_Channel = 1;

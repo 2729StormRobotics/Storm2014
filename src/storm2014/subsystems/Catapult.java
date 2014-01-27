@@ -24,7 +24,7 @@ public class Catapult extends Subsystem {
     Talon _winch;
     Encoder _winchEncoder =  new Encoder(RobotMap.PORT_ENCODER_RELOADENCODER_1,RobotMap.PORT_ENCODER_RELOADENCODER_2);
     Solenoid _release = new Solenoid(RobotMap.PORT_SOLENOID_RELEASE_CHANNEL);
-    Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_REENGAGE_CHANNEL);
+    Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE_CHANNEL);
     //new talon
     public Catapult(){
         _winch = new Talon(RobotMap.PORT_MOTOR_WINCH);
@@ -45,8 +45,8 @@ public class Catapult extends Subsystem {
         _release=release;
     }
    
-    public void setEngage(Solenoid reEngage){
-        _engage=reEngage;
+    public void setEngage(Solenoid engage){
+        _engage=engage;
     }
     
     public Talon getWinch(){
@@ -61,7 +61,7 @@ public class Catapult extends Subsystem {
         return _release;
     }
    
-    public Solenoid getReEngage(){
+    public Solenoid getEngage(){
         return _engage;
     }
     
