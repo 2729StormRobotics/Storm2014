@@ -69,7 +69,7 @@ public class Robot extends IterativeRobot {
     /** Called on robot boot. */
     public void robotInit() {
 
-        
+        catapult   = new Catapult();
         driveTrain = new DriveTrain();
         shooter    = new Shooter();
         tomahawk   = new Tomahawk();

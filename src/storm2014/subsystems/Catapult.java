@@ -68,7 +68,7 @@ public class Catapult extends Subsystem {
     }
     
     public void setWinchRawVal(double winchRawVal){
-        _winch.pidWrite(winchRawVal);
+        _winch.set(winchRawVal);
     }
     
     public void resetWinchEncoder(){
@@ -79,4 +79,7 @@ public class Catapult extends Subsystem {
         return _winchEncoder.get();
     }
     
+    public void setSolonoidState(boolean release){
+        _release.set(release);
+    }
 }
