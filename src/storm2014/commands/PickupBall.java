@@ -1,5 +1,3 @@
-
-
 package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -16,7 +14,7 @@ public class PickupBall extends Command {
     }
 
     protected boolean isFinished() {
-        
+        return false;
     }
 
     protected void end() {

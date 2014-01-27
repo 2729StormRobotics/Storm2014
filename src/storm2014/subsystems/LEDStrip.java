@@ -37,6 +37,8 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public static int currentMode = 0;
 
     private ITable table;
+    
+    private boolean disconnected = false;
 
     protected void initDefaultCommand() {}
 
@@ -61,8 +63,12 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                     currentMode = mode;
                     table.putNumber("Mode", currentMode);
                     System.out.println("Mode is now " + currentMode);
+                    disconnected = false;
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    if (!disconnected){
+                        ex.printStackTrace();
+                        disconnected = true;
+                    }
                 }
             }
         }.start();
