@@ -20,6 +20,7 @@ import storm2014.commands.DriveForward;
 import storm2014.commands.SpinUp;
 import storm2014.commands.TomahawkRev;
 import storm2014.commands.TriangleMovement;
+import storm2014.subsystems.Catapult;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
 import storm2014.subsystems.Tomahawk;
@@ -34,7 +35,11 @@ public class Robot extends IterativeRobot {
     public static DriveTrain driveTrain;
     public static Shooter shooter;
     public static LEDStrip leds;
+
+    public static Catapult catapult;
+
     public static Tomahawk tomahawk;
+
     
     Command teleop;
     String[] autonomiceNames;
