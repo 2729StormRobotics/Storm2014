@@ -9,6 +9,10 @@ public class TomahawkRev extends Command {
     
     private boolean _hasBeenForward = false;
     
+    public TomahawkRev(){
+        requires(Robot.tomahawk);
+    }
+    
     protected void initialize() {
         _hasBeenForward = false;
         Robot.tomahawk.startMotor(); 

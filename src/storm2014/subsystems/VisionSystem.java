@@ -26,10 +26,13 @@ public class VisionSystem {
         return SmartDashboard.getNumber("Ball Y position", 0);
     }
     public static double getXAngle() {
-        return SmartDashboard.getNumber("Target horizontal angle", 0);
+        return SmartDashboard.getNumber("Ball horizontal angle to center", 0);
     }
     public static double getYAngle() {
-        return SmartDashboard.getNumber("Target vertical angle", 0);
+        return SmartDashboard.getNumber("Ball vertical angle to center", 0);
+    }
+    public static double getBallDistance() {
+        return SmartDashboard.getNumber("Distance to ball in inches", 0);
     }
     public static double getBallXAngle() {
         return SmartDashboard.getNumber("Ball horizontal angle", 0);
@@ -43,4 +46,5 @@ public class VisionSystem {
     public static boolean foundTarget() {
         return SmartDashboard.getBoolean("Found target ", false);
     }
+    
 }

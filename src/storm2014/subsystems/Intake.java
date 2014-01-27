@@ -11,11 +11,11 @@ public class Intake extends Subsystem{
     
     private Talon _motor  = new Talon(RobotMap.PORT_MOTOR_ROLLER);
     private DigitalInput _ir = new DigitalInput(RobotMap.PORT_SENSOR_BALL_IR);
-    private  TakeBackHalfPlusPlus takeBackHalfController;
+    private  TakeBackHalfPlusPlus takeBackHalf;
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
     
     public Intake(){
-        takeBackHalfController = new TakeBackHalfPlusPlus(_motor, _speedSensor, 1.0/100,1,0);
+        takeBackHalf = new TakeBackHalfPlusPlus(_motor, _speedSensor, 1.0/100,1,-1);
     }
     
     protected void initDefaultCommand() {
@@ -23,17 +23,17 @@ public class Intake extends Subsystem{
     }
     
     public void spinIn(){
-        _motor.set(1);
+        takeBackHalf.setMinMax(0, 1);
     }
     
     public void spinOut(){
-        _motor.set(-1);
+        takeBackHalf.setMinMax(-1, 0);
     }
     
     public void stopMotor(){
-        _motor.set(0);
+        takeBackHalf.disable();
     }
-    
+    //TODO make sure this gets added
     public boolean isLoaded(){
         return _ir.get();
     }

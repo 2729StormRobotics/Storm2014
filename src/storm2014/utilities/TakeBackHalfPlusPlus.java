@@ -86,6 +86,11 @@ public class TakeBackHalfPlusPlus implements LiveWindowSendable {
         _gain = gain;
     }
     
+    public void setMinMax(double min, double max){
+        _min = min; 
+        _max = max;
+    }
+    
     private void setPropGain(double propGain){
         _propGain = propGain;
     }

@@ -1,25 +1,13 @@
 package storm2014.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import storm2014.Robot;
 
-public class Launch extends Command {
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
-    protected void initialize() { 
-      
+public class Launch extends CommandGroup {
+    
+    public Launch(){
+        addSequential();
+        addSequential(new Engage());     
     }
-
-    protected void execute() {
-        
-    }
-
-    protected boolean isFinished() {
-        return true;
-    }
-
-    protected void end() {
-    }
-
-    protected void interrupted() {
-    }
+    
 }
