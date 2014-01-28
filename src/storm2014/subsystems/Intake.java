@@ -15,7 +15,7 @@ public class Intake extends Subsystem{
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
     
     public Intake(){
-        takeBackHalf = new TakeBackHalfPlusPlus(_motor, _speedSensor, 1.0/100,1,-1);
+        takeBackHalf = new TakeBackHalfPlusPlus(_motor, _speedSensor, 1.0/100,1,0);
     }
     
     protected void initDefaultCommand() {
@@ -23,14 +23,17 @@ public class Intake extends Subsystem{
     }
     
     public void spinIn(){
-        takeBackHalf.setMinMax(0, 1);
+        takeBackHalf.setOutputRange(0, 1);
+        takeBackHalf.setSetpoint(1000);
     }
     
     public void spinOut(){
-        takeBackHalf.setMinMax(-1, 0);
+        takeBackHalf.setOutputRange(-1, 0);
+        takeBackHalf.setSetpoint(-1000);
     }
     
     public void stopMotor(){
+        takeBackHalf.setOutputRange(-1, 1);
         takeBackHalf.disable();
     }
     //TODO make sure this gets added

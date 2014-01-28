@@ -1,10 +1,5 @@
-/*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
-
 package storm2014.subsystems;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -13,38 +8,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class VisionSystem {
     
-    public static double getXTarget() {
-        return SmartDashboard.getNumber("Target X position ", 0);
+    public static double getTargetXAngle() {
+        return SmartDashboard.getNumber("Vertical target horizontal angle", 0);
     }
-    public static double getYTarget() {
-        return SmartDashboard.getNumber("Target Y position ", 0);
-    }
-    public static double getXBall() {
-        return SmartDashboard.getNumber("Ball X position", 0);
-    }
-    public static double getYBall() {
-        return SmartDashboard.getNumber("Ball Y position", 0);
-    }
-    public static double getXAngle() {
-        return SmartDashboard.getNumber("Ball horizontal angle to center", 0);
-    }
-    public static double getYAngle() {
-        return SmartDashboard.getNumber("Ball vertical angle to center", 0);
+    public static double getTargetYAngle() {
+        return SmartDashboard.getNumber("Vertical target vertical angle", 0);
     }
     public static double getBallDistance() {
         return SmartDashboard.getNumber("Distance to ball in inches", 0);
     }
     public static double getBallXAngle() {
-        return SmartDashboard.getNumber("Ball horizontal angle", 0);
+        return SmartDashboard.getNumber("Ball horizontal angle to center", 0);
     }
     public static double getBallYAngle() {
-        return SmartDashboard.getNumber("Ball vertical angle", 0);
+        return SmartDashboard.getNumber("Ball vertical angle to center", 0);
     }
     public static boolean foundBall() {
         return SmartDashboard.getBoolean("Found ball", false);
     }
     public static boolean foundTarget() {
-        return SmartDashboard.getBoolean("Found target ", false);
+        return SmartDashboard.getBoolean("Found horizontal target", false);
     }
     
 }

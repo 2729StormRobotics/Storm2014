@@ -16,12 +16,12 @@ import storm2014.Robot;
 public class Turn extends Command {
 
     double _angle;
-    double _power;
+    double _speed;
 
     public Turn(double angle, double power) {
         requires(Robot.driveTrain);
         _angle = angle;
-        _power = power;
+        _speed = power;
     }
 
     // Called just before this Command runs the first time
@@ -32,9 +32,9 @@ public class Turn extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (_angle > 0){
-            Robot.driveTrain.tankDrive(_power,-_power);
+            Robot.driveTrain.tankDrive(_speed,-_speed);
         } else {
-            Robot.driveTrain.tankDrive(-_power,_power);
+            Robot.driveTrain.tankDrive(-_speed,_speed);
         }
     }
 
