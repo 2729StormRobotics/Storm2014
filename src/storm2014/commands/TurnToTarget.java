@@ -28,7 +28,7 @@ public class TurnToTarget extends Command {
 
    
     protected void execute() {
-        targetX = VisionSystem.getXTarget();
+        targetX = VisionSystem.getTargetXAngle();
         if (targetX<=0){
             Robot.driveTrain.tankDrive(_speed, -_speed );
         }
