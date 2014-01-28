@@ -11,6 +11,7 @@ public class RobotMap {
     public static final int JOYDRIVE_BUTTON_SLOW    = 5;
     public static final int JOYDRIVE_BUTTON_SPINUP  = 3;
     public static final int JOYTOMAHAWK_BUTTON  = 10; //tomahawk button
+    public static final int JOYDRIBBLE_BUTTON  = 11;
     
     // public static final int JOYDEBUG_BUTTON_CONTROLSHOOT = 10;
     
@@ -37,7 +38,7 @@ public class RobotMap {
     public static final int PORT_SENSOR_BALL_IR          = 7;
     
     public static final int PORT_SENSOR_GYRO          = 1;
-
+    
 //    public static final int Port_Compressor_SwitchChannel = 5;
 //    public static final int Port_Compressor_RelayChannel  = 2;
     

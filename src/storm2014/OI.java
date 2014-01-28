@@ -3,6 +3,7 @@ package storm2014;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import storm2014.commands.DribbleBall;
 
 import storm2014.commands.SetLEDMode;
 import storm2014.commands.SpinUp;
@@ -10,10 +11,10 @@ import storm2014.commands.TomahawkRev;
 
 
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
-public class OI {    
+public class OI {
     private final Joystick driveJoystick = new Joystick(RobotMap.PORT_JOYSTICK_DRIVE),
 //                           shootJoystick = new Joystick(RobotMap.PORT_JOYSTICK_SHOOT),
-                           debugJoystick = new Joystick(RobotMap.PORT_JOYSTICK_DEBUG);
+            debugJoystick = new Joystick(RobotMap.PORT_JOYSTICK_DEBUG);
     
     private final Button slowModeButton      = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SLOW);
     
@@ -21,10 +22,12 @@ public class OI {
     
     private final Button tomahawk = new JoystickButton(driveJoystick,RobotMap.JOYTOMAHAWK_BUTTON);
     
+    private final Button dribbleBall = new JoystickButton(driveJoystick,RobotMap.JOYDRIBBLE_BUTTON);
+    
     public OI() {
         spinUp.whenPressed(new SpinUp(1500.0));
         tomahawk.whenPressed(new TomahawkRev());
-        
+        dribbleBall.toggleWhenPressed(new DribbleBall());
     }
     
     // When a joystick is in its zero position, it will not necessarily read

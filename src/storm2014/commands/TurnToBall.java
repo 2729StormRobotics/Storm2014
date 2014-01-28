@@ -17,7 +17,6 @@ public class TurnToBall extends Command {
     protected void initialize() { 
         ballX =  VisionSystem.getBallXAngle();
     }
-
    
     protected void execute() {
          ballX =  VisionSystem.getBallXAngle();
