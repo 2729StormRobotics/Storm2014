@@ -4,6 +4,7 @@
  */
 package storm2014.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -56,6 +57,21 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                         os.write(red);
                         os.write(green);
                         os.write(blue);
+                    }
+                    else if (mode == DisabledMode){
+                        DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
+                        if (color == DriverStation.Alliance.kBlue){
+                            os.write('b');
+                        }
+                        else if (color == DriverStation.Alliance.kRed){
+                            os.write('r');
+                        }
+                        else if (color == DriverStation.Alliance.kInvalid){
+                            os.write('i');
+                        }
+                        else{
+                            os.write('e');
+                        }
                     }
 
                     os.close();
