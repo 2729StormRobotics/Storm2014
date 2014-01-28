@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
@@ -26,6 +27,11 @@ public class DriveTrain extends Subsystem {
     Gyro _gyro = new Gyro(RobotMap.PORT_SENSOR_GYRO);
     double _gyroOffset = 0;
     public Object tankDrive;
+    
+    Solenoid _leftShiftDown  = new Solenoid(RobotMap.PORT_SOLENOID_LEFTSHIFTDOWN_CHANNEL),
+             _rightShiftDown = new Solenoid(RobotMap.PORT_SOLENOID_RIGHTSHIFTDOWN_CHANNEL),
+             _leftShiftUp    = new Solenoid(RobotMap.PORT_SOLENOID_LEFTSHIFTUP_CHANNEL),
+             _rightShiftUp   = new Solenoid(RobotMap.PORT_SOLENOID_RIGHTSHIFTUP_CHANNEL);
     
     public DriveTrain() {
 	
@@ -97,5 +103,13 @@ public class DriveTrain extends Subsystem {
     /** Reads the [-1,1] value set for the right wheels. */
     public double getRightSpeed(){
         return _right.get();
+    }
+    public void shiftDown(){
+        _rightShiftDown.set(true);
+        _leftShiftDown.set(true);
+    }
+    public void shiftUp(){
+        _rightShiftUp.set(true);
+        _leftShiftUp.set(true);
     }
 }
