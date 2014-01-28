@@ -22,7 +22,7 @@ public class Catapult extends Subsystem {
     //Motor Puller back thing/ winch
     //release/Pneumatics
     private Talon _winch = new Talon(RobotMap.PORT_MOTOR_WINCH);
-    private Encoder _winchEncoder =  new Encoder(RobotMap.PORT_ENCODER_RELOADENCODER_1,RobotMap.PORT_ENCODER_RELOADENCODER_2);
+    private Encoder _winchEncoder =  new Encoder(RobotMap.PORT_ENCODER_PULLBACKENCODER_1,RobotMap.PORT_ENCODER_PULLBACKENCODER_2);
     private Solenoid _release = new Solenoid(RobotMap.PORT_SOLENOID_RELEASE_CHANNEL);
     private Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE_CHANNEL);
     //new talon
