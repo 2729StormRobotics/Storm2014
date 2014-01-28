@@ -32,6 +32,7 @@ public class RobotMap {
     public static final int PORT_ENCODER_RELOADENCODER_1 = 8;
     public static final int PORT_ENCODER_RELOADENCODER_2 = 9;
     public static final int PORT_SENSOR_HALL_EFFECT      = 5;
+    public static final int PORT_SENSOR_HALL_EFFECT_ROLLER = 8;
     public static final int PORT_SENSOR_TOMAHAWK_IR      = 6;
     public static final int PORT_SENSOR_BALL_IR          = 7;
     

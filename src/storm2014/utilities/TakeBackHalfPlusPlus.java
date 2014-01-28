@@ -78,7 +78,7 @@ public class TakeBackHalfPlusPlus implements LiveWindowSendable {
     
     
     //sets speed
-    private void setSetpoint(double setPoint) {
+    public void setSetpoint(double setPoint) {
         _setPoint = setPoint;
     }
     //sets gain
@@ -86,10 +86,6 @@ public class TakeBackHalfPlusPlus implements LiveWindowSendable {
         _gain = gain;
     }
     
-    public void setMinMax(double min, double max){
-        _min = min; 
-        _max = max;
-    }
     
     private void setPropGain(double propGain){
         _propGain = propGain;
