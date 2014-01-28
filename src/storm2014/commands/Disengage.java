@@ -13,9 +13,9 @@ import storm2014.Robot;
  *
  * @author Matthew Rassmann
  */
-public class ReleaseWinch extends Command {
+public class Disengage extends Command {
      
-    public ReleaseWinch(){
+    public Disengage(){
        requires(Robot.catapult);
     }
     // Called just before this Command runs the first time
