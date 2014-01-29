@@ -61,16 +61,16 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                     else if (mode == DisabledMode){
                         DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
                         if (color == DriverStation.Alliance.kBlue){
-                            os.write('b');
+                            os.write((byte) 0);
                         }
                         else if (color == DriverStation.Alliance.kRed){
-                            os.write('r');
+                            os.write((byte) 1);
                         }
                         else if (color == DriverStation.Alliance.kInvalid){
-                            os.write('i');
+                            os.write((byte) 2);
                         }
                         else{
-                            os.write('e');
+                            os.write((byte) 3);
                         }
                     }
 
