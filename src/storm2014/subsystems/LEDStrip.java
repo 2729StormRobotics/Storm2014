@@ -6,7 +6,6 @@ package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.NamedSendable;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
@@ -32,6 +31,11 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public static final int SetColorMode          =  8;
     public static final int ParticleCollisionMode =  9;
     public static final int PileMode              = 10;
+    
+    private static final byte allianceBlue    = 0;
+    private static final byte allianceRed     = 1;
+    private static final byte allianceInvalid = 2;
+    private static final byte allianceError   = 3;
 
     private static final String serverIP   = "socket://10.27.29.100:1025";
 
@@ -61,16 +65,16 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                     else if (mode == DisabledMode){
                         DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
                         if (color == DriverStation.Alliance.kBlue){
-                            os.write((byte) 0);
+                            os.write(allianceBlue);
                         }
                         else if (color == DriverStation.Alliance.kRed){
-                            os.write((byte) 1);
+                            os.write(allianceRed);
                         }
                         else if (color == DriverStation.Alliance.kInvalid){
-                            os.write((byte) 2);
+                            os.write(allianceInvalid);
                         }
                         else{
-                            os.write((byte) 3);
+                            os.write(allianceError);
                         }
                     }
 
