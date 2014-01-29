@@ -17,7 +17,7 @@ public class DribbleSpeedCalculator {
     private double _output;
     private Timer _timer  = new Timer();
     private double _period;
-    private boolean _enabled;
+    private boolean _enabled = false;
     
     private class _bTask extends TimerTask {
         
@@ -25,8 +25,7 @@ public class DribbleSpeedCalculator {
             if(_enabled){
                 _curVelocity = _pidVelocity.pidGet();
                 _curSpeed = _pidSource.pidGet();
-                _curVelocity = _pidVelocity.pidGet();
-                
+                _curVelocity = _pidVelocity.pidGet();          
                 //TODO add formula to calculate output. will calculate the speed to spin roller to dribble ball.
                 //covert curvelocity to usable value.
             }
