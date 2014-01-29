@@ -8,7 +8,6 @@ import storm2014.utilities.BangBangController;
 import storm2014.utilities.HallEffectSpeedSensor;
 import storm2014.utilities.TakeBackHalfPlusPlus;
 
-
 public class Shooter extends Subsystem{
     private static final double SCALE = 10000;
     //declares variables

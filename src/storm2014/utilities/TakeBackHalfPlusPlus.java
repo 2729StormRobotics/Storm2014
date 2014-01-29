@@ -75,8 +75,7 @@ public class TakeBackHalfPlusPlus implements LiveWindowSendable {
         _min = min;
         _timer.schedule(new _bgTask(), 0, (long) (1000 * _period));
     }
-    
-    
+
     //sets speed
     public void setSetpoint(double setPoint) {
         _setPoint = setPoint;
@@ -85,7 +84,6 @@ public class TakeBackHalfPlusPlus implements LiveWindowSendable {
     private void setGain(double gain){
         _gain = gain;
     }
-    
     
     private void setPropGain(double propGain){
         _propGain = propGain;
@@ -150,7 +148,6 @@ public class TakeBackHalfPlusPlus implements LiveWindowSendable {
                     setPropGain(((Double) value).doubleValue());
                 }
             }
-            
         }
     };
     

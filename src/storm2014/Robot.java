@@ -21,6 +21,7 @@ import storm2014.commands.SpinUp;
 import storm2014.commands.TomahawkRev;
 import storm2014.commands.TriangleMovement;
 import storm2014.subsystems.Catapult;
+import storm2014.subsystems.DribblerSub;
 import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
@@ -38,6 +39,7 @@ public class Robot extends IterativeRobot {
     public static LEDStrip leds;
     public static Intake intake;
     public static Catapult catapult;
+    public static DribblerSub dribblerSub;
 
     public static Tomahawk tomahawk;
 
@@ -76,6 +78,7 @@ public class Robot extends IterativeRobot {
         tomahawk   = new Tomahawk();
         leds       = new LEDStrip();
         intake = new Intake();
+        dribblerSub = new DribblerSub();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         
