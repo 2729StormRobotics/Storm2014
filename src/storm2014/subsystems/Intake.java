@@ -1,6 +1,7 @@
 package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import storm2014.RobotMap;
@@ -13,6 +14,7 @@ public class Intake extends Subsystem{
     private DigitalInput _ir = new DigitalInput(RobotMap.PORT_SENSOR_BALL_IR);
     private  TakeBackHalfPlusPlus takeBackHalf;
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
+    private Encoder encoder = new Encoder(RobotMap.PORT_ENCODER_LEFT_1,RobotMap.PORT_ENCODER_LEFT_2);
     
     public Intake(){
         takeBackHalf = new TakeBackHalfPlusPlus(_motor, _speedSensor, 1.0/100,1,0);
@@ -39,6 +41,18 @@ public class Intake extends Subsystem{
     //TODO make sure this gets added
     public boolean isLoaded(){
         return _ir.get();
+    }
+    
+    public double getRollerSpeed(){
+        return _speedSensor.pidGet();
+    }
+    
+    public void setRollerSpeed(double output){
+        _motor.pidWrite(output);
+    }
+    
+    public double getEncoderValue(){
+        return encoder.get();
     }
     
 }
