@@ -10,6 +10,11 @@ import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ *
+ * @author Garrett
+ */
+
 public class BangBangController implements LiveWindowSendable {
     
     

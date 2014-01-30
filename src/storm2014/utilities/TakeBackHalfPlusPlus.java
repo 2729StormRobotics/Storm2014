@@ -12,6 +12,11 @@ import java.util.TimerTask;
 import storm2014.Robot;
 import storm2014.subsystems.LEDStrip;
 
+/**
+ *
+ * @author Garrett
+ */
+
 public class TakeBackHalfPlusPlus implements LiveWindowSendable {
     
     private class _bgTask extends TimerTask {

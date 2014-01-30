@@ -6,7 +6,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
 
-
+/**
+ *
+ * @author Garrett
+ */
 
 public class Tomahawk extends Subsystem {
     
@@ -27,11 +30,11 @@ public class Tomahawk extends Subsystem {
     
     
     public void startMotor(){
-        _motor.pidWrite(1);
+        _motor.set(1);
     }
     
     public void stopMotor(){
-        _motor.pidWrite(0);
+        _motor.set(0);
     }
     
 }

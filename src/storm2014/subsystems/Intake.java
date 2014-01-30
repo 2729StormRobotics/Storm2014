@@ -8,13 +8,18 @@ import storm2014.RobotMap;
 import storm2014.utilities.HallEffectSpeedSensor;
 import storm2014.utilities.TakeBackHalfPlusPlus;
 
+/**
+ *
+ * @author Garrett
+ */
+
 public class Intake extends Subsystem{
     
     private Talon _motor  = new Talon(RobotMap.PORT_MOTOR_ROLLER);
     private DigitalInput _ir = new DigitalInput(RobotMap.PORT_SENSOR_BALL_IR);
     private  TakeBackHalfPlusPlus takeBackHalf;
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
-    private Encoder encoder = new Encoder(RobotMap.PORT_ENCODER_LEFT_1,RobotMap.PORT_ENCODER_LEFT_2);
+    private Encoder _encoder = new Encoder(RobotMap.PORT_ENCODER_LEFT_1,RobotMap.PORT_ENCODER_LEFT_2);
     
     public Intake(){
         takeBackHalf = new TakeBackHalfPlusPlus(_motor, _speedSensor, 1.0/100,1,0);
@@ -48,11 +53,14 @@ public class Intake extends Subsystem{
     }
     
     public void setRollerSpeed(double output){
-        _motor.pidWrite(output);
+        _motor.set(output);
     }
     
     public double getEncoderValue(){
-        return encoder.get();
+        return _encoder.get();
     }
     
+    public void clearEncoder(){
+        _encoder.reset();
+    }
 }

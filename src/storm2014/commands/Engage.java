@@ -3,6 +3,11 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
+/**
+ *
+ * @author Garrett
+ */
+
 public class Engage extends Command {
 
     public Engage(){
