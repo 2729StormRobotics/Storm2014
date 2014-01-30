@@ -4,21 +4,19 @@
  * and open the template in the editor.
  */
 package storm2014.commands;
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
+import storm2014.subsystems.VisionSystem;
 /**
  *
  * @author Erik
  */
-public class TurnToHotTargetAndFire extends CommandGroup{
-    private static final double ANGLE       = 75,
-                                TURN_SPEED  = 0.7;
+public class TurnRightToHotTarget extends Command {
+    private double _speed;
     
-    public TurnToHotTargetAndFire() {
-//       addSequential(new Conditional(new TurnLeftToHotTarget(ANGLE), new Engage()));
-//       addSequential(new Conditional(new TurnRightToHotTarget(ANGLE), new Engage()));
-       addSequential(new Engage());
-       addSequential(new Disengage());
+    public TurnRightToHotTarget(double speed) {
+        requires(Robot.driveTrain);
+       _speed = speed;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -29,11 +27,14 @@ public class TurnToHotTargetAndFire extends CommandGroup{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+       if (!VisionSystem.foundHotTarget()){
+            Robot.driveTrain.tankDrive(_speed, -_speed );
+       }
     }
-
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    return !VisionSystem.foundHotTarget();   
     }
 
     // Called once after isFinished returns true
