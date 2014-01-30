@@ -25,6 +25,7 @@ import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
 import storm2014.subsystems.Tomahawk;
+import storm2014.utilities.Tilter;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
@@ -38,7 +39,7 @@ public class Robot extends IterativeRobot {
     public static LEDStrip leds;
     public static Intake intake;
     public static Catapult catapult;
-
+    public static Tilter tilter;
     public static Tomahawk tomahawk;
 
     
@@ -76,6 +77,7 @@ public class Robot extends IterativeRobot {
         tomahawk   = new Tomahawk();
         leds       = new LEDStrip();
         intake = new Intake();
+        tilter = new Tilter();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         

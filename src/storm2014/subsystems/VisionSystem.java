@@ -26,7 +26,7 @@ public class VisionSystem {
     public static boolean foundBall() {
         return SmartDashboard.getBoolean("Found ball", false);
     }
-    public static boolean foundTarget() {
+    public static boolean foundHotTarget() {
         return SmartDashboard.getBoolean("Found horizontal target", false);
     }
     

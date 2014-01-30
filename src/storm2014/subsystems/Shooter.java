@@ -8,7 +8,6 @@ import storm2014.utilities.BangBangController;
 import storm2014.utilities.HallEffectSpeedSensor;
 import storm2014.utilities.TakeBackHalfPlusPlus;
 
-
 public class Shooter extends Subsystem{
     private static final double SCALE = 10000;
     //declares variables
@@ -19,7 +18,7 @@ public class Shooter extends Subsystem{
     
     public Shooter(){
         super("shooter");//,0,0.032,0,0.27);
-        bangbangcontroller = new BangBangController(_wheelMotor, _speedSensor,1.0/100);
+      //  bangbangcontroller = new BangBangController(_wheelMotor, _speedSensor,1.0/100);
         takeBackHalfController = new TakeBackHalfPlusPlus(_wheelMotor, _speedSensor, 1.0/100,1,0);
         _speedSensor.setMinSpeedRpm(200);
 //        SmartDashboard.putData("Shooter wheel PID",getPIDController());
