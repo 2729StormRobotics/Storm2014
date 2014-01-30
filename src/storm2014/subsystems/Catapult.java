@@ -18,14 +18,14 @@ import storm2014.commands.PullBack;
  * @author Matthew Rassmann
  */
 public class Catapult extends Subsystem {
-    //Encoders
-    //Motor Puller back thing/ winch
-    //release/Pneumatics
+
     private Talon _winch = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private Encoder _winchEncoder =  new Encoder(RobotMap.PORT_ENCODER_PULLBACKENCODER_1,RobotMap.PORT_ENCODER_PULLBACKENCODER_2);
-    private Solenoid _release = new Solenoid(RobotMap.PORT_SOLENOID_RELEASE_CHANNEL);
+    private Solenoid _disengage = new Solenoid(RobotMap.PORT_SOLENOID_DISENGAGE_CHANNEL);
     private Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE_CHANNEL);
-    //new talon
+    private Solenoid _latched = new Solenoid(RobotMap.PORT_SOLENOID_LATCHED_CHANNEL);
+    private Solenoid _unlatched = new Solenoid(RobotMap.PORT_SOLENOID_UNLATCHED_CHANNEL);
+    
     public Catapult(){
         
     }
@@ -45,11 +45,19 @@ public class Catapult extends Subsystem {
         return _winchEncoder.get();
     }
     
-    public void release(boolean release){
-        _release.set(release);
+    public void disengage(boolean disEngage){
+        _disengage.set(disEngage);
     }
     
     public void engage(boolean engage){
         _engage.set(engage);
+    }
+    
+    public void latched(boolean latched){
+        _latched.set(latched);
+    }
+    
+    public void unlatched(boolean unlatched){
+        _unlatched.set(unlatched);
     }
 }

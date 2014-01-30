@@ -42,8 +42,10 @@ public class RobotMap {
 //    public static final int Port_Compressor_RelayChannel  = 2;
     
 //
-    public static final int PORT_SOLENOID_RELEASE_CHANNEL        = 1;
+    public static final int PORT_SOLENOID_DISENGAGE_CHANNEL      = 1;
     public static final int PORT_SOLENOID_ENGAGE_CHANNEL         = 2;
+    public static final int PORT_SOLENOID_LATCHED_CHANNEL        = 7;
+    public static final int PORT_SOLENOID_UNLATCHED_CHANNEL      = 8;
     public static final int PORT_SOLENOID_LEFTSHIFTDOWN_CHANNEL  = 3;
     public static final int PORT_SOLENOID_RIGHTSHIFTDOWN_CHANNEL = 4;
     public static final int PORT_SOLENOID_LEFTSHIFTUP_CHANNEL    = 5;

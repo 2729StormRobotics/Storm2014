@@ -34,8 +34,7 @@ public class PullBack extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (_power >= 0 && Robot.catapult.getWinchDistance() >= _distance) || 
-               (_power < 0 && Robot.catapult.getWinchDistance() <= -_distance);
+        return (Math.abs(Robot.catapult.getWinchDistance())>=_distance);
     }
 
     // Called once after isFinished returns true
