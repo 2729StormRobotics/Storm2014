@@ -6,11 +6,10 @@ import storm2014.subsystems.VisionSystem;
  *
  * @author Erik
  */
-public class TurnToHotTarget extends Command {
+public class TurnRightToHotTarget extends Command {
     private double _speed;
-    private double targetX;
-    private boolean hotTarget;
-    public TurnToHotTarget(double speed) {
+    
+    public TurnRightToHotTarget(double speed) {
         requires(Robot.driveTrain);
        _speed = speed;
         // Use requires() here to declare subsystem dependencies
@@ -23,19 +22,14 @@ public class TurnToHotTarget extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-       if (hotTarget = VisionSystem.foundHotTarget()){
-        targetX = VisionSystem.getTargetXAngle();
-        if (targetX<=0){
+       if (!VisionSystem.foundHotTarget()){
             Robot.driveTrain.tankDrive(_speed, -_speed );
-        }
-        else {
-            Robot.driveTrain.tankDrive(-_speed, _speed);      
-        }
+       }
     }
-    }
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    return targetX<=0.1 && targetX>=-0.1 && VisionSystem.foundHotTarget();   
+    return !VisionSystem.foundHotTarget();   
     }
 
     // Called once after isFinished returns true
