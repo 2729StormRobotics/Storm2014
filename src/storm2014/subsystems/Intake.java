@@ -41,7 +41,7 @@ public class Intake extends Subsystem{
         takeBackHalf.setOutputRange(-1, 1);
         takeBackHalf.disable();
     }
-    //TODO make sure this gets added
+    //TODO make sure this gets added 
     public boolean isLoaded(){
         return _ir.get();
     }
