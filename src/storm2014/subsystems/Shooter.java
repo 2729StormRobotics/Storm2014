@@ -18,10 +18,10 @@ public class Shooter extends Subsystem{
     
     public Shooter(){
         super("shooter");//,0,0.032,0,0.27);
-      //  bangbangcontroller = new BangBangController(_wheelMotor, _speedSensor,1.0/100);
+        bangbangcontroller = new BangBangController(_wheelMotor, _speedSensor,1.0/100);
         takeBackHalfController = new TakeBackHalfPlusPlus(_wheelMotor, _speedSensor, 1.0/100,1,0);
         _speedSensor.setMinSpeedRpm(200);
-//        SmartDashboard.putData("Shooter wheel PID",getPIDController());
+//    SmartDashboard.putData("Shooter wheel PID",getPIDController());
         SmartDashboard.putData("Bang Bang Controller", bangbangcontroller); //adds bangbang to smartdashboard
         SmartDashboard.putData("Take Back Half Controller", takeBackHalfController ); //adds takebackhalf to smart dashboard
 //        getPIDController().setOutputRange(-SCALE, SCALE);
