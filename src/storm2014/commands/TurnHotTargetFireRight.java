@@ -5,6 +5,8 @@
  */
 package storm2014.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 /**
  *
  * @author Erik
