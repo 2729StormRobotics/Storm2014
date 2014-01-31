@@ -25,7 +25,7 @@ import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
 import storm2014.subsystems.Tomahawk;
-import storm2014.utilities.Tilter;
+import storm2014.subsystems.Tilter;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.

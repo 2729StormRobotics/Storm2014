@@ -1,8 +1,9 @@
-package storm2014.utilities;
+package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import storm2014.RobotMap;
+import storm2014.utilities.StringPot;
 
 /**
  *
