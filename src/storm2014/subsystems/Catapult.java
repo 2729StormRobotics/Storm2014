@@ -26,9 +26,6 @@ public class Catapult extends Subsystem {
     private Solenoid _latched = new Solenoid(RobotMap.PORT_SOLENOID_LATCHED_CHANNEL);
     private Solenoid _unlatched = new Solenoid(RobotMap.PORT_SOLENOID_UNLATCHED_CHANNEL);
     
-    public Catapult(){
-        
-    }
     protected void initDefaultCommand() {
         setDefaultCommand(new PullBack(0.0,0.0));
     }
@@ -53,11 +50,11 @@ public class Catapult extends Subsystem {
         _engage.set(engage);
     }
     
-    public void latched(boolean latched){
+    public void latch(boolean latched){
         _latched.set(latched);
     }
     
-    public void unlatched(boolean unlatched){
+    public void unlatch(boolean unlatched){
         _unlatched.set(unlatched);
     }
 }

@@ -5,17 +5,16 @@ import storm2014.Robot;
 
 /**
  *
- * @author Garrett
+ * @author garrett
  */
-
-public class Engage extends Command {
-
-    public Engage(){
+public class Unlatch extends Command {
+ 
+    public Unlatch(){
         requires(Robot.catapult);
     }
     
     protected void initialize() {
-        Robot.catapult.engage(true);
+       
     }
 
     protected void execute() {
@@ -23,7 +22,7 @@ public class Engage extends Command {
     }
 
     protected boolean isFinished() {
-       return true;
+     return true;   
     }
 
     protected void end() {
@@ -31,7 +30,7 @@ public class Engage extends Command {
     }
 
     protected void interrupted() {
-       
+        
     }
     
 }
