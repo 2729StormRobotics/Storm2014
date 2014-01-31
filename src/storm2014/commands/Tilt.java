@@ -5,7 +5,7 @@ import storm2014.Robot;
 
 /**
  *
- * @author garrett
+ * @author garrett/Matthew Rassmann
  */
 public class Tilt extends Command{
     
