@@ -5,11 +5,13 @@
  */
 package storm2014.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 /**
  *
  * @author Erik
  */
-public class TurnHotTargetFireRight extends CommandBase {
+public class TurnHotTargetFireRight extends Command {
     
     public TurnHotTargetFireRight() {
         // Use requires() here to declare subsystem dependencies
