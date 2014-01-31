@@ -5,6 +5,11 @@ import storm2014.subsystems.LEDStrip;
 
 public class PreLaunch extends CommandGroup{
     
+    /**
+     *
+     * @author Garrett
+     */
+    
     public PreLaunch(){
         //wait until arm is in place
         addSequential(new SetLEDMode(LEDStrip.StormSpiritMode));
@@ -12,5 +17,5 @@ public class PreLaunch extends CommandGroup{
         addSequential(new Engage());
         addSequential(new PullBack(1, 100));
         
-    }   
+    }
 }
