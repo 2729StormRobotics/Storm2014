@@ -11,7 +11,7 @@ import storm2014.Robot;
 
 /**
  *
- * @author Matthew Rassmann
+ * @author Matthew Rassmann/Garrett
  */
 public class Disengage extends Command {
      

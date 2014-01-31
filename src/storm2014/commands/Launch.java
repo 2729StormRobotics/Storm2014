@@ -6,7 +6,7 @@ import storm2014.subsystems.LEDStrip;
 
 /**
  *
- * @author Garrett
+ * @author Garrett/Matthew Rasmann
  */
 
 public class Launch extends CommandGroup {
