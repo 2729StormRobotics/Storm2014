@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
- * @author Garrett
+ * @author Garrett/Matthew Rasmann
  */
 
 public class Launch extends CommandGroup {
