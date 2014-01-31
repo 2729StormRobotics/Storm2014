@@ -93,7 +93,7 @@ public class Robot extends IterativeRobot {
 //        LiveWindow.addSensor("Pneumatics","digiInput", digiInput);
 
         // The names, and corresponding Commands of our autonomous modes
-        autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance"};
+        autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance","TurnToHotTargetAndFire"};
         autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0)};
         
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
