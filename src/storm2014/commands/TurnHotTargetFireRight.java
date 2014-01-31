@@ -9,7 +9,7 @@ package storm2014.commands;
  *
  * @author Erik
  */
-public class TurnHotTargetFireRight extends CommandBase {
+public class TurnHotTargetFireRight extends Command {
     
     public TurnHotTargetFireRight() {
         // Use requires() here to declare subsystem dependencies
