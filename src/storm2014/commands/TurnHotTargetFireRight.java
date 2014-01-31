@@ -4,19 +4,14 @@
  * and open the template in the editor.
  */
 package storm2014.commands;
-import edu.wpi.first.wpilibj.command.Command;
-import storm2014.Robot;
-import storm2014.subsystems.VisionSystem;
+
 /**
  *
  * @author Erik
  */
-public class TurnLeftToHotTarget extends Command {
-    private double _speed;
-   
-    public TurnLeftToHotTarget(double speed) {
-        requires(Robot.driveTrain);
-       _speed = speed;
+public class TurnHotTargetFireRight extends CommandBase {
+    
+    public TurnHotTargetFireRight() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -27,14 +22,11 @@ public class TurnLeftToHotTarget extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (!VisionSystem.foundHotTarget()){
-            Robot.driveTrain.tankDrive(-_speed, _speed );
-       }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return VisionSystem.foundHotTarget(); 
+        return false;
     }
 
     // Called once after isFinished returns true
