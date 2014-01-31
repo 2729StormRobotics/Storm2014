@@ -1,6 +1,6 @@
 package storm2014.subsystems;
 
-import edu.wpi.first.wpilibj.Accelerometer;
+import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import storm2014.RobotMap;
@@ -15,7 +15,7 @@ public class Tilter extends Subsystem{
     
     private StringPot _stringpot = new StringPot(RobotMap.PORT_SENSOR_STRINGPOT);
     private Talon _talon = new Talon(RobotMap.PORT_MOTOR_TILTER);
-    private Accelerometer _acc = new Accelerometer(RobotMap.MODULE_SENSOR_ACCELEROMETER);
+    private ADXL345_I2C _acc = new ADXL345_I2C();
     
     protected void initDefaultCommand() {
         

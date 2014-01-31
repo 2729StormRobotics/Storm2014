@@ -15,8 +15,10 @@ public class Launch extends CommandGroup {
         //wait until ball is in catapult. will be ir sensor.
         addSequential(new SetLEDMode(LEDStrip.PewMode));
         addSequential(new WaitCommand(1000));
-        addSequential(new Disengage());  
         addSequential(new Unlatch());
+        //Wait
+        addSequential(new WaitCommand(1000));
+        addSequential(new Disengage());  
     }
     
 }
