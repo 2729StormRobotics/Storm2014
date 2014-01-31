@@ -19,7 +19,7 @@ public class Tilt extends Command{
     }
     
     protected void initialize() {
-        _curAngle = Robot.tilter.getVolts() * MULTIPLIER;
+        
     }
     
     protected void execute() {
