@@ -7,9 +7,12 @@ package storm2014.subsystems;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.communication.Semaphore;
+import edu.wpi.first.wpilibj.communication.SemaphoreException;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.SocketConnection;
@@ -33,66 +36,42 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public static final int PileMode              = 10;
     public static final int OneWayPileMode        = 11;
     
-    private static final byte allianceBlue    = 0;
-    private static final byte allianceRed     = 1;
-    private static final byte allianceInvalid = 2;
-    private static final byte allianceError   = 3;
+    private static final byte _allianceBlue    = 0;
+    private static final byte _allianceRed     = 1;
+    private static final byte _allianceInvalid = 2;
+    private static final byte _allianceError   = 3;
 
-    private static final String serverIP   = "socket://10.27.29.100:1025";
+    private static final String _serverIP   = "socket://10.27.29.100:1025";
 
-    public static int currentMode = 0;
+    private static int     _lastMode    = 0;
+    private static int     _currentMode = 0; 
+    private static byte    _red         = 0; //For setColorMode
+    private static byte    _green       = 0; //For setColorMode
+    private static byte    _blue        = 0; //For setColorMode
 
     private ITable table;
     
     private boolean disconnected = false;
-
+    
+    private Semaphore.Options _semaphoreOptions;
+    private Semaphore         _semaphore;
+    
+    public LEDStrip(){
+        //_semaphoreOptions.setDeleteSafe(true);
+        //_semaphore = new Semaphore(_semaphoreOptions);
+        _networkThread.start();
+    }
+    
     protected void initDefaultCommand() {}
 
     public void setMode(int mode){
         setMode(mode, (byte) 0, (byte) 0, (byte) 0);
     }
-    public void setMode(final int mode, final byte red, final byte green, final byte blue){
-        new Thread() {
-            public void run() {
-                try {
-                    SocketConnection sc = (SocketConnection) Connector.open(serverIP);
-                    OutputStream os = sc.openOutputStream();
-                    os.write(mode);
-                    if (mode == SetColorMode){
-                        os.write(red);
-                        os.write(green);
-                        os.write(blue);
-                    }
-                    else if (mode == DisabledMode){
-                        DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
-                        if (color == DriverStation.Alliance.kBlue){
-                            os.write(allianceBlue);
-                        }
-                        else if (color == DriverStation.Alliance.kRed){
-                            os.write(allianceRed);
-                        }
-                        else if (color == DriverStation.Alliance.kInvalid){
-                            os.write(allianceInvalid);
-                        }
-                        else{
-                            os.write(allianceError);
-                        }
-                    }
-
-                    os.close();
-                    sc.close();
-                    currentMode = mode;
-                    table.putNumber("Mode", currentMode);
-                    System.out.println("Mode is now " + currentMode);
-                    disconnected = false;
-                } catch (IOException ex) {
-                    if (!disconnected){
-                        ex.printStackTrace();
-                        disconnected = true;
-                    }
-                }
-            }
-        }.start();
+    public void setMode(int mode, byte red, byte green, byte blue){
+        _currentMode = mode;
+        _red   = red;
+        _green = green;
+        _blue  = blue;
     }
 
     public String getSmartDashboardType(){
@@ -156,4 +135,67 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public ITable getTable(){
         return table;
     }
+    
+    Thread _networkThread = new Thread() {
+            public void run() {
+                int tempMode = _currentMode;
+                try {
+                    SocketConnection sc = (SocketConnection) Connector.open(_serverIP);
+                    if (tempMode != _lastMode){
+                        OutputStream os = sc.openOutputStream();
+                        
+                        os.write(tempMode);
+                        if (tempMode == SetColorMode){
+                            os.write(_red);
+                            os.write(_green);
+                            os.write(_blue);
+                        }
+                        else if (tempMode == DisabledMode){
+                            DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
+                            if (color == DriverStation.Alliance.kBlue){
+                                os.write(_allianceBlue);
+                            }
+                            else if (color == DriverStation.Alliance.kRed){
+                                os.write(_allianceRed);
+                            }
+                            else if (color == DriverStation.Alliance.kInvalid){
+                                os.write(_allianceInvalid);
+                            }
+                            else{
+                                os.write(_allianceError);
+                            }
+                        }
+
+                        os.close();
+                    }
+                    
+                    InputStream is = sc.openInputStream();
+                    
+                    int newMode = tempMode;
+                    while (is.available() > 0){
+                        byte input[] = new byte[is.available()];
+                        int bytesRead = is.read(input);
+                        
+                        newMode = (int) input[bytesRead - 1];
+                    }
+                    
+                    if (newMode != tempMode){
+                        _lastMode    = newMode; //Because we've already taken care of the mode change, i.e. the change was from the arduino not from the dashboard, so we don't need to check that against _currentMode next time
+                        _currentMode = newMode;
+                    }
+                    
+                    
+                    is.close();
+                    sc.close();
+                    if (table != null) table.putNumber("Mode", _currentMode);
+                    System.out.println("Mode is now " + _currentMode);
+                    disconnected = false;
+                } catch (IOException ex) {
+                    if (!disconnected){
+                        ex.printStackTrace();
+                        disconnected = true;
+                    }
+                }
+            }
+        };
 }
