@@ -20,6 +20,7 @@ import storm2014.commands.DriveForward;
 import storm2014.commands.SpinUp;
 import storm2014.commands.TomahawkRev;
 import storm2014.commands.TriangleMovement;
+import storm2014.commands.TurnToHotTargetAndFire;
 import storm2014.subsystems.Catapult;
 import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDStrip;
@@ -94,7 +95,7 @@ public class Robot extends IterativeRobot {
 
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance","TurnToHotTargetAndFire"};
-        autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0)};
+        autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0), new TurnToHotTargetAndFire(1500)};
         
         accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
         
