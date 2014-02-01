@@ -8,23 +8,20 @@ import storm2014.subsystems.VisionSystem;
 public class TurnHotTargetFireLeft extends CommandGroup{
     private static final double TURN_ANGLE = 60,
                                 TURN_SPEED  = 0.7,
+                                DISTANCE = 1,
                                 DRIVE_SPEED = 0.6;   
-    public TurnHotTargetFireLeft(double sideLength) {
-       addSequential(new Conditional(new Turn(TURN_ANGLE, TURN_SPEED), new Engage()) {
+    public TurnHotTargetFireLeft() {
+       addSequential(new Conditional(new Turn(TURN_ANGLE, TURN_SPEED), new DoNothing()) {
            protected boolean condition() {
                return !VisionSystem.foundHotTarget();
            }
        });
     
-       addSequential(new Conditional(new Turn(TURN_ANGLE, TURN_SPEED), new Engage()) {
-           protected boolean condition() {
-               return VisionSystem.foundHotTarget();
-           }
-       });
+       
       //addSequential(new Engage());
       //addSequential(new Disengage());
        
-       addSequential(new DriveForward(DRIVE_SPEED,sideLength));
+       addSequential(new DriveForward(DRIVE_SPEED,DISTANCE));
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
