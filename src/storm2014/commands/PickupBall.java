@@ -23,7 +23,7 @@ public class PickupBall extends Command {
     }
     
     protected boolean isFinished() {
-        return Robot.intake.isLoaded();
+        return false;
     }
     
     protected void end() {
