@@ -9,15 +9,15 @@ import storm2014.Robot;
  */
 public class SetLatched extends Command {
  
-    public boolean _b;
+    public boolean _latched;
     
-    public SetLatched(boolean b){
+    public SetLatched(boolean engaged){
         requires(Robot.catapult);
-        _b = b;
+        _latched = engaged;
     }
     
     protected void initialize() {
-       if(_b){
+       if(_latched){
            Robot.catapult.engage();
        } else{
            Robot.catapult.disengage();

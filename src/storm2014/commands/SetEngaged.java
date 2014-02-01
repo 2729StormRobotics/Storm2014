@@ -15,15 +15,15 @@ import storm2014.Robot;
  */
 public class SetEngaged extends Command {
    
-    private boolean _b;
+    private boolean _engaged;
     
-    public SetEngaged(boolean b){
+    public SetEngaged(boolean engaged){
        requires(Robot.catapult);
-       _b = b;
+       _engaged = engaged;
     }
     // Called just before this Command runs the first time
     protected void initialize() {
-       if(_b){
+       if(_engaged){
            Robot.catapult.engage();
        } else{
            Robot.catapult.disengage();
