@@ -8,10 +8,10 @@ import storm2014.Robot;
  * @author Matthew Rassmann/Garrett
  */
 public class PullBack extends Command {
-     double _power;
+     double _power = 0.5;
      double _distance;
      
-    public PullBack(double power, double distance){
+    public PullBack(double distance){
         requires(Robot.catapult);
     }
    
@@ -36,11 +36,4 @@ public class PullBack extends Command {
        
     }
     
-    public void setPower(double power){
-        _power = power;
-    }
-    
-    public void setDistance(double distance){
-        _distance = distance;
-    }
 }

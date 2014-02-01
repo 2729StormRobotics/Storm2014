@@ -30,7 +30,7 @@ public class Catapult extends Subsystem {
     
     
     protected void initDefaultCommand() {
-        setDefaultCommand(new PullBack(0.0,0.0));
+        setDefaultCommand(new PullBack(0.0));
     }
     
     public void setWinchRawVal(double winchRawVal){
@@ -45,20 +45,24 @@ public class Catapult extends Subsystem {
         return _winchEncoder.get();
     }
     
-    public void disengage(boolean disEngage){
-        _disengage.set(disEngage);
+    public void disengage(){
+        _disengage.set(true);
+        _engage.set(false);
     }
     
-    public void engage(boolean engage){
-        _engage.set(engage);
+    public void engage(){
+        _engage.set(true);
+        _disengage.set(false);
     }
     
-    public void latch(boolean latched){
-        _latched.set(latched);
+    public void latch(){
+        _latched.set(true);
+        _unlatched.set(false);
     }
     
-    public void unlatch(boolean unlatched){
-        _unlatched.set(unlatched);
+    public void unlatch(){
+        _unlatched.set(true);
+        _latched.set(false);
     }
     
     public double getVoltage(){
