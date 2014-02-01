@@ -16,8 +16,8 @@ public class PreLaunch extends CommandGroup{
         //wait until arm is in place needs a sensor
         addSequential(new WaitCommand(3000));
         addSequential(new SetLEDMode(LEDStrip.StormSpiritMode));
-        addSequential(new Latch());
-        addSequential(new Engage());
+        addSequential(new SetLatched(true));
+        addSequential(new SetEngaged(true));
         addSequential(new PullBack(100));
         
     }

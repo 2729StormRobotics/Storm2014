@@ -13,10 +13,10 @@ public class Launch extends CommandGroup {
     
     public Launch(){
         addSequential(new SetLEDMode(LEDStrip.PewMode));
-        addSequential(new Unlatch());
+        addSequential(new SetLatched(false));
         //Wait
         addSequential(new WaitCommand(1000));
-        addSequential(new Disengage());  
+        addSequential(new SetEngaged(false));  
     }
     
 }

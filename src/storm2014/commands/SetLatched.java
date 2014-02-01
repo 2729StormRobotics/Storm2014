@@ -7,14 +7,21 @@ import storm2014.Robot;
  *
  * @author garrett
  */
-public class Unlatch extends Command {
+public class SetLatched extends Command {
  
-    public Unlatch(){
+    public boolean _b;
+    
+    public SetLatched(boolean b){
         requires(Robot.catapult);
+        _b = b;
     }
     
     protected void initialize() {
-       
+       if(_b){
+           Robot.catapult.engage();
+       } else{
+           Robot.catapult.disengage();
+       }
     }
 
     protected void execute() {
