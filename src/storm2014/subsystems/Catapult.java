@@ -68,4 +68,9 @@ public class Catapult extends Subsystem {
     public double getVoltage(){
         return _pot.getVoltage();
     }
+    
+    //Needs to calculate the angle from the potentiometer voltage.  Maybe use a utility?
+    public double getAngle(){
+        return 0.0;
+    }
 }
