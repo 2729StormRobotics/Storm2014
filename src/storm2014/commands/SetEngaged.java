@@ -23,16 +23,11 @@ public class SetEngaged extends Command {
     }
     // Called just before this Command runs the first time
     protected void initialize() {
-<<<<<<< HEAD:src/storm2014/commands/Disengage.java
-       Robot.catapult.disengage(true);
-       
-=======
        if(_b){
            Robot.catapult.engage();
        } else{
            Robot.catapult.disengage();
        }
->>>>>>> 92ad1ba89b9f6fdc97dcb4bf4d27cd741c26bca6:src/storm2014/commands/SetEngaged.java
     }
 
     // Called repeatedly when this Command is scheduled to run
