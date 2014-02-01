@@ -28,7 +28,7 @@ public class OI {
         spinUp.whenPressed(new SpinUp(1500.0));
         tomahawk.whenPressed(new TomahawkRev());
         pickup.toggleWhenPressed(new PickupBall());
-        
+  
     }
     
     // When a joystick is in its zero position, it will not necessarily read
