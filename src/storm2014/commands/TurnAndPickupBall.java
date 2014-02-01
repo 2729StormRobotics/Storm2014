@@ -11,7 +11,7 @@ public class TurnAndPickupBall extends CommandGroup {
          addSequential(new TurnToBall(DRIVE_SPEED));
           
          addSequential(new DriveForward(DRIVE_SPEED, VisionSystem.getBallDistance()));
-         addSequential(new PickupBall());
+         addSequential(new SpinRollerIn());
     }
 }
    
