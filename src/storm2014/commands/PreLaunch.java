@@ -1,11 +1,8 @@
 package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-
 import edu.wpi.first.wpilibj.command.WaitCommand;
-
 import storm2014.subsystems.LEDStrip;
-
 
 public class PreLaunch extends CommandGroup{
     

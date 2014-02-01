@@ -29,7 +29,20 @@ public class Tilter extends Subsystem{
         return _stringpot.get();
     }
     
-    public double getAccValue(){
-        return _acc.pidGet(); //TODO get bobo to fix this
+    public double getAccValueX(){
+        return _acc.getAcceleration(ADXL345_I2C.Axes.kX); //TODO get bobo to fix this
+    } 
+    
+     public double getAccValueY(){
+        return _acc.getAcceleration(ADXL345_I2C.Axes.kY); //TODO get bobo to fix this
+    } 
+    
+     public double getAccValueZ(){
+        return _acc.getAcceleration(ADXL345_I2C.Axes.kZ); //TODO get bobo to fix this
+    } 
+     
+    public double getAvgVoltage(){
+        return _stringpot.get();
     }
+    
 }

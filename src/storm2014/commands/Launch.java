@@ -12,9 +12,7 @@ import storm2014.subsystems.LEDStrip;
 public class Launch extends CommandGroup {
     
     public Launch(){
-        //wait until ball is in catapult. will be ir sensor.
         addSequential(new SetLEDMode(LEDStrip.PewMode));
-        addSequential(new WaitCommand(1000));
         addSequential(new Unlatch());
         //Wait
         addSequential(new WaitCommand(1000));
