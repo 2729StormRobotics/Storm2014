@@ -12,7 +12,6 @@ import storm2014.subsystems.VisionSystem;
  */
 public class TurnHotTargetFireRight extends CommandGroup {
     private static final double TURN_ANGLE = 60,
-                                TURN_SPEED  = 0.55,
                                 DRIVE_SPEED = 0.6,
                                 DISTANCE = 2000;
     public TurnHotTargetFireRight() {
