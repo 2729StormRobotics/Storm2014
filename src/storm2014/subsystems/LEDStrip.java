@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.SocketConnection;
@@ -33,18 +34,26 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public static final int PileMode              = 10;
     public static final int OneWayPileMode        = 11;
     
-    private static final byte allianceBlue    = 0;
-    private static final byte allianceRed     = 1;
-    private static final byte allianceInvalid = 2;
-    private static final byte allianceError   = 3;
+    private static final byte _allianceBlue    = 0;
+    private static final byte _allianceRed     = 1;
+    private static final byte _allianceInvalid = 2;
+    private static final byte _allianceError   = 3;
 
-    private static final String serverIP   = "socket://10.27.29.100:1025";
+    private static final String _serverIP   = "socket://10.27.29.100:1025";
 
-    public static int currentMode = 0;
+    private static int _currentMode = 0;
 
-    private ITable table;
+    private ITable _table;
     
-    private boolean disconnected = false;
+    private SocketConnection _socket;
+    private OutputStream     _outstream;
+    private InputStream      _instream;
+    
+    private boolean _disconnected = false;
+    
+    public LEDStrip(){
+        
+    }
 
     protected void initDefaultCommand() {}
 
@@ -55,40 +64,60 @@ public class LEDStrip extends Subsystem implements NamedSendable {
         new Thread() {
             public void run() {
                 try {
-                    SocketConnection sc = (SocketConnection) Connector.open(serverIP);
-                    OutputStream os = sc.openOutputStream();
-                    os.write(mode);
+                    _socket = (SocketConnection) Connector.open(_serverIP);
+                    _outstream = _socket.openOutputStream();
+                    _instream  = _socket.openInputStream();
+                    
+                    _outstream.write(mode);
                     if (mode == SetColorMode){
-                        os.write(red);
-                        os.write(green);
-                        os.write(blue);
+                        _outstream.write(red);
+                        _outstream.write(green);
+                        _outstream.write(blue);
                     }
                     else if (mode == DisabledMode){
                         DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
                         if (color == DriverStation.Alliance.kBlue){
-                            os.write(allianceBlue);
+                            _outstream.write(_allianceBlue);
                         }
                         else if (color == DriverStation.Alliance.kRed){
-                            os.write(allianceRed);
+                            _outstream.write(_allianceRed);
                         }
                         else if (color == DriverStation.Alliance.kInvalid){
-                            os.write(allianceInvalid);
+                            _outstream.write(_allianceInvalid);
                         }
                         else{
-                            os.write(allianceError);
+                            _outstream.write(_allianceError);
+                        }
+                    }
+                    
+                    int newMode = -1;
+                    while(newMode == -1){
+                        while (_instream.available() > 0){
+                            byte bytes[] = new byte[_instream.available()];
+                            int bytesRead = _instream.read(bytes);
+                            
+                            newMode = bytes[bytesRead - 1];
                         }
                     }
 
-                    os.close();
-                    sc.close();
-                    currentMode = mode;
-                    table.putNumber("Mode", currentMode);
-                    System.out.println("Mode is now " + currentMode);
-                    disconnected = false;
+                    _outstream.close();
+                    _instream.close();
+                    _socket.close();
+                    
+                    _currentMode = mode;
+                    _table.putNumber("Mode", _currentMode);
+                    System.out.print("LEDMode was set to " + _currentMode);
+                    
+                    if (_currentMode != newMode){
+                        System.out.println("... Except that it's not. The LED strip kinda ignored the new mode. It's acutally " + newMode);
+                    } else {
+                        System.out.println(".");
+                    }
+                    _disconnected = false;
                 } catch (IOException ex) {
-                    if (!disconnected){
+                    if (!_disconnected){
                         ex.printStackTrace();
-                        disconnected = true;
+                        _disconnected = true;
                     }
                 }
             }
@@ -100,7 +129,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     }
 
     public void initTable(ITable table){
-        this.table = table;
+        this._table = table;
         if(table!=null){
             table.putNumber("Mode", DisabledMode);
             table.putNumber("Red", 0);
@@ -154,6 +183,6 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     };
 
     public ITable getTable(){
-        return table;
+        return _table;
     }
 }

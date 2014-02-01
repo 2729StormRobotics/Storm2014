@@ -3,6 +3,11 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
+/**
+ *
+ * @author Garrett
+ */
+
 public class PickupBall extends Command {
     
     public PickupBall(){
@@ -10,22 +15,22 @@ public class PickupBall extends Command {
     }
     
     protected void initialize() {
-       
+        
     }
-
+    
     protected void execute() {
-       Robot.intake.spinIn();
+        Robot.intake.spinIn();
     }
-
+    
     protected boolean isFinished() {
-        return Robot.intake.isLoaded();
+        return false;
     }
-
+    
     protected void end() {
-       Robot.intake.stopMotor();
+        Robot.intake.stopMotor();
     }
-
+    
     protected void interrupted() {
-       end();
-    }  
+        end();
+    }
 }
