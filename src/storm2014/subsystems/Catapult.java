@@ -6,6 +6,7 @@
 
 package storm2014.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
@@ -25,6 +26,8 @@ public class Catapult extends Subsystem {
     private Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE_CHANNEL);
     private Solenoid _latched = new Solenoid(RobotMap.PORT_SOLENOID_LATCHED_CHANNEL);
     private Solenoid _unlatched = new Solenoid(RobotMap.PORT_SOLENOID_UNLATCHED_CHANNEL);
+    private AnalogChannel _pot = new AnalogChannel(RobotMap.PORT_SENSOR_POTENTIOMETER);
+    
     
     protected void initDefaultCommand() {
         setDefaultCommand(new PullBack(0.0,0.0));
@@ -56,5 +59,9 @@ public class Catapult extends Subsystem {
     
     public void unlatch(boolean unlatched){
         _unlatched.set(unlatched);
+    }
+    
+    public double getVoltage(){
+        return _pot.getVoltage();
     }
 }
