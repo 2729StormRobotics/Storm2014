@@ -49,4 +49,8 @@ public class Intake extends Subsystem{
     public void setRollerSpeed(double output){
         _motor.set(output);
     }
+    
+    public boolean isInIntake(){
+        return _ir.get();
+    }
 }
