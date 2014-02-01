@@ -29,7 +29,7 @@ public class TurnToTarget extends Command {
    
     protected void execute() {
         targetX = VisionSystem.getTargetXAngle();
-        if (targetX<=0){
+        if (targetX<0){
             Robot.driveTrain.tankDrive(_speed, -_speed );
         }
         else {
@@ -39,13 +39,15 @@ public class TurnToTarget extends Command {
 
     
     protected boolean isFinished() {
-    return targetX<=0.1 && targetX>=-0.1;
+    return targetX<=4 && targetX>=-4;
     }
     
     protected void end() {
+        Robot.driveTrain.tankDrive(0.0,0.0);
     }
 
     
     protected void interrupted() {
+        end();
     }
 }
