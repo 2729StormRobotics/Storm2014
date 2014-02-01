@@ -19,7 +19,7 @@ public class ChangeArmPosition extends Command {
 
     protected void initialize() {
        _curMode = Robot.intake.getMode();
-       Robot.intake.setMode((((_curMode + _increment ) % 4) + 4) % 4);
+       Robot.intake.setMode((((_curMode + _increment ) % 3) + 3) % 3);
     }
 
     protected void execute() {

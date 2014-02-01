@@ -19,7 +19,8 @@ public class Intake extends Subsystem{
     private DigitalInput _ir = new DigitalInput(RobotMap.PORT_SENSOR_BALL_IR);
     private  TakeBackHalfPlusPlus takeBackHalf;
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
-    private Solenoid _armPos = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_CHANNEL);
+    private Solenoid _solBot = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_BOT_CHANNEL);
+    private Solenoid _solTop = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_TOP_CHANNEL);
     private int _mode;
     
     public Intake(int mode){
@@ -60,15 +61,17 @@ public class Intake extends Subsystem{
     
     public void setMode(int mode){
         switch (mode){
-            case 0: _armPos.set(true);
+            case 0: _solBot.set(false);
+                    _solTop.set(false);
                     break;
-            case 1: _armPos.set(true);
+            case 1: _solBot.set(true);
+                    _solTop.set(false);
                     break;
-            case 2: _armPos.set(true);
+            case 2: _solBot.set(true);
+                    _solTop.set(true);
                     break;
-            case 3: _armPos.set(true);
-                    break;
-            default: _armPos.set(true);
+            default: _solBot.set(false);
+                     _solTop.set(false);
         }   
     }
     
@@ -78,10 +81,9 @@ public class Intake extends Subsystem{
     
     public String getModeName(){
         switch (_mode){
-            case 0: return "Lowest";        
-            case 1: return "Low";
+            case 0: return "Low";        
+            case 1: return "Middle";
             case 2: return "High";
-            case 3: return "Highest";
         }
         
         return null;

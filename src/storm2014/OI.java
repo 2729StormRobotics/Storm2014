@@ -22,12 +22,12 @@ public class OI {
     
     private final Button tomahawk = new JoystickButton(driveJoystick,RobotMap.JOYTOMAHAWK_BUTTON);
     
-    private final Button spinin   = new JoystickButton(driveJoystick, RobotMap.JOYPICKUP_BUTTON);
+    private final Button spinIn   = new JoystickButton(driveJoystick, RobotMap.JOYPICKUP_BUTTON);
     
     public OI() {
         spinUp.whenPressed(new SpinUp(1500.0));
         tomahawk.whenPressed(new TomahawkRev());
-        spinin.toggleWhenPressed(new SpinRollerIn());
+        spinIn.toggleWhenPressed(new SpinRollerIn());
     }
     
     // When a joystick is in its zero position, it will not necessarily read
