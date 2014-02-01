@@ -12,7 +12,7 @@ import storm2014.subsystems.LEDStrip;
 public class Launch extends CommandGroup {
     
     public Launch(){
-        addSequential(new SetLEDMode(LEDStrip.PewMode));
+        addSequential(new SetLEDMode(LEDStrip.ParticleCollisionMode));
         addSequential(new SetLatched(false));
         //Wait
         addSequential(new WaitCommand(1000));
