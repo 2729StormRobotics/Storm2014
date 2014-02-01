@@ -55,6 +55,7 @@ public class RobotMap {
     public static final int PORT_SOLENOID_RIGHTSHIFTDOWN_CHANNEL = 4;
     public static final int PORT_SOLENOID_LEFTSHIFTUP_CHANNEL    = 5;
     public static final int PORT_SOLENOID_RIGHTSHIFTUP_CHANNEL   = 6;
+    public static final int PORT_SOLENOID_INTAKE_CHANNEL         = 9;
     
 //
 //    public static final int Port_Solenoid1_Channel = 1;

@@ -1,6 +1,7 @@
 package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import storm2014.RobotMap;
@@ -18,6 +19,7 @@ public class Intake extends Subsystem{
     private DigitalInput _ir = new DigitalInput(RobotMap.PORT_SENSOR_BALL_IR);
     private  TakeBackHalfPlusPlus takeBackHalf;
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
+    private Solenoid _armPos = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_CHANNEL);
     
     public Intake(){
         takeBackHalf = new TakeBackHalfPlusPlus(_motor, _speedSensor, 1.0/100,1,0);
@@ -53,4 +55,20 @@ public class Intake extends Subsystem{
     public boolean isInIntake(){
         return _ir.get();
     }
+    
+    public void setPos(int pos){
+        switch (pos){
+            case 1: _armPos.set(true);
+                    break;
+            case 2: _armPos.set(true);
+                    break;
+            case 3: _armPos.set(true);
+                    break;
+            case 4: _armPos.set(true);
+                    break;
+            default: _armPos.set(true);
+        }   
+    }
+    
+    //set position change solenoids
 }
