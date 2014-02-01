@@ -1,4 +1,3 @@
-
 package storm2014.commands;
 import storm2014.Robot;
 import edu.wpi.first.wpilibj.command.Command;

@@ -15,11 +15,11 @@ public class TurnHotTargetFireRight extends CommandGroup {
     private static final double TURN_ANGLE = 60,
                                 TURN_SPEED  = 0.7,
                                 DRIVE_SPEED = 0.6,
-                                DISTANCE = 100;
+                                DISTANCE = 2000;
     public TurnHotTargetFireRight() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        addSequential(new Conditional(new Turn(TURN_ANGLE, TURN_SPEED), new DoNothing()) {
+        addSequential(new Conditional(new TurnToTarget(TURN_ANGLE), new DoNothing()) {
            protected boolean condition() {
                return !VisionSystem.foundHotTarget();
            }
