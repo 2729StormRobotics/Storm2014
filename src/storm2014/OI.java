@@ -3,8 +3,8 @@ package storm2014;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import storm2014.commands.PickupBall;
-
+import storm2014.commands.ChangeArmPosition;
+import storm2014.commands.SpinRollerIn;
 import storm2014.commands.SetLEDMode;
 import storm2014.commands.SpinUp;
 import storm2014.commands.TomahawkRev;
@@ -22,13 +22,12 @@ public class OI {
     
     private final Button tomahawk = new JoystickButton(driveJoystick,RobotMap.JOYTOMAHAWK_BUTTON);
     
-    private final Button pickup   = new JoystickButton(driveJoystick, RobotMap.JOYPICKUP_BUTTON);
+    private final Button spinin   = new JoystickButton(driveJoystick, RobotMap.JOYPICKUP_BUTTON);
     
     public OI() {
         spinUp.whenPressed(new SpinUp(1500.0));
         tomahawk.whenPressed(new TomahawkRev());
-        pickup.toggleWhenPressed(new PickupBall());
-  
+        spinin.toggleWhenPressed(new SpinRollerIn());
     }
     
     // When a joystick is in its zero position, it will not necessarily read

@@ -78,7 +78,7 @@ public class Robot extends IterativeRobot {
         shooter    = new Shooter();
         tomahawk   = new Tomahawk();
         leds       = new LEDStrip();
-        intake = new Intake();
+        intake = new Intake(0);
         tilter = new Tilter();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();

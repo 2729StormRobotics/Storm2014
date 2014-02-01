@@ -8,9 +8,9 @@ import storm2014.Robot;
  * @author Garrett
  */
 
-public class PickupBall extends Command {
-    
-    public PickupBall(){
+public class SpinRollerIn extends Command { 
+     
+    public SpinRollerIn(){
         requires(Robot.intake);
     }
     
@@ -34,3 +34,4 @@ public class PickupBall extends Command {
         end();
     }
 }
+

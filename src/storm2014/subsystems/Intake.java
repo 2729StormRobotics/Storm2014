@@ -20,9 +20,11 @@ public class Intake extends Subsystem{
     private  TakeBackHalfPlusPlus takeBackHalf;
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
     private Solenoid _armPos = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_CHANNEL);
+    private int _mode;
     
-    public Intake(){
+    public Intake(int mode){
         takeBackHalf = new TakeBackHalfPlusPlus(_motor, _speedSensor, 1.0/100,1,0);
+        _mode = mode;
     }
     
     protected void initDefaultCommand() {
@@ -56,19 +58,34 @@ public class Intake extends Subsystem{
         return _ir.get();
     }
     
-    public void setPos(int pos){
-        switch (pos){
+    public void setMode(int mode){
+        switch (mode){
+            case 0: _armPos.set(true);
+                    break;
             case 1: _armPos.set(true);
                     break;
             case 2: _armPos.set(true);
                     break;
             case 3: _armPos.set(true);
                     break;
-            case 4: _armPos.set(true);
-                    break;
             default: _armPos.set(true);
         }   
     }
     
-    //set position change solenoids
+    public int getMode(){
+        return _mode;
+    }
+    
+    public String getModeName(){
+        switch (_mode){
+            case 0: return "Lowest";        
+            case 1: return "Low";
+            case 2: return "High";
+            case 3: return "Highest";
+        }
+        
+        return null;
+    }
+    
+    
 }
