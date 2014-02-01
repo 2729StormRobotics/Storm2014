@@ -24,16 +24,17 @@ public class TurnToTarget extends Command {
 
    
     protected void initialize() {
+         
     }
 
    
     protected void execute() {
         targetX = VisionSystem.getTargetXAngle();
         if (targetX<0){
-            Robot.driveTrain.tankDrive(_speed, -_speed );
+            Robot.driveTrain.tankDrive(-_speed, _speed );
         }
         else {
-            Robot.driveTrain.tankDrive(-_speed, _speed);      
+            Robot.driveTrain.tankDrive(_speed, -_speed);      
         }
     }
 
