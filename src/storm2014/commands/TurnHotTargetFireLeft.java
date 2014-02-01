@@ -6,7 +6,7 @@ import storm2014.subsystems.VisionSystem;
  * @author Erik
  */
 public class TurnHotTargetFireLeft extends CommandGroup{
-    private static final double TURN_ANGLE = 60,
+    private static final double TURN_ANGLE = -60,
                                 TURN_SPEED  = 0.7,
                                 DISTANCE = 1,
                                 DRIVE_SPEED = 0.6;   

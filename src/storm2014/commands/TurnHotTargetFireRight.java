@@ -12,7 +12,7 @@ import storm2014.subsystems.VisionSystem;
  * @author Erik
  */
 public class TurnHotTargetFireRight extends CommandGroup {
-    private static final double TURN_ANGLE = -60,
+    private static final double TURN_ANGLE = 60,
                                 TURN_SPEED  = 0.7,
                                 DRIVE_SPEED = 0.6,
                                 DISTANCE = 1;
@@ -21,7 +21,7 @@ public class TurnHotTargetFireRight extends CommandGroup {
         // eg. requires(chassis);
         addSequential(new Conditional(new Turn(TURN_ANGLE, TURN_SPEED), new DoNothing()) {
            protected boolean condition() {
-               return VisionSystem.foundHotTarget();
+               return !VisionSystem.foundHotTarget();
            }
        });
         addSequential(new DriveForward(DRIVE_SPEED,DISTANCE));
