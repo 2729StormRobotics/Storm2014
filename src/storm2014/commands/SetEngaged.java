@@ -13,14 +13,21 @@ import storm2014.Robot;
  *
  * @author Matthew Rassmann/Garrett
  */
-public class Disengage extends Command {
-     
-    public Disengage(){
+public class SetEngaged extends Command {
+   
+    private boolean _b;
+    
+    public SetEngaged(boolean b){
        requires(Robot.catapult);
+       _b = b;
     }
     // Called just before this Command runs the first time
     protected void initialize() {
-       Robot.catapult.disengage(true);
+       if(_b){
+           Robot.catapult.engage();
+       } else{
+           Robot.catapult.disengage();
+       }
     }
 
     // Called repeatedly when this Command is scheduled to run
