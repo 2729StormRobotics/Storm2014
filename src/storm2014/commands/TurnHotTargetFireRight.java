@@ -15,7 +15,7 @@ public class TurnHotTargetFireRight extends CommandGroup {
     private static final double TURN_ANGLE = 60,
                                 TURN_SPEED  = 0.7,
                                 DRIVE_SPEED = 0.6,
-                                DISTANCE = 1;
+                                DISTANCE = 100;
     public TurnHotTargetFireRight() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
