@@ -1,4 +1,5 @@
 package storm2014.commands;
+
 import storm2014.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.subsystems.VisionSystem;
@@ -11,7 +12,6 @@ public class TurnToBall extends Command {
         requires(Robot.driveTrain);
        _speed = speed;
     }
-
    
     protected void initialize() { 
         ballX =  VisionSystem.getBallXAngle();
@@ -26,7 +26,6 @@ public class TurnToBall extends Command {
             Robot.driveTrain.tankDrive(-_speed, _speed);      
         }
     }
-
     
     protected boolean isFinished() {
         return ballX<=0.1 && ballX >=-0.1;
@@ -35,8 +34,7 @@ public class TurnToBall extends Command {
     protected void end() {
         Robot.driveTrain.tankDrive(0, 0);
     }
-
-    
     protected void interrupted() {
+        end();
     }
 }
