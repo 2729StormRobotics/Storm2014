@@ -10,7 +10,7 @@ public class TurnHotTargetFireLeft extends CommandGroup{
                                 DISTANCE = 2000,
                                 DRIVE_SPEED = 0.6;   
     public TurnHotTargetFireLeft() {
-       addSequential(new Conditional(new TurnTurnBackAndDrive(DRIVE_SPEED, DISTANCE, TURN_ANGLE), new DriveForward(DRIVE_SPEED, DISTANCE)) {
+       addSequential(new Conditional(new TurnAndTurnBack(DRIVE_SPEED, DISTANCE, TURN_ANGLE), new DriveForward(DRIVE_SPEED, DISTANCE)) {
            protected boolean condition() {
                return !VisionSystem.foundHotTarget();
                  
