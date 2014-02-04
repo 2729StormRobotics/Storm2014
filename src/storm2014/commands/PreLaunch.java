@@ -18,6 +18,7 @@ public class PreLaunch extends CommandGroup{
         addSequential(new SetLEDMode(LEDStrip.StormSpiritMode));
         addSequential(new SetLatched(true));
         addSequential(new SetEngagedWinch(true));
+        addSequential(new SetEngagedRatchet(true));
         addSequential(new PullBack(100));
         
     }

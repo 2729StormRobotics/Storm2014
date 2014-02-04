@@ -14,9 +14,10 @@ public class Launch extends CommandGroup {
     public Launch(){
         addSequential(new SetLEDMode(LEDStrip.ParticleCollisionMode));
         addSequential(new SetLatched(false));
+        addSequential(new SetEngagedWinch(false));
         //Wait
         addSequential(new WaitCommand(5));
-        addSequential(new SetEngagedWinch(false));  
+        addSequential(new SetEngagedRatchet(false));
     }
     
 }
