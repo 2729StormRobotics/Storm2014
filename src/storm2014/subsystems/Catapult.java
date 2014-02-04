@@ -74,11 +74,11 @@ public class Catapult extends Subsystem {
         return _pot.getVoltage();
     }
     
-    public void setServoLatched(){
+    public void setRatchetLatched(){
         _servo.setAngle(latchedAngle);
     }
     
-    public void setServoUnatched(){
+    public void setRatchetUnatched(){
         _servo.setAngle(unlatchedAngle);
     }
     
