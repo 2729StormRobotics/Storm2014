@@ -13,20 +13,20 @@ import storm2014.Robot;
  *
  * @author Matthew Rassmann/Garrett
  */
-public class SetEngaged extends Command {
+public class SetEngagedWinch extends Command {
    
     private boolean _engaged;
     
-    public SetEngaged(boolean engaged){
+    public SetEngagedWinch(boolean engaged){
        requires(Robot.catapult);
        _engaged = engaged;
     }
     // Called just before this Command runs the first time
     protected void initialize() {
        if(_engaged){
-           Robot.catapult.engage();
+           Robot.catapult.engageWinch();
        } else{
-           Robot.catapult.disengage();
+           Robot.catapult.disengageWinch();
        }
     }
 
