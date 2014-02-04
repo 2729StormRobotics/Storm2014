@@ -8,6 +8,7 @@ package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,7 +27,11 @@ public class Catapult extends Subsystem {
     private Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE_CHANNEL);
     private Solenoid _latched = new Solenoid(RobotMap.PORT_SOLENOID_LATCHED_CHANNEL);
     private Solenoid _unlatched = new Solenoid(RobotMap.PORT_SOLENOID_UNLATCHED_CHANNEL);
+    private Servo _servo = new Servo(RobotMap.PORT_SERVO);
     private AnalogChannel _pot = new AnalogChannel(RobotMap.PORT_SENSOR_POTENTIOMETER);
+    private static final double latchedAngle = 170;
+    private static final double unlatchedAngle = 0;
+    
     
     
     protected void initDefaultCommand() {
@@ -68,6 +73,17 @@ public class Catapult extends Subsystem {
     public double getVoltage(){
         return _pot.getVoltage();
     }
+    
+    public void setServoLatched(){
+        _servo.setAngle(latchedAngle);
+    }
+    
+    public void setServoUnatched(){
+        _servo.setAngle(unlatchedAngle);
+    }
+    
+    
+    
     
     //Needs to calculate the angle from the potentiometer voltage.  Maybe use a utility?
     public double getAngle(){

@@ -27,6 +27,7 @@ public class RobotMap {
     public static final int PORT_MOTOR_ROLLER         = 4;
     public static final int PORT_MOTOR_TOMAHAWK       = 5;
     public static final int PORT_MOTOR_TILTER         = 6;
+    public static final int PORT_SERVO                = 7;
     
     public static final int PORT_ENCODER_LEFT_1            = 3;
     public static final int PORT_ENCODER_LEFT_2            = 4;
