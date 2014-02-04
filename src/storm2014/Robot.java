@@ -28,6 +28,10 @@ import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Shooter;
 import storm2014.subsystems.Tomahawk;
 import storm2014.subsystems.Tilter;
+import storm2014.utilities.BangBangController;
+import storm2014.utilities.pipeline.FilterTask;
+import storm2014.utilities.pipeline.ISource;
+import storm2014.utilities.pipeline.LowPassFilter;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
@@ -51,11 +55,18 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser = new SendableChooser();
     Command autonomouse;
     
+//    ADXL345_I2C accelerometer = new ADXL345_I2C(RobotMap.MODULE_SENSOR_ACCELEROMETER, ADXL345_I2C.DataFormat_Range.k2G);
+    
 //    Compressor compressor;
 //    Solenoid solenoid1, solenoid2;
 //    DigitalInput digiInput;
     
-    ADXL345_I2C accelerometer;
+//    ADXL345_I2C accelerometer = new ADXL345_I2C(RobotMap.MODULE_SENSOR_ACCELEROMETER, ADXL345_I2C.DataFormat_Range.k2G);
+//    FilterTask accFilter = new FilterTask(new LowPassFilter(0.5, 0), new ISource() {
+//        public double get() {
+//            return accelerometer.getAcceleration(ADXL345_I2C.Axes.kZ);
+//        }
+//    }, 1.0/100);
     
     private void sendSensorData() {
         SmartDashboard.putNumber("Wheel Speed RPM", shooter.getSpeedRPM());
@@ -63,9 +74,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("bangbang enabled?", shooter.isBangBangControllerEnabled());
         SmartDashboard.putBoolean("takeback enabled?", shooter.isTakeBackEnabled());
         SmartDashboard.putNumber("Shooter val", shooter.getMotorRawVal());
-        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kX));
-        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
-        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kZ));
+//        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kX));
+//        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
+//        SmartDashboard.putNumber("Accelerometer Z raw", accelerometer.getAcceleration(ADXL345_I2C.Axes.kZ));
+//        SmartDashboard.putNumber("Accelerometer Z filtered", accFilter.get());
 
 //        System.out.println("hi");
     }
@@ -97,8 +109,6 @@ public class Robot extends IterativeRobot {
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance","TurnHotTargetFireLeft","TurnHotTargetFireRight"};
         autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0), new TurnHotTargetFireLeft(), new TurnHotTargetFireRight()};
-        
-        accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
         
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard
