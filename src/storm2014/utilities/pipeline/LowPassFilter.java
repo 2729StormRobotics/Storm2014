@@ -23,4 +23,7 @@ public class LowPassFilter implements IFilter {
     public double get() {
         return _val;
     }
+    public double getRC() {
+        return _rc;
+    }
 }

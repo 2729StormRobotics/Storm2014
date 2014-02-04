@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package storm2014.commands;
+package storm2014.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import storm2014.commands.DriveForward;
+import storm2014.commands.Turn;
 /**
  *
  * @author Storm
