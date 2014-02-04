@@ -116,7 +116,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                     _disconnected = false;
                 } catch (IOException ex) {
                     if (!_disconnected){
-                        ex.printStackTrace();
+                        System.out.println("[ERROR] Arduino not responding.");
                         _disconnected = true;
                     }
                 }
