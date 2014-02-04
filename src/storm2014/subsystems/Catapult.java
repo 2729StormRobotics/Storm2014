@@ -45,12 +45,12 @@ public class Catapult extends Subsystem {
         return _winchEncoder.get();
     }
     
-    public void disengage(){
+    public void disengageWinch(){
         _disengage.set(true);
         _engage.set(false);
     }
     
-    public void engage(){
+    public void engageWinch(){
         _engage.set(true);
         _disengage.set(false);
     }

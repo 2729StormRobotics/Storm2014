@@ -16,7 +16,7 @@ public class Launch extends CommandGroup {
         addSequential(new SetLatched(false));
         //Wait
         addSequential(new WaitCommand(5));
-        addSequential(new SetEngaged(false));  
+        addSequential(new SetEngagedWinch(false));  
     }
     
 }
