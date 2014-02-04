@@ -58,7 +58,7 @@ public class Intake extends Subsystem{
     public boolean isInIntake(){
         return _ir.get();
     }
-    
+
     public void setMode(int mode){
         switch (mode){
             case 0: _solBot.set(false);
