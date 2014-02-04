@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import storm2014.commands.ChangeArmPosition;
 import storm2014.commands.SpinRollerIn;
 import storm2014.commands.SetLEDMode;
-import storm2014.commands.SpinUp;
-import storm2014.commands.TomahawkRev;
 
 
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
@@ -18,15 +16,9 @@ public class OI {
     
     private final Button slowModeButton      = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SLOW);
     
-    private final Button spinUp = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SPINUP);
-    
-    private final Button tomahawk = new JoystickButton(driveJoystick,RobotMap.JOYTOMAHAWK_BUTTON);
-    
     private final Button spinIn   = new JoystickButton(driveJoystick, RobotMap.JOYPICKUP_BUTTON);
     
     public OI() {
-        spinUp.whenPressed(new SpinUp(1500.0));
-        tomahawk.whenPressed(new TomahawkRev());
         spinIn.toggleWhenPressed(new SpinRollerIn());
     }
     

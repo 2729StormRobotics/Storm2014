@@ -15,19 +15,19 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import storm2014.commands.AutonomousDance;
+import storm2014.commands.autonomous.AutonomousDance;
 import storm2014.commands.DriveForward;
-import storm2014.commands.SpinUp;
-import storm2014.commands.TomahawkRev;
-import storm2014.commands.TriangleMovement;
-import storm2014.commands.TurnHotTargetFireLeft;
-import storm2014.commands.TurnHotTargetFireRight;
+import storm2014.commands.autonomous.TriangleMovement;
+import storm2014.commands.autonomous.TurnHotTargetFireLeft;
+import storm2014.commands.autonomous.TurnHotTargetFireRight;
 import storm2014.subsystems.Catapult;
 import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDStrip;
-import storm2014.subsystems.Shooter;
-import storm2014.subsystems.Tomahawk;
 import storm2014.subsystems.Tilter;
+import storm2014.utilities.BangBangController;
+import storm2014.utilities.pipeline.FilterTask;
+import storm2014.utilities.pipeline.ISource;
+import storm2014.utilities.pipeline.LowPassFilter;
 
 /** 
  * This is the robot's "Main class" which is run by the VM.
@@ -37,12 +37,10 @@ public class Robot extends IterativeRobot {
     // All subsystems are accessible by Robot.name
     public static OI         oi;
     public static DriveTrain driveTrain;
-    public static Shooter shooter;
     public static LEDStrip leds;
     public static Intake intake;
     public static Catapult catapult;
     public static Tilter tilter;
-    public static Tomahawk tomahawk;
 
     
     Command teleop;
@@ -51,54 +49,38 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser = new SendableChooser();
     Command autonomouse;
     
-//    Compressor compressor;
-//    Solenoid solenoid1, solenoid2;
-//    DigitalInput digiInput;
-    
-    ADXL345_I2C accelerometer;
+//    ADXL345_I2C accelerometer = new ADXL345_I2C(RobotMap.MODULE_SENSOR_ACCELEROMETER, ADXL345_I2C.DataFormat_Range.k2G);
+//    FilterTask accFilter = new FilterTask(new LowPassFilter(0.5, 0), new ISource() {
+//        public double get() {
+//            return accelerometer.getAcceleration(ADXL345_I2C.Axes.kZ);
+//        }
+//    }, 1.0/100);
     
     private void sendSensorData() {
-        SmartDashboard.putNumber("Wheel Speed RPM", shooter.getSpeedRPM());
+//        SmartDashboard.putNumber("Wheel Speed RPM", shooter.getSpeedRPM());
 //        SmartDashboard.putBoolean("Shooter enabled", shooter.getPIDController().isEnable());
-        SmartDashboard.putBoolean("bangbang enabled?", shooter.isBangBangControllerEnabled());
-        SmartDashboard.putBoolean("takeback enabled?", shooter.isTakeBackEnabled());
-        SmartDashboard.putNumber("Shooter val", shooter.getMotorRawVal());
-        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kX));
-        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
-        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kZ));
-
-//        System.out.println("hi");
+//        SmartDashboard.putBoolean("bangbang enabled?", shooter.isBangBangControllerEnabled());
+//        SmartDashboard.putBoolean("takeback enabled?", shooter.isTakeBackEnabled());
+//        SmartDashboard.putNumber("Shooter val", shooter.getMotorRawVal());
+//        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kX));
+//        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
+//        SmartDashboard.putNumber("Accelerometer Z raw", accelerometer.getAcceleration(ADXL345_I2C.Axes.kZ));
+//        SmartDashboard.putNumber("Accelerometer Z filtered", accFilter.get());
     }
     
     /** Called on robot boot. */
     public void robotInit() {
-
         catapult   = new Catapult();
         driveTrain = new DriveTrain();
-        shooter    = new Shooter();
-        tomahawk   = new Tomahawk();
         leds       = new LEDStrip();
         intake = new Intake(0);
         tilter = new Tilter();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
-        
-        
-       
-//       compressor = new Compressor(RobotMap.Port_Compressor_SwitchChannel,RobotMap.Port_Compressor_RelayChannel);
-//        solenoid1 = new Solenoid(RobotMap.Port_Solenoid1_Channel);
-//        solenoid2 = new Solenoid(RobotMap.Port_Solenoid2_Channel);
-//        digiInput = new DigitalInput(RobotMap.Port_DigitalInput_Channel);
-//        LiveWindow.addActuator("Pneumatics", "compressor", compressor);
-//        LiveWindow.addActuator("Pneumatics","solenoid1", solenoid1);
-//        LiveWindow.addActuator("Pneumatics","solenoid2", solenoid2);
-//        LiveWindow.addSensor("Pneumatics","digiInput", digiInput);
 
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance","TurnHotTargetFireLeft","TurnHotTargetFireRight"};
         autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0), new TurnHotTargetFireLeft(), new TurnHotTargetFireRight()};
-        
-        accelerometer = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
         
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard
@@ -123,11 +105,7 @@ public class Robot extends IterativeRobot {
                 end();
             }
         }.start();
-//        System.out.println("Thingy");
-//        SmartDashboard.putData("Shooter PID 2",shooter.getPIDController());
-          SmartDashboard.putData(new SpinUp(1500));
-          SmartDashboard.putData(new TomahawkRev());
-          leds.initTable(NetworkTable.getTable("SmartDashboard"));
+        leds.initTable(NetworkTable.getTable("SmartDashboard"));
     }
 
     /** Called at the start of autonomous mode. */
