@@ -12,13 +12,11 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  *
  * @author Erik
  */
-public class TurnTurnBackAndDrive extends CommandGroup {
+public class TurnAndTurnBack extends CommandGroup {
     
-    public TurnTurnBackAndDrive(double power, double distance, double angle) {
+    public TurnAndTurnBack(double power, double distance, double angle) {
         addSequential(new Turn(angle, power));
         addSequential(new WaitCommand(5));
         addSequential(new Turn(-angle, power));
-        addSequential(new DriveForward(power, distance));
     }
-
 }
