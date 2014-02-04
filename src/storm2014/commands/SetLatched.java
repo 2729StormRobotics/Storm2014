@@ -18,9 +18,9 @@ public class SetLatched extends Command {
     
     protected void initialize() {
        if(_latched){
-           Robot.catapult.engage();
+           Robot.catapult.engageWinch();
        } else{
-           Robot.catapult.disengage();
+           Robot.catapult.disengageWinch();
        }
     }
 
