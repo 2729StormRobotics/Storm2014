@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.DriverStation;
 
 import storm2014.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -168,12 +169,22 @@ public class Robot extends IterativeRobot {
     /** Called after any of the other modes ends. */
     public void disabledInit() {
         SmartDashboard.putBoolean("Enabled", false);
+        
+        DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
+        if (color == DriverStation.Alliance.kBlue){
+            SmartDashboard.putBoolean("Blue Alliance?", true);
+        }
+        else{
+            SmartDashboard.putBoolean("Blue Alliance?", false);
+        }
+        
         if(autonomouse != null) {
             autonomouse.cancel();
         }
         if(teleop != null) {
             teleop.cancel();
         }
+        
         leds.setMode(LEDStrip.DisabledMode);
     }
     /**
