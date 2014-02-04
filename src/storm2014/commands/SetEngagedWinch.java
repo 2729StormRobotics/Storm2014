@@ -24,9 +24,9 @@ public class SetEngagedWinch extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
        if(_engaged){
-           Robot.catapult.engage();
+           Robot.catapult.engageWinch();
        } else{
-           Robot.catapult.disengage();
+           Robot.catapult.disengageWinch();
        }
     }
 
