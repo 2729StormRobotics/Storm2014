@@ -18,5 +18,13 @@ public class TurnAndTurnBack extends CommandGroup {
         addSequential(new Turn(angle, power));
         addSequential(new WaitCommand(5));
         addSequential(new Turn(-angle, power));
+        
+        addSequential(new DriveForward(-power, distance));
+        addSequential(new DriveForward(power, distance));
+        addSequential(new Turn(angle, power));
+        addSequential(new WaitCommand(5));
+        addSequential(new Turn(-angle, power));
+        
+        
     }
 }
