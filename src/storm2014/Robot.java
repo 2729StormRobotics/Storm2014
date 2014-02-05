@@ -18,6 +18,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.autonomous.AutonomousDance;
 import storm2014.commands.DriveForward;
+import storm2014.commands.PullBack;
+import storm2014.commands.SetEngagedRatchet;
+import storm2014.commands.SetEngagedWinch;
+import storm2014.commands.SetLatched;
+import storm2014.commands.SpinRollerIn;
 import storm2014.commands.autonomous.TriangleMovement;
 import storm2014.commands.autonomous.TurnHotTargetFireLeft;
 import storm2014.commands.autonomous.TurnHotTargetFireRight;
@@ -30,7 +35,7 @@ import storm2014.utilities.pipeline.FilterTask;
 import storm2014.utilities.pipeline.ISource;
 import storm2014.utilities.pipeline.LowPassFilter;
 
-/** 
+/**
  * This is the robot's "Main class" which is run by the VM.
  */
 //create allcellaromiter class, send data to dashboard in send sensor method in robot.java
@@ -42,7 +47,7 @@ public class Robot extends IterativeRobot {
     public static Intake intake;
     public static Catapult catapult;
     public static Tilter tilter;
-
+    
     
     Command teleop;
     String[] autonomiceNames;
@@ -67,6 +72,15 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
 //        SmartDashboard.putNumber("Accelerometer Z raw", accelerometer.getAcceleration(ADXL345_I2C.Axes.kZ));
 //        SmartDashboard.putNumber("Accelerometer Z filtered", accFilter.get());
+          SmartDashboard.putData("Pull Back",new PullBack(100));
+          SmartDashboard.putData("Arm Mode",new PullBack(1));
+          SmartDashboard.putData("Engage Ratchet",new SetEngagedRatchet(true));
+          SmartDashboard.putData("Disengage Ratchet",new SetEngagedRatchet(false));
+          SmartDashboard.putData("Engage Winch",new SetEngagedWinch(true));
+          SmartDashboard.putData("Disengage Winch",new SetEngagedWinch(false));
+          SmartDashboard.putData("Latch", new SetLatched(true));
+          SmartDashboard.putData("Unlatch", new SetLatched(false));
+          SmartDashboard.putData("Spin Roller In", new SpinRollerIn());
     }
     
     /** Called on robot boot. */
@@ -78,7 +92,7 @@ public class Robot extends IterativeRobot {
         tilter = new Tilter();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
-
+        
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance","TurnHotTargetFireLeft","TurnHotTargetFireRight"};
         autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0), new TurnHotTargetFireLeft(), new TurnHotTargetFireRight()};
@@ -108,7 +122,7 @@ public class Robot extends IterativeRobot {
         }.start();
         leds.initTable(NetworkTable.getTable("SmartDashboard"));
     }
-
+    
     /** Called at the start of autonomous mode. */
     public void autonomousInit() {
         SmartDashboard.putBoolean("Enabled", true);
@@ -121,7 +135,7 @@ public class Robot extends IterativeRobot {
         }
         leds.setMode(LEDStrip.MarqueeMode);
     }
-
+    
     /**
      * Called during autonomous whenever a new driver station packet arrives
      * (about every 1/50 of a second).
@@ -130,7 +144,7 @@ public class Robot extends IterativeRobot {
         // Runs commands & stuff.
         Scheduler.getInstance().run();
     }
-
+    
     /** Called at the start of teleop mode. */
     public void teleopInit() {
         SmartDashboard.putBoolean("Enabled", true);
@@ -142,7 +156,7 @@ public class Robot extends IterativeRobot {
         }
         leds.setMode(LEDStrip.ColorCycleMode);
     }
-
+    
     /**
      * Called during teleop whenever a new driver station packet arrives (about
      * every 1/50 of a second).
@@ -151,12 +165,12 @@ public class Robot extends IterativeRobot {
         // Runs commands & stuff
         Scheduler.getInstance().run();
     }
-
+    
     /** Called at the start of test mode */
     public void testInit() {
         SmartDashboard.putBoolean("Enabled", false);
     }
-
+    
     /**
      * Called during test whenever a new driver station packet arrives (about
      * every 1/50 of a second).
@@ -165,7 +179,7 @@ public class Robot extends IterativeRobot {
         // Updates sensors & actuators on the LiveWindow
         LiveWindow.run();
     }
-
+    
     /** Called after any of the other modes ends. */
     public void disabledInit() {
         SmartDashboard.putBoolean("Enabled", false);
