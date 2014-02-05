@@ -78,7 +78,7 @@ public class Catapult extends Subsystem {
         _servo.setAngle(latchedAngle);
     }
     
-    public void setRatchetUnatched(){
+    public void setRatchetUnlatched(){
         _servo.setAngle(unlatchedAngle);
     }
     

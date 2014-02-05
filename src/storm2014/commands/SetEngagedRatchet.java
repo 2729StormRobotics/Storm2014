@@ -18,9 +18,9 @@ public class SetEngagedRatchet extends Command{
     
     protected void initialize() {
         if(_latched){
-            Robot.catapult.setServoLatched();
+            Robot.catapult.setRatchetLatched();
         } else {
-            Robot.catapult.setServoUnatched();
+            Robot.catapult.setRatchetUnlatched();
         }
     }
     
