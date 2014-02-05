@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
 import storm2014.commands.PreLaunch;
 
@@ -32,7 +33,16 @@ public class Catapult extends Subsystem {
     private static final double latchedAngle = 170;
     private static final double unlatchedAngle = 0;
     
-    
+    public Catapult(){
+        _winchEncoder.start();
+        LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
+        LiveWindow.addActuator("Catapult", "Ratchet", _servo);
+        LiveWindow.addActuator("Catapult", "Winch", _winch);
+        LiveWindow.addActuator("Catapult", "Disengage Sole", _disengage);
+        LiveWindow.addActuator("Catapult","Engage Sole", _engage);
+        LiveWindow.addActuator("Catapult", "Disengage Sole", _latched);
+        LiveWindow.addActuator("Catapult","Engage Sole", _unlatched);
+    }
     
     protected void initDefaultCommand() {
         setDefaultCommand(new PreLaunch());
