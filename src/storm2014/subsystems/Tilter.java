@@ -29,6 +29,7 @@ public class Tilter extends Subsystem{
     
     public double getAngle(){
         return  _convert.getAngle(_stringpot.get());
+
     }
     
 }
