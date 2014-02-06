@@ -5,15 +5,14 @@ package storm2014.commands;
  * @author garrett
  */
 public class ConvertToAngle {
- 
-    private double _angle;
+
     
-    public ConvertToAngle(double angle){
-        _angle = angle;
+    public ConvertToAngle(){
+        
     }
     
-    public double getAngle(){
-        return _angle;
+    public double getAngle(double voltage){
+        return voltage;
     }
     
 }

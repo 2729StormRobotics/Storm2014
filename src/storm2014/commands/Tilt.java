@@ -5,7 +5,7 @@ import storm2014.Robot;
 
 /**
  *
- * @author garrett/Matthew Rassmann
+ * @author Matthew Rassmann
  */
 public class Tilt extends Command{
     
@@ -14,7 +14,8 @@ public class Tilt extends Command{
     private double _setAngle;
     private double _rawOutput;
     
-    public Tilt(){
+    public Tilt(double angle){
+        _setAngle = angle;
         requires(Robot.tilter);
     }
     
@@ -23,9 +24,9 @@ public class Tilt extends Command{
     }
     
     protected void execute() {
-        _curAngle = Robot.tilter.getVolts() * MULTIPLIER;
-        _rawOutput = _setAngle * MULTIPLIER; // TODO convert angle to output
-        Robot.tilter.setRawVal(_rawOutput);
+        _curAngle = Robot.tilter.getAngle();
+        
+        Robot.tilter.setRawVal(0.2);
     }
     
     protected boolean isFinished() {
@@ -33,7 +34,7 @@ public class Tilt extends Command{
     }
     
     protected void end() {
-        
+        Robot.tilter.setRawVal(0.0);
     }
     
     protected void interrupted() {

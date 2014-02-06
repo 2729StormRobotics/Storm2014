@@ -72,15 +72,7 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("accelerometer", accelerometer.getAcceleration(ADXL345_I2C.Axes.kY));
 //        SmartDashboard.putNumber("Accelerometer Z raw", accelerometer.getAcceleration(ADXL345_I2C.Axes.kZ));
 //        SmartDashboard.putNumber("Accelerometer Z filtered", accFilter.get());
-          SmartDashboard.putData("Pull Back",new PullBack(100));
-          SmartDashboard.putData("Arm Mode",new PullBack(1));
-          SmartDashboard.putData("Engage Ratchet",new SetEngagedRatchet(true));
-          SmartDashboard.putData("Disengage Ratchet",new SetEngagedRatchet(false));
-          SmartDashboard.putData("Engage Winch",new SetEngagedWinch(true));
-          SmartDashboard.putData("Disengage Winch",new SetEngagedWinch(false));
-          SmartDashboard.putData("Latch", new SetLatched(true));
-          SmartDashboard.putData("Unlatch", new SetLatched(false));
-          SmartDashboard.putData("Spin Roller In", new SpinRollerIn());
+         
     }
     
     /** Called on robot boot. */
@@ -105,6 +97,16 @@ public class Robot extends IterativeRobot {
         }
         SmartDashboard.putData("Which Autonomouse?", chooser);
         SmartDashboard.putData(Scheduler.getInstance());
+        
+        SmartDashboard.putData("Pull Back",new PullBack(100));
+        SmartDashboard.putData("Arm Mode",new PullBack(1));
+        SmartDashboard.putData("Engage Ratchet",new SetEngagedRatchet(true));
+        SmartDashboard.putData("Disengage Ratchet",new SetEngagedRatchet(false));
+        SmartDashboard.putData("Engage Winch",new SetEngagedWinch(true));
+        SmartDashboard.putData("Disengage Winch",new SetEngagedWinch(false));
+        SmartDashboard.putData("Latch", new SetLatched(true));
+        SmartDashboard.putData("Unlatch", new SetLatched(false));
+        SmartDashboard.putData("Spin Roller In", new SpinRollerIn());
         
         // Send sensor info to the SmartDashboard periodically
         new Command("Sensor feedback") {

@@ -28,15 +28,14 @@ public class Catapult extends Subsystem {
     private Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE_CHANNEL);
     private Solenoid _latched = new Solenoid(RobotMap.PORT_SOLENOID_LATCHED_CHANNEL);
     private Solenoid _unlatched = new Solenoid(RobotMap.PORT_SOLENOID_UNLATCHED_CHANNEL);
-    private Servo _servo = new Servo(RobotMap.PORT_SERVO);
-    private AnalogChannel _pot = new AnalogChannel(RobotMap.PORT_SENSOR_POTENTIOMETER);
+    private Servo _ratchetEngage = new Servo(RobotMap.PORT_SERVO);
     private static final double latchedAngle = 170;
     private static final double unlatchedAngle = 0;
     
     public Catapult(){
         _winchEncoder.start();
         LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
-        LiveWindow.addActuator("Catapult", "Ratchet", _servo);
+        LiveWindow.addActuator("Catapult", "Ratchet", _ratchetEngage);
         LiveWindow.addActuator("Catapult", "Winch", _winch);
         LiveWindow.addActuator("Catapult", "Disengage Sole", _disengage);
         LiveWindow.addActuator("Catapult","Engage Sole", _engage);
@@ -80,20 +79,14 @@ public class Catapult extends Subsystem {
         _latched.set(false);
     }
     
-    public double getVoltage(){
-        return _pot.getVoltage();
-    }
     
     public void setRatchetLatched(){
-        _servo.setAngle(latchedAngle);
+        _ratchetEngage.setAngle(latchedAngle);
     }
     
     public void setRatchetUnlatched(){
-        _servo.setAngle(unlatchedAngle);
+        _ratchetEngage.setAngle(unlatchedAngle);
     }
-    
-    
-    
     
     //Needs to calculate the angle from the potentiometer voltage.  Maybe use a utility?
     public double getAngle(){
