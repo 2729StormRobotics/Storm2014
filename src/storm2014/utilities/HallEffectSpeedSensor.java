@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.tables.ITable;
 /**
  * This uses a digital signal from a hall effect sensor to calculate the speed
  * of a wheel.
- * @author Joe
  */
 public class HallEffectSpeedSensor implements LiveWindowSendable,PIDSource {
     private DigitalInput _hallEffect;
