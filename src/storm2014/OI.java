@@ -3,6 +3,7 @@ package storm2014;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import storm2014.commands.AutoAlign;
 import storm2014.commands.SetEngagedRatchet;
 import storm2014.commands.SpinRollerIn;
 import storm2014.commands.SetLEDMode;
@@ -21,10 +22,13 @@ public class OI {
     private Button ratchetEngage = new JoystickButton(driveJoystick, RobotMap.JOYRATCHET_ENGAGE_BUTTON);
     private Button ratchetDisengage = new JoystickButton(driveJoystick, RobotMap.JOYRATCHET_DISENGAGE_BUTTON);
     
+    private Button autoAlign = new JoystickButton(driveJoystick, RobotMap.JOYAUTOALIGN_BUTTON);
+    
     public OI() {
         spinIn.toggleWhenPressed(new SpinRollerIn());
         ratchetEngage.whenPressed(new SetEngagedRatchet(true));
         ratchetDisengage.whenPressed(new SetEngagedRatchet(false));
+        autoAlign.whenPressed(new AutoAlign());
     }
     
     // When a joystick is in its zero position, it will not necessarily read

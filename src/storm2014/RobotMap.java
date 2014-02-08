@@ -9,16 +9,16 @@ public class RobotMap {
             PORT_JOYSTICK_DEBUG = 3;
     
     public static final int JOYDRIVE_BUTTON_SLOW    = 5;
-    public static final int JOYDRIVE_BUTTON_SPINUP  = 3;
-    public static final int JOYRATCHET_ENGAGE_BUTTON       = 10; 
-     public static final int JOYRATCHET_DISENGAGE_BUTTON      = 11; 
-    public static final int JOYPICKUP_BUTTON        = 9; 
+    public static final int JOYRATCHET_ENGAGE_BUTTON       = 10;
+    public static final int JOYRATCHET_DISENGAGE_BUTTON      = 11;
+    public static final int JOYPICKUP_BUTTON        = 9;
     public static final int JOYARMPOS_BUTTON        = 8;
-    
-    // public static final int JOYDEBUG_BUTTON_CONTROLSHOOT = 10;
-    
-    
-    public static final int JOYDRIVE_AXIS_DRIVE_LEFT  = 2,
+    public static final int JOYAUTOALIGN_BUTTON     = 6;
+            
+            // public static final int JOYDEBUG_BUTTON_CONTROLSHOOT = 10;
+            
+            
+            public static final int JOYDRIVE_AXIS_DRIVE_LEFT  = 2,
             JOYDRIVE_AXIS_DRIVE_RIGHT = 4;
     
     public static final int PORT_MOTOR_DRIVE_LEFT     = 1;
@@ -40,7 +40,7 @@ public class RobotMap {
     public static final int PORT_SENSOR_HALL_EFFECT_ROLLER = 8;
     public static final int PORT_SENSOR_TOMAHAWK_IR        = 6;
     public static final int PORT_SENSOR_BALL_IR            = 7;
-    public static final int PORT_SENSOR_STRINGPOT          = 2; 
+    public static final int PORT_SENSOR_STRINGPOT          = 2;
     public static final int MODULE_SENSOR_ACCELEROMETER    = 1;
     public static final int PORT_SENSOR_POTENTIOMETER      = 3;
     

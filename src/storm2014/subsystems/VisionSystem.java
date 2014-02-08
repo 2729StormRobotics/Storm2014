@@ -17,6 +17,9 @@ public class VisionSystem {
     public static double getBallDistance() {
         return SmartDashboard.getNumber("Distance to ball in inches", 0);
     }
+    public static double getTargetDistance() {
+        return SmartDashboard.getNumber("Distance to wall", 0);
+    }
     public static double getBallXAngle() {
         return SmartDashboard.getNumber("Ball horizontal angle to center", 0);
     }
