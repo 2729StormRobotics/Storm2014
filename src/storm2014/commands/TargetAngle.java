@@ -14,16 +14,19 @@ import storm2014.subsystems.VisionSystem;
 public class TargetAngle extends Command {
      double _angle;
     double _speed;
-    public TargetAngle(double angle, double power) {
+    double _getAngle;
+    public TargetAngle(double angle, double power, double getAngle) {
         requires(Robot.driveTrain);
         _angle = angle;
         _speed = power;
+        _getAngle = getAngle;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Robot.driveTrain.clearGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,9 +34,11 @@ public class TargetAngle extends Command {
          if (_angle > 0){
             Robot.driveTrain.tankDrive(_speed,-_speed);
             _angle = VisionSystem.getTargetXAngle();
+            _getAngle = Robot.driveTrain.getGyroAngle();
         } else {
             Robot.driveTrain.tankDrive(-_speed,_speed);
             _angle = VisionSystem.getTargetXAngle();
+            _getAngle = Robot.driveTrain.getGyroAngle();
         }
     }
 

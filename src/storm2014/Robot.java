@@ -24,8 +24,8 @@ import storm2014.commands.SetEngagedWinch;
 import storm2014.commands.SetLatched;
 import storm2014.commands.SpinRollerIn;
 import storm2014.commands.autonomous.TriangleMovement;
-import storm2014.commands.autonomous.TurnHotTargetFireLeft;
-import storm2014.commands.autonomous.TurnHotTargetFireRight;
+import storm2014.commands.autonomous.TurnHotTargetFireDynamic;
+import storm2014.commands.autonomous.TurnHotTargetFireFixed;
 import storm2014.subsystems.Catapult;
 import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDStrip;
@@ -87,7 +87,7 @@ public class Robot extends IterativeRobot {
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance","TurnHotTargetFireLeft","TurnHotTargetFireRight"};
-        autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0), new TurnHotTargetFireLeft(), new TurnHotTargetFireRight()};
+        autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0), nTurnHotTargetFireDynamiceft(), new TurnHotTargetFireFixed()};
         
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard

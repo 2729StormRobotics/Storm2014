@@ -5,12 +5,12 @@ import storm2014.commands.DriveForward;
 import storm2014.commands.TurnAndTurnBack;
 import storm2014.subsystems.VisionSystem;
 
-public class TurnHotTargetFireRight extends CommandGroup {
+public class TurnHotTargetFireFixed extends CommandGroup {
     private static final double TURN_ANGLE = 60,
                                 DRIVE_SPEED = 0.6,
                                 DISTANCE = 2000;
-    public TurnHotTargetFireRight() {
-        addSequential(new Conditional(new TurnAndTurnBack(DRIVE_SPEED, DISTANCE, TURN_ANGLE), null) {
+    public TurnHotTargetFireFixed(boolean isRight) {
+        addSequential(new Conditional(new TurnAndTurnBack(DRIVE_SPEED, DISTANCE, (isRight?-1:1) * TURN_ANGLE), null) {
            protected boolean condition() {
                return !VisionSystem.foundHotTarget();
            }
