@@ -3,6 +3,7 @@ package storm2014.subsystems;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -12,10 +13,8 @@ import storm2014.commands.PreLaunch;
 public class Catapult extends Subsystem {
     private final Talon    _winch         = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder  _winchEncoder  = new Encoder(RobotMap.PORT_ENCODER_PULLBACKENCODER_1,RobotMap.PORT_ENCODER_PULLBACKENCODER_2);
-    private final Solenoid _disengage     = new Solenoid(RobotMap.PORT_SOLENOID_DISENGAGE);
-    private final Solenoid _engage        = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE);
-    private final Solenoid _latched       = new Solenoid(RobotMap.PORT_SOLENOID_LATCHED);
-    private final Solenoid _unlatched     = new Solenoid(RobotMap.PORT_SOLENOID_UNLATCHED);
+    private final Solenoid _winchShift    = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);
+    private final Solenoid _latch         = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
     private final Servo    _ratchetEngage = new Servo(RobotMap.PORT_SERVO);
     private static final double latchedAngle = 170;
     private static final double unlatchedAngle = 0;
@@ -25,10 +24,8 @@ public class Catapult extends Subsystem {
         LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
         LiveWindow.addActuator("Catapult", "Ratchet", _ratchetEngage);
         LiveWindow.addActuator("Catapult", "Winch", _winch);
-        LiveWindow.addActuator("Catapult", "Disengage Sole", _disengage);
-        LiveWindow.addActuator("Catapult","Engage Sole", _engage);
-        LiveWindow.addActuator("Catapult", "Disengage Sole", _latched);
-        LiveWindow.addActuator("Catapult","Engage Sole", _unlatched);
+        LiveWindow.addActuator("Catapult", "Winch shifter", _winchShift);
+        LiveWindow.addActuator("Catapult", "Latch", _latch);
     }
     
     protected void initDefaultCommand() {
@@ -48,23 +45,19 @@ public class Catapult extends Subsystem {
     }
     
     public void disengageWinch(){
-        _disengage.set(true);
-        _engage.set(false);
+        _winchShift.set(false);
     }
     
     public void engageWinch(){
-        _engage.set(true);
-        _disengage.set(false);
+        _winchShift.set(true);
     }
     
     public void latch(){
-        _latched.set(true);
-        _unlatched.set(false);
+        _latch.set(true);
     }
     
     public void unlatch(){
-        _unlatched.set(true);
-        _latched.set(false);
+        _latch.set(false);
     }
     
     public void setRatchetLatched(){

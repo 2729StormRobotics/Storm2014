@@ -1,6 +1,7 @@
 package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -8,11 +9,13 @@ import storm2014.RobotMap;
 import storm2014.utilities.HallEffectSpeedSensor;
 
 public final class Intake extends Subsystem {
-    private final Talon                 _motor = new Talon(RobotMap.PORT_MOTOR_ROLLER);
-    private final DigitalInput          _ir = new DigitalInput(RobotMap.PORT_SENSOR_BALL_IR);
+    private final Talon                 _motor       = new Talon(RobotMap.PORT_MOTOR_ROLLER);
+    private final DigitalInput          _ir          = new DigitalInput(RobotMap.PORT_SENSOR_BALL_IR);
     private final HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
-    private final Solenoid              _solBot = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_BOTTOM);
-    private final Solenoid              _solTop = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_TOP);
+    private final DoubleSolenoid        _solBot      = new DoubleSolenoid(RobotMap.PORT_SOLENOID_INTAKE_BOTTOM_OUT,
+                                                                          RobotMap.PORT_SOLENOID_INTAKE_BOTTOM_IN);
+    private final DoubleSolenoid        _solTop      = new DoubleSolenoid(RobotMap.PORT_SOLENOID_INTAKE_TOP_OUT,
+                                                                          RobotMap.PORT_SOLENOID_INTAKE_TOP_IN);
     private int _mode;
 
     public Intake(int mode) {
@@ -47,20 +50,20 @@ public final class Intake extends Subsystem {
         _mode = mode;
         switch (mode) {
             case 0:
-                _solBot.set(false);
-                _solTop.set(false);
+                _solBot.set(DoubleSolenoid.Value.kReverse);
+                _solTop.set(DoubleSolenoid.Value.kReverse);
                 break;
             case 1:
-                _solBot.set(true);
-                _solTop.set(false);
+                _solBot.set(DoubleSolenoid.Value.kForward);
+                _solTop.set(DoubleSolenoid.Value.kReverse);
                 break;
             case 2:
-                _solBot.set(true);
-                _solTop.set(true);
+                _solBot.set(DoubleSolenoid.Value.kForward);
+                _solTop.set(DoubleSolenoid.Value.kForward);
                 break;
             default:
-                _solBot.set(false);
-                _solTop.set(false);
+                _solBot.set(DoubleSolenoid.Value.kReverse);
+                _solTop.set(DoubleSolenoid.Value.kReverse);
         }
     }
 
