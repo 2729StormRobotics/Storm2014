@@ -125,6 +125,7 @@ public class Robot extends IterativeRobot {
             }
         }.start();
         leds.initTable(NetworkTable.getTable("SmartDashboard"));
+        ledring.initTable(NetworkTable.getTable("SmartDashboard"));
     }
     
     /** Called at the start of autonomous mode. */

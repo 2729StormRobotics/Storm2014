@@ -38,7 +38,7 @@ public class LEDRing extends Subsystem implements NamedSendable {
     public void initTable(ITable table){
         this._table = table;
         if(table!=null){
-            table.putNumber("LED Percentage", 20);
+            table.putNumber("LED Percentage", 50);
             table.addTableListener(listener);
         }
     }
