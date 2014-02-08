@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package storm2014.commands.autonomous;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import storm2014.commands.DriveForward;
 import storm2014.commands.Turn;
 
-/**
- *
- * @author Erik
- */
+// Tested by Erik Bobo on Electra before 2/8/13
 public class AutonomousDance extends CommandGroup {
      private static final double ANGLE       = 30,
                                 DRIVE_SPEED = 0.6,
@@ -54,12 +47,5 @@ public class AutonomousDance extends CommandGroup {
         
         addSequential(new DriveForward(DRIVE_SPEED,sideLength));
         addSequential(new DriveForward(-DRIVE_SPEED,sideLength));
-        
-        
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
-
-    // Called just before this Command runs the first time
-
 }

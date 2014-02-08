@@ -3,16 +3,9 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
-/**
- *
- * @author garrett
- */
-
 //Not tested
 public class ChangeArmPosition extends Command {
-    
-    private int _curMode;
-    private int _increment;
+    private final int _increment;
     
     public ChangeArmPosition(int increment){
         requires(Robot.intake);
@@ -20,24 +13,21 @@ public class ChangeArmPosition extends Command {
     } 
 
     protected void initialize() {
-       _curMode = Robot.intake.getMode();
-       Robot.intake.setMode((((_curMode + _increment ) % 3) + 3) % 3);
+       int nextMode = Robot.intake.getMode() + _increment;
+       if(nextMode >= 3) {
+           nextMode = 2;
+       } else {
+           nextMode = 0;
+       }
+       Robot.intake.setMode(nextMode);
     }
 
-    protected void execute() {
-       
-    }
+    protected void execute() {}
 
     protected boolean isFinished() {
        return true;
     }
 
-    protected void end() {
-      
-    }
-
-    protected void interrupted() {
-   
-    }
-    
+    protected void end() {}
+    protected void interrupted() {}
 }

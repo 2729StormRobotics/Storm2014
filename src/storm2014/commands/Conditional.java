@@ -2,10 +2,6 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- * @author ginto
- */
 public abstract class Conditional extends Command {
     private final Command _ifTrue,_ifFalse;
     private Command _running = null;
