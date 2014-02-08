@@ -32,7 +32,6 @@ public class DriveTrain extends Subsystem {
              _rightShift = new Solenoid(RobotMap.PORT_SOLENOID_RIGHT_SHIFTER);
     
     public DriveTrain() {
-	
         _leftEncoder.start();
         _rightEncoder.start();
 	
@@ -70,7 +69,7 @@ public class DriveTrain extends Subsystem {
     }
     
     /** Resets both encoders. */
-    public void clearEncoder(){
+    public void clearEncoders(){
         _leftEncoder.reset();
         _rightEncoder.reset();
     }

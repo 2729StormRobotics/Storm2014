@@ -2,7 +2,6 @@ package storm2014.utilities;
 
 /**
  * This prevents flickery signals from deceiving you
- * @author Ginto
  */
 public class Debouncer {
     private final long _targetTime;

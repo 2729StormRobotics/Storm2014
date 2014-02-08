@@ -1,5 +1,3 @@
-
-
 package storm2014.utilities;
 
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -10,19 +8,10 @@ import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- *
- * @author Garrett
- */
-
 public class BangBangController implements LiveWindowSendable {
-    
-    
     //if less then set point gun it if you are greater drop down to 0 or drop down to lower value
     private class _bgTask extends TimerTask {
-        
         public void run() {
-            
             if(_enabled){
                 System.out.println("bg task is running");
                 curSpeed = _pidSource.pidGet(); //sets current speed to what the sensor is reading
@@ -33,16 +22,15 @@ public class BangBangController implements LiveWindowSendable {
                     _pidOutput.pidWrite(0);
                 }
             }
-            
         }
     }
     
     private Timer _timer = new Timer();
-    private  double _period;
-    private  double _setPoint;
+    private double _period;
+    private double _setPoint;
     private double curSpeed;
-    private  PIDOutput _pidOutput;
-    private  PIDSource _pidSource;
+    private PIDOutput _pidOutput;
+    private PIDSource _pidSource;
     
     private boolean _enabled = false;
     

@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package storm2014.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -16,19 +9,14 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
 import storm2014.commands.PreLaunch;
 
-/**
- *
- * @author Matthew Rassmann
- */
 public class Catapult extends Subsystem {
-
-    private Talon _winch = new Talon(RobotMap.PORT_MOTOR_WINCH);
-    private Encoder _winchEncoder =  new Encoder(RobotMap.PORT_ENCODER_PULLBACKENCODER_1,RobotMap.PORT_ENCODER_PULLBACKENCODER_2);
-    private Solenoid _disengage = new Solenoid(RobotMap.PORT_SOLENOID_DISENGAGE);
-    private Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE);
-    private Solenoid _latched = new Solenoid(RobotMap.PORT_SOLENOID_LATCHED);
-    private Solenoid _unlatched = new Solenoid(RobotMap.PORT_SOLENOID_UNLATCHED);
-    private Servo _ratchetEngage = new Servo(RobotMap.PORT_SERVO);
+    private final Talon    _winch         = new Talon(RobotMap.PORT_MOTOR_WINCH);
+    private final Encoder  _winchEncoder  = new Encoder(RobotMap.PORT_ENCODER_PULLBACKENCODER_1,RobotMap.PORT_ENCODER_PULLBACKENCODER_2);
+    private final Solenoid _disengage     = new Solenoid(RobotMap.PORT_SOLENOID_DISENGAGE);
+    private final Solenoid _engage        = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE);
+    private final Solenoid _latched       = new Solenoid(RobotMap.PORT_SOLENOID_LATCHED);
+    private final Solenoid _unlatched     = new Solenoid(RobotMap.PORT_SOLENOID_UNLATCHED);
+    private final Servo    _ratchetEngage = new Servo(RobotMap.PORT_SERVO);
     private static final double latchedAngle = 170;
     private static final double unlatchedAngle = 0;
     
@@ -47,8 +35,8 @@ public class Catapult extends Subsystem {
         setDefaultCommand(new PreLaunch());
     }
     
-    public void setWinchRawVal(double winchRawVal){
-        _winch.set(winchRawVal);
+    public void setWinchPower(double winchRawVal){
+        _winch.set(Math.abs(winchRawVal));
     }
     
     public void resetWinchEncoder(){
@@ -78,7 +66,6 @@ public class Catapult extends Subsystem {
         _unlatched.set(true);
         _latched.set(false);
     }
-    
     
     public void setRatchetLatched(){
         _ratchetEngage.setAngle(latchedAngle);

@@ -3,10 +3,6 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
-/**
- *
- * @author Matthew Rassmann/Garrett
- */
 //Not Tested
 public class PullBack extends Command {
      double _power = 0.5;
@@ -21,7 +17,7 @@ public class PullBack extends Command {
     }
 
     protected void execute() {
-        Robot.catapult.setWinchRawVal(_power);
+        Robot.catapult.setWinchPower(_power);
     }
 
     protected boolean isFinished() {
@@ -29,12 +25,10 @@ public class PullBack extends Command {
     }
 
     protected void end() {
-       Robot.catapult.setWinchRawVal(0.0);
+       Robot.catapult.setWinchPower(0.0);
     }
 
     protected void interrupted() {
         end();
-       
     }
-    
 }

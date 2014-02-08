@@ -1,9 +1,5 @@
 package storm2014.utilities.pipeline;
 
-/**
- *
- * @author ginto
- */
 public class HighPassFilter implements IFilter {
     private double _rc;
     private double _val;

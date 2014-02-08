@@ -1,5 +1,3 @@
-  
-
 package storm2014.utilities;
 
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -11,11 +9,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import storm2014.Robot;
 import storm2014.subsystems.LEDStrip;
-
-/**
- *
- * @author Garrett
- */
 
 public class TakeBackHalfPlusPlus implements LiveWindowSendable {
     
