@@ -7,6 +7,7 @@ import storm2014.Robot;
  *
  * @author garrett
  */
+//Not Tested
 public class SetLatched extends Command {
  
     public boolean _latched;
@@ -18,9 +19,9 @@ public class SetLatched extends Command {
     
     protected void initialize() {
        if(_latched){
-           Robot.catapult.engageWinch();
+           Robot.catapult.latch();
        } else{
-           Robot.catapult.disengageWinch();
+           Robot.catapult.unlatch();
        }
     }
 

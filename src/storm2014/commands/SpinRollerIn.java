@@ -7,7 +7,7 @@ import storm2014.Robot;
  *
  * @author Garrett
  */
-
+//Not Tested
 public class SpinRollerIn extends Command { 
      
     public SpinRollerIn(){

@@ -13,6 +13,7 @@ import storm2014.Robot;
  *
  * @author Matthew Rassmann/Garrett
  */
+//Not tested
 public class SetEngagedWinch extends Command {
    
     private boolean _engaged;

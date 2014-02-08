@@ -7,6 +7,8 @@ import storm2014.Robot;
  *
  * @author garrett
  */
+
+//Not tested
 public class ChangeArmPosition extends Command {
     
     private int _curMode;

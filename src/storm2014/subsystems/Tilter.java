@@ -12,6 +12,7 @@ import storm2014.utilities.StringPot;
  *
  * @author garrett
  */
+//TODO waiting for joes array value list.
 
 public class Tilter extends Subsystem{
     

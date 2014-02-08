@@ -7,6 +7,8 @@ import storm2014.Robot;
  *
  * @author garrett
  */
+
+//Tested by Garrett/Matt on Magic Box 2/6/14
 public class SetEngagedRatchet extends Command{
     
     private boolean _latched;
