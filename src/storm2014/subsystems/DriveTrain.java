@@ -28,10 +28,8 @@ public class DriveTrain extends Subsystem {
     double _gyroOffset = 0;
     public Object tankDrive;
     
-    Solenoid _leftShiftDown  = new Solenoid(RobotMap.PORT_SOLENOID_LEFTSHIFTDOWN_CHANNEL),
-             _rightShiftDown = new Solenoid(RobotMap.PORT_SOLENOID_RIGHTSHIFTDOWN_CHANNEL),
-             _leftShiftUp    = new Solenoid(RobotMap.PORT_SOLENOID_LEFTSHIFTUP_CHANNEL),
-             _rightShiftUp   = new Solenoid(RobotMap.PORT_SOLENOID_RIGHTSHIFTUP_CHANNEL);
+    Solenoid _leftShift  = new Solenoid(RobotMap.PORT_SOLENOID_LEFT_SHIFTER),
+             _rightShift = new Solenoid(RobotMap.PORT_SOLENOID_RIGHT_SHIFTER);
     
     public DriveTrain() {
 	
@@ -104,12 +102,8 @@ public class DriveTrain extends Subsystem {
     public double getRightSpeed(){
         return _right.get();
     }
-    public void shiftDown(){
-        _rightShiftDown.set(true);
-        _leftShiftDown.set(true);
-    }
-    public void shiftUp(){
-        _rightShiftUp.set(true);
-        _leftShiftUp.set(true);
+    public void setHighGear(boolean enabled) {
+        _rightShift.set(enabled);
+        _leftShift.set(enabled);
     }
 }

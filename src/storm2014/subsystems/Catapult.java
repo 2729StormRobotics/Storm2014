@@ -24,10 +24,10 @@ public class Catapult extends Subsystem {
 
     private Talon _winch = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private Encoder _winchEncoder =  new Encoder(RobotMap.PORT_ENCODER_PULLBACKENCODER_1,RobotMap.PORT_ENCODER_PULLBACKENCODER_2);
-    private Solenoid _disengage = new Solenoid(RobotMap.PORT_SOLENOID_DISENGAGE_CHANNEL);
-    private Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE_CHANNEL);
-    private Solenoid _latched = new Solenoid(RobotMap.PORT_SOLENOID_LATCHED_CHANNEL);
-    private Solenoid _unlatched = new Solenoid(RobotMap.PORT_SOLENOID_UNLATCHED_CHANNEL);
+    private Solenoid _disengage = new Solenoid(RobotMap.PORT_SOLENOID_DISENGAGE);
+    private Solenoid _engage = new Solenoid(RobotMap.PORT_SOLENOID_ENGAGE);
+    private Solenoid _latched = new Solenoid(RobotMap.PORT_SOLENOID_LATCHED);
+    private Solenoid _unlatched = new Solenoid(RobotMap.PORT_SOLENOID_UNLATCHED);
     private Servo _ratchetEngage = new Servo(RobotMap.PORT_SERVO);
     private static final double latchedAngle = 170;
     private static final double unlatchedAngle = 0;

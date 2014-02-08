@@ -19,8 +19,8 @@ public class Intake extends Subsystem{
     private DigitalInput _ir = new DigitalInput(RobotMap.PORT_SENSOR_BALL_IR);
     private  TakeBackHalfPlusPlus takeBackHalf;
     private HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
-    private Solenoid _solBot = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_BOT_CHANNEL);
-    private Solenoid _solTop = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_TOP_CHANNEL);
+    private Solenoid _solBot = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_BOTTOM);
+    private Solenoid _solTop = new Solenoid(RobotMap.PORT_SOLENOID_INTAKE_TOP);
     private int _mode;
     
     public Intake(int mode){
