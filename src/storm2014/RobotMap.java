@@ -37,6 +37,7 @@ public class RobotMap {
     public static final int PORT_ENCODER_PULLBACKENCODER_2 = 9;
     public static final int PORT_ENCODER_PULLBACKENCODER_1 = 10;
     public static final int PORT_LIMIT_TILTER_TOP          = 11;
+    public static final int PORT_LED_RING                  = 12;
     
     // Analog ports
     public static final int PORT_SENSOR_GYRO          = 1;
