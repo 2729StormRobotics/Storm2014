@@ -28,6 +28,7 @@ import storm2014.commands.autonomous.TurnHotTargetFireDynamic;
 import storm2014.commands.autonomous.TurnHotTargetFireFixed;
 import storm2014.subsystems.Catapult;
 import storm2014.subsystems.Intake;
+import storm2014.subsystems.LEDRing;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.Tilter;
 import storm2014.utilities.BangBangController;
@@ -43,11 +44,11 @@ public class Robot extends IterativeRobot {
     // All subsystems are accessible by Robot.name
     public static OI         oi;
     public static DriveTrain driveTrain;
-    public static LEDStrip leds;
-    public static Intake intake;
-    public static Catapult catapult;
-    public static Tilter tilter;
-    
+    public static LEDStrip   leds;
+    public static Intake     intake;
+    public static Catapult   catapult;
+    public static Tilter     tilter;
+    public static LEDRing    ledring;
     
     Command teleop;
     String[] autonomiceNames;
@@ -80,8 +81,9 @@ public class Robot extends IterativeRobot {
         catapult   = new Catapult();
         driveTrain = new DriveTrain();
         leds       = new LEDStrip();
-        intake = new Intake(0);
-        tilter = new Tilter();
+        intake     = new Intake(0);
+        tilter     = new Tilter();
+        ledring    = new LEDRing();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         
@@ -123,6 +125,7 @@ public class Robot extends IterativeRobot {
             }
         }.start();
         leds.initTable(NetworkTable.getTable("SmartDashboard"));
+        ledring.initTable(NetworkTable.getTable("SmartDashboard"));
     }
     
     /** Called at the start of autonomous mode. */

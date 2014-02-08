@@ -1,7 +1,6 @@
 package storm2014.subsystems;
 
-
-
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Jaguar;
@@ -28,8 +27,7 @@ public class DriveTrain extends Subsystem {
     double _gyroOffset = 0;
     public Object tankDrive;
     
-    Solenoid _leftShift  = new Solenoid(RobotMap.PORT_SOLENOID_LEFT_SHIFTER),
-             _rightShift = new Solenoid(RobotMap.PORT_SOLENOID_RIGHT_SHIFTER);
+    DoubleSolenoid _shifter  = new DoubleSolenoid(RobotMap.PORT_SOLENOID_SHIFT_HIGH,RobotMap.PORT_SOLENOID_SHIFT_LOW);
     
     public DriveTrain() {
         _leftEncoder.start();
@@ -102,7 +100,7 @@ public class DriveTrain extends Subsystem {
         return _right.get();
     }
     public void setHighGear(boolean enabled) {
-        _rightShift.set(enabled);
-        _leftShift.set(enabled);
+        _shifter.set(enabled ? DoubleSolenoid.Value.kForward :
+                               DoubleSolenoid.Value.kReverse);
     }
 }
