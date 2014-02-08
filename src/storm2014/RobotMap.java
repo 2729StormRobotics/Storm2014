@@ -36,6 +36,7 @@ public class RobotMap {
     public static final int PORT_ENCODER_RIGHT_2           = 1;
     public static final int PORT_ENCODER_PULLBACKENCODER_1 = 10;
     public static final int PORT_ENCODER_PULLBACKENCODER_2 = 9;
+    public static final int PORT_LIMIT_TILTER_TOP          = 13;
     public static final int PORT_SENSOR_HALL_EFFECT        = 5;
     public static final int PORT_SENSOR_HALL_EFFECT_ROLLER = 8;
     public static final int PORT_SENSOR_TOMAHAWK_IR        = 6;
