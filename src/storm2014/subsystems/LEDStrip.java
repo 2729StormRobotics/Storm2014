@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -15,10 +11,6 @@ import java.io.OutputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.SocketConnection;
 
-/**
- *
- * @author evan1026
- */
 public class LEDStrip extends Subsystem implements NamedSendable {
 
     public static final int DisabledMode          =  0;
@@ -51,9 +43,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     
     private boolean _disconnected = false;
     
-    public LEDStrip(){
-        
-    }
+    public LEDStrip() {}
 
     protected void initDefaultCommand() {}
 
@@ -139,7 +129,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
         }
     }
 
-    private ITableListener listener = new ITableListener() {
+    private final ITableListener listener = new ITableListener() {
         public void valueChanged(ITable table, String key, Object value, boolean isNew) {
             if (key.equals("Mode")) {
                 int newMode = (int) table.getNumber("Mode");

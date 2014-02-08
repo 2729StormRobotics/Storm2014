@@ -4,9 +4,11 @@ import storm2014.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.subsystems.VisionSystem;
 
+//Not Tested
 public class TurnToBall extends Command {                           
-     private double _speed;
-     private double ballX;
+     private final double _speed;
+     private double _ballX;
+     private int    _direction; // + clockwise, - counterclockwise
      
     public TurnToBall(double speed) {
         requires(Robot.driveTrain);
@@ -14,21 +16,20 @@ public class TurnToBall extends Command {
     }
    
     protected void initialize() { 
-        ballX =  VisionSystem.getBallXAngle();
+        _ballX =  VisionSystem.getBallXAngle();
+        _direction = _ballX >= 0 ? 1 : -1;
     }
    
     protected void execute() {
-         ballX =  VisionSystem.getBallXAngle();
-        if (ballX<=0){
-            Robot.driveTrain.tankDrive(_speed, -_speed );
-        }
-        else {
-            Robot.driveTrain.tankDrive(-_speed, _speed);      
-        }
+         double turnVal = _speed*_direction;
+         Robot.driveTrain.tankDrive(turnVal,-turnVal);
     }
     
     protected boolean isFinished() {
-        return ballX<=0.1 && ballX >=-0.1;
+        double newBallX = VisionSystem.getBallXAngle();
+        double product = newBallX*_ballX; // + if still approaching ball,
+                                          // - if we just passed it.
+        return product < 0;
     }
     
     protected void end() {

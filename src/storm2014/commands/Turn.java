@@ -1,18 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package storm2014.commands;
-
-/**
- *
- * @author Storm
- */
 
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
+// Tested by Joe Doyle on Electra before 2/8/13
 public class Turn extends Command {
 
     double _angle;

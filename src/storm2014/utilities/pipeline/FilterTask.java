@@ -2,13 +2,7 @@ package storm2014.utilities.pipeline;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import storm2014.utilities.pipeline.IFilter;
-import storm2014.utilities.pipeline.ISource;
 
-/**
- *
- * @author Ginto
- */
 public class FilterTask implements ISource {
     private final double  _dt;
     private final IFilter _filter;

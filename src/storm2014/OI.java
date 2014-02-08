@@ -17,17 +17,12 @@ public class OI {
     
     private final Button slowModeButton      = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SLOW);
     
-    private final Button spinIn   = new JoystickButton(driveJoystick, RobotMap.JOYPICKUP_BUTTON);
+    private final Button spinIn   = new JoystickButton(driveJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN);
     
-    private Button ratchetEngage = new JoystickButton(driveJoystick, RobotMap.JOYRATCHET_ENGAGE_BUTTON);
-    private Button ratchetDisengage = new JoystickButton(driveJoystick, RobotMap.JOYRATCHET_DISENGAGE_BUTTON);
-    
-    private Button autoAlign = new JoystickButton(driveJoystick, RobotMap.JOYAUTOALIGN_BUTTON);
+    private Button autoAlign = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_AUTOALIGN);
     
     public OI() {
         spinIn.toggleWhenPressed(new SpinRollerIn());
-        ratchetEngage.whenPressed(new SetEngagedRatchet(true));
-        ratchetDisengage.whenPressed(new SetEngagedRatchet(false));
         autoAlign.whenPressed(new AutoAlign());
     }
     
