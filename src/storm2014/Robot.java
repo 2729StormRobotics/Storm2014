@@ -85,7 +85,7 @@ public class Robot extends IterativeRobot {
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance","TurnHotTargetFireLeft","TurnHotTargetFireRight"};
-        autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0), new TurnHotTargetFireDynamic(false), new TurnHotTargetFireFixed(true)};
+        autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0), new TurnHotTargetFireDynamic(false), new TurnHotTargetFireDynamic(true)};
         
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard

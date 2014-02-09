@@ -4,22 +4,19 @@ import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.tables.ITable;
 
-public class StringPot implements LiveWindowSendable {
-    public final static double VAL_MAX_SAFE   = 2.86,
-                               VAL_NEAR       = 2.59,
-                               VAL_CENTER     = 2.44,
-                               VAL_OPPAUTO    = 2.30,
-                               VAL_FEEDER     = 2.20;
-    
+public class MagneticEncoder implements LiveWindowSendable {
     private final AnalogChannel _channel;
     
-    public StringPot(int channelNum) {
+    public MagneticEncoder(int channelNum) {
         _channel = new AnalogChannel(channelNum);
     }
     
+    public double getAngle() {
+        return _channel.getAverageVoltage()/5.0*360;
+    }
+    
     public double get() {
-        double val = _channel.getAverageVoltage();
-        return val > 0.05 ? val : 0;
+        return _channel.getAverageVoltage();
     }
     
     private ITable _table = null;

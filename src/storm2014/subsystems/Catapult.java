@@ -1,5 +1,6 @@
 package storm2014.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -9,13 +10,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
 import storm2014.commands.PreLaunch;
+import storm2014.utilities.MagneticEncoder;
+import storm2014.utilities.StringPotToAngle;
 
 public class Catapult extends Subsystem {
-    private final Talon    _winch         = new Talon(RobotMap.PORT_MOTOR_WINCH);
-    private final Encoder  _winchEncoder  = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
-    private final Solenoid _winchShift    = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);
-    private final Solenoid _latch         = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
-    private final Servo    _ratchetEngage = new Servo(RobotMap.PORT_SERVO);
+    private final Talon           _winch         = new Talon(RobotMap.PORT_MOTOR_WINCH);
+    private final Encoder         _winchEncoder  = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
+    private final Solenoid        _winchShift    = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);
+    private final Solenoid        _latch         = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
+    private final Servo           _ratchetEngage = new Servo(RobotMap.PORT_SERVO);
+    private final MagneticEncoder _magEnc        = new MagneticEncoder(RobotMap.PORT_SENSOR_MAG_ENCODER);
     private static final double latchedAngle = 170;
     private static final double unlatchedAngle = 0;
     
@@ -68,8 +72,7 @@ public class Catapult extends Subsystem {
         _ratchetEngage.setAngle(unlatchedAngle);
     }
     
-    //Needs to calculate the angle from the potentiometer voltage.  Maybe use a utility?
-    public double getAngle(){
-        return 0.0;
+    public double getPivotAngle() {
+        return _magEnc.getAngle();
     }
 }
