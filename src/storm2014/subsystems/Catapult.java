@@ -1,19 +1,18 @@
 package storm2014.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
 import storm2014.commands.PreLaunch;
 import storm2014.utilities.MagneticEncoder;
-import storm2014.utilities.StringPotToAngle;
 
 public class Catapult extends Subsystem {
+    public static final double BASE_ANGLE = 10;
+    
     private final Talon           _winch         = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder         _winchEncoder  = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
     private final Solenoid        _winchShift    = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);

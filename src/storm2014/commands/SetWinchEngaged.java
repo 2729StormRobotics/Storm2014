@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
 //Not tested
-public class SetEngagedWinch extends Command {
+public class SetWinchEngaged extends Command {
     private final boolean _engaged;
     
-    public SetEngagedWinch(boolean engaged){
+    public SetWinchEngaged(boolean engaged){
        requires(Robot.catapult);
        _engaged = engaged;
     }

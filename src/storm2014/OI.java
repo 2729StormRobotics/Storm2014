@@ -3,9 +3,7 @@ package storm2014;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import storm2014.commands.SetEngagedRatchet;
-import storm2014.commands.SpinRollerIn;
-import storm2014.commands.SetLEDMode;
+import storm2014.commands.SpinRoller;
 
 
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
@@ -19,7 +17,8 @@ public class OI {
     private final Button spinIn   = new JoystickButton(driveJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN);
     
     public OI() {
-        spinIn.toggleWhenPressed(new SpinRollerIn());
+        spinIn.whenPressed(new SpinRoller(1));
+        spinIn.whenReleased(new SpinRoller(0));
     }
     
     // When a joystick is in its zero position, it will not necessarily read
