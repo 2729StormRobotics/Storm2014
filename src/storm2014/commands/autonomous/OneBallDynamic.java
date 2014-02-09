@@ -7,10 +7,10 @@ import storm2014.commands.Launch;
 import storm2014.commands.TurnAndShootDynamic;
 import storm2014.subsystems.VisionSystem;
 
-public class OneBalDynamic extends CommandGroup{
+public class OneBallDynamic extends CommandGroup {
     private static final double DISTANCE = 2000,
                                 DRIVE_SPEED = 0.6;   
-    public OneBalDynamic(boolean isRight) { 
+    public OneBallDynamic(boolean isRight) { 
         addSequential(new Conditional(new TurnAndShootDynamic(isRight,DRIVE_SPEED),new Launch()) {
             protected boolean condition() {
                 return !VisionSystem.foundHotTarget();

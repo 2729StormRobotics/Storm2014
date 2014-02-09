@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Launch extends CommandGroup {
     public Launch(){
 //        addSequential(new SetLEDMode(LEDStrip.ParticleCollisionMode));
+        // For safety
+        addSequential(new SetArmPosition(2));
         addSequential(new SetWinchEngaged(false));
         addSequential(new SetLatched(false));
         addSequential(new WaitForFollowThrough());

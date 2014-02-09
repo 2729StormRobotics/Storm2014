@@ -18,7 +18,7 @@ import storm2014.commands.SetEngagedRatchet;
 import storm2014.commands.SetWinchEngaged;
 import storm2014.commands.SetLatched;
 import storm2014.commands.SpinRoller;
-import storm2014.commands.autonomous.OneBalDynamic;
+import storm2014.commands.autonomous.OneBallDynamic;
 import storm2014.subsystems.Catapult;
 import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDRing;
@@ -64,7 +64,7 @@ public class Robot extends IterativeRobot {
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"Drive Forward","TurnHotTargetFireLeft","TurnHotTargetFireRight"};
-        autonomice = new Command[]{new DriveForward(0.6, 1000),new OneBalDynamic(false), new OneBalDynamic(true)};
+        autonomice = new Command[]{new DriveForward(0.6, 1000),new OneBallDynamic(false), new OneBallDynamic(true)};
         
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard
