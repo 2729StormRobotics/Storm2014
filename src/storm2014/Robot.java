@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
     Command autonomouse;
     
     private void sendSensorData() {
-         
+         SmartDashboard.putNumber("String Pot Voltage",1.0/tilter.getStringPotRaw());
     }
     
     /** Called on robot boot. */

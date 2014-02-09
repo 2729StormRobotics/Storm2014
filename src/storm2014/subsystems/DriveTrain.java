@@ -36,6 +36,7 @@ public class DriveTrain extends Subsystem {
         LiveWindow.addSensor  ("Drive Train", "Gyro", _gyro);
         LiveWindow.addSensor  ("Drive Train", "Left Encoder", _leftEncoder);
         LiveWindow.addSensor  ("Drive Train", "Right Encoder", _rightEncoder);
+        LiveWindow.addActuator("Drive Train", "Shifter", _shifter);
     }
     
     protected void initDefaultCommand() {

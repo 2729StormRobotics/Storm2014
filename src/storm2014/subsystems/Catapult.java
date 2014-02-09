@@ -13,22 +13,23 @@ import storm2014.utilities.MagneticEncoder;
 public class Catapult extends Subsystem {
     public static final double BASE_ANGLE = 10;
     
-    private final Talon           _winch         = new Talon(RobotMap.PORT_MOTOR_WINCH);
-    private final Encoder         _winchEncoder  = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
-    private final Solenoid        _winchShift    = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);
-    private final Solenoid        _latch         = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
-    private final Servo           _ratchetEngage = new Servo(RobotMap.PORT_SERVO);
-    private final MagneticEncoder _magEnc        = new MagneticEncoder(RobotMap.PORT_SENSOR_MAG_ENCODER);
-    private static final double latchedAngle = 170;
-    private static final double unlatchedAngle = 0;
+    private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
+    private final Encoder         _winchEncoder = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
+    private final Solenoid        _winchShift   = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);
+    private final Solenoid        _latch        = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
+    private final Servo           _ratchet      = new Servo(RobotMap.PORT_SERVO);
+    private final MagneticEncoder _magEnc       = new MagneticEncoder(RobotMap.PORT_SENSOR_MAG_ENCODER);
+    private static final double ANGLE_RATCHET_ENGAGED    = 170;
+    private static final double ANGLE_RATCHET_DISENGAGED = 0;
     
     public Catapult(){
         _winchEncoder.start();
         LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
-        LiveWindow.addActuator("Catapult", "Ratchet", _ratchetEngage);
+        LiveWindow.addActuator("Catapult", "Ratchet", _ratchet);
         LiveWindow.addActuator("Catapult", "Winch", _winch);
         LiveWindow.addActuator("Catapult", "Winch shifter", _winchShift);
         LiveWindow.addActuator("Catapult", "Latch", _latch);
+        LiveWindow.addActuator("Catapult", "Magnetic Encoder", _magEnc);
     }
     
     protected void initDefaultCommand() {
@@ -64,11 +65,11 @@ public class Catapult extends Subsystem {
     }
     
     public void setRatchetLatched(){
-        _ratchetEngage.setAngle(latchedAngle);
+        _ratchet.setAngle(ANGLE_RATCHET_ENGAGED);
     }
     
     public void setRatchetUnlatched(){
-        _ratchetEngage.setAngle(unlatchedAngle);
+        _ratchet.setAngle(ANGLE_RATCHET_DISENGAGED);
     }
     
     public double getPivotAngle() {
