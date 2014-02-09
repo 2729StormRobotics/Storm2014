@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DriverStation;
 
 import storm2014.subsystems.DriveTrain;
@@ -56,12 +57,7 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser = new SendableChooser();
     Command autonomouse;
     
-//    ADXL345_I2C accelerometer = new ADXL345_I2C(RobotMap.MODULE_SENSOR_ACCELEROMETER, ADXL345_I2C.DataFormat_Range.k2G);
-//    FilterTask accFilter = new FilterTask(new LowPassFilter(0.5, 0), new ISource() {
-//        public double get() {
-//            return accelerometer.getAcceleration(ADXL345_I2C.Axes.kZ);
-//        }
-//    }, 1.0/100);
+    AnalogChannel magEnc = new AnalogChannel(4);
     
     private void sendSensorData() {
 //        SmartDashboard.putNumber("Wheel Speed RPM", shooter.getSpeedRPM());
@@ -89,7 +85,7 @@ public class Robot extends IterativeRobot {
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"TakeItBackNowYall","Triangle Movement","AutonomousDance","TurnHotTargetFireLeft","TurnHotTargetFireRight"};
-        autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0), nTurnHotTargetFireDynamiceft(), new TurnHotTargetFireFixed()};
+        autonomice = new Command[]{new DriveForward(0.6, 1000),new TriangleMovement(1500), new AutonomousDance(1000.0), new TurnHotTargetFireDynamic(false), new TurnHotTargetFireFixed(true)};
         
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard
@@ -126,6 +122,7 @@ public class Robot extends IterativeRobot {
         }.start();
         leds.initTable(NetworkTable.getTable("SmartDashboard"));
         ledring.initTable(NetworkTable.getTable("SmartDashboard"));
+        LiveWindow.addSensor("Random", "Magnetic Encoder", magEnc);
     }
     
     /** Called at the start of autonomous mode. */

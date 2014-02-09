@@ -18,31 +18,26 @@ public class RobotMap {
     // PWM Ports
     public static final int PORT_MOTOR_DRIVE_LEFT     = 1;
     public static final int PORT_MOTOR_DRIVE_RIGHT    = 2;
-    public static final int PORT_MOTOR_SHOOTER        = 3;
-    public static final int PORT_MOTOR_ROLLER         = 4;
-    public static final int PORT_MOTOR_TILTER         = 5;
-    public static final int PORT_SERVO                = 6;
-    public static final int PORT_MOTOR_WINCH          = 7;
+    public static final int PORT_MOTOR_ROLLER         = 3;
+    public static final int PORT_MOTOR_TILTER         = 4;
+    public static final int PORT_SERVO                = 5;
+    public static final int PORT_MOTOR_WINCH          = 6;
     
     
     // Digital I/O Ports
-    public static final int PORT_ENCODER_RIGHT_1           = 1;
-    public static final int PORT_ENCODER_RIGHT_2           = 2;
-    public static final int PORT_ENCODER_LEFT_1            = 3;
-    public static final int PORT_ENCODER_LEFT_2            = 4;
-    public static final int PORT_SENSOR_HALL_EFFECT        = 5;
-    public static final int PORT_SENSOR_TOMAHAWK_IR        = 6;
-    public static final int PORT_SENSOR_BALL_IR            = 7;
-    public static final int PORT_SENSOR_HALL_EFFECT_ROLLER = 8;
-    public static final int PORT_ENCODER_PULLBACKENCODER_2 = 9;
-    public static final int PORT_ENCODER_PULLBACKENCODER_1 = 10;
-    public static final int PORT_LIMIT_TILTER_TOP          = 11;
-    public static final int PORT_LED_RING                  = 12;
+    public static final int PORT_ENCODER_RIGHT_1  = 1;
+    public static final int PORT_ENCODER_RIGHT_2  = 2;
+    public static final int PORT_ENCODER_LEFT_1   = 3;
+    public static final int PORT_ENCODER_LEFT_2   = 4;
+    public static final int PORT_SENSOR_BALL_IR   = 5;
+    public static final int PORT_ENCODER_WINCH_1  = 6;
+    public static final int PORT_ENCODER_WINCH_2  = 7;
+    public static final int PORT_LED_RING         = 8;
     
     // Analog ports
-    public static final int PORT_SENSOR_GYRO          = 1;
-    public static final int PORT_SENSOR_STRINGPOT     = 2;
-    public static final int PORT_SENSOR_POTENTIOMETER = 3;
+    public static final int PORT_SENSOR_GYRO        = 1;
+    public static final int PORT_SENSOR_STRINGPOT   = 2;
+    public static final int PORT_SENSOR_MAG_ENCODER = 3;
     
     // I2C on the Digital Sidecar
     public static final int MODULE_SENSOR_ACCELEROMETER = 1;

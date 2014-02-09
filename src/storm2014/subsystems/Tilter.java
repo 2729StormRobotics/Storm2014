@@ -16,7 +16,7 @@ public class Tilter extends Subsystem {
     private final StringPot _stringpot = new StringPot(RobotMap.PORT_SENSOR_STRINGPOT);
     private final Talon _tiltMotor = new Talon(RobotMap.PORT_MOTOR_TILTER);
     private final boolean _topLimitOnState = true;
-    private final DigitalInput _topLimitSwitch = new DigitalInput(RobotMap.PORT_LIMIT_TILTER_TOP);
+//    private final DigitalInput _topLimitSwitch = new DigitalInput(RobotMap.PORT_LIMIT_TILTER_TOP);
     private Trigger _topLimitTrigger = new Trigger(){
                                            public boolean get(){
                                                return isTopLimitTriggered();
@@ -34,7 +34,7 @@ public class Tilter extends Subsystem {
     }
     
     public boolean isTopLimitTriggered() {
-        return _stringpot.get() > StringPot.VAL_MAX_SAFE || _topLimitSwitch.get() == _topLimitOnState;
+        return _stringpot.get() > StringPot.VAL_MAX_SAFE;// || _topLimitSwitch.get() == _topLimitOnState;
     }
     
     public double getAngle(){

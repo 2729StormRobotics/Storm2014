@@ -12,7 +12,7 @@ import storm2014.commands.PreLaunch;
 
 public class Catapult extends Subsystem {
     private final Talon    _winch         = new Talon(RobotMap.PORT_MOTOR_WINCH);
-    private final Encoder  _winchEncoder  = new Encoder(RobotMap.PORT_ENCODER_PULLBACKENCODER_1,RobotMap.PORT_ENCODER_PULLBACKENCODER_2);
+    private final Encoder  _winchEncoder  = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
     private final Solenoid _winchShift    = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);
     private final Solenoid _latch         = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
     private final Servo    _ratchetEngage = new Servo(RobotMap.PORT_SERVO);
