@@ -45,8 +45,6 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser = new SendableChooser();
     Command autonomouse;
     
-    AnalogChannel magEnc = new AnalogChannel(4);
-    
     private void sendSensorData() {
          
     }
@@ -101,7 +99,6 @@ public class Robot extends IterativeRobot {
         }.start();
         leds.initTable(NetworkTable.getTable("SmartDashboard"));
         ledring.initTable(NetworkTable.getTable("SmartDashboard"));
-        LiveWindow.addSensor("Random", "Magnetic Encoder", magEnc);
     }
     
     /** Called at the start of autonomous mode. */
