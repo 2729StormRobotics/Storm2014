@@ -1,8 +1,8 @@
 package storm2014.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import storm2014.commands.ChangeArmPosition;
 import storm2014.commands.DriveForward;
+import storm2014.commands.SetArmPosition;
 import storm2014.commands.SpinRoller;
 
 public class GrabBall extends CommandGroup {
