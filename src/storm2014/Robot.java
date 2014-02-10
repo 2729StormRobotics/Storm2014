@@ -1,7 +1,5 @@
 package storm2014;
 
-
-import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DriverStation;
 
 import storm2014.subsystems.DriveTrain;
@@ -85,6 +83,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Latch", new SetLatched(true));
         SmartDashboard.putData("Unlatch", new SetLatched(false));
         SmartDashboard.putData("Spin Roller In", new SpinRoller(1));
+        SmartDashboard.putData("Stop Roller", new SpinRoller(0));
+        SmartDashboard.putData("Spin Roller Out", new SpinRoller(-1));
         
         // Send sensor info to the SmartDashboard periodically
         new Command("Sensor feedback") {
