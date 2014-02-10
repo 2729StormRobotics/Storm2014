@@ -1,20 +1,23 @@
 package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
-import storm2014.subsystems.LEDStrip;
+import storm2014.Robot;
+import storm2014.subsystems.Catapult;
+//import storm2014.subsystems.LEDStrip;
 
 //Not Tested
 public class PreLaunch extends CommandGroup {
-    public PreLaunch(){
-
-        //wait until arm is in place needs a sensor
-        addSequential(new WaitCommand(10));
-        addSequential(new SetLEDMode(LEDStrip.StormSpiritMode));
+    public PreLaunch() {
+        // Wait for catapult to return
+        addSequential(new DoNothing() {
+            protected boolean isFinished() {
+                return Robot.catapult.getPivotAngle() < Catapult.BASE_ANGLE;
+            }
+        });
+//        addSequential(new SetLEDMode(LEDStrip.StormSpiritMode));
         addSequential(new SetLatched(true));
-        addSequential(new SetEngagedWinch(true));
         addSequential(new SetEngagedRatchet(true));
+        addSequential(new SetWinchEngaged(true));
         addSequential(new PullBack(100));
-        
     }
 }

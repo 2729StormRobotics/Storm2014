@@ -4,10 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import storm2014.commands.AutoAlign;
-import storm2014.commands.SetEngagedRatchet;
-import storm2014.commands.SpinRollerIn;
 import storm2014.commands.SetLEDMode;
-
+import storm2014.commands.SpinRoller;
 
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
 public class OI {
@@ -22,8 +20,10 @@ public class OI {
     private Button autoAlign = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_AUTOALIGN);
     
     public OI() {
-        spinIn.toggleWhenPressed(new SpinRollerIn());
+
         autoAlign.whenPressed(new AutoAlign());
+        spinIn.whenPressed(new SpinRoller(1));
+        spinIn.whenReleased(new SpinRoller(0));
     }
     
     // When a joystick is in its zero position, it will not necessarily read

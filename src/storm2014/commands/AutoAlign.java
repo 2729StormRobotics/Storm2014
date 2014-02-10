@@ -25,8 +25,9 @@ public class AutoAlign extends Command{
 
     protected void execute() {
         _distance = VisionSystem.getTargetDistance();
-       //  _angle = sTODO waiting for lookup on joes table.
-       // Robot.tilter waiting for convert to angle to be done.
+        _curAngle = Robot.tilter.getAngle();
+       //  _angle = TODO waiting for lookup on joes table based on distance.
+       // Robot.tilter waiting for convert angle to raw value.
     }
 
     protected boolean isFinished() {

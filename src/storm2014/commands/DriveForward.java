@@ -11,7 +11,6 @@ public class DriveForward extends Command {
         requires(Robot.driveTrain);
         _speed = speed;
         _distance = distance;
-
     }
 
     protected void initialize() {

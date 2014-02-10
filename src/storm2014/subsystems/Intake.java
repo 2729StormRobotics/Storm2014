@@ -11,7 +11,7 @@ import storm2014.utilities.HallEffectSpeedSensor;
 public final class Intake extends Subsystem {
     private final Talon                 _motor       = new Talon(RobotMap.PORT_MOTOR_ROLLER);
     private final DigitalInput          _ir          = new DigitalInput(RobotMap.PORT_SENSOR_BALL_IR);
-    private final HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
+//    private final HallEffectSpeedSensor _speedSensor = new HallEffectSpeedSensor(RobotMap.PORT_SENSOR_HALL_EFFECT_ROLLER);
     private final DoubleSolenoid        _solBot      = new DoubleSolenoid(RobotMap.PORT_SOLENOID_INTAKE_BOTTOM_OUT,
                                                                           RobotMap.PORT_SOLENOID_INTAKE_BOTTOM_IN);
     private final DoubleSolenoid        _solTop      = new DoubleSolenoid(RobotMap.PORT_SOLENOID_INTAKE_TOP_OUT,
@@ -24,9 +24,9 @@ public final class Intake extends Subsystem {
 
     protected void initDefaultCommand() {}
 
-    public double getRollerSpeed() {
-        return _speedSensor.pidGet();
-    }
+//    public double getRollerSpeed() {
+//        return _speedSensor.pidGet();
+//    }
 
     public void setRollerRaw(double output) {
         _motor.set(output);

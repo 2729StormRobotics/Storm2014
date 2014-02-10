@@ -77,7 +77,7 @@ public class DriveTrain extends Subsystem {
         _gyro.reset();
         clearGyro();
     }
-    /** Makes gyro readings  */
+    /** Makes gyro readings relative to current */
     public void clearGyro(){
         _gyroOffset = _gyro.getAngle();
     }
