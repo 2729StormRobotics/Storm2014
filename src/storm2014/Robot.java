@@ -1,5 +1,6 @@
 package storm2014;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 
 import storm2014.subsystems.DriveTrain;
@@ -38,7 +39,7 @@ public class Robot extends IterativeRobot {
     public static Tilter         tilter;
     public static LEDRing        ledring;
     public static StaticLEDStrip staticleds;
-    
+    Compressor compressor;
     Command teleop;
     String[] autonomiceNames;
     Command[] autonomice;
@@ -58,6 +59,8 @@ public class Robot extends IterativeRobot {
         tilter     = new Tilter();
         ledring    = new LEDRing();
         staticleds = new StaticLEDStrip();
+        compressor = new Compressor(RobotMap.PORT_SWITCH_COMPRESSO, RobotMap.PORT_RELAY_COMPRESSOR);
+        compressor.start();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         
@@ -85,6 +88,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Spin Roller In", new SpinRoller(1));
         SmartDashboard.putData("Stop Roller", new SpinRoller(0));
         SmartDashboard.putData("Spin Roller Out", new SpinRoller(-1));
+        
         
         // Send sensor info to the SmartDashboard periodically
         new Command("Sensor feedback") {
