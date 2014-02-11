@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
 import storm2014.utilities.HallEffectSpeedSensor;
 
@@ -20,6 +21,10 @@ public final class Intake extends Subsystem {
 
     public Intake(int mode) {
         setMode(mode);
+        LiveWindow.addSensor("Intake", "Ball Detector", _ir);
+        LiveWindow.addActuator("Intake", "Arm Bottom", _solBot);
+        LiveWindow.addActuator("Intake", "Arm Top", _solTop);
+        LiveWindow.addActuator("Intake", "Motor", _motor);
     }
 
     protected void initDefaultCommand() {}
