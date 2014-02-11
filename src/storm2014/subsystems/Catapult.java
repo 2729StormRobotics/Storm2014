@@ -33,7 +33,7 @@ public class Catapult extends Subsystem {
     }
     
     protected void initDefaultCommand() {
-        setDefaultCommand(new PreLaunch());
+//        setDefaultCommand(new PreLaunch());
     }
     
     public void setWinchPower(double winchRawVal){
