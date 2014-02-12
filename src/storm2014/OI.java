@@ -12,7 +12,7 @@ import storm2014.commands.SpinRoller;
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
 public class OI {
     private final Joystick driveJoystick = new Joystick(RobotMap.PORT_JOYSTICK_DRIVE),
-//                           shootJoystick = new Joystick(RobotMap.PORT_JOYSTICK_SHOOT),
+                           shootJoystick = new Joystick(RobotMap.PORT_JOYSTICK_SHOOT),
             debugJoystick = new Joystick(RobotMap.PORT_JOYSTICK_DEBUG);
     
     private final Button slowModeButton      = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SLOW);
@@ -45,6 +45,11 @@ public class OI {
     
     public double getRightDrive() {
         return _zeroDeadzone(-driveJoystick.getRawAxis(RobotMap.JOYDRIVE_AXIS_DRIVE_RIGHT),0.15)*(slowModeButton.get() ? 0.7 : 1);
+    }
+    
+    
+    public double getTension() {
+        return _zeroDeadzone(-shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_TENSION),0.15);
     }
 }
 

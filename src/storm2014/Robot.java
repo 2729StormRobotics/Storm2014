@@ -67,6 +67,24 @@ public class Robot extends IterativeRobot {
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         
+        new Command() {
+
+            protected void initialize() {
+            }
+
+            protected void execute() {
+                catapult.setWinchPower(oi.getTension());
+            }
+
+            protected boolean isFinished() {
+                return false;
+            }
+            protected void end() {
+                catapult.setWinchPower(0);
+            }
+            protected void interrupted() {}
+        }.start();
+        
         System.out.println("Got to stuff!");
         
         // The names, and corresponding Commands of our autonomous modes

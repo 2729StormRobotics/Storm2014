@@ -11,10 +11,12 @@ public class RobotMap {
     public static final int JOYDRIVE_BUTTON_SLOW    = 5;
     public static final int JOYDRIVE_BUTTON_SPINUP  = 3;
     public static final int JOYDRIVE_BUTTON_AUTOALIGN = 6;
+    
     public static final int JOYSHOOT_BUTTON_SPIN_IN = 9;
     
     public static final int JOYDRIVE_AXIS_DRIVE_LEFT  = 2;
     public static final int JOYDRIVE_AXIS_DRIVE_RIGHT = 4;
+    public static final int JOYSHOOT_AXIS_TENSION     = 2;
     
     // PWM Ports
     public static final int PORT_MOTOR_DRIVE_LEFT     = 2;
