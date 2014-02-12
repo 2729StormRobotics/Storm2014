@@ -49,6 +49,7 @@ public class Robot extends IterativeRobot {
     private void sendSensorData() {
          SmartDashboard.putNumber("String Pot Voltage",1.0/tilter.getStringPotRaw());
          SmartDashboard.putNumber("Piston mode", intake.getMode());
+         SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
     }
     
     /** Called on robot boot. */
@@ -66,7 +67,7 @@ public class Robot extends IterativeRobot {
         oi         = new OI();
         
         // The names, and corresponding Commands of our autonomous modes
-        autonomiceNames = new String[]{"Drive Forward","TurnHotTargetFireLeft","TurnHotTargetFireRight"};
+        autonomiceNames = new String[]{"Drive Forward","OneBallDynamic","OneBallDynamic"};
         autonomice = new Command[]{new DriveForward(0.6, 1000),new OneBallDynamic(false), new OneBallDynamic(true)};
         
         // Configure and send the SendableChooser, which allows autonomous modes
