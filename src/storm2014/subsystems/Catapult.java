@@ -43,7 +43,7 @@ public class Catapult extends Subsystem {
     }
     
     public void setWinchPower(double winchRawVal){
-        _winch.set(Math.abs(winchRawVal));
+        _winch.set(-winchRawVal);
     }
     
     public void resetWinchEncoder(){
