@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class TurnAndShoot extends CommandGroup {
     public TurnAndShoot(double power, double angle) {
         addSequential(new Turn(angle, power));
-        addSequential(new Launch());
+       // addSequential(new Launch());
         addSequential(new Turn(-angle, power));
     }
 }
