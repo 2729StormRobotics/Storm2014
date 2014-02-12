@@ -27,10 +27,13 @@ public class LEDRing extends Subsystem implements NamedSendable {
         out = new DigitalOutput(RobotMap.PORT_LED_RING);
         out.setPWMRate(FREQUENCY);
         out.enablePWM(50.0 / 100);
+        System.out.println("Enabled PWM on port " + RobotMap.PORT_LED_RING + " and set it to rate " + FREQUENCY + " with an initial duty cycle of 50%");
     }
     
     public void setPercentage(double percent){
         out.updateDutyCycle(percent / 100.0);
+        System.out.println("Set duty cycle to " + percent + "%.");
+        
     }
     
     protected void initDefaultCommand() {}
