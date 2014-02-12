@@ -4,9 +4,11 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
+import storm2014.commands.DoNothing;
 import storm2014.commands.PreLaunch;
 import storm2014.utilities.MagneticEncoder;
 
@@ -19,6 +21,7 @@ public class Catapult extends Subsystem {
     private final Solenoid        _latch        = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
     private final Servo           _ratchet      = new Servo(RobotMap.PORT_SERVO);
     private final MagneticEncoder _magEnc       = new MagneticEncoder(RobotMap.PORT_SENSOR_MAG_ENCODER);
+    private boolean preLaunchFinished;
     private static final double ANGLE_RATCHET_ENGAGED    = 170;
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
     
@@ -33,7 +36,10 @@ public class Catapult extends Subsystem {
     }
     
     protected void initDefaultCommand() {
-//        setDefaultCommand(new PreLaunch());
+       CommandGroup wait = new CommandGroup("wait");
+       wait.addSequential(new PreLaunch());
+       wait.addSequential(new DoNothing());
+        setDefaultCommand(wait);
     }
     
     public void setWinchPower(double winchRawVal){
@@ -75,4 +81,13 @@ public class Catapult extends Subsystem {
     public double getPivotAngle() {
         return _magEnc.getAngle();
     }
+    
+    public void setFinished(boolean finished){
+       preLaunchFinished = finished;
+    }
+    
+    public boolean isFinished(){
+       return preLaunchFinished;
+    }
+    
 }

@@ -20,4 +20,7 @@ public class PreLaunch extends CommandGroup {
         addSequential(new SetWinchEngaged(true));
         addSequential(new PullBack(100));
     }
+    protected boolean isFinished() {
+        return Robot.catapult.isFinished();
+    }   
 }
