@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
     
     private void sendSensorData() {
          SmartDashboard.putNumber("String Pot Voltage",1.0/tilter.getStringPotRaw());
+         SmartDashboard.putNumber("Piston mode", intake.getMode());
     }
     
     /** Called on robot boot. */
@@ -55,7 +56,7 @@ public class Robot extends IterativeRobot {
         catapult   = new Catapult();
         driveTrain = new DriveTrain();
         leds       = new LEDStrip();
-        intake     = new Intake(0);
+        intake     = new Intake();
         tilter     = new Tilter();
         ledring    = new LEDRing();
         staticleds = new StaticLEDStrip();
