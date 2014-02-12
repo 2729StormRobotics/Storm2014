@@ -30,8 +30,8 @@ public class RobotMap {
     public static final int PORT_ENCODER_LEFT_1   =  3;
     public static final int PORT_ENCODER_LEFT_2   =  4;
     public static final int PORT_SENSOR_BALL_IR   =  5;
-    public static final int PORT_ENCODER_WINCH_1  =  6;
-    public static final int PORT_ENCODER_WINCH_2  =  7;
+    public static final int PORT_ENCODER_WINCH_1  =  7;
+    public static final int PORT_ENCODER_WINCH_2  =  6;
     public static final int PORT_LED_RING         =  8;
     public static final int PORT_STATIC_LED_GREEN =  9;
     public static final int PORT_STATIC_LED_RED   = 10;
