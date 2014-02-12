@@ -16,7 +16,7 @@ public class ChangeArmPosition extends Command {
        int nextMode = Robot.intake.getMode() + _increment;
        if(nextMode >= 3) {
            nextMode = 2;
-       } else {
+       } else if(nextMode < 0) {
            nextMode = 0;
        }
        Robot.intake.setMode(nextMode);

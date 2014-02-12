@@ -28,6 +28,7 @@ public class DriveTrain extends Subsystem {
     public Object tankDrive;
     
     DoubleSolenoid _shifter  = new DoubleSolenoid(RobotMap.PORT_SOLENOID_SHIFT_HIGH,RobotMap.PORT_SOLENOID_SHIFT_LOW);
+    private boolean _isHighGear = false;
     
     public DriveTrain() {
         _leftEncoder.start();
@@ -101,7 +102,12 @@ public class DriveTrain extends Subsystem {
         return _right.get();
     }
     public void setHighGear(boolean enabled) {
+        _isHighGear = enabled;
         _shifter.set(enabled ? DoubleSolenoid.Value.kForward :
                                DoubleSolenoid.Value.kReverse);
+    }
+
+    public boolean isHighgear() {
+        return _isHighGear;
     }
 }

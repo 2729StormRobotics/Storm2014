@@ -19,8 +19,8 @@ public final class Intake extends Subsystem {
                                                                           RobotMap.PORT_SOLENOID_INTAKE_TOP_IN);
     private int _mode;
 
-    public Intake(int mode) {
-        setMode(mode);
+    public Intake() {
+        setMode(0);
         LiveWindow.addSensor("Intake", "Ball Detector", _ir);
         LiveWindow.addActuator("Intake", "Arm Bottom", _solBot);
         LiveWindow.addActuator("Intake", "Arm Top", _solTop);
@@ -38,10 +38,10 @@ public final class Intake extends Subsystem {
     }
     
     public void spinIn() {
-        setRollerRaw(1);
+        setRollerRaw(-1);
     }
     public void spinOut() {
-        setRollerRaw(-1);
+        setRollerRaw(1);
     }
     public void stop() {
         setRollerRaw(0);
