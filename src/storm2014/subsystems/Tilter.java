@@ -13,7 +13,7 @@ import storm2014.utilities.StringPot;
 
 //TODO waiting for joes array value list.
 public class Tilter extends Subsystem {
-    private static double STRINGPOT_MAX_SAFE = 5;
+    private static final double STRINGPOT_MAX_SAFE = 2.85;
     
     private final StringPot _stringpot = new StringPot(RobotMap.PORT_SENSOR_STRINGPOT);
     private final Talon _tiltMotor = new Talon(RobotMap.PORT_MOTOR_TILTER);
@@ -25,10 +25,10 @@ public class Tilter extends Subsystem {
                               }
                           },
                           _bottomLimitTrigger = null;
-//    private final LimitSwitchedMotor _limitedMotor = new LimitSwitchedMotor(
-//                                                            _tiltMotor,
-//                                                            _bottomLimitTrigger, true,
-//                                                            _topLimitTrigger, _topLimitOnState);
+    private final LimitSwitchedMotor _limitedMotor = new LimitSwitchedMotor(
+                                                            _tiltMotor,
+                                                            _bottomLimitTrigger, true,
+                                                            _topLimitTrigger, _topLimitOnState);
 
     public Tilter() {
         LiveWindow.addSensor("Tilter","String Pot",_stringpot);
@@ -38,7 +38,7 @@ public class Tilter extends Subsystem {
     protected void initDefaultCommand() {}
 
     public void setRawVal(double speed) {
-//        _limitedMotor.set(speed);
+        _limitedMotor.set(speed);
     }
 
     public boolean isTopLimitTriggered() {

@@ -50,6 +50,7 @@ public class Robot extends IterativeRobot {
          SmartDashboard.putNumber("String Pot Voltage",1.0/tilter.getStringPotRaw());
          SmartDashboard.putNumber("Piston mode", intake.getMode());
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
+         SmartDashboard.putNumber("Catapult Angle", catapult.getPivotAngle());
     }
     
     /** Called on robot boot. */
@@ -65,6 +66,8 @@ public class Robot extends IterativeRobot {
         compressor.start();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
+        
+        System.out.println("Got to stuff!");
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"Drive Forward","OneBallDynamic","OneBallDynamic"};
@@ -175,10 +178,24 @@ public class Robot extends IterativeRobot {
         DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
         if (color == DriverStation.Alliance.kBlue){
             SmartDashboard.putBoolean("Blue Alliance?", true);
-        }
-        else{
+            
+            staticleds.setRed((byte) 0);
+            staticleds.setGreen((byte) 0);
+            staticleds.setBlue((byte) 255);
+        } else if (color == DriverStation.Alliance.kRed){
             SmartDashboard.putBoolean("Blue Alliance?", false);
+            
+            staticleds.setRed((byte) 255);
+            staticleds.setGreen((byte) 0);
+            staticleds.setBlue((byte) 0);
+        } else {
+            SmartDashboard.putBoolean("Blue Alliance?", false);
+            
+            staticleds.setRed((byte) 255);
+            staticleds.setGreen((byte) 0);
+            staticleds.setBlue((byte) 255);
         }
+        
         
         if(autonomouse != null) {
             autonomouse.cancel();
@@ -188,6 +205,8 @@ public class Robot extends IterativeRobot {
         }
         
         leds.setMode(LEDStrip.DisabledMode);
+        
+        
     }
     /**
      * Called during disabled whenever a new driver station packet arrives
