@@ -9,7 +9,7 @@ import storm2014.subsystems.VisionSystem;
 
 public class OneBallDynamic extends CommandGroup {
     private static final double DISTANCE = 2000,
-                                DRIVE_SPEED = 0.6;   
+                                DRIVE_SPEED = 0.5;   
     public OneBallDynamic(boolean isRight) { 
         addSequential(new Conditional(new TurnAndShootDynamic(isRight,DRIVE_SPEED),new Launch()) {
             protected boolean condition() {
