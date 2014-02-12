@@ -17,7 +17,7 @@ public abstract class Launch extends CommandGroup {
         addSequential(new SetLatched(false));
         addSequential(new WaitForFollowThrough());
         addSequential(new SetEngagedRatchet(false));
-        addSequential(new PullBack(100));
+        //addSequential(new PullBack(100));
     }    
     
     protected abstract boolean thisIsIntentional();
