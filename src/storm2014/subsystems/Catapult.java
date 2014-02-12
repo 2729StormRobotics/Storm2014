@@ -1,5 +1,6 @@
 package storm2014.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -17,6 +18,8 @@ public class Catapult extends Subsystem {
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder         _winchEncoder = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
+//    private final DigitalInput    _winchOne     = new DigitalInput(RobotMap.PORT_ENCODER_WINCH_1),
+//                                  _winchTwo     = new DigitalInput(RobotMap.PORT_ENCODER_WINCH_2);
     private final Solenoid        _winchShift   = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);
     private final Solenoid        _latch        = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
     private final Servo           _ratchet      = new Servo(RobotMap.PORT_SERVO);
@@ -26,13 +29,15 @@ public class Catapult extends Subsystem {
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
     
     public Catapult(){
-        _winchEncoder.start();
+//        _winchEncoder.start();
         LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
         LiveWindow.addActuator("Catapult", "Ratchet", _ratchet);
         LiveWindow.addActuator("Catapult", "Winch", _winch);
         LiveWindow.addActuator("Catapult", "Winch shifter", _winchShift);
         LiveWindow.addActuator("Catapult", "Latch", _latch);
         LiveWindow.addActuator("Catapult", "Magnetic Encoder", _magEnc);
+//        LiveWindow.addSensor("Catapult", "Winch one", _winchOne);
+//        LiveWindow.addSensor("Catapult", "Winch two", _winchTwo);
     }
     
     protected void initDefaultCommand() {
@@ -47,11 +52,11 @@ public class Catapult extends Subsystem {
     }
     
     public void resetWinchEncoder(){
-        _winchEncoder.reset();
+//        _winchEncoder.reset();
     }
     
     public double getWinchDistance(){
-        return _winchEncoder.get();
+        return 0;//_winchEncoder.get();
     }
     
     public void disengageWinch(){

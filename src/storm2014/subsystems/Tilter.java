@@ -25,10 +25,10 @@ public class Tilter extends Subsystem {
                               }
                           },
                           _bottomLimitTrigger = null;
-    private final LimitSwitchedMotor _limitedMotor = new LimitSwitchedMotor(
-                                                            _tiltMotor,
-                                                            _bottomLimitTrigger, true,
-                                                            _topLimitTrigger, _topLimitOnState);
+//    private final LimitSwitchedMotor _limitedMotor = new LimitSwitchedMotor(
+//                                                            _tiltMotor,
+//                                                            _bottomLimitTrigger, true,
+//                                                            _topLimitTrigger, _topLimitOnState);
 
     public Tilter() {
         LiveWindow.addSensor("Tilter","String Pot",_stringpot);
@@ -38,7 +38,7 @@ public class Tilter extends Subsystem {
     protected void initDefaultCommand() {}
 
     public void setRawVal(double speed) {
-        _limitedMotor.set(speed);
+//        _limitedMotor.set(speed);
     }
 
     public boolean isTopLimitTriggered() {

@@ -33,7 +33,8 @@ public class LEDStrip extends Subsystem implements NamedSendable {
 
     private static final String _serverIP   = "socket://10.27.29.100:1025";
 
-    private static int _currentMode = 0;
+    private static int  _currentMode = 0;
+    private static long _readTimeout = 5000;
 
     private ITable _table;
     
@@ -80,8 +81,9 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                         }
                     }
                     
+                    long timeoutTime = System.currentTimeMillis() + _readTimeout;
                     int newMode = -1;
-                    while(newMode == -1){
+                    while(newMode == -1 && System.currentTimeMillis() < timeoutTime){
                         while (_instream.available() > 0){
                             byte bytes[] = new byte[_instream.available()];
                             int bytesRead = _instream.read(bytes);
