@@ -15,7 +15,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
 
     public static final int DisabledMode          =  0;
     public static final int MarqueeMode           =  1;
-    public static final int ColorCycleMode        =  2;
+    public static final int TeleopMode            =  2;
     public static final int PewMode               =  3;
     public static final int RainbowDancePartyMode =  4;
     public static final int StormSpiritMode       =  5;
@@ -64,7 +64,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                         _outstream.write(green);
                         _outstream.write(blue);
                     }
-                    else if (mode == DisabledMode){
+                    else if (mode == TeleopMode){
                         DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
                         if (color == DriverStation.Alliance.kBlue){
                             _outstream.write(_allianceBlue);

@@ -140,7 +140,7 @@ public class Robot extends IterativeRobot {
         if (teleop != null) {
             teleop.start();
         }
-        leds.setMode(LEDStrip.ColorCycleMode);
+        leds.setMode(LEDStrip.TeleopMode);
     }
     
     /**
