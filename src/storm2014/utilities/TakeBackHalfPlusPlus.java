@@ -102,7 +102,6 @@ public class TakeBackHalfPlusPlus implements LiveWindowSendable {
         _integral = 0;
         _pidOutput.pidWrite(0);
         _enabled = false;
-        Robot.leds.setMode(LEDStrip.ColorCycleMode);
         
         if (table != null) {
             table.putBoolean("enabled", false);
