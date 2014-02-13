@@ -4,10 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 import storm2014.subsystems.VisionSystem;
 
-/**
- *
- * @author garrett
- */
 //TODO
 public class AutoAlign extends Command{
     

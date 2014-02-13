@@ -8,15 +8,18 @@ public class RobotMap {
                             PORT_JOYSTICK_SHOOT = 2,
                             PORT_JOYSTICK_DEBUG = 3;
     
-    public static final int JOYDRIVE_BUTTON_SLOW    = 5;
-    public static final int JOYDRIVE_BUTTON_SPINUP  = 3;
-    public static final int JOYDRIVE_BUTTON_AUTOALIGN = 6;
-    
-    public static final int JOYSHOOT_BUTTON_SPIN_IN = 9;
-    
     public static final int JOYDRIVE_AXIS_DRIVE_LEFT  = 2;
     public static final int JOYDRIVE_AXIS_DRIVE_RIGHT = 4;
     public static final int JOYSHOOT_AXIS_TENSION     = 2;
+    public static final int JOYSHOOT_AXIS_TILT        = 4;
+    
+    public static final int JOYDRIVE_BUTTON_SHIFT_HIGH = 5;
+    public static final int JOYDRIVE_BUTTON_SHIFT_LOW  = 7;
+    
+    public static final int JOYSHOOT_BUTTON_SPIN_IN  = 5;
+    public static final int JOYSHOOT_BUTTON_SPIN_OUT = 7;
+    public static final int JOYSHOOT_BUTTON_ARMS_OUT = 4;
+    public static final int JOYSHOOT_BUTTON_ARMS_IN  = 2;
     
     // PWM Ports
     public static final int PORT_MOTOR_DRIVE_LEFT     = 2;

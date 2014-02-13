@@ -15,31 +15,28 @@ import storm2014.commands.SpinRoller;
 public class OI {
     private final Joystick driveJoystick = new Joystick(RobotMap.PORT_JOYSTICK_DRIVE),
                            shootJoystick = new Joystick(RobotMap.PORT_JOYSTICK_SHOOT),
-            debugJoystick = new Joystick(RobotMap.PORT_JOYSTICK_DEBUG);
+                           debugJoystick = new Joystick(RobotMap.PORT_JOYSTICK_DEBUG);
     
-    private final Button slowModeButton      = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SLOW);
-    
-    private final Button spinIn   = new JoystickButton(shootJoystick, 5),
-                         spinOut  = new JoystickButton(shootJoystick, 7),
-                         shift    = new JoystickButton(driveJoystick, 5),
-                         armsOut  = new JoystickButton(shootJoystick, 4),
-                         armsIn   = new JoystickButton(shootJoystick, 2),
-                         prefire  = new JoystickButton(shootJoystick, 8),
-                         fire     = new JoystickButton(shootJoystick, 6);
-    
-    private Button autoAlign = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_AUTOALIGN);
+    private final Button shiftHigh = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_HIGH),
+                         shiftLow  = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_LOW),
+                         spinIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN),
+                         spinOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_OUT),
+                         armsOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_OUT),
+                         armsIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_IN),
+                         prefire   = new JoystickButton(shootJoystick, 8),
+                         fire      = new JoystickButton(shootJoystick, 6);
     
     public OI() {
-        autoAlign.whenPressed(new AutoAlign());
-        spinIn.whenPressed(new SpinRoller(1));
-        spinIn.whenReleased(new SpinRoller(0));
-        spinOut.whenPressed(new SpinRoller(-1));
-        spinOut.whenReleased(new SpinRoller(0));
-        armsIn.whenPressed(new ChangeArmPosition(-1));
-        armsOut.whenPressed(new ChangeArmPosition(1));
-        shift.whenPressed(new Shift());
-        prefire.whenPressed(new PreLaunch());
-        fire.whenPressed(new Launch() {
+        spinIn   .whenPressed (new SpinRoller(1));
+        spinIn   .whenReleased(new SpinRoller(0));
+        spinOut  .whenPressed (new SpinRoller(-1));
+        spinOut  .whenReleased(new SpinRoller(0));
+        armsIn   .whenPressed (new ChangeArmPosition(-1));
+        armsOut  .whenPressed (new ChangeArmPosition(1));
+        shiftHigh.whenPressed (new Shift(true));
+        shiftLow .whenPressed (new Shift(false));
+        prefire  .whenPressed (new PreLaunch());
+        fire     .whenPressed (new Launch() {
             protected boolean thisIsIntentional() {
                 return true;
             }
@@ -53,16 +50,20 @@ public class OI {
     }
     
     public double getLeftDrive() {
-        return _zeroDeadzone(-driveJoystick.getRawAxis(RobotMap.JOYDRIVE_AXIS_DRIVE_LEFT),0.15)*(slowModeButton.get() ? 0.7 : 1);
+        return _zeroDeadzone(-driveJoystick.getRawAxis(RobotMap.JOYDRIVE_AXIS_DRIVE_LEFT),0.15);
     }
     
     public double getRightDrive() {
-        return _zeroDeadzone(-driveJoystick.getRawAxis(RobotMap.JOYDRIVE_AXIS_DRIVE_RIGHT),0.15)*(slowModeButton.get() ? 0.7 : 1);
+        return _zeroDeadzone(-driveJoystick.getRawAxis(RobotMap.JOYDRIVE_AXIS_DRIVE_RIGHT),0.15);
     }
     
     
     public double getTension() {
         return _zeroDeadzone(-shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_TENSION),0.15);
+    }
+
+    public double getTilt() {
+        return _zeroDeadzone(-shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_TILT),0.15);
     }
 }
 

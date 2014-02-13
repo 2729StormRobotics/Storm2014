@@ -4,22 +4,21 @@ import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
 public class Shift extends Command {
-
+    private final boolean _high;
+    
+    public Shift(boolean high) {
+        _high = high;
+    }
+    
     protected void initialize() {
-        Robot.driveTrain.setHighGear(!Robot.driveTrain.isHighgear());
+        Robot.driveTrain.setHighGear(_high);
     }
 
-    protected void execute() {
-    }
-
+    protected void execute() {}
     protected boolean isFinished() {
         return true;
     }
 
-    protected void end() {
-    }
-
-    protected void interrupted() {
-    }
-    
+    protected void end() {}
+    protected void interrupted() {}
 }
