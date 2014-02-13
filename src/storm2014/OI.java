@@ -3,11 +3,10 @@ package storm2014;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import storm2014.commands.AutoAlign;
+import edu.wpi.first.wpilibj.command.Command;
 import storm2014.commands.ChangeArmPosition;
 import storm2014.commands.Launch;
 import storm2014.commands.PreLaunch;
-import storm2014.commands.SetLEDMode;
 import storm2014.commands.Shift;
 import storm2014.commands.SpinRoller;
 
@@ -19,6 +18,8 @@ public class OI {
     
     private final Button shiftHigh = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_HIGH),
                          shiftLow  = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_LOW),
+                         reverse   = new JoystickButton(driveJoystick, 6),
+            
                          spinIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN),
                          spinOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_OUT),
                          armsOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_OUT),
@@ -27,14 +28,32 @@ public class OI {
                          fire      = new JoystickButton(shootJoystick, 6);
     
     public OI() {
+        shiftHigh.whenPressed (new Shift(true));
+        shiftLow .whenPressed (new Shift(false));
+        reverse  .whileHeld   (new Command() {
+            protected void initialize() {
+                Robot.driveTrain.setReverseDrive(true);
+            }
+
+            protected void execute() {}
+            protected boolean isFinished() {
+                return false;
+            }
+            protected void end() {
+                Robot.driveTrain.setReverseDrive(false);
+            }
+            protected void interrupted() {
+                end();
+            }
+        });
+        
         spinIn   .whenPressed (new SpinRoller(1));
         spinIn   .whenReleased(new SpinRoller(0));
         spinOut  .whenPressed (new SpinRoller(-1));
         spinOut  .whenReleased(new SpinRoller(0));
+        
         armsIn   .whenPressed (new ChangeArmPosition(-1));
         armsOut  .whenPressed (new ChangeArmPosition(1));
-        shiftHigh.whenPressed (new Shift(true));
-        shiftLow .whenPressed (new Shift(false));
         prefire  .whenPressed (new PreLaunch());
         fire     .whenPressed (new Launch() {
             protected boolean thisIsIntentional() {
