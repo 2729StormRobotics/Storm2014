@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import storm2014.commands.AutoAlign;
 import storm2014.commands.ChangeArmPosition;
+import storm2014.commands.Launch;
+import storm2014.commands.PreLaunch;
 import storm2014.commands.SetLEDMode;
 import storm2014.commands.Shift;
 import storm2014.commands.SpinRoller;
@@ -17,10 +19,13 @@ public class OI {
     
     private final Button slowModeButton      = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SLOW);
     
-    private final Button spinIn   = new JoystickButton(driveJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN),
-                         armsOut  = new JoystickButton(driveJoystick, 8),
-                         armsIn   = new JoystickButton(driveJoystick, 6),
-                         shift    = new JoystickButton(driveJoystick, 5);
+    private final Button spinIn   = new JoystickButton(shootJoystick, 5),
+                         spinOut  = new JoystickButton(shootJoystick, 7),
+                         shift    = new JoystickButton(driveJoystick, 5),
+                         armsOut  = new JoystickButton(shootJoystick, 4),
+                         armsIn   = new JoystickButton(shootJoystick, 2),
+                         prefire  = new JoystickButton(shootJoystick, 8),
+                         fire     = new JoystickButton(shootJoystick, 6);
     
     private Button autoAlign = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_AUTOALIGN);
     
@@ -28,9 +33,17 @@ public class OI {
         autoAlign.whenPressed(new AutoAlign());
         spinIn.whenPressed(new SpinRoller(1));
         spinIn.whenReleased(new SpinRoller(0));
+        spinOut.whenPressed(new SpinRoller(-1));
+        spinOut.whenReleased(new SpinRoller(0));
         armsIn.whenPressed(new ChangeArmPosition(-1));
         armsOut.whenPressed(new ChangeArmPosition(1));
         shift.whenPressed(new Shift());
+        prefire.whenPressed(new PreLaunch());
+        fire.whenPressed(new Launch() {
+            protected boolean thisIsIntentional() {
+                return true;
+            }
+        });
     }
     
     // When a joystick is in its zero position, it will not necessarily read

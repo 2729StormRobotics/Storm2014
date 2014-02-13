@@ -29,7 +29,7 @@ public class Catapult extends Subsystem {
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
     
     public Catapult(){
-//        _winchEncoder.start();
+        _winchEncoder.start();
         LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
         LiveWindow.addActuator("Catapult", "Ratchet", _ratchet);
         LiveWindow.addActuator("Catapult", "Winch", _winch);
@@ -44,7 +44,7 @@ public class Catapult extends Subsystem {
        CommandGroup wait = new CommandGroup("wait");
        wait.addSequential(new PreLaunch());
        wait.addSequential(new DoNothing());
-        setDefaultCommand(wait);
+//        setDefaultCommand(wait);
     }
     
     public void setWinchPower(double winchRawVal){
@@ -68,11 +68,11 @@ public class Catapult extends Subsystem {
     }
     
     public void latch(){
-        _latch.set(true);
+        _latch.set(false);
     }
     
     public void unlatch(){
-        _latch.set(false);
+        _latch.set(true);
     }
     
     public void setRatchetLatched(){

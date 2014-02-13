@@ -67,8 +67,7 @@ public class Robot extends IterativeRobot {
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         
-        new Command() {
-
+        new Command("Winch control") {
             protected void initialize() {
             }
 
@@ -197,21 +196,21 @@ public class Robot extends IterativeRobot {
         if (color == DriverStation.Alliance.kBlue){
             SmartDashboard.putBoolean("Blue Alliance?", true);
             
-            staticleds.setRed((byte) 0);
-            staticleds.setGreen((byte) 0);
-            staticleds.setBlue((byte) 255);
+            staticleds.setRed((short) 0);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 255);
         } else if (color == DriverStation.Alliance.kRed){
             SmartDashboard.putBoolean("Blue Alliance?", false);
             
-            staticleds.setRed((byte) 255);
-            staticleds.setGreen((byte) 0);
-            staticleds.setBlue((byte) 0);
+            staticleds.setRed((short) 255);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 0);
         } else {
             SmartDashboard.putBoolean("Blue Alliance?", false);
             
-            staticleds.setRed((byte) 255);
-            staticleds.setGreen((byte) 0);
-            staticleds.setBlue((byte) 255);
+            staticleds.setRed((short) 255);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 255);
         }
         
         
