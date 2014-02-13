@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import storm2014.Robot;
 import storm2014.commands.LaunchWhenReady;
-import storm2014.commands.RuntimeCommand;
+import storm2014.commands.control.RuntimeCommand;
 import storm2014.commands.Turn;
 import storm2014.commands.TurnToTarget;
 

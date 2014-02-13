@@ -1,4 +1,4 @@
-package storm2014.commands;
+package storm2014.commands.control;
 
 import edu.wpi.first.wpilibj.command.Command;
 
