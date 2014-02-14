@@ -232,5 +232,26 @@ public class Robot extends IterativeRobot {
      */
     public void disabledPeriodic() {
         sendSensorData();
+        
+        DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
+        if (color == DriverStation.Alliance.kBlue){
+            SmartDashboard.putBoolean("Blue Alliance?", true);
+            
+            staticleds.setRed((short) 0);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 255);
+        } else if (color == DriverStation.Alliance.kRed){
+            SmartDashboard.putBoolean("Blue Alliance?", false);
+            
+            staticleds.setRed((short) 255);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 0);
+        } else {
+            SmartDashboard.putBoolean("Blue Alliance?", false);
+            
+            staticleds.setRed((short) 255);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 255);
+        }
     }
 }
