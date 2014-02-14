@@ -13,12 +13,11 @@ public class PreLaunch extends CommandGroup {
         addSequential(new SetLatched(false));
         addSequential(new SetEngagedRatchet(false));
         addSequential(new SetWinchEngaged(true));
-        addSequential(new WaitCommand(2));
         // Wait for catapult to return
         addSequential(new Command() {
             protected void initialize() {}
             protected void execute() {
-                Robot.catapult.setWinchPower(-1);
+                Robot.catapult.setWinchPower(-0.5);
             }
             protected boolean isFinished() {
                 return Robot.catapult.getPivotAngle() <= Catapult.BASE_ANGLE;
@@ -26,6 +25,7 @@ public class PreLaunch extends CommandGroup {
 
             protected void end() {
                 Robot.catapult.setWinchPower(0);
+                Robot.catapult.resetWinchEncoder();
             }
 
             protected void interrupted() {
@@ -35,7 +35,17 @@ public class PreLaunch extends CommandGroup {
         addSequential(new SetLatched(true));
         addSequential(new SetEngagedRatchet(true));
         addSequential(new SetWinchEngaged(true));
-        Robot.catapult.setFinishedPreLaunch(true);
+        addSequential(new Command() {
+            protected void initialize() {
+                Robot.catapult.setFinishedPreLaunch(true);
+            }
+            protected void execute() {}
+            protected boolean isFinished() {
+                return true;
+            }
+            protected void end() {}
+            protected void interrupted() {}
+        });
 //        addSequential(new PullBack(100));
     }
 }

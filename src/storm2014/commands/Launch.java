@@ -1,5 +1,6 @@
 package storm2014.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.util.AllocationException;
 import storm2014.Robot;
@@ -13,6 +14,17 @@ public abstract class Launch extends CommandGroup {
         if(!thisIsIntentional()) {
             throw new AllocationException("Launch should only be run if you want to");
         }
+        addSequential(new Command() {
+            protected void initialize() {
+                Robot.catapult.setFinishedPreLaunch(false);
+            }
+            protected void execute() {}
+            protected boolean isFinished() {
+                return true;
+            }
+            protected void end() {}
+            protected void interrupted() {}
+        });
         addSequential(new SetLEDMode(LEDStrip.PileMode));
         addSequential(new SetArmPosition(2));
         addSequential(new SetWinchEngaged(false));
@@ -21,7 +33,6 @@ public abstract class Launch extends CommandGroup {
         addSequential(new WaitForFollowThrough());
         addSequential(new SetWinchEngaged(true));
         addSequential(new SetEngagedRatchet(false));
-        Robot.catapult.setFinishedPreLaunch(false);
         //addSequential(new PullBack(100));
         addSequential(new SetLEDMode(LEDStrip.TeleopMode));
     }    

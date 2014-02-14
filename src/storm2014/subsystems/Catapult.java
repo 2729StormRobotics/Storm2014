@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
 import storm2014.commands.control.DoNothing;
 import storm2014.commands.PreLaunch;
+import storm2014.utilities.Debouncer;
 import storm2014.utilities.MagneticEncoder;
 
 public class Catapult extends Subsystem {
     //Full Power is -650 on the encoder
+    public static final double WINCH_ENCODER_MAX = 600;
     public static final double BASE_ANGLE = 188;
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
@@ -26,7 +28,8 @@ public class Catapult extends Subsystem {
     private boolean preLaunchFinished;
     private static final double ANGLE_RATCHET_ENGAGED    = 170;
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
-    private boolean _rachetEngaged = false;
+    private boolean _ratchetEngaged = false;
+    private final Debouncer _ratchetSafe = new Debouncer(2);
     
     public Catapult(){
         _winchEncoder.start();
@@ -48,7 +51,10 @@ public class Catapult extends Subsystem {
     }
     
     public void setWinchPower(double winchRawVal){
-        if(_rachetEngaged && winchRawVal <= 0) {
+        if(!_ratchetSafe.check(!_ratchetEngaged) && winchRawVal <= 0) {
+            winchRawVal = 0;
+        }
+        if(getWinchDistance() > WINCH_ENCODER_MAX && winchRawVal > 0) {
             winchRawVal = 0;
         }
         winchRawVal = -winchRawVal;
@@ -80,12 +86,12 @@ public class Catapult extends Subsystem {
     }
     
     public void setRatchetLatched(){
-        _rachetEngaged = true;
+        _ratchetEngaged = true;
         _ratchet.setAngle(ANGLE_RATCHET_ENGAGED);
     }
     
     public void setRatchetUnlatched(){
-        _rachetEngaged = false;
+        _ratchetEngaged = false;
         _ratchet.setAngle(ANGLE_RATCHET_DISENGAGED);
     }
     

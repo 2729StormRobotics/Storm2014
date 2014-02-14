@@ -8,7 +8,7 @@ public class Debouncer {
     private long _prevTime = 0;
 
     public Debouncer(double timeDelay) {
-        _targetTime = (long)(timeDelay*100);
+        _targetTime = (long)(timeDelay*1000);
     }
     
     public boolean check(boolean val) {
