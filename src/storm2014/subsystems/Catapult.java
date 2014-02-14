@@ -1,5 +1,6 @@
 package storm2014.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -8,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
-import storm2014.commands.DoNothing;
+import storm2014.commands.control.DoNothing;
 import storm2014.commands.PreLaunch;
 import storm2014.utilities.MagneticEncoder;
 
@@ -18,6 +19,8 @@ public class Catapult extends Subsystem {
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder         _winchEncoder = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
+//    private final DigitalInput    _winchOne     = new DigitalInput(RobotMap.PORT_ENCODER_WINCH_1),
+//                                  _winchTwo     = new DigitalInput(RobotMap.PORT_ENCODER_WINCH_2);
     private final Solenoid        _winchShift   = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);
     private final Solenoid        _latch        = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
     private final Servo           _ratchet      = new Servo(RobotMap.PORT_SERVO);
@@ -34,13 +37,15 @@ public class Catapult extends Subsystem {
         LiveWindow.addActuator("Catapult", "Winch shifter", _winchShift);
         LiveWindow.addActuator("Catapult", "Latch", _latch);
         LiveWindow.addActuator("Catapult", "Magnetic Encoder", _magEnc);
+//        LiveWindow.addSensor("Catapult", "Winch one", _winchOne);
+//        LiveWindow.addSensor("Catapult", "Winch two", _winchTwo);
     }
     
     protected void initDefaultCommand() {
        CommandGroup wait = new CommandGroup("wait");
        wait.addSequential(new PreLaunch());
        wait.addSequential(new DoNothing());
-        setDefaultCommand(wait);
+//        setDefaultCommand(wait);
     }
     
     public void setWinchPower(double winchRawVal){
@@ -48,11 +53,11 @@ public class Catapult extends Subsystem {
     }
     
     public void resetWinchEncoder(){
-        _winchEncoder.reset();
+//        _winchEncoder.reset();
     }
     
     public double getWinchDistance(){
-        return _winchEncoder.get();
+        return 0;//_winchEncoder.get();
     }
     
     public void disengageWinch(){
@@ -64,11 +69,11 @@ public class Catapult extends Subsystem {
     }
     
     public void latch(){
-        _latch.set(true);
+        _latch.set(false);
     }
     
     public void unlatch(){
-        _latch.set(false);
+        _latch.set(true);
     }
     
     public void setRatchetLatched(){

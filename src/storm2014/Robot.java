@@ -50,6 +50,7 @@ public class Robot extends IterativeRobot {
          SmartDashboard.putNumber("String Pot Voltage",1.0/tilter.getStringPotRaw());
          SmartDashboard.putNumber("Piston mode", intake.getMode());
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
+         SmartDashboard.putNumber("Catapult Angle", catapult.getPivotAngle());
     }
     
     /** Called on robot boot. */
@@ -65,6 +66,25 @@ public class Robot extends IterativeRobot {
         compressor.start();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
+        
+        new Command("Winch control") {
+            protected void initialize() {
+            }
+
+            protected void execute() {
+                catapult.setWinchPower(oi.getTension());
+            }
+
+            protected boolean isFinished() {
+                return false;
+            }
+            protected void end() {
+                catapult.setWinchPower(0);
+            }
+            protected void interrupted() {}
+        }.start();
+        
+        System.out.println("Got to stuff!");
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"Drive Forward","OneBallDynamic","OneBallDynamic"};
@@ -175,10 +195,24 @@ public class Robot extends IterativeRobot {
         DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
         if (color == DriverStation.Alliance.kBlue){
             SmartDashboard.putBoolean("Blue Alliance?", true);
-        }
-        else{
+            
+            staticleds.setRed((short) 0);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 255);
+        } else if (color == DriverStation.Alliance.kRed){
             SmartDashboard.putBoolean("Blue Alliance?", false);
+            
+            staticleds.setRed((short) 255);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 0);
+        } else {
+            SmartDashboard.putBoolean("Blue Alliance?", false);
+            
+            staticleds.setRed((short) 255);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 255);
         }
+        
         
         if(autonomouse != null) {
             autonomouse.cancel();
@@ -188,6 +222,8 @@ public class Robot extends IterativeRobot {
         }
         
         leds.setMode(LEDStrip.DisabledMode);
+        
+        
     }
     /**
      * Called during disabled whenever a new driver station packet arrives
@@ -196,5 +232,26 @@ public class Robot extends IterativeRobot {
      */
     public void disabledPeriodic() {
         sendSensorData();
+        
+        DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
+        if (color == DriverStation.Alliance.kBlue){
+            SmartDashboard.putBoolean("Blue Alliance?", true);
+            
+            staticleds.setRed((short) 0);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 255);
+        } else if (color == DriverStation.Alliance.kRed){
+            SmartDashboard.putBoolean("Blue Alliance?", false);
+            
+            staticleds.setRed((short) 255);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 0);
+        } else {
+            SmartDashboard.putBoolean("Blue Alliance?", false);
+            
+            staticleds.setRed((short) 255);
+            staticleds.setGreen((short) 0);
+            staticleds.setBlue((short) 255);
+        }
     }
 }
