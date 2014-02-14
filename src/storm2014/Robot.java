@@ -142,7 +142,7 @@ public class Robot extends IterativeRobot {
         if (autonomouse != null) {
             autonomouse.start();
         }
-        leds.setMode(LEDStrip.MarqueeMode);
+        leds.setMode(LEDStrip.USAMode);
     }
     
     /**

@@ -34,7 +34,7 @@ public abstract class Launch extends CommandGroup {
         addSequential(new SetWinchEngaged(true));
         addSequential(new SetEngagedRatchet(false));
         //addSequential(new PullBack(100));
-        addSequential(new SetLEDMode(LEDStrip.TeleopMode));
+        addSequential(new SetLEDMode()); //Back to whatever the default is
     }    
     
     protected abstract boolean thisIsIntentional();

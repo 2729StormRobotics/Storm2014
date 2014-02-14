@@ -1,7 +1,9 @@
 package storm2014.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
+import storm2014.subsystems.LEDStrip;
 
 public class SetLEDMode extends Command {
     private int _mode;
@@ -18,6 +20,16 @@ public class SetLEDMode extends Command {
         _r = r;
         _g = g;
         _b = b;
+    }
+    //Back to default
+    public SetLEDMode(){
+        if (DriverStation.getInstance().isAutonomous()){
+            _mode = LEDStrip.USAMode;
+        } else if (DriverStation.getInstance().isOperatorControl()) {
+            _mode = LEDStrip.TeleopMode;
+        } else {
+            _mode = LEDStrip.AutonomousMode; //Shouldn't be possible, but just in case
+        }
     }
     protected void initialize() {
         Robot.leds.setMode(_mode, _r, _g, _b);

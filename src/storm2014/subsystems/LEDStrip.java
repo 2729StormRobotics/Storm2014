@@ -26,6 +26,8 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public static final int PileMode              = 10;
     public static final int OneWayPileMode        = 11;
     
+    public static final int AutonomousMode        = USAMode;
+    
     private static final byte _allianceBlue    = 0;
     private static final byte _allianceRed     = 1;
     private static final byte _allianceInvalid = 2;
