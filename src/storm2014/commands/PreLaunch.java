@@ -18,12 +18,10 @@ public class PreLaunch extends CommandGroup {
 //            }
 //        });
 //        addSequential(new SetLEDMode(LEDStrip.StormSpiritMode));
+        Robot.catapult.setFinishedPreLaunch(true);
         addSequential(new SetLatched(true));
         addSequential(new SetEngagedRatchet(true));
         addSequential(new SetWinchEngaged(true));
 //        addSequential(new PullBack(100));
     }
-    protected boolean isFinished() {
-        return Robot.catapult.isFinished();
-    }   
 }

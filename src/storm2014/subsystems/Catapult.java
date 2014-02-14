@@ -13,6 +13,7 @@ import storm2014.commands.PreLaunch;
 import storm2014.utilities.MagneticEncoder;
 
 public class Catapult extends Subsystem {
+    //Full Power is -650 on the encoder
     public static final double BASE_ANGLE = 10;
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
@@ -82,11 +83,11 @@ public class Catapult extends Subsystem {
         return _magEnc.getAngle();
     }
     
-    public void setFinished(boolean finished){
+    public void setFinishedPreLaunch(boolean finished){
        preLaunchFinished = finished;
     }
     
-    public boolean isFinished(){
+    public boolean isFinishedPreLaunch(){
        return preLaunchFinished;
     }
     
