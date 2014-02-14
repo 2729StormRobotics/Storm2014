@@ -47,7 +47,8 @@ public class Robot extends IterativeRobot {
     Command autonomouse;
     
     private void sendSensorData() {
-         SmartDashboard.putNumber("String Pot Voltage",1.0/tilter.getStringPotRaw());
+         SmartDashboard.putNumber("String Pot Voltage",tilter.getStringPotRaw());
+         SmartDashboard.putNumber("Winch Encoder",catapult.getWinchDistance());
          SmartDashboard.putNumber("Piston mode", intake.getMode());
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
          SmartDashboard.putNumber("Catapult Angle", catapult.getPivotAngle());

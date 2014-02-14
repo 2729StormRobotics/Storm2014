@@ -15,12 +15,10 @@ import storm2014.utilities.MagneticEncoder;
 
 public class Catapult extends Subsystem {
     //Full Power is -650 on the encoder
-    public static final double BASE_ANGLE = 10;
+    public static final double BASE_ANGLE = 188;
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder         _winchEncoder = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
-//    private final DigitalInput    _winchOne     = new DigitalInput(RobotMap.PORT_ENCODER_WINCH_1),
-//                                  _winchTwo     = new DigitalInput(RobotMap.PORT_ENCODER_WINCH_2);
     private final Solenoid        _winchShift   = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);
     private final Solenoid        _latch        = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
     private final Servo           _ratchet      = new Servo(RobotMap.PORT_SERVO);
@@ -28,6 +26,7 @@ public class Catapult extends Subsystem {
     private boolean preLaunchFinished;
     private static final double ANGLE_RATCHET_ENGAGED    = 170;
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
+    private boolean _rachetEngaged = false;
     
     public Catapult(){
         _winchEncoder.start();
@@ -49,15 +48,19 @@ public class Catapult extends Subsystem {
     }
     
     public void setWinchPower(double winchRawVal){
-        _winch.set(-winchRawVal);
+        if(_rachetEngaged && winchRawVal <= 0) {
+            winchRawVal = 0;
+        }
+        winchRawVal = -winchRawVal;
+        _winch.set(winchRawVal);
     }
     
     public void resetWinchEncoder(){
-//        _winchEncoder.reset();
+        _winchEncoder.reset();
     }
     
     public double getWinchDistance(){
-        return 0;//_winchEncoder.get();
+        return -_winchEncoder.get();
     }
     
     public void disengageWinch(){
@@ -68,24 +71,26 @@ public class Catapult extends Subsystem {
         _winchShift.set(true);
     }
     
-    public void latch(){
+    public void latch() {
         _latch.set(false);
     }
     
-    public void unlatch(){
+    public void unlatch() {
         _latch.set(true);
     }
     
     public void setRatchetLatched(){
+        _rachetEngaged = true;
         _ratchet.setAngle(ANGLE_RATCHET_ENGAGED);
     }
     
     public void setRatchetUnlatched(){
+        _rachetEngaged = false;
         _ratchet.setAngle(ANGLE_RATCHET_DISENGAGED);
     }
     
     public double getPivotAngle() {
-        return _magEnc.getAngle();
+        return 360-_magEnc.getAngle();
     }
     
     public void setFinishedPreLaunch(boolean finished){
