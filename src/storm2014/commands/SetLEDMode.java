@@ -24,11 +24,11 @@ public class SetLEDMode extends Command {
     //Back to default
     public SetLEDMode(){
         if (DriverStation.getInstance().isAutonomous()){
-            _mode = LEDStrip.USAMode;
+            _mode = LEDStrip.AutonomousMode;
         } else if (DriverStation.getInstance().isOperatorControl()) {
             _mode = LEDStrip.TeleopMode;
         } else {
-            _mode = LEDStrip.AutonomousMode; //Shouldn't be possible, but just in case
+            _mode = LEDStrip.DisabledMode; //Shouldn't be possible, but just in case
         }
     }
     protected void initialize() {
