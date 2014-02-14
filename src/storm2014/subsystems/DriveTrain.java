@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
@@ -15,20 +14,21 @@ import storm2014.commands.TankDrive;
 
 public class DriveTrain extends Subsystem {
     
-    Jaguar _left  = new Jaguar(RobotMap.PORT_MOTOR_DRIVE_LEFT),
-           _right = new Jaguar(RobotMap.PORT_MOTOR_DRIVE_RIGHT);
+    private final Jaguar _left  = new Jaguar(RobotMap.PORT_MOTOR_DRIVE_LEFT),
+                         _right = new Jaguar(RobotMap.PORT_MOTOR_DRIVE_RIGHT);
     
-    RobotDrive _drive = new RobotDrive(_left,_right);
+    private final RobotDrive _drive = new RobotDrive(_left,_right);
     
-    Encoder _leftEncoder =  new Encoder(RobotMap.PORT_ENCODER_LEFT_1, RobotMap.PORT_ENCODER_LEFT_2);
-    Encoder _rightEncoder = new Encoder(RobotMap.PORT_ENCODER_RIGHT_1, RobotMap.PORT_ENCODER_RIGHT_2);
+    private final Encoder _leftEncoder =  new Encoder(RobotMap.PORT_ENCODER_LEFT_1, RobotMap.PORT_ENCODER_LEFT_2);
+    private final Encoder _rightEncoder = new Encoder(RobotMap.PORT_ENCODER_RIGHT_1, RobotMap.PORT_ENCODER_RIGHT_2);
      
-    Gyro _gyro = new Gyro(RobotMap.PORT_SENSOR_GYRO);
-    double _gyroOffset = 0;
-    public Object tankDrive;
+    private final Gyro _gyro = new Gyro(RobotMap.PORT_SENSOR_GYRO);
+    private double _gyroOffset = 0;
     
-    DoubleSolenoid _shifter  = new DoubleSolenoid(RobotMap.PORT_SOLENOID_SHIFT_HIGH,RobotMap.PORT_SOLENOID_SHIFT_LOW);
+    private final DoubleSolenoid _shifter  = new DoubleSolenoid(RobotMap.PORT_SOLENOID_SHIFT_HIGH,RobotMap.PORT_SOLENOID_SHIFT_LOW);
     private boolean _isHighGear = false;
+    
+    private boolean _reverseDrive = false;
     
     public DriveTrain() {
         _leftEncoder.start();
@@ -44,18 +44,13 @@ public class DriveTrain extends Subsystem {
         setDefaultCommand(new TankDrive());
     }
     
-    /**
-     * Drives in arcade mode (think the old game "Asteroid").
-     * @param speed Forward/back (1 = forward,-1 = back)
-     * @param turn  (Counter)Clockwise (1 = clockwise,-1 = counterclockwise)
-     */
-    public void arcadeDrive(double speed,double turn) {
-        _drive.arcadeDrive(-speed, turn, false);
-    }
-    
     /** Drives in tank mode (each motor gets 1 = forward,-1 = back). */
-    public void tankDrive(double leftValue, double rightValue){
-        _drive.tankDrive(-leftValue, -rightValue);
+    public void tankDrive(double leftValue, double rightValue) {
+        if(!_reverseDrive) {
+            _drive.tankDrive(-leftValue, -rightValue);
+        } else {
+            _drive.tankDrive(rightValue, leftValue);
+        }
     }
 
     /** Reads the left encoder (+ = forward,- = back). */
@@ -106,8 +101,14 @@ public class DriveTrain extends Subsystem {
         _shifter.set(enabled ? DoubleSolenoid.Value.kForward :
                                DoubleSolenoid.Value.kReverse);
     }
-
     public boolean isHighgear() {
         return _isHighGear;
+    }
+    
+    public void setReverseDrive(boolean enabled) {
+        _reverseDrive = enabled;
+    }
+    public boolean getReverseDrive() {
+        return _reverseDrive;
     }
 }

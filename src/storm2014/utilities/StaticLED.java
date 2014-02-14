@@ -18,7 +18,7 @@ public class StaticLED {
     
     private DigitalOutput _out;
     
-    private byte _value = 0;
+    private short _value = 0;
     
     public StaticLED(int channel){
         _out = new DigitalOutput(channel);
@@ -39,16 +39,21 @@ public class StaticLED {
         _out.updateDutyCycle(calculateDutyCycle(_value));
     }
     
-    private double calculateDutyCycle(byte value){
+    private double calculateDutyCycle(short value){
+        if(value > 255) {
+            value = 255;
+        } else if(value < 0) {
+            value = 0;
+        }
         return (double) value / 255;
     }
     
-    public void setValue(byte value){
+    public void setValue(short value){
         _value = value;
         updateDutyCycle();
     }
     
-    public byte getValue(){
+    public short getValue(){
         return _value;
     }
     

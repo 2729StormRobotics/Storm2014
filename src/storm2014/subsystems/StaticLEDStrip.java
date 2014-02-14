@@ -31,27 +31,27 @@ public class StaticLEDStrip extends Subsystem implements NamedSendable {
     
     protected void initDefaultCommand() {}
     
-    public void setRed(byte color){
+    public void setRed(short color){
         _red.setValue(color);
     }
     
-    public void setGreen(byte color){
+    public void setGreen(short color){
         _green.setValue(color);
     }
     
-    public void setBlue(byte color){
+    public void setBlue(short color){
         _blue.setValue(color);
     }
     
-    public byte getRed(){
+    public short getRed(){
         return _red.getValue();
     }
     
-    public byte getGreen(){
+    public short getGreen(){
         return _green.getValue();
     }
     
-    public byte getBlue(){
+    public short getBlue(){
         return _blue.getValue();
     }
     

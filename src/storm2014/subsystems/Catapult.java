@@ -1,5 +1,6 @@
 package storm2014.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -8,12 +9,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
-import storm2014.commands.DoNothing;
+import storm2014.commands.control.DoNothing;
 import storm2014.commands.PreLaunch;
 import storm2014.utilities.MagneticEncoder;
 
 public class Catapult extends Subsystem {
-    public static final double BASE_ANGLE = 10;
+    //Full Power is -650 on the encoder
+    public static final double BASE_ANGLE = 188;
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder         _winchEncoder = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
@@ -24,6 +26,7 @@ public class Catapult extends Subsystem {
     private boolean preLaunchFinished;
     private static final double ANGLE_RATCHET_ENGAGED    = 170;
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
+    private boolean _rachetEngaged = false;
     
     public Catapult(){
         _winchEncoder.start();
@@ -33,17 +36,23 @@ public class Catapult extends Subsystem {
         LiveWindow.addActuator("Catapult", "Winch shifter", _winchShift);
         LiveWindow.addActuator("Catapult", "Latch", _latch);
         LiveWindow.addActuator("Catapult", "Magnetic Encoder", _magEnc);
+//        LiveWindow.addSensor("Catapult", "Winch one", _winchOne);
+//        LiveWindow.addSensor("Catapult", "Winch two", _winchTwo);
     }
     
     protected void initDefaultCommand() {
        CommandGroup wait = new CommandGroup("wait");
        wait.addSequential(new PreLaunch());
        wait.addSequential(new DoNothing());
-        setDefaultCommand(wait);
+//        setDefaultCommand(wait);
     }
     
     public void setWinchPower(double winchRawVal){
-        _winch.set(-winchRawVal);
+        if(_rachetEngaged && winchRawVal <= 0) {
+            winchRawVal = 0;
+        }
+        winchRawVal = -winchRawVal;
+        _winch.set(winchRawVal);
     }
     
     public void resetWinchEncoder(){
@@ -51,7 +60,7 @@ public class Catapult extends Subsystem {
     }
     
     public double getWinchDistance(){
-        return _winchEncoder.get();
+        return -_winchEncoder.get();
     }
     
     public void disengageWinch(){
@@ -62,31 +71,33 @@ public class Catapult extends Subsystem {
         _winchShift.set(true);
     }
     
-    public void latch(){
-        _latch.set(true);
-    }
-    
-    public void unlatch(){
+    public void latch() {
         _latch.set(false);
     }
     
+    public void unlatch() {
+        _latch.set(true);
+    }
+    
     public void setRatchetLatched(){
+        _rachetEngaged = true;
         _ratchet.setAngle(ANGLE_RATCHET_ENGAGED);
     }
     
     public void setRatchetUnlatched(){
+        _rachetEngaged = false;
         _ratchet.setAngle(ANGLE_RATCHET_DISENGAGED);
     }
     
     public double getPivotAngle() {
-        return _magEnc.getAngle();
+        return 360-_magEnc.getAngle();
     }
     
-    public void setFinished(boolean finished){
+    public void setFinishedPreLaunch(boolean finished){
        preLaunchFinished = finished;
     }
     
-    public boolean isFinished(){
+    public boolean isFinishedPreLaunch(){
        return preLaunchFinished;
     }
     
