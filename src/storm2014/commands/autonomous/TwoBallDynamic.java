@@ -13,13 +13,21 @@ public class TwoBallDynamic extends CommandGroup {
                                 BALL_DISTANCE = 2000;
     private boolean _firstWasHot;
     public TwoBallDynamic(boolean isRight) {
-        addSequential(new Conditional(new TurnAndShootDynamic(isRight,DRIVE_SPEED), new Launch()) {
+        addSequential(new Conditional(new TurnAndShootDynamic(isRight,DRIVE_SPEED), new Launch() {
+
+            protected boolean thisIsIntentional() {
+                return true;             }
+        }) {
            protected boolean condition() {
                return !(_firstWasHot = VisionSystem.foundHotTarget());
            }
         });
         addSequential(new GrabBall(DRIVE_SPEED, BALL_DISTANCE));
-        addSequential(new Conditional(new TurnAndShootDynamic(isRight,DRIVE_SPEED), new Launch()) {
+        addSequential(new Conditional(new TurnAndShootDynamic(isRight,DRIVE_SPEED), new Launch() {
+
+            protected boolean thisIsIntentional() {
+                return true;             }
+        }) {
            protected boolean condition() {
                return _firstWasHot;
            }

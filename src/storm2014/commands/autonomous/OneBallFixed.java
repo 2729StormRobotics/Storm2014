@@ -11,7 +11,11 @@ public class OneBallFixed extends CommandGroup {
                                 DRIVE_SPEED = 0.6,
                                 DISTANCE = 2000;
     public OneBallFixed(boolean isRight) {
-        addSequential(new Conditional(new TurnAndShoot(DRIVE_SPEED, (isRight?-1:1) * TURN_ANGLE), new Launch()) {
+        addSequential(new Conditional(new TurnAndShoot(DRIVE_SPEED, (isRight?-1:1) * TURN_ANGLE), new Launch() {
+
+            protected boolean thisIsIntentional() {
+                return true;            }
+        }) {
            protected boolean condition() {
                return !VisionSystem.foundHotTarget();
            }

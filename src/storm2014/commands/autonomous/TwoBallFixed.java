@@ -14,13 +14,21 @@ public class TwoBallFixed extends CommandGroup {
                                 BALL_DISTANCE = 2000;
     private boolean _firstWasHot;
     public TwoBallFixed(boolean isRight) {
-        addSequential(new Conditional(new TurnAndShoot(DRIVE_SPEED, (isRight?-1:1) * TURN_ANGLE), new Launch()) {
+        addSequential(new Conditional(new TurnAndShoot(DRIVE_SPEED, (isRight?-1:1) * TURN_ANGLE), new Launch() {
+
+            protected boolean thisIsIntentional() {
+               return true;            }
+        }) {
            protected boolean condition() {
                return !(_firstWasHot = VisionSystem.foundHotTarget());
            }
         });
         addSequential(new GrabBall(DRIVE_SPEED, BALL_DISTANCE));
-        addSequential(new Conditional(new TurnAndShoot(DRIVE_SPEED, (isRight?-1:1) * TURN_ANGLE), new Launch()) {
+        addSequential(new Conditional(new TurnAndShoot(DRIVE_SPEED, (isRight?-1:1) * TURN_ANGLE), new Launch() {
+
+            protected boolean thisIsIntentional() {
+                return true;             }
+        }) {
            protected boolean condition() {
                return _firstWasHot;
            }

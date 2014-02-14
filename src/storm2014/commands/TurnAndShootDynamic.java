@@ -7,7 +7,12 @@ import storm2014.Robot;
 public class TurnAndShootDynamic extends CommandGroup {
     public TurnAndShootDynamic(boolean isRight,final double power) {
         addSequential(new TurnToTarget(isRight,power,15));
-        addSequential(new Launch());
+        addSequential(new Launch() {
+
+            protected boolean thisIsIntentional() {
+                return true;
+            }
+        });
         addSequential(new RuntimeCommand() {
             protected Command getCommand() {
                 return new Turn(-Robot.driveTrain.getGyroAngle(), power);
