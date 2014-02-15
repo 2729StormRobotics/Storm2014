@@ -3,7 +3,6 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import storm2014.Robot;
-import storm2014.commands.control.WaitForButton;
 import storm2014.subsystems.Catapult;
 import storm2014.utilities.Debouncer;
 
@@ -11,9 +10,7 @@ import storm2014.utilities.Debouncer;
 public class ResetCatapult extends CommandGroup {
     public ResetCatapult() {
         addSequential(new SetEngagedRatchet(false));
-        addSequential(new WaitForButton());
         addSequential(new SetWinchEngaged(true));
-        addSequential(new WaitForButton());
         // Wait for catapult to return
         addSequential(new Command() {
             private Debouncer _debounce = new Debouncer(0.5);
@@ -39,8 +36,6 @@ public class ResetCatapult extends CommandGroup {
                 end();
             }
         });
-        addSequential(new WaitForButton());
         addSequential(new SetLatched(true));
-        addSequential(new WaitForButton());
     }
 }
