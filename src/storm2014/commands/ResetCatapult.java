@@ -20,7 +20,8 @@ public class ResetCatapult extends CommandGroup {
                 Robot.catapult.setWinchPower(-0.5);
             }
             protected boolean isFinished() {
-                return Robot.catapult.getPivotAngle() <= Catapult.BASE_ANGLE;
+                return Robot.catapult.getPivotAngle() <= Catapult.BASE_ANGLE ||
+                       Robot.catapult.getWinchDistance() < 0;
             }
 
             protected void end() {
