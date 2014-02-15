@@ -30,7 +30,7 @@ public class OI {
                          resetCat  = new JoystickButton(shootJoystick, 3),
                          fire      = new JoystickButton(shootJoystick, 6);
     
-    public final Button continueProcess = new JoystickButton(driveJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
+    public final Button continueProcess = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
     
     public OI() {
         shiftHigh.whenPressed (new Shift(true));
