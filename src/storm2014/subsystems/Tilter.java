@@ -15,7 +15,7 @@ import storm2014.utilities.StringPot;
 //TODO waiting for joes array value list.
 public class Tilter extends Subsystem {
     private static final double STRINGPOT_MAX_SAFE = 2.85,
-                                STRINGPOT_MIN_SAFE = 0;
+                                STRINGPOT_MIN_SAFE = 1.295;
     
     private final StringPot _stringpot = new StringPot(RobotMap.PORT_SENSOR_STRINGPOT);
     private final Talon _tiltMotor = new Talon(RobotMap.PORT_MOTOR_TILTER);

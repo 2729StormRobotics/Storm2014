@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import storm2014.Robot;
 import storm2014.commands.control.WaitForButton;
 import storm2014.subsystems.Catapult;
+import storm2014.utilities.Debouncer;
 
+// Tested by Joe Doyle (mostly) on 2014 Robot on 2/15/14
 public class ResetCatapult extends CommandGroup {
     public ResetCatapult() {
         addSequential(new SetEngagedRatchet(false));
@@ -14,6 +16,7 @@ public class ResetCatapult extends CommandGroup {
         addSequential(new WaitForButton());
         // Wait for catapult to return
         addSequential(new Command() {
+            private Debouncer _debounce = new Debouncer(0.5);
             protected void initialize() {
                 if(Robot.catapult.getPivotAngle() > Catapult.BASE_ANGLE) {
                     Robot.catapult.unlatch();
@@ -23,8 +26,8 @@ public class ResetCatapult extends CommandGroup {
                 Robot.catapult.setWinchPower(-0.5);
             }
             protected boolean isFinished() {
-                return Robot.catapult.getPivotAngle() <= Catapult.BASE_ANGLE ||
-                       Robot.catapult.getWinchDistance() < 0;
+                return _debounce.check(Robot.catapult.getPivotAngle() <= Catapult.BASE_ANGLE) ||
+                       Robot.catapult.getWinchDistance() < -20;
             }
 
             protected void end() {

@@ -8,9 +8,8 @@ import storm2014.commands.control.WaitForButton;
 import storm2014.subsystems.LEDStrip;
 //import storm2014.subsystems.LEDStrip;
 
-//Not Tested
+// Tested by Joe Doyle (mostly) on 2014 Robot on 2/15/14
 public abstract class Launch extends CommandGroup {
-    // Tension More or less and then backtrack
     public Launch(){
         if(!thisIsIntentional()) {
             throw new AllocationException("Launch should only be run if you want to");
@@ -41,7 +40,6 @@ public abstract class Launch extends CommandGroup {
         addSequential(new SetWinchEngaged(true));
         addSequential(new WaitForButton());
         addSequential(new SetEngagedRatchet(false));
-        //addSequential(new PullBack(100));
         addSequential(new SetLEDMode()); //Back to whatever the default is
         addSequential(new WaitForButton());
     }    

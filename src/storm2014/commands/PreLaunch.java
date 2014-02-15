@@ -9,7 +9,7 @@ import storm2014.commands.control.WaitForButton;
 import storm2014.subsystems.Catapult;
 //import storm2014.subsystems.LEDStrip;
 
-//Not Tested
+// Tested by Joe Doyle on 2014 Robot on 2/15/14
 public class PreLaunch extends CommandGroup {
     public PreLaunch() {
         addSequential(new SetEngagedRatchet(true));
