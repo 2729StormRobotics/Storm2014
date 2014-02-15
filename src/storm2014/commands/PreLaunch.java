@@ -13,9 +13,9 @@ import storm2014.subsystems.Catapult;
 public class PreLaunch extends CommandGroup {
     public PreLaunch() {
         addSequential(new SetEngagedRatchet(true));
-        addSequential(new WaitForButton(Robot.oi.continueProcess));
+        addSequential(new WaitForButton());
         addSequential(new SetWinchEngaged(true));
-        addSequential(new WaitForButton(Robot.oi.continueProcess));
+        addSequential(new WaitForButton());
         addSequential(new Command() {
             protected void initialize() {
                 Robot.catapult.setFinishedPreLaunch(true);
@@ -27,7 +27,7 @@ public class PreLaunch extends CommandGroup {
             protected void end() {}
             protected void interrupted() {}
         });
-        addSequential(new WaitForButton(Robot.oi.continueProcess));
+        addSequential(new WaitForButton());
 //        addSequential(new PullBack(100));
     }
 }

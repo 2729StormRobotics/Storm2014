@@ -30,7 +30,7 @@ public class OI {
                          resetCat  = new JoystickButton(shootJoystick, 3),
                          fire      = new JoystickButton(shootJoystick, 6);
     
-    public final Button continueProcess = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
+    private final Button continueProcess = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
     
     public OI() {
         shiftHigh.whenPressed (new Shift(true));
@@ -89,6 +89,9 @@ public class OI {
 
     public double getTilt() {
         return _zeroDeadzone(-shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_TILT),0.15);
+    }
+    public boolean isContinueButton() {
+        return continueProcess.get();
     }
 }
 

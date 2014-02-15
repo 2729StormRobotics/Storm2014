@@ -8,6 +8,7 @@ package storm2014.commands.control;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
+import storm2014.Robot;
 
 /**
  *
@@ -15,20 +16,18 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class WaitForButton extends Command {
     
-    private Button _button;
     private boolean _wasReleased;
 
-    public WaitForButton(Button button){
-        _button = button;
+    public WaitForButton() {
     }
     protected void initialize() {
         _wasReleased = false;
     }
     protected void execute() {
-        if (!_button.get()) _wasReleased = true;
+        if (!Robot.oi.isContinueButton()) _wasReleased = true;
     }
     protected boolean isFinished() {
-        return _wasReleased && _button.get();
+        return _wasReleased && Robot.oi.isContinueButton();
     }
     protected void end() {}
     protected void interrupted() {

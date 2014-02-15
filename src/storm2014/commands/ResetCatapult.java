@@ -9,9 +9,9 @@ import storm2014.subsystems.Catapult;
 public class ResetCatapult extends CommandGroup {
     public ResetCatapult() {
         addSequential(new SetEngagedRatchet(false));
-        addSequential(new WaitForButton(Robot.oi.continueProcess));
+        addSequential(new WaitForButton());
         addSequential(new SetWinchEngaged(true));
-        addSequential(new WaitForButton(Robot.oi.continueProcess));
+        addSequential(new WaitForButton());
         // Wait for catapult to return
         addSequential(new Command() {
             protected void initialize() {
@@ -36,8 +36,8 @@ public class ResetCatapult extends CommandGroup {
                 end();
             }
         });
-        addSequential(new WaitForButton(Robot.oi.continueProcess));
+        addSequential(new WaitForButton());
         addSequential(new SetLatched(true));
-        addSequential(new WaitForButton(Robot.oi.continueProcess));
+        addSequential(new WaitForButton());
     }
 }
