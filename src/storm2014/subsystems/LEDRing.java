@@ -10,7 +10,7 @@ import storm2014.RobotMap;
 
 public class LEDRing extends Subsystem implements NamedSendable {
     
-    private static final int FREQUENCY = 500;
+    private static final int FREQUENCY = 1000;
     private static final double INIT_DUTY_CYCLE = 20;
     
     DigitalOutput out;
