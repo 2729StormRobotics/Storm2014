@@ -22,15 +22,17 @@ public class OI {
                          shiftLow        = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_LOW),
                          reverse         = new JoystickButton(driveJoystick, 6),
             
-                         spinIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN),
-                         spinOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_OUT),
-                         armsOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_OUT),
-                         armsIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_IN),
-                         prefire   = new JoystickButton(shootJoystick, 8),
-                         resetCat  = new JoystickButton(shootJoystick, 3),
-                         fire      = new JoystickButton(shootJoystick, 6);
+                         spinIn          = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN),
+                         spinOut         = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_OUT),
+                         armsOut         = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_OUT),
+                         armsIn          = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_IN),
+                         prefire         = new JoystickButton(shootJoystick, 8),
+                         resetCat        = new JoystickButton(shootJoystick, 3),
+                         fire            = new JoystickButton(shootJoystick, 6),
+                         tensionCatapult = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_TENSION);
     
     public final Button continueProcess = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
+
     
     public OI() {
         shiftHigh.whenPressed (new Shift(true));
@@ -66,6 +68,7 @@ public class OI {
                 return true;
             }
         });
+        tensionCatapult .whenPressed(null);
     }
     
     // When a joystick is in its zero position, it will not necessarily read

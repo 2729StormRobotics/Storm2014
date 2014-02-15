@@ -21,6 +21,7 @@ public class RobotMap {
     public static final int JOYSHOOT_BUTTON_ARMS_OUT = 4;
     public static final int JOYSHOOT_BUTTON_ARMS_IN  = 2;
     public static final int JOYSHOOT_BUTTON_CONTINUE = 1;
+    public static final int JOYSHOOT_BUTTON_TENSION = 10;
     
     // PWM Ports
     public static final int PORT_MOTOR_DRIVE_LEFT     = 2;
