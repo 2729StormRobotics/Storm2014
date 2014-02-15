@@ -3,12 +3,15 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import storm2014.Robot;
+import storm2014.commands.control.WaitForButton;
 import storm2014.subsystems.Catapult;
 
 public class ResetCatapult extends CommandGroup {
     public ResetCatapult() {
         addSequential(new SetEngagedRatchet(false));
+        addSequential(new WaitForButton(Robot.oi.continueProcess));
         addSequential(new SetWinchEngaged(true));
+        addSequential(new WaitForButton(Robot.oi.continueProcess));
         // Wait for catapult to return
         addSequential(new Command() {
             protected void initialize() {
@@ -33,6 +36,8 @@ public class ResetCatapult extends CommandGroup {
                 end();
             }
         });
+        addSequential(new WaitForButton(Robot.oi.continueProcess));
         addSequential(new SetLatched(true));
+        addSequential(new WaitForButton(Robot.oi.continueProcess));
     }
 }

@@ -27,6 +27,7 @@ public class PreLaunch extends CommandGroup {
             protected void end() {}
             protected void interrupted() {}
         });
+        addSequential(new WaitForButton(Robot.oi.continueProcess));
 //        addSequential(new PullBack(100));
     }
 }

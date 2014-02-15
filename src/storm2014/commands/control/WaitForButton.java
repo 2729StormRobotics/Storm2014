@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class WaitForButton extends Command {
     
     private Button _button;
-    private boolean _wasReleased = false;
+    private boolean _wasReleased;
 
     public WaitForButton(Button button){
         _button = button;

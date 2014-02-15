@@ -42,6 +42,7 @@ public abstract class Launch extends CommandGroup {
         addSequential(new SetEngagedRatchet(false));
         //addSequential(new PullBack(100));
         addSequential(new SetLEDMode()); //Back to whatever the default is
+        addSequential(new WaitForButton(Robot.oi.continueProcess));
     }    
     
     protected abstract boolean thisIsIntentional();
