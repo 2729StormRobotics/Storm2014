@@ -1,14 +1,32 @@
 package storm2014.commands.control;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PublicCommand;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import java.util.Enumeration;
 
 public abstract class Conditional extends Command {
-    private final Command _ifTrue,_ifFalse;
-    private Command _running = null;
+    private final PublicCommand _ifTrue,_ifFalse;
+    private PublicCommand _running = null;
 
-    public Conditional(Command ifTrue,Command ifFalse) {
-        _ifTrue  = ifTrue;
-        _ifFalse = ifFalse;
+    public Conditional(final Command ifTrue,final Command ifFalse) {
+        // Wrap the Commands to expose protected methods
+        if(ifTrue != null) {
+            _ifTrue  = new PublicCommand(ifTrue);
+            for(Enumeration e = _ifTrue.getRequirements();e.hasMoreElements();) {
+                requires((Subsystem) e.nextElement());
+            }
+        } else {
+            _ifTrue = null;
+        }
+        if(ifFalse != null) {
+            _ifFalse  = new PublicCommand(ifFalse);
+            for(Enumeration e = _ifFalse.getRequirements();e.hasMoreElements();) {
+                requires((Subsystem) e.nextElement());
+            }
+        } else {
+            _ifFalse = null;
+        }
     }
     
     protected abstract boolean condition();
@@ -20,24 +38,33 @@ public abstract class Conditional extends Command {
             _running = _ifFalse;
         }
         if(_running != null) {
-            _running.start();
+            _running._initialize();
+            _running.initialize();
         }
     }
 
     protected void execute() {
+        if(_running != null) {
+            _running._execute();
+            _running.execute();
+        }
     }
 
     protected boolean isFinished() {
-        return _running == null || !_running.isRunning();
+        return _running == null || _running.isFinished();
     }
 
     protected void end() {
-        if(_running != null && _running.isRunning()) {
-            _running.cancel();
+        if(_running != null) {
+            _running._end();
+            _running.end();
         }
     }
 
     protected void interrupted() {
-        end();
+        if(_running != null) {
+            _running._interrupted();
+            _running.interrupted();
+        }
     }
 }
