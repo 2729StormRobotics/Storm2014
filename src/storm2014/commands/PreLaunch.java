@@ -10,12 +10,15 @@ import storm2014.subsystems.Catapult;
 //Not Tested
 public class PreLaunch extends CommandGroup {
     public PreLaunch() {
-        addSequential(new SetLatched(false));
         addSequential(new SetEngagedRatchet(false));
         addSequential(new SetWinchEngaged(true));
         // Wait for catapult to return
         addSequential(new Command() {
-            protected void initialize() {}
+            protected void initialize() {
+                if(Robot.catapult.getPivotAngle() > Catapult.BASE_ANGLE) {
+                    Robot.catapult.unlatch();
+                }
+            }
             protected void execute() {
                 Robot.catapult.setWinchPower(-0.5);
             }

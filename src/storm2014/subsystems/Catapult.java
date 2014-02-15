@@ -17,7 +17,7 @@ import storm2014.utilities.MagneticEncoder;
 public class Catapult extends Subsystem {
     //Full Power is -650 on the encoder
     public static final double WINCH_ENCODER_MAX = 600;
-    public static final double BASE_ANGLE = 188;
+    public static final double BASE_ANGLE = 230;
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder         _winchEncoder = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
@@ -28,11 +28,12 @@ public class Catapult extends Subsystem {
     private boolean preLaunchFinished;
     private static final double ANGLE_RATCHET_ENGAGED    = 170;
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
-    private boolean _ratchetEngaged = false;
-    private final Debouncer _ratchetSafe = new Debouncer(2);
+    private boolean _ratchetEngaged = true;
+    private final Debouncer _ratchetSafe = new Debouncer(0.5);
     
     public Catapult(){
         _winchEncoder.start();
+        setRatchetUnlatched();
         LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
         LiveWindow.addActuator("Catapult", "Ratchet", _ratchet);
         LiveWindow.addActuator("Catapult", "Winch", _winch);
@@ -86,11 +87,14 @@ public class Catapult extends Subsystem {
     }
     
     public void setRatchetLatched(){
+        _winch.set(0);
         _ratchetEngaged = true;
         _ratchet.setAngle(ANGLE_RATCHET_ENGAGED);
     }
     
     public void setRatchetUnlatched(){
+        _winch.set(0);
+        _ratchetSafe.check(!_ratchetEngaged);
         _ratchetEngaged = false;
         _ratchet.setAngle(ANGLE_RATCHET_DISENGAGED);
     }
