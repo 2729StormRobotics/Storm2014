@@ -10,32 +10,6 @@ import storm2014.subsystems.Catapult;
 //Not Tested
 public class PreLaunch extends CommandGroup {
     public PreLaunch() {
-        addSequential(new SetEngagedRatchet(false));
-        addSequential(new SetWinchEngaged(true));
-        // Wait for catapult to return
-        addSequential(new Command() {
-            protected void initialize() {
-                if(Robot.catapult.getPivotAngle() > Catapult.BASE_ANGLE) {
-                    Robot.catapult.unlatch();
-                }
-            }
-            protected void execute() {
-                Robot.catapult.setWinchPower(-0.5);
-            }
-            protected boolean isFinished() {
-                return Robot.catapult.getPivotAngle() <= Catapult.BASE_ANGLE;
-            }
-
-            protected void end() {
-                Robot.catapult.setWinchPower(0);
-                Robot.catapult.resetWinchEncoder();
-            }
-
-            protected void interrupted() {
-                end();
-            }
-        });
-        addSequential(new SetLatched(true));
         addSequential(new SetEngagedRatchet(true));
         addSequential(new SetWinchEngaged(true));
         addSequential(new Command() {

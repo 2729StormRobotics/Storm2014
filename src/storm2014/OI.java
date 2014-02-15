@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import storm2014.commands.ChangeArmPosition;
 import storm2014.commands.Launch;
 import storm2014.commands.PreLaunch;
+import storm2014.commands.ResetCatapult;
 import storm2014.commands.Shift;
 import storm2014.commands.SpinRoller;
 
@@ -25,6 +26,7 @@ public class OI {
                          armsOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_OUT),
                          armsIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_IN),
                          prefire   = new JoystickButton(shootJoystick, 8),
+                         resetCat  = new JoystickButton(shootJoystick, 3),
                          fire      = new JoystickButton(shootJoystick, 6);
     
     public OI() {
@@ -55,6 +57,7 @@ public class OI {
         armsIn   .whenPressed (new ChangeArmPosition(-1));
         armsOut  .whenPressed (new ChangeArmPosition(1));
         prefire  .whenPressed (new PreLaunch());
+        resetCat .whenPressed (new ResetCatapult());
         fire     .whenPressed (new Launch() {
             protected boolean thisIsIntentional() {
                 return true;
