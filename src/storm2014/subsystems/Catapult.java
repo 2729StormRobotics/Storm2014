@@ -25,11 +25,12 @@ public class Catapult extends Subsystem {
     private final Solenoid        _latch        = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
     private final Servo           _ratchet      = new Servo(RobotMap.PORT_SERVO);
     private final MagneticEncoder _magEnc       = new MagneticEncoder(RobotMap.PORT_SENSOR_MAG_ENCODER);
+    private final DigitalInput    _pawlSwitch   = new DigitalInput(RobotMap.PORT_SENSOR_SWITCH_PAWL);
+    
     private boolean preLaunchFinished;
     private static final double ANGLE_RATCHET_ENGAGED    = 170;
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
-    private boolean _ratchetEngaged = true;
-    private final Debouncer _ratchetSafe = new Debouncer(0.5);
+    private final Debouncer _ratchetDisengaged = new Debouncer(0.25);
     
     public Catapult(){
         _winchEncoder.start();
@@ -51,8 +52,12 @@ public class Catapult extends Subsystem {
 //        setDefaultCommand(wait);
     }
     
+    public boolean isRatchetEngaged() {
+        return !_ratchetDisengaged.check(_pawlSwitch.get());
+    }
+    
     public void setWinchPower(double winchRawVal){
-        if(!_ratchetSafe.check(!_ratchetEngaged) && winchRawVal <= 0) {
+        if(isRatchetEngaged() && winchRawVal <= 0) {
             winchRawVal = 0;
         }
         if(getWinchDistance() > WINCH_ENCODER_MAX && winchRawVal > 0) {
@@ -88,14 +93,12 @@ public class Catapult extends Subsystem {
     
     public void setRatchetLatched(){
         _winch.set(0);
-        _ratchetEngaged = true;
         _ratchet.setAngle(ANGLE_RATCHET_ENGAGED);
     }
     
     public void setRatchetUnlatched(){
         _winch.set(0);
-        _ratchetSafe.check(!_ratchetEngaged);
-        _ratchetEngaged = false;
+        isRatchetEngaged();
         _ratchet.setAngle(ANGLE_RATCHET_DISENGAGED);
     }
     

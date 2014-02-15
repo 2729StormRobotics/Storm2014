@@ -31,18 +31,19 @@ public class RobotMap {
     public static final int PORT_MOTOR_WINCH          = 6;
     
     // Digital I/O Ports
-    public static final int PORT_ENCODER_RIGHT_1  =  1;
-    public static final int PORT_ENCODER_RIGHT_2  =  2;
-    public static final int PORT_ENCODER_LEFT_1   =  3;
-    public static final int PORT_ENCODER_LEFT_2   =  4;
-    public static final int PORT_SENSOR_BALL_IR   =  5;
-    public static final int PORT_ENCODER_WINCH_1  =  7;
-    public static final int PORT_ENCODER_WINCH_2  =  6;
-    public static final int PORT_LED_RING         =  8;
-    public static final int PORT_STATIC_LED_GREEN =  9;
-    public static final int PORT_STATIC_LED_RED   = 10;
-    public static final int PORT_STATIC_LED_BLUE  = 11;
-    public static final int PORT_SWITCH_COMPRESSO = 12;
+    public static final int PORT_ENCODER_RIGHT_1    =  1;
+    public static final int PORT_ENCODER_RIGHT_2    =  2;
+    public static final int PORT_ENCODER_LEFT_1     =  3;
+    public static final int PORT_ENCODER_LEFT_2     =  4;
+    public static final int PORT_SENSOR_BALL_IR     =  5;
+    public static final int PORT_ENCODER_WINCH_1    =  7;
+    public static final int PORT_ENCODER_WINCH_2    =  6;
+    public static final int PORT_LED_RING           =  8;
+    public static final int PORT_STATIC_LED_GREEN   =  9;
+    public static final int PORT_STATIC_LED_RED     = 10;
+    public static final int PORT_STATIC_LED_BLUE    = 11;
+    public static final int PORT_SWITCH_COMPRESSO   = 12;
+    public static final int PORT_SENSOR_SWITCH_PAWL = 14;
     
     //Relays
     public static final int PORT_RELAY_COMPRESSOR = 1;
