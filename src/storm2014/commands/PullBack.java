@@ -10,11 +10,10 @@ public class PullBack extends Command {
      
     public PullBack(double distance){
         requires(Robot.catapult);
+        _distance = distance;
     }
-   
-    protected void initialize() {
-       Robot.catapult.resetWinchEncoder();
-    }
+    
+    protected void initialize() {}
 
     protected void execute() {
         Robot.catapult.setWinchPower(_power);

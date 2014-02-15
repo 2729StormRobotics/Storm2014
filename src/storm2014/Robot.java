@@ -83,13 +83,15 @@ public class Robot extends IterativeRobot {
             protected void end() {
                 catapult.setWinchPower(0);
             }
-            protected void interrupted() {}
+            protected void interrupted() {
+                end();
+            }
         }.start();
         
         System.out.println("Got to stuff!");
         
         // The names, and corresponding Commands of our autonomous modes
-        autonomiceNames = new String[]{"Drive Forward","OneBallDynamic","OneBallDynamic"};
+        autonomiceNames = new String[]{"Drive Forward","OneBallDynamic Left","OneBallDynamic Right"};
         autonomice = new Command[]{new DriveForward(0.6, 1000),new OneBallDynamic(false), new OneBallDynamic(true)};
         
         // Configure and send the SendableChooser, which allows autonomous modes
@@ -102,7 +104,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData(Scheduler.getInstance());
         
         SmartDashboard.putData("Pull Back",new PullBack(100));
-        SmartDashboard.putData("Arm Mode",new PullBack(1));
         SmartDashboard.putData("Engage Ratchet",new SetEngagedRatchet(true));
         SmartDashboard.putData("Disengage Ratchet",new SetEngagedRatchet(false));
         SmartDashboard.putData("Engage Winch",new SetWinchEngaged(true));
@@ -169,7 +170,7 @@ public class Robot extends IterativeRobot {
     
     /**
      * Called during teleop whenever a new driver station packet arrives (about
-     * every 1/50 of a second).
+     * every 1/50 of a second).q
      */
     public void teleopPeriodic() {
         // Runs commands & stuff
