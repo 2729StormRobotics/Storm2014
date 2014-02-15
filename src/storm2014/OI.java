@@ -10,6 +10,7 @@ import storm2014.commands.PreLaunch;
 import storm2014.commands.ResetCatapult;
 import storm2014.commands.Shift;
 import storm2014.commands.SpinRoller;
+import storm2014.commands.control.WaitForButton;
 
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
 public class OI {
@@ -17,9 +18,9 @@ public class OI {
                            shootJoystick = new Joystick(RobotMap.PORT_JOYSTICK_SHOOT),
                            debugJoystick = new Joystick(RobotMap.PORT_JOYSTICK_DEBUG);
     
-    private final Button shiftHigh = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_HIGH),
-                         shiftLow  = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_LOW),
-                         reverse   = new JoystickButton(driveJoystick, 6),
+    private final Button shiftHigh       = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_HIGH),
+                         shiftLow        = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_LOW),
+                         reverse         = new JoystickButton(driveJoystick, 6),
             
                          spinIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN),
                          spinOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_OUT),
@@ -28,6 +29,8 @@ public class OI {
                          prefire   = new JoystickButton(shootJoystick, 8),
                          resetCat  = new JoystickButton(shootJoystick, 3),
                          fire      = new JoystickButton(shootJoystick, 6);
+    
+    public final Button continueProcess = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_CONTINUE);
     
     public OI() {
         shiftHigh.whenPressed (new Shift(true));

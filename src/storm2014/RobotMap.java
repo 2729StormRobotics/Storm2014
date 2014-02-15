@@ -13,6 +13,7 @@ public class RobotMap {
     public static final int JOYSHOOT_AXIS_TENSION     = 2;
     public static final int JOYSHOOT_AXIS_TILT        = 4;
     
+    public static final int JOYDRIVE_BUTTON_CONTINUE   = 4;
     public static final int JOYDRIVE_BUTTON_SHIFT_HIGH = 5;
     public static final int JOYDRIVE_BUTTON_SHIFT_LOW  = 7;
     
