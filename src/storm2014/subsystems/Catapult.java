@@ -60,9 +60,9 @@ public class Catapult extends Subsystem {
         if(isRatchetEngaged() && winchRawVal <= 0) {
             winchRawVal = 0;
         }
-        if(getWinchDistance() > WINCH_ENCODER_MAX && winchRawVal > 0) {
-            winchRawVal = 0;
-        }
+//        if(getWinchDistance() > WINCH_ENCODER_MAX && winchRawVal > 0) {
+//            winchRawVal = 0;
+//        }
         winchRawVal = -winchRawVal;
         _winch.set(winchRawVal);
     }

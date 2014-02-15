@@ -53,6 +53,7 @@ public class Robot extends IterativeRobot {
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
          SmartDashboard.putNumber("Catapult Angle", catapult.getPivotAngle());
          SmartDashboard.putBoolean("Pawl Engaged", catapult.isRatchetEngaged());
+         SmartDashboard.putBoolean("Pre-Launched", catapult.isFinishedPreLaunch());
     }
     
     /** Called on robot boot. */

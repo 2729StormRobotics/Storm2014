@@ -36,6 +36,7 @@ public abstract class Launch extends CommandGroup {
         addSequential(new SetLEDMode(LEDStrip.RainbowDancePartyMode));
         addSequential(new WaitForButton());
         addSequential(new WaitForFollowThrough(),1);
+        addSequential(new SetLEDMode(LEDStrip.USAMode));
         addSequential(new WaitForButton());
         addSequential(new SetWinchEngaged(true));
         addSequential(new WaitForButton());
