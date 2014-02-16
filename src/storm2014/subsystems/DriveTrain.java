@@ -3,8 +3,8 @@ package storm2014.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
-import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
@@ -14,8 +14,8 @@ import storm2014.commands.TankDrive;
 
 public class DriveTrain extends Subsystem {
     
-    private final Jaguar _left  = new Jaguar(RobotMap.PORT_MOTOR_DRIVE_LEFT),
-                         _right = new Jaguar(RobotMap.PORT_MOTOR_DRIVE_RIGHT);
+    private final Talon _left  = new Talon(RobotMap.PORT_MOTOR_DRIVE_LEFT),
+                        _right = new Talon(RobotMap.PORT_MOTOR_DRIVE_RIGHT);
     
     private final RobotDrive _drive = new RobotDrive(_left,_right);
     
