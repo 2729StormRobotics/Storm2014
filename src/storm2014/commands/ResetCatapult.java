@@ -17,6 +17,9 @@ public class ResetCatapult extends CommandGroup {
         addSequential(new Command() {
             private Debouncer _debounce = new Debouncer(0.5);
             private boolean _useEncoder = false;
+            {
+                requires(Robot.catapult);
+            }
             protected void initialize() {
                 if(Robot.catapult.getPivotAngle() > Catapult.BASE_ANGLE) {
                     Robot.catapult.unlatch();

@@ -10,20 +10,24 @@ public abstract class Conditional extends Command {
     private PublicCommand _running = null;
 
     public Conditional(final Command ifTrue,final Command ifFalse) {
+        String name = "Condition?";
         // Wrap the Commands to expose protected methods
         if(ifTrue != null) {
             _ifTrue  = new PublicCommand(ifTrue);
             for(Enumeration e = _ifTrue.getRequirements();e.hasMoreElements();) {
                 requires((Subsystem) e.nextElement());
             }
+            name += ifTrue.getName();
         } else {
             _ifTrue = null;
         }
+        name += ":";
         if(ifFalse != null) {
             _ifFalse  = new PublicCommand(ifFalse);
             for(Enumeration e = _ifFalse.getRequirements();e.hasMoreElements();) {
                 requires((Subsystem) e.nextElement());
             }
+            name += ifTrue.getName();
         } else {
             _ifFalse = null;
         }
