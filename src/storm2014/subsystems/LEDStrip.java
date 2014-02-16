@@ -11,6 +11,9 @@ import java.io.OutputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.SocketConnection;
 
+/**
+ * A class for interfacing with the addressable LED strip on the arms.
+ */
 public class LEDStrip extends Subsystem implements NamedSendable {
 
     public static final int DisabledMode          =  0;
@@ -53,6 +56,12 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public void setMode(int mode){
         setMode(mode, (byte) 0, (byte) 0, (byte) 0);
     }
+    /**
+     * @param mode The LED mode to set
+     * @param red The red value if the mode is SetColorMode
+     * @param green The green value if the mode is SetColorMode
+     * @param blue The blue value if the mode is SetColorMode
+     */
     public void setMode(final int mode, final byte red, final byte green, final byte blue){
         new Thread() {
             public void run() {

@@ -9,8 +9,7 @@ package storm2014.utilities;
 import edu.wpi.first.wpilibj.DigitalOutput;
 
 /**
- *
- * @author evan1026
+ * One static LED (bottom of the robot), i.e., either red, green, or blue.
  */
 public class StaticLED {
     
@@ -20,11 +19,18 @@ public class StaticLED {
     
     private short _value = 0;
     
+    /**
+     * @param channel The channel for the DigitalOutput.
+     */
     public StaticLED(int channel){
         _out = new DigitalOutput(channel);
         initDigitalOutput();
     }
     
+    /**
+     * @param module The module for the DigitalOutput.
+     * @param channel The channel for the DigitalOutput.
+     */
     public StaticLED(int module, int channel){
         _out = new DigitalOutput(module, channel);
         initDigitalOutput();
@@ -48,6 +54,9 @@ public class StaticLED {
         return (double) value / 255;
     }
     
+    /**
+     * @param value From 0 to 255
+     */
     public void setValue(short value){
         _value = value;
         updateDutyCycle();

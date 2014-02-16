@@ -14,8 +14,7 @@ import storm2014.RobotMap;
 import storm2014.utilities.StaticLED;
 
 /**
- *
- * @author evan1026
+ * Interfaces with the LEDs on the bottom of the robot.
  */
 public class StaticLEDStrip extends Subsystem implements NamedSendable {
     

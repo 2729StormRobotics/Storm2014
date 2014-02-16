@@ -21,7 +21,10 @@ public class SetLEDMode extends Command {
         _g = g;
         _b = b;
     }
-    //Back to default
+    
+    /**
+     * Sets to the default LED mode (Teleop, autonomous, or disabled, as applicable.)
+     */
     public SetLEDMode(){
         if (DriverStation.getInstance().isAutonomous()){
             _mode = LEDStrip.AutonomousMode;

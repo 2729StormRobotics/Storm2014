@@ -8,23 +8,23 @@ import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 import storm2014.RobotMap;
 
+/**
+ * A class that allows control over the LED ring on the camera.
+ */
 public class LEDRing extends Subsystem implements NamedSendable {
     private static final int FREQUENCY = 6000;
     private static final double INIT_DUTY_CYCLE = 20;
     
-    DigitalOutput out;
+    private DigitalOutput _out;
     
     public LEDRing(){
-        System.out.println("Got before stuff!");
-        out = new DigitalOutput(RobotMap.PORT_LED_RING);
-        out.setPWMRate(FREQUENCY);
-        out.enablePWM(INIT_DUTY_CYCLE / 100);
-        SmartDashboard.putString("Stuff","Enabled PWM on port " + RobotMap.PORT_LED_RING + " and set it to rate " + FREQUENCY + " with an initial duty cycle of 50%");
+        _out = new DigitalOutput(RobotMap.PORT_LED_RING);
+        _out.setPWMRate(FREQUENCY);
+        _out.enablePWM(INIT_DUTY_CYCLE / 100);
     }
     
     public void setPercentage(double percent){
-        out.updateDutyCycle(percent / 100.0);
-        System.out.println("Set duty cycle to " + percent + "%.");
+        _out.updateDutyCycle(percent / 100.0);
         
     }
     
