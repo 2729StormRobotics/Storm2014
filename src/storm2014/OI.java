@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.commands.ChangeArmPosition;
+import storm2014.commands.IncrementWinchIndex;
 import storm2014.commands.Launch;
 import storm2014.commands.LaunchIfReady;
 import storm2014.commands.PreLaunch;
@@ -29,7 +30,8 @@ public class OI {
                          armsIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_IN),
 //                         prefire   = new JoystickButton(shootJoystick, 8),
                          resetCat  = new JoystickButton(shootJoystick, 3),
-                         fire      = new JoystickButton(shootJoystick, 6);
+                         fire      = new JoystickButton(shootJoystick, 6),
+                         tensionCatapult = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_TENSION);
     
     private final Button continueProcess = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
     
@@ -63,6 +65,7 @@ public class OI {
 //        prefire  .whenPressed (new PreLaunch());
         resetCat .whenPressed (new ResetCatapult());
         fire     .whenPressed (new LaunchIfReady());
+        tensionCatapult .whenPressed(new IncrementWinchIndex());
     }
     
     // When a joystick is in its zero position, it will not necessarily read
@@ -91,4 +94,3 @@ public class OI {
         return continueProcess.get();
     }
 }
-
