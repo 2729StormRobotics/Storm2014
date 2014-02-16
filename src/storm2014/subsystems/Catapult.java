@@ -49,7 +49,7 @@ public class Catapult extends Subsystem {
        CommandGroup wait = new CommandGroup("wait");
        wait.addSequential(new PreLaunch());
        wait.addSequential(new DoNothing());
-//        setDefaultCommand(wait);
+       setDefaultCommand(wait);
     }
     
     public boolean isRatchetEngaged() {
