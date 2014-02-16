@@ -3,7 +3,9 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
-/** Drives the robot based on joystick input (each side gets one axis). */
+/** 
+ * Drives the robot based on joystick input (each side gets one axis). 
+ */
 public class TankDrive extends Command {
     public TankDrive() {
         requires(Robot.driveTrain);

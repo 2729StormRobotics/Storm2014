@@ -11,7 +11,6 @@ import storm2014.RobotMap;
 import storm2014.commands.TankDrive;
 
 /** Subsystem including the drive motors, encoders, and gyro. */
-
 public class DriveTrain extends Subsystem {
     
     private final Talon _left  = new Talon(RobotMap.PORT_MOTOR_DRIVE_LEFT),

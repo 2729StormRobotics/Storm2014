@@ -45,8 +45,8 @@ public class TakeBackHalfPlusPlus implements LiveWindowSendable {
         }
     }
     
-    private PIDSource _pidSource;
-    private PIDOutput _pidOutput;
+    private final PIDSource _pidSource;
+    private final PIDOutput _pidOutput;
     private double _setPoint;
     private double _currentSpeed;
     private double _oldSpeed = 0;
@@ -55,8 +55,8 @@ public class TakeBackHalfPlusPlus implements LiveWindowSendable {
     private double _integral;
     private double _min;
     private double _max;
-    private Timer _timer  = new Timer();
-    private double _period;
+    private final Timer _timer  = new Timer();
+    private final double _period;
     private boolean _enabled;
     public final double MULTIPLIER = -.01;
     private double _err;
@@ -118,7 +118,7 @@ public class TakeBackHalfPlusPlus implements LiveWindowSendable {
     }
     
     //updates changes from smart dashboard
-    private ITableListener listener = new ITableListener() {
+    private final ITableListener listener = new ITableListener() {
         public void valueChanged(ITable table, String key, Object value, boolean isNew){
             
             if (key.equals("setpoint")) {

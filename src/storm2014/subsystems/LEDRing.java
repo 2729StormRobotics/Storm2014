@@ -3,7 +3,6 @@ package storm2014.subsystems;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 import storm2014.RobotMap;
@@ -15,7 +14,7 @@ public class LEDRing extends Subsystem implements NamedSendable {
     private static final int FREQUENCY = 6000;
     private static final double INIT_DUTY_CYCLE = 20;
     
-    private DigitalOutput _out;
+    private final DigitalOutput _out;
     
     public LEDRing(){
         _out = new DigitalOutput(RobotMap.PORT_LED_RING);
@@ -38,7 +37,7 @@ public class LEDRing extends Subsystem implements NamedSendable {
         }
     }
 
-    private ITableListener listener = new ITableListener() {
+    private final ITableListener listener = new ITableListener() {
         public void valueChanged(ITable table, String key, Object value, boolean isNew) {
             if (key.equals("LED Percentage")) {
                 setPercentage(_table.getNumber("LED Percentage"));

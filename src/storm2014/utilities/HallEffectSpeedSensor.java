@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.tables.ITable;
  * of a wheel.
  */
 public class HallEffectSpeedSensor implements LiveWindowSendable,PIDSource {
-    private DigitalInput _hallEffect;
-    private Counter _counter;
+    private final DigitalInput _hallEffect;
+    private final Counter _counter;
 
     public HallEffectSpeedSensor(int port) {
         _hallEffect = new DigitalInput(port);

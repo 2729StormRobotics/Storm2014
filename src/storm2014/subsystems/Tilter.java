@@ -1,7 +1,5 @@
 package storm2014.subsystems;
 
-import edu.wpi.first.wpilibj.ADXL345_I2C;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.Subsystem;

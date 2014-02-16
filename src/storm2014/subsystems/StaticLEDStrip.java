@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.NamedSendable;
@@ -18,9 +12,9 @@ import storm2014.utilities.StaticLED;
  */
 public class StaticLEDStrip extends Subsystem implements NamedSendable {
     
-    private StaticLED _red,
-                      _green,
-                      _blue;
+    private final StaticLED _red,
+                            _green,
+                            _blue;
 
     public StaticLEDStrip(){
         _red   = new StaticLED(RobotMap.PORT_STATIC_LED_RED);
@@ -64,7 +58,7 @@ public class StaticLEDStrip extends Subsystem implements NamedSendable {
         }
     }
 
-    private ITableListener listener = new ITableListener() {
+    private final ITableListener listener = new ITableListener() {
         public void valueChanged(ITable table, String key, Object value, boolean isNew) {
             if (key.equals("Static Red")) {
                 setRed((byte) _table.getNumber("Static Red"));

@@ -13,7 +13,7 @@ public class BangBangController implements LiveWindowSendable {
     private class _bgTask extends TimerTask {
         public void run() {
             if(_enabled){
-                System.out.println("bg task is running");
+                //System.out.println("bg task is running");
                 curSpeed = _pidSource.pidGet(); //sets current speed to what the sensor is reading
                 if(curSpeed < _setPoint){
                     _pidOutput.pidWrite(1);
@@ -25,12 +25,12 @@ public class BangBangController implements LiveWindowSendable {
         }
     }
     
-    private Timer _timer = new Timer();
-    private double _period;
+    private final Timer _timer = new Timer();
+    private final double _period;
     private double _setPoint;
     private double curSpeed;
-    private PIDOutput _pidOutput;
-    private PIDSource _pidSource;
+    private final PIDOutput _pidOutput;
+    private final PIDSource _pidSource;
     
     private boolean _enabled = false;
     
@@ -70,7 +70,7 @@ public class BangBangController implements LiveWindowSendable {
     }
     
     //updates values when user changes them
-    private ITableListener listener = new ITableListener() {
+    private final ITableListener listener = new ITableListener() {
         public void valueChanged(ITable table, String key, Object value, boolean isNew){
             
             if (key.equals("setpoint")) {

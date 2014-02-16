@@ -2,12 +2,10 @@ package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
-import storm2014.utilities.HallEffectSpeedSensor;
 
 public final class Intake extends Subsystem {
     private final Talon                 _motor       = new Talon(RobotMap.PORT_MOTOR_ROLLER);

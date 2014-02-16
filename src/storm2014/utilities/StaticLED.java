@@ -15,7 +15,7 @@ public class StaticLED {
     
     private static final int FREQUENCY = 100;
     
-    private DigitalOutput _out;
+    private final DigitalOutput _out;
     
     private short _value = 0;
     

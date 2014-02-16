@@ -38,8 +38,8 @@ public class LEDStrip extends Subsystem implements NamedSendable {
 
     private static final String _serverIP   = "socket://10.27.29.100:1025";
 
-    private static int  _currentMode = 0;
-    private static long _readTimeout = 5000;
+    private static int        _currentMode = 0;
+    private static final long _readTimeout = 5000;
 
     private ITable _table;
     

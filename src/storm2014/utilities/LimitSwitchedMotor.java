@@ -16,11 +16,10 @@ public class LimitSwitchedMotor implements SpeedController {
     private final Trigger _top,_bottom;
     private final boolean      _topOn,_bottomOn;
     private double _value;
-    private Timer _bgThread = new Timer();
+    private final Timer _bgThread = new Timer();
     private boolean _limitingEnabled = true;
-    private Timer _safetyOnTimer = new Timer();
     
-    private TimerTask _bgTask = new TimerTask() {
+    private final TimerTask _bgTask = new TimerTask() {
         public void run() {
             double output = _value;
             if(_limitingEnabled) {
@@ -35,12 +34,6 @@ public class LimitSwitchedMotor implements SpeedController {
                 }
             }
             _controller.set(output);
-        }
-    };
-    
-    private TimerTask _resetSafety = new TimerTask() {
-        public void run() {
-            _limitingEnabled = true;
         }
     };
 

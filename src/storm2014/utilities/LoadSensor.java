@@ -9,7 +9,7 @@ public class LoadSensor implements LiveWindowSendable {
     // slope: x-axis: amps y-axis: volts (Dropbox/Storm2729/current-sensor-curve.xlsx)
     private final double voltToAmpRatio = 39.46e-3;
     
-    private AnalogChannel loadSensor;
+    private final AnalogChannel loadSensor;
     private ITable _table;
     
     public LoadSensor(int channel){

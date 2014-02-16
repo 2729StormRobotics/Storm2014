@@ -1,6 +1,5 @@
 package storm2014.commands.control;
 
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
