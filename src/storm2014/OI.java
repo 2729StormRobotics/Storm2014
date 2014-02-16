@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.commands.ChangeArmPosition;
+import storm2014.commands.IncrementWinchIndex;
 import storm2014.commands.Launch;
 import storm2014.commands.PreLaunch;
 import storm2014.commands.ResetCatapult;
@@ -59,16 +60,16 @@ public class OI {
         spinOut  .whenPressed (new SpinRoller(-1));
         spinOut  .whenReleased(new SpinRoller(0));
         
-        armsIn   .whenPressed (new ChangeArmPosition(-1));
-        armsOut  .whenPressed (new ChangeArmPosition(1));
-        prefire  .whenPressed (new PreLaunch());
-        resetCat .whenPressed (new ResetCatapult());
-        fire     .whenPressed (new Launch() {
+        armsIn          .whenPressed (new ChangeArmPosition(-1));
+        armsOut         .whenPressed (new ChangeArmPosition(1));
+        prefire         .whenPressed (new PreLaunch());
+        resetCat        .whenPressed (new ResetCatapult());
+        fire            .whenPressed (new Launch() {
             protected boolean thisIsIntentional() {
                 return true;
             }
         });
-        tensionCatapult .whenPressed(null);
+        tensionCatapult .whenPressed(new IncrementWinchIndex());
     }
     
     // When a joystick is in its zero position, it will not necessarily read

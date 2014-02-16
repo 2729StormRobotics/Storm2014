@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
 import storm2014.commands.control.DoNothing;
 import storm2014.commands.PreLaunch;
+import storm2014.commands.TensionWinch;
 import storm2014.utilities.Debouncer;
 import storm2014.utilities.MagneticEncoder;
 
@@ -32,6 +33,10 @@ public class Catapult extends Subsystem {
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
     private final Debouncer _ratchetDisengaged = new Debouncer(0.25);
     
+    public final double [] pullBackPresets = new double[]{100, 283, 467, 650}; //presets are based on negation already in code
+    public int presetIncrement = -1;
+    
+    
     public Catapult(){
         _winchEncoder.start();
         setRatchetUnlatched();
@@ -48,7 +53,7 @@ public class Catapult extends Subsystem {
     protected void initDefaultCommand() {
        CommandGroup wait = new CommandGroup("wait");
        wait.addSequential(new PreLaunch());
-       wait.addSequential(new DoNothing());
+       wait.addSequential(new TensionWinch(pullBackPresets[presetIncrement]));
 //        setDefaultCommand(wait);
     }
     
@@ -114,4 +119,15 @@ public class Catapult extends Subsystem {
        return preLaunchFinished;
     }
     
+    public void setIndex(int newIndex){
+        presetIncrement = newIndex;
+    }
+
+    public int getIndex(){
+        return presetIncrement;
+    }
+    
+    public double[] getPresets(){
+        return pullBackPresets;
+    }
 }

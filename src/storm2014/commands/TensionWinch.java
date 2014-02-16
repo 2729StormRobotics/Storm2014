@@ -7,30 +7,34 @@
 package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import storm2014.Robot;
 
 /**
  *
  * @author Tim
  */
+public class TensionWinch extends Command{
 
-
-public class IncrementWinchDistance extends Command{
+    double _distance;
+    double power = 0.5;
     
-    public final double [] pullBackPresets = new double[]{100, 283, 467, 650}; //presets are based on negation already in code
-    public int presetIncrement = -1;
-
     protected void initialize() {
-        presetIncrement++;
-        presetIncrement%=pullBackPresets.length;
-        new PullBack(pullBackPresets[presetIncrement]).start();
+        Robot.catapult.setIndex(0);
     }
 
+    public TensionWinch(double distance){
+        requires(Robot.catapult);
+        _distance = distance;
+    }
+    
     protected void execute() {
-        
+        while(Robot.catapult.getWinchDistance() < _distance)
+            Robot.catapult.setWinchPower(power);
+        Robot.catapult.setWinchPower(0);
     }
 
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     protected void end() {
@@ -40,6 +44,5 @@ public class IncrementWinchDistance extends Command{
     protected void interrupted() {
         
     }
-    
     
 }
