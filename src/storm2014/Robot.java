@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
     private void sendSensorData() {
          SmartDashboard.putNumber("String Pot Voltage",tilter.getStringPotRaw());
          SmartDashboard.putNumber("Winch Encoder",catapult.getWinchDistance());
+         SmartDashboard.putNumber("Winch Setpoint",catapult.getCurrentPreset());
          SmartDashboard.putNumber("Piston mode", intake.getMode());
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
          SmartDashboard.putNumber("Catapult Angle", catapult.getPivotAngle());
@@ -69,50 +70,18 @@ public class Robot extends IterativeRobot {
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         
-        new Command("Winch control") {
-            protected void initialize() {
-            }
-
-            protected void execute() {
-                catapult.setWinchPower(oi.getTension());
-            }
-
-            protected boolean isFinished() {
-                return false;
-            }
-            protected void end() {
-                catapult.setWinchPower(0);
-            }
-            protected void interrupted() {
-                end();
-            }
-        }.start();
-        
-        System.out.println("Got to stuff!");
-        
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"Drive Forward","OneBallDynamic Left","OneBallDynamic Right"};
         autonomice = new Command[]{new DriveForward(0.6, 1000),new OneBallDynamic(false), new OneBallDynamic(true)};
         
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard
-        System.out.println(autonomice.length);
+        System.out.println(autonomice.length + " autonomice");
         for (int i = 0; i < autonomice.length; ++i) {
             chooser.addObject(autonomiceNames[i], autonomice[i]);
         }
         SmartDashboard.putData("Which Autonomouse?", chooser);
         SmartDashboard.putData(Scheduler.getInstance());
-        
-        SmartDashboard.putData("Engage Ratchet",new SetEngagedRatchet(true));
-        SmartDashboard.putData("Disengage Ratchet",new SetEngagedRatchet(false));
-        SmartDashboard.putData("Engage Winch",new SetWinchEngaged(true));
-        SmartDashboard.putData("Disengage Winch",new SetWinchEngaged(false));
-        SmartDashboard.putData("Latch", new SetLatched(true));
-        SmartDashboard.putData("Unlatch", new SetLatched(false));
-        SmartDashboard.putData("Spin Roller In", new SpinRoller(1));
-        SmartDashboard.putData("Stop Roller", new SpinRoller(0));
-        SmartDashboard.putData("Spin Roller Out", new SpinRoller(-1));
-        
         
         // Send sensor info to the SmartDashboard periodically
         new Command("Sensor feedback") {

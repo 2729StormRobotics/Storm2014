@@ -62,7 +62,7 @@ public class OI {
 //        prefire  .whenPressed (new PreLaunch());
         resetCat .whenPressed (new ResetCatapult());
         fire     .whenPressed (new LaunchIfReady());
-        tension .whenPressed(new IncrementWinchIndex());
+        tension  .whenPressed(new IncrementWinchIndex());
     }
     
     // When a joystick is in its zero position, it will not necessarily read

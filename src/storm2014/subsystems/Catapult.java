@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.Robot;
 import storm2014.RobotMap;
-import storm2014.commands.control.DoNothing;
 import storm2014.commands.PreLaunch;
 import storm2014.commands.TensionWinch;
 import storm2014.utilities.Debouncer;
@@ -35,7 +35,7 @@ public class Catapult extends Subsystem {
     private final Debouncer _ratchetDisengaged = new Debouncer(0.25);
     
     public final double [] pullBackPresets = new double[]{100, 283, 467, 760}; //presets are based on negation already in code
-    public int presetIncrement = -1;
+    public int presetIndex = 0;
     
     
     public Catapult(){
@@ -47,15 +47,35 @@ public class Catapult extends Subsystem {
         LiveWindow.addActuator("Catapult", "Winch shifter", _winchShift);
         LiveWindow.addActuator("Catapult", "Latch", _latch);
         LiveWindow.addActuator("Catapult", "Magnetic Encoder", _magEnc);
-//        LiveWindow.addSensor("Catapult", "Winch one", _winchOne);
-//        LiveWindow.addSensor("Catapult", "Winch two", _winchTwo);
     }
     
     protected void initDefaultCommand() {
        CommandGroup wait = new CommandGroup("wait");
        wait.addSequential(new PreLaunch());
-       wait.addSequential(new TensionWinch());
-       setDefaultCommand(wait);
+//       wait.addSequential(new TensionWinch());
+       wait.addSequential(new Command("Winch control") {
+            {
+                requires(Robot.catapult);
+            }
+            protected void initialize() {
+                Robot.catapult.setIndex(0);
+            }
+
+            protected void execute() {
+                Robot.catapult.setWinchPower(Robot.oi.getTension());
+            }
+
+            protected boolean isFinished() {
+                return false;
+            }
+            protected void end() {
+                Robot.catapult.setWinchPower(0);
+            }
+            protected void interrupted() {
+                end();
+            }
+        });
+        setDefaultCommand(wait);
     }
     
     public boolean isRatchetEngaged() {
@@ -121,15 +141,15 @@ public class Catapult extends Subsystem {
     }
     
     public void setIndex(int newIndex){
-        presetIncrement = Math.max(0, Math.min(newIndex,pullBackPresets.length-1));
+        presetIndex = Math.max(0, Math.min(newIndex,pullBackPresets.length-1));
     }
 
     public int getCurrentIndex(){
-        return presetIncrement;
+        return presetIndex;
     }
     
     public double getCurrentPreset(){
-        return pullBackPresets[presetIncrement];
+        return pullBackPresets[presetIndex];
     }
     public int getNumPresets() {
         return pullBackPresets.length;
