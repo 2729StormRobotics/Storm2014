@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import storm2014.Robot;
 import storm2014.RobotMap;
 import storm2014.commands.control.DoNothing;
 import storm2014.commands.PreLaunch;
@@ -120,7 +121,7 @@ public class Catapult extends Subsystem {
     }
     
     public void setIndex(int newIndex){
-        presetIncrement = newIndex;
+        presetIncrement = Math.max(0, Math.min(newIndex,pullBackPresets.length-1));
     }
 
     public int getCurrentIndex(){
