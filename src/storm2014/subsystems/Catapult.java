@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import storm2014.Robot;
 import storm2014.RobotMap;
 import storm2014.commands.PreLaunch;
-import storm2014.commands.TensionWinch;
 import storm2014.utilities.Debouncer;
 import storm2014.utilities.MagneticEncoder;
 
