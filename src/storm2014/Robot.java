@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.DriveForward;
-import storm2014.commands.PullBack;
 import storm2014.commands.SetEngagedRatchet;
 import storm2014.commands.SetWinchEngaged;
 import storm2014.commands.SetLatched;
@@ -104,7 +103,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Which Autonomouse?", chooser);
         SmartDashboard.putData(Scheduler.getInstance());
         
-        SmartDashboard.putData("Pull Back",new PullBack(100));
         SmartDashboard.putData("Engage Ratchet",new SetEngagedRatchet(true));
         SmartDashboard.putData("Disengage Ratchet",new SetEngagedRatchet(false));
         SmartDashboard.putData("Engage Winch",new SetWinchEngaged(true));

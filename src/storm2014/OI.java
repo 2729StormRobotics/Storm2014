@@ -6,13 +6,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.commands.ChangeArmPosition;
 import storm2014.commands.IncrementWinchIndex;
-import storm2014.commands.Launch;
 import storm2014.commands.LaunchIfReady;
-import storm2014.commands.PreLaunch;
 import storm2014.commands.ResetCatapult;
 import storm2014.commands.Shift;
 import storm2014.commands.SpinRoller;
-import storm2014.commands.control.WaitForButton;
 
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
 public class OI {
@@ -22,16 +19,16 @@ public class OI {
     
     private final Button shiftHigh       = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_HIGH),
                          shiftLow        = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_LOW),
-                         reverse         = new JoystickButton(driveJoystick, 6),
+                         reverse         = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_REVERSE),
             
                          spinIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN),
                          spinOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_OUT),
                          armsOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_OUT),
                          armsIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_IN),
 //                         prefire   = new JoystickButton(shootJoystick, 8),
-                         resetCat  = new JoystickButton(shootJoystick, 3),
-                         fire      = new JoystickButton(shootJoystick, 6),
-                         tensionCatapult = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_TENSION);
+                         resetCat  = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_RESET),
+                         fire      = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_FIRE),
+                         tension   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_TENSION);
     
     private final Button continueProcess = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
     
@@ -65,7 +62,7 @@ public class OI {
 //        prefire  .whenPressed (new PreLaunch());
         resetCat .whenPressed (new ResetCatapult());
         fire     .whenPressed (new LaunchIfReady());
-        tensionCatapult .whenPressed(new IncrementWinchIndex());
+        tension .whenPressed(new IncrementWinchIndex());
     }
     
     // When a joystick is in its zero position, it will not necessarily read
