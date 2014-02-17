@@ -4,7 +4,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 
 public class TensionWinch extends Command {
-    double power = 0.5;
+    private final double power = 0.5;
+    private final double tolerance = 10.0;
     
     protected void initialize() {
         Robot.catapult.setIndex(0);
@@ -16,7 +17,7 @@ public class TensionWinch extends Command {
     
     protected void execute() {
         double distance = Robot.catapult.getCurrentPreset();
-        if(Robot.catapult.getWinchDistance() < distance) {
+        if(Robot.catapult.getWinchDistance() < distance - tolerance) {
             Robot.catapult.setWinchPower(power);
         } else {
             Robot.catapult.setWinchPower(0);
