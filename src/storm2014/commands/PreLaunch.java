@@ -3,6 +3,7 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import storm2014.Robot;
+import storm2014.commands.control.WaitForButton;
 /**
  * Gets the robot ready to fire.
 */
@@ -10,6 +11,7 @@ import storm2014.Robot;
 public class PreLaunch extends CommandGroup {
     public PreLaunch() {
         addSequential(new SetEngagedRatchet(true));
+        addSequential(new WaitForButton());
         addSequential(new Command() {
             protected void initialize() {
                 Robot.catapult.setFinishedPreLaunch(true);

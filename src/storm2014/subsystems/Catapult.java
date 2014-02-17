@@ -28,12 +28,13 @@ public class Catapult extends Subsystem {
     private final Solenoid        _latch        = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
     private final Solenoid        _ratchet      = new Solenoid(RobotMap.PORT_SOLENOID_RATCHET);
     private final MagneticEncoder _magEnc       = new MagneticEncoder(RobotMap.PORT_SENSOR_MAG_ENCODER);
-    private final DigitalInput    _pawlSwitch   = new DigitalInput(RobotMap.PORT_SENSOR_SWITCH_PAWL);
+//    private final DigitalInput    _pawlSwitch   = new DigitalInput(RobotMap.PORT_SENSOR_SWITCH_PAWL);
     
     private boolean preLaunchFinished;
     private static final double ANGLE_RATCHET_ENGAGED    = 170;
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
-    private final Debouncer _ratchetDisengaged = new Debouncer(0.25);
+    private boolean _ratchetEngaged = true;
+//    private final Debouncer _ratchetDisengaged = new Debouncer(0.25);
     
     public final double [] pullBackPresets = new double[]{100, 283, 467, 760}; //presets are based on negation already in code
     public int presetIndex = 0;
@@ -51,7 +52,7 @@ public class Catapult extends Subsystem {
     
     protected void initDefaultCommand() {
        CommandGroup wait = new CommandGroup("wait");
-       wait.addSequential(new PreLaunch());
+//       wait.addSequential(new PreLaunch());
 //       wait.addSequential(new TensionWinch());
        wait.addSequential(new Command("Winch control") {
             {
@@ -79,7 +80,7 @@ public class Catapult extends Subsystem {
     }
     
     public boolean isRatchetEngaged() {
-        return !_ratchetDisengaged.check(_pawlSwitch.get());
+        return _ratchetEngaged;//!_ratchetDisengaged.check(_pawlSwitch.get());
     }
     
     public void setWinchPower(double winchRawVal){
@@ -111,13 +112,15 @@ public class Catapult extends Subsystem {
     
     public void setRatchetLatched(){
         _winch.set(0);
-        _ratchet.set(true);
+        _ratchet.set(false);
+        _ratchetEngaged = true;
     }
     
     public void setRatchetUnlatched(){
         _winch.set(0);
         isRatchetEngaged();
-        _ratchet.set(false);
+        _ratchet.set(true);
+        _ratchetEngaged = false;
     }
     
     public double getPivotAngle() {

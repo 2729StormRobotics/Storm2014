@@ -46,7 +46,7 @@ public class RobotMap {
     public static final int PORT_STATIC_LED_RED     = 10;
     public static final int PORT_STATIC_LED_BLUE    = 11;
     public static final int PORT_SWITCH_COMPRESSO   = 12;
-    public static final int PORT_SENSOR_SWITCH_PAWL = 14;
+//    public static final int PORT_SENSOR_SWITCH_PAWL = 14;
     
     //Relays
     public static final int PORT_RELAY_COMPRESSOR = 1;
