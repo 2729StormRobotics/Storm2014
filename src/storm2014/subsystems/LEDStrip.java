@@ -68,7 +68,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                 try {
                     _socket = (SocketConnection) Connector.open(_serverIP);
                     _outstream = _socket.openOutputStream();
-                    _instream  = _socket.openInputStream();
+                    //_instream  = _socket.openInputStream();
                     
                     _outstream.write(mode);
                     if (mode == SetColorMode){
@@ -92,7 +92,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                         }
                     }
                     
-                    long timeoutTime = System.currentTimeMillis() + _readTimeout;
+                    /*long timeoutTime = System.currentTimeMillis() + _readTimeout;
                     int newMode = -1;
                     while(newMode == -1 && System.currentTimeMillis() < timeoutTime){
                         while (_instream.available() > 0){
@@ -101,21 +101,21 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                             
                             newMode = bytes[bytesRead - 1];
                         }
-                    }
+                    }*/
 
                     _outstream.close();
-                    _instream.close();
+                    //_instream.close();
                     _socket.close();
                     
                     _currentMode = mode;
                     _table.putNumber("Mode", _currentMode);
                     System.out.print("LEDMode was set to " + _currentMode);
                     
-                    if (_currentMode != newMode){
+                    /*if (_currentMode != newMode){
                         System.out.println("... Except that it's not. The LED strip kinda ignored the new mode. It's acutally " + newMode);
                     } else {
                         System.out.println(".");
-                    }
+                    }*/
                     _disconnected = false;
                 } catch (IOException ex) {
                     if (!_disconnected){

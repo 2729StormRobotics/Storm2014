@@ -20,6 +20,7 @@ public class SetLEDMode extends Command {
         _b = 0;
     }
     public SetLEDMode(int mode, byte r, byte g, byte b){
+        _mode = mode;
         _r = r;
         _g = g;
         _b = b;
