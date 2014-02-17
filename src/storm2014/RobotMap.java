@@ -69,4 +69,5 @@ public class RobotMap {
     public static final int PORT_SOLENOID_INTAKE_TOP_OUT    = 6;
     public static final int PORT_SOLENOID_INTAKE_BOTTOM_IN  = 7;
     public static final int PORT_SOLENOID_INTAKE_BOTTOM_OUT = 8;
+    public static final int PORT_SOLENOID_RATCHET           = 9;
 }

@@ -23,9 +23,8 @@ public class Catapult extends Subsystem {
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder         _winchEncoder = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
-    private final Solenoid        _winchShift   = new Solenoid(RobotMap.PORT_SOLENOID_WINCH);
     private final Solenoid        _latch        = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
-    private final Servo           _ratchet      = new Servo(RobotMap.PORT_SERVO);
+    private final Solenoid        _ratchet      = new Solenoid(RobotMap.PORT_SOLENOID_RATCHET);
     private final MagneticEncoder _magEnc       = new MagneticEncoder(RobotMap.PORT_SENSOR_MAG_ENCODER);
     private final DigitalInput    _pawlSwitch   = new DigitalInput(RobotMap.PORT_SENSOR_SWITCH_PAWL);
     
@@ -44,7 +43,6 @@ public class Catapult extends Subsystem {
         LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
         LiveWindow.addActuator("Catapult", "Ratchet", _ratchet);
         LiveWindow.addActuator("Catapult", "Winch", _winch);
-        LiveWindow.addActuator("Catapult", "Winch shifter", _winchShift);
         LiveWindow.addActuator("Catapult", "Latch", _latch);
         LiveWindow.addActuator("Catapult", "Magnetic Encoder", _magEnc);
     }
@@ -101,14 +99,6 @@ public class Catapult extends Subsystem {
         return -_winchEncoder.get();
     }
     
-    public void disengageWinch(){
-        _winchShift.set(false);
-    }
-    
-    public void engageWinch(){
-        _winchShift.set(true);
-    }
-    
     public void latch() {
         _latch.set(false);
     }
@@ -119,13 +109,13 @@ public class Catapult extends Subsystem {
     
     public void setRatchetLatched(){
         _winch.set(0);
-        _ratchet.setAngle(ANGLE_RATCHET_ENGAGED);
+        _ratchet.set(true);
     }
     
     public void setRatchetUnlatched(){
         _winch.set(0);
         isRatchetEngaged();
-        _ratchet.setAngle(ANGLE_RATCHET_DISENGAGED);
+        _ratchet.set(false);
     }
     
     public double getPivotAngle() {

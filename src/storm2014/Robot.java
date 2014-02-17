@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.DriveForward;
 import storm2014.commands.SetEngagedRatchet;
-import storm2014.commands.SetWinchEngaged;
 import storm2014.commands.SetLatched;
 import storm2014.commands.SpinRoller;
 import storm2014.commands.autonomous.OneBallDynamic;

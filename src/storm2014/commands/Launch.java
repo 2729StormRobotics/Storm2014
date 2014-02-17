@@ -25,12 +25,10 @@ public abstract class Launch extends CommandGroup {
         });
         addSequential(new SetLEDMode(LEDStrip.PileMode));
         addSequential(new SetArmPosition(2));
-        addSequential(new SetWinchEngaged(false));
         addSequential(new SetLatched(false));
         addSequential(new SetLEDMode(LEDStrip.RainbowDancePartyMode));
         addSequential(new WaitForFollowThrough(),1);
         addSequential(new SetLEDMode(LEDStrip.USAMode));
-        addSequential(new SetWinchEngaged(true));
         addSequential(new SetEngagedRatchet(false));
         addSequential(new ResetCatapult());
         addSequential(new SetLEDMode()); //Back to whatever the default is

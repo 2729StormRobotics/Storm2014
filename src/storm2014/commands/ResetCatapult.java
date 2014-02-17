@@ -10,7 +10,6 @@ import storm2014.utilities.Debouncer;
 public class ResetCatapult extends CommandGroup {
     public ResetCatapult() {
         addSequential(new SetEngagedRatchet(false));
-        addSequential(new SetWinchEngaged(true));
         // Wait for catapult to return
         addSequential(new Command() {
             private final Debouncer _debounce = new Debouncer(0.5);

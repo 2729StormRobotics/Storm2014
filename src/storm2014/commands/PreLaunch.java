@@ -8,7 +8,6 @@ import storm2014.Robot;
 public class PreLaunch extends CommandGroup {
     public PreLaunch() {
         addSequential(new SetEngagedRatchet(true));
-        addSequential(new SetWinchEngaged(true));
         addSequential(new Command() {
             protected void initialize() {
                 Robot.catapult.setFinishedPreLaunch(true);
