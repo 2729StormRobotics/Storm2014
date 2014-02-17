@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.util.AllocationException;
 import storm2014.Robot;
 import storm2014.subsystems.LEDStrip;
-
+/**
+ *Launches the catapult thru a series of steps.
+ */
 // Tested by Joe Doyle (mostly) on 2014 Robot on 2/15/14
 public abstract class Launch extends CommandGroup {
     public Launch(){

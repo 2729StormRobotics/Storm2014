@@ -3,8 +3,9 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 import storm2014.subsystems.VisionSystem;
-
-//TODO
+/**
+ *Auto align the tilter to the correct angle to allow an easy shot for the user. 
+ */
 public class AutoAlign extends Command{
     
     private double _distance;

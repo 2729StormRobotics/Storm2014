@@ -2,7 +2,9 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
-
+/**
+ * Wait until pre launch is finished then launch.
+*/
 public class LaunchWhenReady extends Command {
     Command _launch;
      boolean _hasRun;

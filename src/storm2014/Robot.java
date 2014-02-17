@@ -24,7 +24,7 @@ import storm2014.subsystems.StaticLEDStrip;
 import storm2014.subsystems.Tilter;
 
 /**
- * This is the robot's "Main class" which is run by the VM.
+ * This is the robot's "Main class" which is run by the VM. 
  */
 //create allcellaromiter class, send data to dashboard in send sensor method in robot.java
 public class Robot extends IterativeRobot {

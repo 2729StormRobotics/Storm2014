@@ -3,7 +3,9 @@ package storm2014.commands;
 import storm2014.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.subsystems.VisionSystem;
-
+/**
+ * Turns robot to ball.
+ */
 //Not Tested
 public class TurnToBall extends Command {                           
      private final double _speed;

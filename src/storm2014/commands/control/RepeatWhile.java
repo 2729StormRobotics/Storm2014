@@ -1,7 +1,9 @@
 package storm2014.commands.control;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+/**
+ * Repeats a command while the condition is true.
+ */
 public abstract class RepeatWhile extends Command {
     Command _c;
     

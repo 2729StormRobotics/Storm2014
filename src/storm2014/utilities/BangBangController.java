@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**
+ * Spins up fast then ocelates around a value.
+ */
 public class BangBangController implements LiveWindowSendable {
     //if less then set point gun it if you are greater drop down to 0 or drop down to lower value
     private class _bgTask extends TimerTask {

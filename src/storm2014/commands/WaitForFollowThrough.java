@@ -2,7 +2,9 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
-
+/**
+ * Waits for catapult follow thru.
+ */
 public class WaitForFollowThrough extends Command {
     private double _prevDiff  = 0,
             _prevAngle = 0;

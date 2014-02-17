@@ -9,7 +9,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import storm2014.Robot;
 import storm2014.subsystems.LEDStrip;
-
+/**
+ * Used for getting an accurate motor speed.
+ */
 public class TakeBackHalfPlusPlus implements LiveWindowSendable {
     
     private class _bgTask extends TimerTask {

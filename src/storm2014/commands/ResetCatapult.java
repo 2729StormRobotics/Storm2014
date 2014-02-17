@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import storm2014.Robot;
 import storm2014.subsystems.Catapult;
 import storm2014.utilities.Debouncer;
-
+/**
+ * Resets the catapult to the correct position.
+ */
 // Tested by Joe Doyle (mostly) on 2014 Robot on 2/15/14
 public class ResetCatapult extends CommandGroup {
     public ResetCatapult() {

@@ -2,7 +2,9 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
-
+/**
+ *Changes the arm position by a given increment.
+ */
 //Not tested
 public class ChangeArmPosition extends Command {
     private final int _increment;

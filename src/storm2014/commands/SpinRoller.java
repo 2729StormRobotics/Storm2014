@@ -2,7 +2,9 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
-
+/**
+ *Spins the roller a given direction.
+ */
 //Not Tested
 public class SpinRoller extends Command {
     private final int _direction;

@@ -1,7 +1,9 @@
 package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+/**
+ * Vision system smart dashboard keys.
+ */
 public abstract class VisionSystem {
     public static double getTargetXAngle() {
         return SmartDashboard.getNumber("Vertical target horizontal angle", 0);

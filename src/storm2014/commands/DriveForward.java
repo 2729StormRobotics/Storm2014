@@ -2,7 +2,9 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
-
+/**
+ *Drives the robot forward by a certain distance and speed
+ */
 public class DriveForward extends Command {
     final double _speed;
     final double _distance;

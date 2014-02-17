@@ -4,7 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.PublicCommand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import java.util.Enumeration;
-
+/**
+ * Used by command groups for if statements.
+ */
 public abstract class Conditional extends Command {
     private final PublicCommand _ifTrue,_ifFalse;
     private PublicCommand _running = null;

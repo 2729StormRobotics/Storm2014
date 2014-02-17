@@ -2,7 +2,9 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
-
+/**
+ * Turns the robot.
+ */
 // Tested by Joe Doyle on Electra before 2/8/13
 public class Turn extends Command {
 

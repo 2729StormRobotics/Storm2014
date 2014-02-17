@@ -1,8 +1,10 @@
 package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+/**
+ *Increments the winch index.
+ */
 import storm2014.Robot;
-
 public class IncrementWinchIndex extends Command{
     
     protected void initialize() {

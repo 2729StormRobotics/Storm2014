@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.RobotMap;
-
+/**
+ * Subsytem that communicates with the intake components.
+ */
 public final class Intake extends Subsystem {
     private final Talon                 _motor       = new Talon(RobotMap.PORT_MOTOR_ROLLER);
     private final DigitalInput          _ir          = new DigitalInput(RobotMap.PORT_SENSOR_BALL_IR);

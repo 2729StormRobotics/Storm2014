@@ -4,7 +4,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import storm2014.commands.DriveForward;
 import storm2014.commands.SetArmPosition;
 import storm2014.commands.SpinRoller;
-
+/**
+ * Grabs the ball.
+ */
 public class GrabBall extends CommandGroup {
     public GrabBall(double speed,double distance) {
         addSequential(new SetArmPosition(2));

@@ -2,7 +2,9 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
-
+/**
+ * Tensions the winch.
+ */
 public class TensionWinch extends Command {
     private final double power = 0.5;
     private final double tolerance = 10.0;

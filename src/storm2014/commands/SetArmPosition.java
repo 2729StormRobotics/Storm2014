@@ -3,7 +3,9 @@ package storm2014.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 import storm2014.utilities.Debouncer;
-
+/**
+ * Sets the arm position to the desired mode.
+ */
 public class SetArmPosition extends Command {
     private final int _mode;
     private int _currMode;

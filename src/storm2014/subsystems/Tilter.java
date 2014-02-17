@@ -9,7 +9,9 @@ import storm2014.commands.TiltByJoystick;
 import storm2014.utilities.LimitSwitchedMotor;
 import storm2014.utilities.StringPotToAngle;
 import storm2014.utilities.StringPot;
-
+/**
+ * subsystem that communicates with the tilter components.
+ */
 //TODO waiting for joes array value list.
 public class Tilter extends Subsystem {
     private static final double STRINGPOT_MAX_SAFE = 2.85,

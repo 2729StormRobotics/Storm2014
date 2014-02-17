@@ -14,7 +14,9 @@ import storm2014.RobotMap;
 import storm2014.commands.PreLaunch;
 import storm2014.utilities.Debouncer;
 import storm2014.utilities.MagneticEncoder;
-
+/**
+ * Subsytem that communicates with the catapult components.
+ */
 public class Catapult extends Subsystem {
     
     //Full Power is -650 on the encoder

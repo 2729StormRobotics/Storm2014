@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
 import storm2014.subsystems.LEDStrip;
+/**
+ * Sets the LED Mode.
+ */
 
 public class SetLEDMode extends Command {
     private int _mode;

@@ -2,7 +2,9 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
-
+/*
+Latches/Unlatches the latch.
+*/
 //Not Tested
 public class SetLatched extends Command {
 
