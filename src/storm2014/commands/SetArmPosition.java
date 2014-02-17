@@ -9,7 +9,7 @@ import storm2014.utilities.Debouncer;
 public class SetArmPosition extends Command {
     private final int _mode;
     private int _currMode;
-    private final Debouncer _wait = new Debouncer(0.5);
+    private final Debouncer _wait = new Debouncer(1);
     
     public SetArmPosition(int mode) {
         requires(Robot.intake);

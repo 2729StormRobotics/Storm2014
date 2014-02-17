@@ -6,7 +6,7 @@ import storm2014.Robot;
  * Tensions the winch.
  */
 public class TensionWinch extends Command {
-    private final double power = 0.5;
+    private final double power = 1;
     private final double tolerance = 10.0;
     
     protected void initialize() {

@@ -32,16 +32,16 @@ public class Catapult extends Subsystem {
     private boolean preLaunchFinished;
     private static final double ANGLE_RATCHET_ENGAGED    = 170;
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
-    private boolean _ratchetEngaged = true;
 //    private final Debouncer _ratchetDisengaged = new Debouncer(0.25);
     
-    public final double [] pullBackPresets = new double[]{100, 283, 467, 760}; //presets are based on negation already in code
+    public final double [] pullBackPresets = new double[]{100, 283, 467, 610}; //presets are based on negation already in code
     public int presetIndex = 0;
+    private boolean _isPawlEngaged = true;
     
     
     public Catapult(){
         _winchEncoder.start();
-        setRatchetUnlatched();
+        setRatchetLatched();
         LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
         LiveWindow.addActuator("Catapult", "Ratchet", _ratchet);
         LiveWindow.addActuator("Catapult", "Winch", _winch);
@@ -51,7 +51,7 @@ public class Catapult extends Subsystem {
     
     protected void initDefaultCommand() {
        CommandGroup wait = new CommandGroup("wait");
-//       wait.addSequential(new PreLaunch());
+       wait.addSequential(new PreLaunch());
 //       wait.addSequential(new TensionWinch());
        wait.addSequential(new Command("Winch control") {
             {
@@ -79,7 +79,7 @@ public class Catapult extends Subsystem {
     }
     
     public boolean isRatchetEngaged() {
-        return _ratchetEngaged;//!_ratchetDisengaged.check(_pawlSwitch.get());
+        return _isPawlEngaged;//!_ratchet.get();//!_ratchetDisengaged.check(_pawlSwitch.get());
     }
     
     public void setWinchPower(double winchRawVal){
@@ -90,6 +90,12 @@ public class Catapult extends Subsystem {
 //            winchRawVal = 0;
 //        }
         winchRawVal = -winchRawVal;
+        if(_isPawlEngaged && Math.abs(winchRawVal) > 0.1) {
+            setRatchetUnlatched();
+            _isPawlEngaged = true;
+        } else if(_isPawlEngaged) {
+            setRatchetLatched();
+        }
         _winch.set(winchRawVal);
     }
     
@@ -112,14 +118,14 @@ public class Catapult extends Subsystem {
     public void setRatchetLatched(){
         _winch.set(0);
         _ratchet.set(false);
-        _ratchetEngaged = true;
+        _isPawlEngaged = true;
     }
     
     public void setRatchetUnlatched(){
         _winch.set(0);
         isRatchetEngaged();
         _ratchet.set(true);
-        _ratchetEngaged = false;
+        _isPawlEngaged = false;
     }
     
     public double getPivotAngle() {
