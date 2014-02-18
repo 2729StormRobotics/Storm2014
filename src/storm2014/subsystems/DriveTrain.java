@@ -97,8 +97,8 @@ public class DriveTrain extends Subsystem {
     }
     public void setHighGear(boolean enabled) {
         _isHighGear = enabled;
-        _shifter.set(enabled ? DoubleSolenoid.Value.kForward :
-                               DoubleSolenoid.Value.kReverse);
+        _shifter.set(enabled ? DoubleSolenoid.Value.kReverse :
+                               DoubleSolenoid.Value.kForward);
     }
     public boolean isHighgear() {
         return _isHighGear;
