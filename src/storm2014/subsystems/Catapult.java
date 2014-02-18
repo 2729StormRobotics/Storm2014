@@ -20,13 +20,14 @@ public class Catapult extends Subsystem {
     
     //Full Power is -650 on the encoder
     public static final double WINCH_ENCODER_MAX = 600;
-    public static final double BASE_ANGLE = 230;
+    public static final double BASE_ANGLE = 238;
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder         _winchEncoder = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
     private final Solenoid        _latch        = new Solenoid(RobotMap.PORT_SOLENOID_LATCH);
     private final Solenoid        _ratchet      = new Solenoid(RobotMap.PORT_SOLENOID_RATCHET);
     private final MagneticEncoder _magEnc       = new MagneticEncoder(RobotMap.PORT_SENSOR_MAG_ENCODER);
+    private final DigitalInput    _winchZero    = new DigitalInput(RobotMap.PORT_SENSOR_WINCH_ZERO);
 //    private final DigitalInput    _pawlSwitch   = new DigitalInput(RobotMap.PORT_SENSOR_SWITCH_PAWL);
     
     private boolean preLaunchFinished;
@@ -47,6 +48,7 @@ public class Catapult extends Subsystem {
         LiveWindow.addActuator("Catapult", "Winch", _winch);
         LiveWindow.addActuator("Catapult", "Latch", _latch);
         LiveWindow.addActuator("Catapult", "Magnetic Encoder", _magEnc);
+        LiveWindow.addActuator("Catapult", "Winch Zero", _winchZero);
     }
     
     protected void initDefaultCommand() {
@@ -78,14 +80,28 @@ public class Catapult extends Subsystem {
         setDefaultCommand(wait);
     }
     
+    public boolean isWinchZeroTriggered() {
+        return !_winchZero.get();
+    }
+    
     public boolean isRatchetEngaged() {
         return _isPawlEngaged;//!_ratchet.get();//!_ratchetDisengaged.check(_pawlSwitch.get());
     }
+    
+    private boolean prevZero = false;
     
     public void setWinchPower(double winchRawVal){
         if(isRatchetEngaged() && winchRawVal <= 0) {
             winchRawVal = 0;
         }
+        boolean zero = isWinchZeroTriggered();
+        if(zero) {
+            winchRawVal = Math.max(0,winchRawVal);
+            if(!prevZero) {
+                resetWinchEncoder();
+            }
+        }
+        prevZero = zero;
 //        if(getWinchDistance() > WINCH_ENCODER_MAX && winchRawVal > 0) {
 //            winchRawVal = 0;
 //        }

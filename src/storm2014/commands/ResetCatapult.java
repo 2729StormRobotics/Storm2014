@@ -10,6 +10,7 @@ import storm2014.utilities.Debouncer;
  */
 // Tested by Joe Doyle (mostly) on 2014 Robot on 2/15/14
 public class ResetCatapult extends CommandGroup {
+//    private int timesRun = 0;
     public ResetCatapult() {
         addSequential(new SetEngagedRatchet(false));
         // Wait for catapult to return
@@ -29,15 +30,18 @@ public class ResetCatapult extends CommandGroup {
             }
             protected void execute() {
                 Robot.catapult.setWinchPower(-0.5);
+//                if(!_useEncoder && firstRun){
+//                    firstRun = false;
+//                    Robot.catapult.resetWinchEncoder();
+//                }
             }
             protected boolean isFinished() {
                 return (!_useEncoder && _debounce.check(Robot.catapult.getPivotAngle() <= Catapult.BASE_ANGLE)) ||
-                       (_useEncoder  && Robot.catapult.getWinchDistance() < 0);
+                       (_useEncoder  && Robot.catapult.getWinchDistance() <= 0);
             }
 
             protected void end() {
                 Robot.catapult.setWinchPower(0);
-                Robot.catapult.resetWinchEncoder();
             }
 
             protected void interrupted() {

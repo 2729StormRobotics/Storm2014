@@ -11,6 +11,7 @@ import storm2014.subsystems.LEDStrip;
 // Tested by Joe Doyle (mostly) on 2014 Robot on 2/15/14
 public abstract class Launch extends CommandGroup {
     public Launch(){
+        
         if(!thisIsIntentional()) {
             throw new AllocationException("Launch should only be run if you want to");
         }
@@ -29,7 +30,7 @@ public abstract class Launch extends CommandGroup {
         addSequential(new SetArmPosition(2));
         addSequential(new SetLatched(false));
         addSequential(new SetLEDMode(LEDStrip.RainbowDancePartyMode));
-        addSequential(new WaitForFollowThrough(),1);
+        addSequential(new WaitForFollowThrough(),3);
         addSequential(new SetLEDMode(LEDStrip.USAMode));
         addSequential(new SetEngagedRatchet(false));
         addSequential(new ResetCatapult());
