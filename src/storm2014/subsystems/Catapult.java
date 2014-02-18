@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.Robot;
 import storm2014.RobotMap;
 import storm2014.commands.PreLaunch;
+import storm2014.commands.control.Conditional;
 import storm2014.utilities.Debouncer;
 import storm2014.utilities.MagneticEncoder;
 /**
@@ -19,8 +20,8 @@ import storm2014.utilities.MagneticEncoder;
 public class Catapult extends Subsystem {
     
     //Full Power is -650 on the encoder
-    public static final double WINCH_ENCODER_MAX = 600;
-    public static final double BASE_ANGLE = 238;
+    public static final double WINCH_ENCODER_MAX = 650;
+    public static final double BASE_ANGLE = 236;
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder         _winchEncoder = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
@@ -38,7 +39,7 @@ public class Catapult extends Subsystem {
     public final double [] pullBackPresets = new double[]{100, 283, 467, 610}; //presets are based on negation already in code
     public int presetIndex = 0;
     private boolean _isPawlEngaged = true;
-    
+    private boolean _firstRun = true;
     
     public Catapult(){
         _winchEncoder.start();
@@ -53,6 +54,41 @@ public class Catapult extends Subsystem {
     
     protected void initDefaultCommand() {
        CommandGroup wait = new CommandGroup("wait");
+       wait.addSequential(new Conditional(new Command() {
+           private boolean _zeroFound = false;
+           protected void initialize() {
+               _winchEncoder.reset();
+               _zeroFound = false;
+               setRatchetUnlatched();
+           }
+
+           protected void execute() {
+               setWinchPower(0.5);
+           }
+
+           protected boolean isFinished() {
+               if(isWinchZeroTriggered()) {
+                   _zeroFound = true;
+               }
+               return isWinchZeroTriggered() || getWinchDistance() > 200;
+           }
+
+           protected void end() {
+               setWinchPower(0);
+               setRatchetLatched();
+               if(_zeroFound) {
+                   _winchEncoder.reset();
+               }
+           }
+
+           protected void interrupted() {
+               end();
+           }
+       }, null) {
+           protected boolean condition() {
+               return _firstRun;
+           }
+       });
        wait.addSequential(new PreLaunch());
 //       wait.addSequential(new TensionWinch());
        wait.addSequential(new Command("Winch control") {
@@ -102,9 +138,9 @@ public class Catapult extends Subsystem {
             }
         }
         prevZero = zero;
-//        if(getWinchDistance() > WINCH_ENCODER_MAX && winchRawVal > 0) {
-//            winchRawVal = 0;
-//        }
+        if(getWinchDistance() > WINCH_ENCODER_MAX && winchRawVal > 0) {
+            winchRawVal = 0;
+        }
         winchRawVal = -winchRawVal;
         if(_isPawlEngaged && Math.abs(winchRawVal) > 0.1) {
             setRatchetUnlatched();

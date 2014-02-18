@@ -45,6 +45,7 @@ public class Robot extends IterativeRobot {
          SmartDashboard.putNumber("String Pot Voltage",tilter.getStringPotRaw());
          SmartDashboard.putNumber("Winch Encoder",catapult.getWinchDistance());
          SmartDashboard.putNumber("Winch Setpoint",catapult.getCurrentPreset());
+         SmartDashboard.putBoolean("Winch Zeroed",catapult.isWinchZeroTriggered());
          SmartDashboard.putNumber("Piston mode", intake.getMode());
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
          SmartDashboard.putNumber("Catapult Angle", catapult.getPivotAngle());

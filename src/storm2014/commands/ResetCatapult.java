@@ -23,25 +23,27 @@ public class ResetCatapult extends CommandGroup {
             protected void initialize() {
                 if(Robot.catapult.getPivotAngle() > Catapult.BASE_ANGLE) {
                     Robot.catapult.unlatch();
-                    _useEncoder = false;
-                } else {
                     _useEncoder = true;
+                } else {
+                    _useEncoder = false;
                 }
             }
             protected void execute() {
-                Robot.catapult.setWinchPower(-0.5);
+                Robot.catapult.setWinchPower((!_useEncoder || Robot.catapult.getWinchDistance() > 0) ? -0.5 : 0);
 //                if(!_useEncoder && firstRun){
 //                    firstRun = false;
 //                    Robot.catapult.resetWinchEncoder();
 //                }
             }
             protected boolean isFinished() {
-                return (!_useEncoder && _debounce.check(Robot.catapult.getPivotAngle() <= Catapult.BASE_ANGLE)) ||
-                       (_useEncoder  && Robot.catapult.getWinchDistance() <= 0);
+                return (_useEncoder  && Robot.catapult.getWinchDistance() <= 0) || //_debounce.check(Robot.catapult.getPivotAngle() <= Catapult.BASE_ANGLE)) ||
+                       (!_useEncoder && Robot.catapult.isWinchZeroTriggered());
             }
 
             protected void end() {
-                Robot.catapult.setWinchPower(0);
+                if(!_useEncoder) {
+                    Robot.catapult.setWinchPower(0);
+                }
             }
 
             protected void interrupted() {
