@@ -9,7 +9,7 @@ import storm2014.subsystems.LEDStrip;
  */
 
 public class SetLEDMode extends Command {
-    private int _mode;
+    private final int _mode;
     
     private byte _r, _g, _b;
     
