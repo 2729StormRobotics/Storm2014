@@ -65,76 +65,67 @@ public class LEDStrip extends Subsystem implements NamedSendable {
      */
     public void setMode(final int mode, final byte red, final byte green, final byte blue){
         new Thread() {
-            boolean _changed = false;
-            int timesRun = 0;
             public void run() {
-                System.out.println("Run time: " + timesRun);
-                while(!_changed){
-                    if (!_changing){
-                        _changing = true;
-                        try {
-                            _socket = (SocketConnection) Connector.open(_serverIP);
-                            _outstream = _socket.openOutputStream();
-                            //_instream  = _socket.openInputStream();
+                System.out.println("Changing LED mode...");
+                try {
+                    _socket = (SocketConnection) Connector.open(_serverIP);
+                    _outstream = _socket.openOutputStream();
+                    //_instream  = _socket.openInputStream();
 
-                            _outstream.write(mode);
-                            if (mode == SetColorMode){
-                                _outstream.write(red);
-                                _outstream.write(green);
-                                _outstream.write(blue);
-                            }
-                            else if (mode == TeleopMode){
-                                DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
-                                if (color == DriverStation.Alliance.kBlue){
-                                    _outstream.write(_allianceBlue);
-                                }
-                                else if (color == DriverStation.Alliance.kRed){
-                                    _outstream.write(_allianceRed);
-                                }
-                                else if (color == DriverStation.Alliance.kInvalid){
-                                    _outstream.write(_allianceInvalid);
-                                }
-                                else{
-                                    _outstream.write(_allianceError);
-                                }
-                            }
-
-                            /*long timeoutTime = System.currentTimeMillis() + _readTimeout;
-                            int newMode = -1;
-                            while(newMode == -1 && System.currentTimeMillis() < timeoutTime){
-                                while (_instream.available() > 0){
-                                    byte bytes[] = new byte[_instream.available()];
-                                    int bytesRead = _instream.read(bytes);
-
-                                    newMode = bytes[bytesRead - 1];
-                                }
-                            }*/
-
-                            _outstream.close();
-                            //_instream.close();
-                            _socket.close();
-
-                            _currentMode = mode;
-                            _table.putNumber("Mode", _currentMode);
-                            System.out.println("LEDMode was set to " + _currentMode);
-
-                            /*if (_currentMode != newMode){
-                                System.out.println("... Except that it's not. The LED strip kinda ignored the new mode. It's acutally " + newMode);
-                            } else {
-                                System.out.println(".");
-                            }*/
-                            _disconnected = false;
-                        } catch (IOException ex) {
-                            if (!_disconnected){
-                                System.out.println("[ERROR] Arduino not responding.");
-                                _disconnected = true;
-                            }
+                    _outstream.write(mode);
+                    if (mode == SetColorMode){
+                        _outstream.write(red);
+                        _outstream.write(green);
+                        _outstream.write(blue);
+                    }
+                    else if (mode == TeleopMode){
+                        DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
+                        if (color == DriverStation.Alliance.kBlue){
+                            _outstream.write(_allianceBlue);
                         }
-                        _changing = false;
-                        _changed = true;
+                        else if (color == DriverStation.Alliance.kRed){
+                            _outstream.write(_allianceRed);
+                        }
+                        else if (color == DriverStation.Alliance.kInvalid){
+                            _outstream.write(_allianceInvalid);
+                        }
+                        else{
+                            _outstream.write(_allianceError);
+                        }
+                    }
+
+                    /*long timeoutTime = System.currentTimeMillis() + _readTimeout;
+                    int newMode = -1;
+                    while(newMode == -1 && System.currentTimeMillis() < timeoutTime){
+                        while (_instream.available() > 0){
+                            byte bytes[] = new byte[_instream.available()];
+                            int bytesRead = _instream.read(bytes);
+
+                            newMode = bytes[bytesRead - 1];
+                        }
+                    }*/
+
+                    _outstream.close();
+                    //_instream.close();
+                    _socket.close();
+
+                    _currentMode = mode;
+                    _table.putNumber("Mode", _currentMode);
+                    System.out.println("LEDMode was set to " + _currentMode);
+
+                    /*if (_currentMode != newMode){
+                        System.out.println("... Except that it's not. The LED strip kinda ignored the new mode. It's acutally " + newMode);
+                    } else {
+                        System.out.println(".");
+                    }*/
+                    _disconnected = false;
+                } catch (IOException ex) {
+                    if (!_disconnected){
+                        System.out.println("[ERROR] Arduino not responding.");
+                        _disconnected = true;
                     }
                 }
-                timesRun++;
+
             }
         }.start();
     }
