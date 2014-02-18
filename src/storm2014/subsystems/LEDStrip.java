@@ -66,7 +66,9 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public void setMode(final int mode, final byte red, final byte green, final byte blue){
         new Thread() {
             boolean _changed = false;
+            int timesRun = 0;
             public void run() {
+                System.out.println("Run time: " + timesRun);
                 while(!_changed){
                     if (!_changing){
                         _changing = true;
@@ -114,7 +116,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
 
                             _currentMode = mode;
                             _table.putNumber("Mode", _currentMode);
-                            System.out.print("LEDMode was set to " + _currentMode);
+                            System.out.println("LEDMode was set to " + _currentMode);
 
                             /*if (_currentMode != newMode){
                                 System.out.println("... Except that it's not. The LED strip kinda ignored the new mode. It's acutally " + newMode);
@@ -132,6 +134,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                         _changed = true;
                     }
                 }
+                timesRun++;
             }
         }.start();
     }
