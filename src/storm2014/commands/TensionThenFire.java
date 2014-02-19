@@ -6,10 +6,44 @@
 
 package storm2014.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
+import storm2014.Robot;
+
 /**
  *
  * @author Tim
  */
-public class TensionThenFire {
+public class TensionThenFire extends Command{
+    
+    private final double power = 1.0;
+    
+    public TensionThenFire(){
+        requires(Robot.catapult);
+    }
+    
+    protected void initialize() {
+        double distance = Robot.catapult.getCurrentPreset();
+        if(Robot.catapult.getWinchDistance() < distance){
+            Robot.catapult.setWinchPower(power);
+        }else{
+            
+        }
+    }
+
+    protected void execute() {
+        
+    }
+
+    protected boolean isFinished() {
+        return true;
+    }
+
+    protected void end() {
+        
+    }
+
+    protected void interrupted() {
+        
+    }
     
 }
