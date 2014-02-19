@@ -49,6 +49,8 @@ public class Robot extends IterativeRobot {
          SmartDashboard.putNumber("Piston mode", intake.getMode());
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
          SmartDashboard.putNumber("Catapult Angle", catapult.getPivotAngle());
+         SmartDashboard.putNumber("Left Distance", driveTrain.getLeftDistance());
+         SmartDashboard.putNumber("Right Distance", driveTrain.getRightDistance());
          SmartDashboard.putBoolean("Pawl Engaged", catapult.isRatchetEngaged());
          SmartDashboard.putBoolean("Pre-Launched", catapult.isFinishedPreLaunch());
     }

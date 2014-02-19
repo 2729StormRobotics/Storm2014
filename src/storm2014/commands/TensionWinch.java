@@ -7,10 +7,13 @@ import storm2014.Robot;
  */
 public class TensionWinch extends Command {
     private final double power = 1;
-    private final double tolerance = 10.0;
+    private final double tolerance = 25.0;
+    private int prevIndex = -1;
+    private boolean reachedPoint = false;
     
     protected void initialize() {
         Robot.catapult.setIndex(0);
+        prevIndex = -1;
     }
 
     public TensionWinch(){
@@ -18,11 +21,18 @@ public class TensionWinch extends Command {
     }
     
     protected void execute() {
+        int index = Robot.catapult.getCurrentIndex();
         double distance = Robot.catapult.getCurrentPreset();
-        if(Robot.catapult.getWinchDistance() < distance - tolerance) {
-            Robot.catapult.setWinchPower(power);
+        double currDistance = Robot.catapult.getWinchDistance();
+        if(currDistance < distance) {
+            if(prevIndex != index) {
+                Robot.catapult.setWinchPower(power);
+            } else {
+                Robot.catapult.setWinchPower(Math.max(0, Robot.oi.getTension()));
+            }
         } else {
-            Robot.catapult.setWinchPower(0);
+            prevIndex = index;
+            Robot.catapult.setWinchPower(Math.max(0, Robot.oi.getTension()));
         }
     }
 
