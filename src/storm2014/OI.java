@@ -28,12 +28,12 @@ public class OI {
                          spinOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_OUT),
                          armsOut   = new InternalButton() {
                             public boolean get() {
-                                return shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_ARMS) > 0.1;
+                                return shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_ARMS) < -0.1;
                             }
                          },
                          armsIn   = new InternalButton() {
                             public boolean get() {
-                                return shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_ARMS) < -0.1;
+                                return shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_ARMS) > 0.1;
                             }
                          },
 //                         prefire   = new JoystickButton(shootJoystick, 3),

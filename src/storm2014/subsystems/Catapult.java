@@ -19,7 +19,7 @@ import storm2014.utilities.MagneticEncoder;
  * Subsytem that communicates with the catapult components.
  */
 public class Catapult extends Subsystem {
-    public static final double WINCH_ENCODER_MAX = 1000;
+    public static final double WINCH_ENCODER_MAX = 950;
     public static double BASE_ANGLE;
     public static final int WINCH_READY = 0;
     public static final int WINCH_CLOSE = 1;
@@ -38,7 +38,7 @@ public class Catapult extends Subsystem {
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
 //    private final Debouncer _ratchetDisengaged = new Debouncer(0.25);
     
-    public final double [] pullBackPresets = new double[]{50,525,575};//100, 283, 467, 610}; //presets are based on negation already in code
+    public final double [] pullBackPresets = new double[]{50,525,840};//100, 283, 467, 610}; //presets are based on negation already in code
     public int presetIndex = 0;
     private boolean _isPawlEngaged = true;
     private boolean _firstRun = true;
@@ -62,7 +62,8 @@ public class Catapult extends Subsystem {
            }
            private boolean _zeroFound = false;
            protected void initialize() {
-               BASE_ANGLE = getPivotAngle()+1.5;
+               BASE_ANGLE = getPivotAngle()+2.5;
+               System.out.println(BASE_ANGLE);
                _firstRun = false;
                _winchEncoder.reset();
                _zeroFound = false;
@@ -221,6 +222,7 @@ public class Catapult extends Subsystem {
         return new Command() {
             protected void initialize() {
                 _firstRun = true;
+                System.out.println("Will Preconfigure");
             }
             protected void execute() {}
             protected boolean isFinished() {
