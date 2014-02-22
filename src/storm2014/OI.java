@@ -2,6 +2,7 @@ package storm2014;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.commands.ChangeArmPosition;
@@ -11,6 +12,7 @@ import storm2014.commands.PreLaunch;
 import storm2014.commands.ResetCatapult;
 import storm2014.commands.Shift;
 import storm2014.commands.SpinRoller;
+import storm2014.commands.control.Conditional;
 
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
 public class OI {
@@ -24,11 +26,20 @@ public class OI {
             
                          spinIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN),
                          spinOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_OUT),
-                         armsOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_OUT),
-                         armsIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_ARMS_IN),
+                         armsOut   = new InternalButton() {
+                            public boolean get() {
+                                return shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_ARMS) > 0.1;
+                            }
+                         },
+                         armsIn   = new InternalButton() {
+                            public boolean get() {
+                                return shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_ARMS) < -0.1;
+                            }
+                         },
 //                         prefire   = new JoystickButton(shootJoystick, 3),
                          resetCat  = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_RESET),
                          fire      = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_FIRE),
+                         safety    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SAFETY),
                          tension   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_TENSION),
             
                          preconfig = new JoystickButton(shootJoystick, RobotMap.JOYDEBUG_BUTTON_PRECONFIG);
@@ -64,7 +75,11 @@ public class OI {
         armsOut  .whenPressed (new ChangeArmPosition(1));
 //        prefire  .whenPressed (new PreLaunch());
         resetCat .whenPressed (new ResetCatapult());
-        fire     .whenPressed (new Launch());
+        fire     .whenPressed (new Conditional(new Launch(),null) {
+            protected boolean condition() {
+                return safety.get();
+            }
+        });
         tension  .whenPressed (new NextWinchPreset());
         
         preconfig.whenPressed(Robot.catapult._getPreconfigureCommand());
