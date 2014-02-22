@@ -71,8 +71,8 @@ public class Robot extends IterativeRobot {
         oi         = new OI();
         
         // The names, and corresponding Commands of our autonomous modes
-        autonomiceNames = new String[]{"Drive Forward","OneBallDynamic Left","OneBallDynamic Right", "Drive and shoot"};
-        autonomice = new Command[]{new DriveForward(0.6, 1000),new OneBallDynamic(false), new OneBallDynamic(true), new DriveAndShoot()};
+        autonomiceNames = new String[]{"Drive Forward","Drive and shoot"};
+        autonomice = new Command[]{new DriveForward(0.8, 4700),new DriveAndShoot()};
         
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard

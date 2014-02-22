@@ -42,7 +42,7 @@ public class OI {
                          safety    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SAFETY),
                          tension   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_TENSION),
             
-                         preconfig = new JoystickButton(shootJoystick, RobotMap.JOYDEBUG_BUTTON_PRECONFIG);
+                         preconfig = new JoystickButton(debugJoystick, RobotMap.JOYDEBUG_BUTTON_PRECONFIG);
     
     private final Button continueProcess = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
     

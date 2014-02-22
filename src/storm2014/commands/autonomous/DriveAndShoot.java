@@ -19,7 +19,7 @@ import storm2014.subsystems.VisionSystem;
 public class DriveAndShoot extends CommandGroup{
     
     public DriveAndShoot(){
-        addSequential(new DriveForward(0.75, 5000));
+        addSequential(new DriveForward(0.75, 4700));
         addSequential(new Conditional(new LaunchWhenReady(), new WaitAndShoot(5)) {
             
             protected boolean condition() {
