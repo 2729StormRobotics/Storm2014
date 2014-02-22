@@ -170,6 +170,7 @@ public class Robot extends IterativeRobot {
     /** Called at the start of test mode */
     public void testInit() {
         SmartDashboard.putBoolean("Enabled", false);
+        leds.setMode(LEDStrip.StormSpiritMode);
     }
     
     /**
