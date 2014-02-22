@@ -1,14 +1,17 @@
 package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-/**
- *Increments the winch index.
- */
 import storm2014.Robot;
-public class IncrementWinchIndex extends Command{
-    
+
+public class SetWinchPreset extends Command {
+    private final int _index;
+
+    public SetWinchPreset(int index) {
+        _index = index;
+    }
+
     protected void initialize() {
-        Robot.catapult.setIndex(Robot.catapult.getCurrentIndex() + 1);
+        Robot.catapult.setIndex(_index);
     }
 
     protected void execute() {}
@@ -16,7 +19,6 @@ public class IncrementWinchIndex extends Command{
     protected boolean isFinished() {
         return true;
     }
-
     protected void end() {}
     protected void interrupted() {}
 }

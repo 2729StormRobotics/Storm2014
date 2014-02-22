@@ -19,10 +19,11 @@ import storm2014.utilities.MagneticEncoder;
  * Subsytem that communicates with the catapult components.
  */
 public class Catapult extends Subsystem {
-    
-    //Full Power is -650 on the encoder
-    public static final double WINCH_ENCODER_MAX = 600;
-    public static final double BASE_ANGLE = 238.5;
+    public static final double WINCH_ENCODER_MAX = 1000;
+    public static double BASE_ANGLE;
+    public static final int WINCH_READY = 0;
+    public static final int WINCH_CLOSE = 1;
+    public static final int WINCH_FAR   = 2;
     
     private final Talon           _winch        = new Talon(RobotMap.PORT_MOTOR_WINCH);
     private final Encoder         _winchEncoder = new Encoder(RobotMap.PORT_ENCODER_WINCH_1,RobotMap.PORT_ENCODER_WINCH_2);
@@ -54,10 +55,14 @@ public class Catapult extends Subsystem {
     }
     
     protected void initDefaultCommand() {
-       CommandGroup wait = new CommandGroup("wait");
+       CommandGroup wait = new CommandGroup("Prep for Launch");
        wait.addSequential(new Conditional(new Command() {
+           {
+               setInterruptible(false);
+           }
            private boolean _zeroFound = false;
            protected void initialize() {
+               BASE_ANGLE = getPivotAngle()+1.5;
                _firstRun = false;
                _winchEncoder.reset();
                _zeroFound = false;
@@ -210,5 +215,19 @@ public class Catapult extends Subsystem {
     }
     public int getNumPresets() {
         return pullBackPresets.length;
+    }
+    
+    public Command _getPreconfigureCommand() {
+        return new Command() {
+            protected void initialize() {
+                _firstRun = true;
+            }
+            protected void execute() {}
+            protected boolean isFinished() {
+                return true;
+            }
+            protected void end() {}
+            protected void interrupted() {}
+        };
     }
 }

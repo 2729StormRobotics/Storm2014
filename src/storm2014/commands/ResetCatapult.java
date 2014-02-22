@@ -13,6 +13,7 @@ import storm2014.utilities.Debouncer;
 public class ResetCatapult extends CommandGroup {
 //    private int timesRun = 0;
     public ResetCatapult() {
+        setInterruptible(false);
         addSequential(new SetEngagedRatchet(false));
         // Wait for catapult to return
         addSequential(new Command() {

@@ -26,6 +26,8 @@ public class RobotMap {
     public static final int JOYSHOOT_BUTTON_RESET    = 8;
     public static final int JOYSHOOT_BUTTON_TENSION  = 10;
     
+    public static final int JOYDEBUG_BUTTON_PRECONFIG = 1;
+    
     // PWM Ports
     public static final int PORT_MOTOR_DRIVE_LEFT     = 2;
     public static final int PORT_MOTOR_DRIVE_RIGHT    = 1;

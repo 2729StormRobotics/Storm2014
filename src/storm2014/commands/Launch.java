@@ -2,19 +2,15 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.util.AllocationException;
 import storm2014.Robot;
 import storm2014.subsystems.LEDStrip;
 /**
  *Launches the catapult thru a series of steps.
  */
 // Tested by Joe Doyle (mostly) on 2014 Robot on 2/15/14
-public abstract class Launch extends CommandGroup {
+public class Launch extends CommandGroup {
     public Launch(){
-        
-        if(!thisIsIntentional()) {
-            throw new AllocationException("Launch should only be run if you want to");
-        }
+        setInterruptible(false);
         addSequential(new Command() {
             protected void initialize() {
                 Robot.catapult.setFinishedPreLaunch(false);
@@ -35,7 +31,5 @@ public abstract class Launch extends CommandGroup {
         addSequential(new SetEngagedRatchet(false));
         addSequential(new ResetCatapult());
         addSequential(new SetLEDMode()); //Back to whatever the default is
-    }    
-    
-    protected abstract boolean thisIsIntentional();
+    }
 }

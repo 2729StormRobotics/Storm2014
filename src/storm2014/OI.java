@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.commands.ChangeArmPosition;
-import storm2014.commands.IncrementWinchIndex;
-import storm2014.commands.LaunchIfReady;
+import storm2014.commands.NextWinchPreset;
+import storm2014.commands.Launch;
 import storm2014.commands.PreLaunch;
 import storm2014.commands.ResetCatapult;
 import storm2014.commands.Shift;
@@ -29,7 +29,9 @@ public class OI {
 //                         prefire   = new JoystickButton(shootJoystick, 3),
                          resetCat  = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_RESET),
                          fire      = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_FIRE),
-                         tension   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_TENSION);
+                         tension   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_TENSION),
+            
+                         preconfig = new JoystickButton(shootJoystick, RobotMap.JOYDEBUG_BUTTON_PRECONFIG);
     
     private final Button continueProcess = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
     
@@ -62,8 +64,10 @@ public class OI {
         armsOut  .whenPressed (new ChangeArmPosition(1));
 //        prefire  .whenPressed (new PreLaunch());
         resetCat .whenPressed (new ResetCatapult());
-        fire     .whenPressed (new LaunchIfReady());
-        tension  .whenPressed(new IncrementWinchIndex());
+        fire     .whenPressed (new Launch());
+        tension  .whenPressed (new NextWinchPreset());
+        
+        preconfig.whenPressed(Robot.catapult._getPreconfigureCommand());
     }
     
     // When a joystick is in its zero position, it will not necessarily read
