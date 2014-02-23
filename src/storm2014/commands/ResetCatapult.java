@@ -18,36 +18,41 @@ public class ResetCatapult extends CommandGroup {
         // Wait for catapult to return
         addSequential(new Command() {
             private static final double WINCH_TARGET = -80;
+            private static final double STOPPED_SPEED = 10;
+            private static final double DT = 1.0/50;
             private final Debouncer _debounce = new Debouncer(0.8);
-            private boolean _useEncoder = false;
+            private boolean _unlatch = false;
+            private double _prevAngle;
+            
             {
                 requires(Robot.catapult);
             }
             protected void initialize() {
+                _prevAngle = Robot.catapult.getPivotAngle();
+                _unlatch = (Robot.catapult.getCurrentIndex() == 0 ||
+                            Robot.catapult.isCatapultOut()        ||
+                            Robot.catapult.getPivotAngle() > Catapult.BASE_ANGLE + 5);
                 Robot.catapult.setIndex(0);
-                if(Robot.catapult.getPivotAngle() > Catapult.BASE_ANGLE) {
+                if(_unlatch) {
                     Robot.catapult.unlatch();
-                    _useEncoder = false;
-                } else {
-                    _useEncoder = true;
                 }
             }
             protected void execute() {
                 Robot.catapult.setWinchPower(Robot.catapult.getWinchDistance() > WINCH_TARGET ? -0.5 : 0);
-//                if(!_useEncoder && firstRun){
-//                    firstRun = false;
-//                    Robot.catapult.resetWinchEncoder();
-//                }
             }
             protected boolean isFinished() {
-                return (!_useEncoder && _debounce.check(Robot.catapult.getPivotAngle() > 100 && Robot.catapult.getPivotAngle() <= Catapult.BASE_ANGLE)) ||
-                       (_useEncoder  && Robot.catapult.getWinchDistance() <= WINCH_TARGET);
+                if(!_unlatch) {
+                    return Robot.catapult.getWinchDistance() <= WINCH_TARGET;
+                } else {
+                    double angle = Robot.catapult.getPivotAngle();
+                    double speed = (angle-_prevAngle)/DT;
+                    _prevAngle = angle;
+                    return _debounce.check(speed < STOPPED_SPEED);
+                }
             }
 
             protected void end() {
-                if(Robot.catapult.getPivotAngle() < Catapult.BASE_ANGLE+1.5) {
-                    Catapult.BASE_ANGLE = Robot.catapult.getPivotAngle()+2.5;
-                }
+                Robot.catapult.setCatapultOut(false);
                 Robot.catapult.setWinchPower(0);
             }
 

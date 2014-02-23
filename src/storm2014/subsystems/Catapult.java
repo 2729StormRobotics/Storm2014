@@ -31,17 +31,16 @@ public class Catapult extends Subsystem {
     private final Solenoid        _ratchet      = new Solenoid(RobotMap.PORT_SOLENOID_RATCHET);
     private final MagneticEncoder _magEnc       = new MagneticEncoder(RobotMap.PORT_SENSOR_MAG_ENCODER);
     private final DigitalInput    _winchZero    = new DigitalInput(RobotMap.PORT_SENSOR_WINCH_ZERO);
-//    private final DigitalInput    _pawlSwitch   = new DigitalInput(RobotMap.PORT_SENSOR_SWITCH_PAWL);
     
     private boolean preLaunchFinished;
     private static final double ANGLE_RATCHET_ENGAGED    = 170;
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
-//    private final Debouncer _ratchetDisengaged = new Debouncer(0.25);
     
     public final double [] pullBackPresets = new double[]{50,525,840};//100, 283, 467, 610}; //presets are based on negation already in code
     public int presetIndex = 0;
     private boolean _isPawlEngaged = true;
     private boolean _firstRun = true;
+    private boolean _catapultOut = false;
     
     public Catapult(){
         _winchEncoder.start();
@@ -99,28 +98,6 @@ public class Catapult extends Subsystem {
        });
        wait.addSequential(new PreLaunch());
        wait.addSequential(new TensionWinch());
-//       wait.addSequential(new Command("Winch control") {
-//            {
-//                requires(Robot.catapult);
-//            }
-//            protected void initialize() {
-//                Robot.catapult.setIndex(0);
-//            }
-//
-//            protected void execute() {
-//                Robot.catapult.setWinchPower(Robot.oi.getTension());
-//            }
-//
-//            protected boolean isFinished() {
-//                return false;
-//            }
-//            protected void end() {
-//                Robot.catapult.setWinchPower(0);
-//            }
-//            protected void interrupted() {
-//                end();
-//            }
-//        });
         setDefaultCommand(wait);
     }
     
@@ -201,6 +178,13 @@ public class Catapult extends Subsystem {
     
     public boolean isFinishedPreLaunch(){
        return preLaunchFinished;
+    }
+    
+    public boolean isCatapultOut() {
+        return _catapultOut;
+    }
+    public void setCatapultOut(boolean out) {
+        _catapultOut = out;
     }
     
     public void setIndex(int newIndex){

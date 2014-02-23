@@ -14,6 +14,7 @@ public class Launch extends CommandGroup {
         addSequential(new Command() {
             protected void initialize() {
                 Robot.catapult.setFinishedPreLaunch(false);
+                Robot.catapult.setCatapultOut(true);
             }
             protected void execute() {}
             protected boolean isFinished() {
