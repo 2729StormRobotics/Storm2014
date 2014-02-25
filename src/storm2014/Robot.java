@@ -42,6 +42,8 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser = new SendableChooser();
     Command autonomouse;
     
+    double prevAngle;
+    
     private void sendSensorData() {
          SmartDashboard.putNumber("String Pot Voltage",tilter.getStringPotRaw());
          SmartDashboard.putNumber("Winch Encoder",catapult.getWinchDistance());
@@ -54,6 +56,9 @@ public class Robot extends IterativeRobot {
          SmartDashboard.putNumber("Right Distance", driveTrain.getRightDistance());
          SmartDashboard.putBoolean("Pawl Engaged", catapult.isRatchetEngaged());
          SmartDashboard.putBoolean("Pre-Launched", catapult.isFinishedPreLaunch());
+         double angle = catapult.getPivotAngle();
+         SmartDashboard.putNumber("Catapult velocity", (angle-prevAngle)*50.0);
+         prevAngle = angle;
     }
     
     /** Called on robot boot. */
@@ -69,6 +74,8 @@ public class Robot extends IterativeRobot {
         compressor.start();
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
+        
+        prevAngle = catapult.getPivotAngle();
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"Drive Forward","Drive and shoot"};
