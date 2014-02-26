@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import storm2014.Robot;
 import storm2014.subsystems.Catapult;
+import storm2014.subsystems.LEDStrip;
 import storm2014.utilities.Debouncer;
 /**
  * Resets the catapult to the correct position.
@@ -14,6 +15,7 @@ public class ResetCatapult extends CommandGroup {
 //    private int timesRun = 0;
     public ResetCatapult() {
         setInterruptible(false);
+        addSequential(new SetLEDMode(LEDStrip.PileMode));
         addSequential(new SetEngagedRatchet(false));
         // Wait for catapult to return
         addSequential(new Command() {
@@ -64,5 +66,6 @@ public class ResetCatapult extends CommandGroup {
         addSequential(new SetWinchPreset(Catapult.WINCH_READY));
         addSequential(new WaitCommand(0.25));
         addSequential(new SetLatched(true));
+        addSequential(new SetLEDMode());
     }
 }
