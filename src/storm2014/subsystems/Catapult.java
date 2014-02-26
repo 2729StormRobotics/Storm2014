@@ -47,6 +47,7 @@ public class Catapult extends Subsystem {
         _winchEncoder.start();
         setRatchetLatched();
         setFinishedPreLaunch(false);
+        setPresetIndex(WINCH_READY);
         LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
         LiveWindow.addActuator("Catapult", "Ratchet", _ratchet);
         LiveWindow.addActuator("Catapult", "Winch", _winch);
@@ -189,7 +190,7 @@ public class Catapult extends Subsystem {
         _catapultOut = out;
     }
     
-    public void setIndex(int newIndex){
+    public void setPresetIndex(int newIndex){
         presetIndex = Math.max(0, Math.min(newIndex,pullBackPresets.length-1));
     }
 

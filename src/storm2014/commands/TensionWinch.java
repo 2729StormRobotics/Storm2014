@@ -15,7 +15,6 @@ public class TensionWinch extends Command {
     
     protected void initialize() {
         setInterruptible(false);
-        Robot.catapult.setIndex(0);
         prevIndex = -1;
     }
     

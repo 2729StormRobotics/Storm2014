@@ -32,7 +32,7 @@ public class ResetCatapult extends CommandGroup {
                 _unlatch = (Robot.catapult.getCurrentIndex() == 0 ||
                             Robot.catapult.isCatapultOut()        ||
                             Robot.catapult.getPivotAngle() > Catapult.BASE_ANGLE + 5);
-                Robot.catapult.setIndex(0);
+                Robot.catapult.setPresetIndex(0);
                 if(_unlatch) {
                     _debounce.reset();
                     Robot.catapult.unlatch();
@@ -61,6 +61,7 @@ public class ResetCatapult extends CommandGroup {
                 end();
             }
         },3);
+        addSequential(new SetWinchPreset(Catapult.WINCH_READY));
         addSequential(new WaitCommand(0.25));
         addSequential(new SetLatched(true));
     }

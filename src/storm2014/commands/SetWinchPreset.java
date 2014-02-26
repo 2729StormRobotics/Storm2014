@@ -11,7 +11,7 @@ public class SetWinchPreset extends Command {
     }
 
     protected void initialize() {
-        Robot.catapult.setIndex(_index);
+        Robot.catapult.setPresetIndex(_index);
     }
 
     protected void execute() {}

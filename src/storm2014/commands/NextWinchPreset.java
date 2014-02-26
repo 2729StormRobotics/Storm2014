@@ -8,7 +8,7 @@ import storm2014.Robot;
 public class NextWinchPreset extends Command{
     
     protected void initialize() {
-        Robot.catapult.setIndex(Robot.catapult.getCurrentIndex() + 1);
+        Robot.catapult.setPresetIndex(Robot.catapult.getCurrentIndex() + 1);
     }
 
     protected void execute() {}
