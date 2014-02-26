@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.DriveForward;
 import storm2014.commands.autonomous.DriveAndShoot;
+import storm2014.commands.autonomous.DriveAndShoot2Ball;
+import storm2014.commands.autonomous.DriveAndShootNoWait;
 import storm2014.commands.autonomous.OneBallDynamic;
 import storm2014.subsystems.Catapult;
 import storm2014.subsystems.Intake;
@@ -78,8 +80,8 @@ public class Robot extends IterativeRobot {
         prevAngle = catapult.getPivotAngle();
         
         // The names, and corresponding Commands of our autonomous modes
-        autonomiceNames = new String[]{"Drive Forward","Drive and shoot"};
-        autonomice = new Command[]{new DriveForward(0.8, 4700),new DriveAndShoot()};
+        autonomiceNames = new String[]{"Drive Forward","Drive and shoot","Drive and shoot blind","2 Ball"};
+        autonomice = new Command[]{new DriveForward(0.8, 4700),new DriveAndShoot(),new DriveAndShootNoWait(),new DriveAndShoot2Ball()};
         
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard

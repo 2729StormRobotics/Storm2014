@@ -13,6 +13,7 @@ import storm2014.commands.ResetCatapult;
 import storm2014.commands.Shift;
 import storm2014.commands.SpinRoller;
 import storm2014.commands.control.Conditional;
+import storm2014.commands.control.DoNothing;
 
 /** Connects the gamepads/joysticks to actual functionality on the robot. */
 public class OI {
@@ -23,6 +24,7 @@ public class OI {
     private final Button shiftHigh       = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_HIGH),
                          shiftLow        = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_SHIFT_LOW),
                          reverse         = new JoystickButton(driveJoystick, RobotMap.JOYDRIVE_BUTTON_REVERSE),
+                         resetEncoder    = new JoystickButton(driveJoystick, 10),
             
                          spinIn    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_IN),
                          spinOut   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SPIN_OUT),
@@ -64,6 +66,9 @@ public class OI {
             protected void interrupted() {
                 end();
             }
+        });
+        resetEncoder.whenPressed(new DoNothing() {
+            
         });
         
         spinIn   .whenPressed (new SpinRoller(1));

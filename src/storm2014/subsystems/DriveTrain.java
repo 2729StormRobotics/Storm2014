@@ -37,6 +37,8 @@ public class DriveTrain extends Subsystem {
         LiveWindow.addSensor  ("Drive Train", "Left Encoder", _leftEncoder);
         LiveWindow.addSensor  ("Drive Train", "Right Encoder", _rightEncoder);
         LiveWindow.addActuator("Drive Train", "Shifter", _shifter);
+        
+        setHighGear(true);
     }
     
     protected void initDefaultCommand() {
@@ -54,12 +56,12 @@ public class DriveTrain extends Subsystem {
 
     /** Reads the left encoder (+ = forward,- = back). */
      public double getLeftDistance() {
-        return _leftEncoder.get();
+        return -_leftEncoder.get();
     }
 
      /** Reads the right encoder (+ = forward,- = back). */
     public double getRightDistance() {
-        return -_rightEncoder.get();
+        return _rightEncoder.get();
     }
     
     /** Resets both encoders. */

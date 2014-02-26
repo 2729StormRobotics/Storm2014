@@ -18,7 +18,7 @@ public class ResetCatapult extends CommandGroup {
         // Wait for catapult to return
         addSequential(new Command() {
             private static final double WINCH_TARGET = -80;
-            private static final double STOPPED_SPEED = 10;
+            private static final double STOPPED_SPEED = 50;
             private static final double DT = 1.0/50;
             private final Debouncer _debounce = new Debouncer(0.8);
             private boolean _unlatch = false;
@@ -34,6 +34,7 @@ public class ResetCatapult extends CommandGroup {
                             Robot.catapult.getPivotAngle() > Catapult.BASE_ANGLE + 5);
                 Robot.catapult.setIndex(0);
                 if(_unlatch) {
+                    _debounce.reset();
                     Robot.catapult.unlatch();
                 }
             }
@@ -47,7 +48,7 @@ public class ResetCatapult extends CommandGroup {
                     double angle = Robot.catapult.getPivotAngle();
                     double speed = (angle-_prevAngle)/DT;
                     _prevAngle = angle;
-                    return _debounce.check(speed < STOPPED_SPEED);
+                    return _debounce.check(Math.abs(speed) < STOPPED_SPEED);
                 }
             }
 

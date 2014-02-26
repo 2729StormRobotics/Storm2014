@@ -20,7 +20,7 @@ public class DriveForward extends Command {
     }
 
     protected void execute() {
-        Robot.driveTrain.tankDrive(_speed, _speed);
+        Robot.driveTrain.tankDrive(_speed*0.95, _speed);
     }
 
     protected boolean isFinished() {
