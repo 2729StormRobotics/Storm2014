@@ -48,6 +48,26 @@ public class OI {
     
     private final Button continueProcess = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
     
+    private int _intake = 0;
+    
+    private Command _changeIntake(final int diff) {
+        return new DoNothing() {
+            protected void initialize() {
+                _intake += diff;
+                if(_intake >= 1) {
+                    Robot.intake.spinIn();
+                } else if(_intake <= -1) {
+                    Robot.intake.spinOut();
+                } else {
+                    Robot.intake.stop();
+                }
+            }
+            protected boolean isFinished() {
+                return true;
+            }
+        };
+    }
+    
     public OI() {
         shiftHigh.whenPressed (new Shift(true));
         shiftLow .whenPressed (new Shift(false));
@@ -68,13 +88,18 @@ public class OI {
             }
         });
         resetEncoder.whenPressed(new DoNothing() {
-            
+            protected void initialize() {
+                Robot.driveTrain.clearEncoders();
+            }
+            protected boolean isFinished() {
+                return true;
+            }
         });
         
-        spinIn   .whenPressed (new SpinRoller(1));
-        spinIn   .whenReleased(new SpinRoller(0));
-        spinOut  .whenPressed (new SpinRoller(-1));
-        spinOut  .whenReleased(new SpinRoller(0));
+        spinIn   .whenPressed (_changeIntake(1));
+        spinIn   .whenReleased(_changeIntake(-1));
+        spinOut  .whenPressed (_changeIntake(-1));
+        spinOut  .whenReleased(_changeIntake(1));
         
         armsIn   .whenPressed (new ChangeArmPosition(-1));
         armsOut  .whenPressed (new ChangeArmPosition(1));

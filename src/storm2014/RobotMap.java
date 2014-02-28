@@ -24,7 +24,7 @@ public class RobotMap {
     public static final int JOYSHOOT_BUTTON_FIRE     = 6;
     public static final int JOYSHOOT_BUTTON_SAFETY   = 3;
     public static final int JOYSHOOT_BUTTON_RESET    = 8;
-    public static final int JOYSHOOT_BUTTON_TENSION  = 10;
+    public static final int JOYSHOOT_BUTTON_TENSION  = 2;
     
     public static final int JOYDEBUG_BUTTON_PRECONFIG = 1;
     
