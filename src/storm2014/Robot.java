@@ -47,20 +47,18 @@ public class Robot extends IterativeRobot {
     double prevAngle;
     
     private void sendSensorData() {
-         SmartDashboard.putNumber("String Pot Voltage",tilter.getStringPotRaw());
          SmartDashboard.putNumber("Winch Encoder",catapult.getWinchDistance());
-         SmartDashboard.putNumber("Winch Setpoint",catapult.getCurrentPreset());
-         SmartDashboard.putBoolean("Winch Zeroed",catapult.isWinchZeroTriggered());
-         SmartDashboard.putNumber("Piston mode", intake.getMode());
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
          SmartDashboard.putNumber("Catapult Angle", catapult.getPivotAngle());
          SmartDashboard.putNumber("Left Distance", driveTrain.getLeftDistance());
          SmartDashboard.putNumber("Right Distance", driveTrain.getRightDistance());
          SmartDashboard.putBoolean("Pawl Engaged", catapult.isRatchetEngaged());
-         SmartDashboard.putBoolean("Pre-Launched", catapult.isFinishedPreLaunch());
-         double angle = catapult.getPivotAngle();
-         SmartDashboard.putNumber("Catapult velocity", (angle-prevAngle)*50.0);
-         prevAngle = angle;
+         SmartDashboard.putBoolean("Ready to fire", catapult.isFinishedPreLaunch());
+         SmartDashboard.putString("Winch Preset", catapult.getIndexName());
+         SmartDashboard.putString("Gear", driveTrain.isHighgear() ? "High gear" : "Low gear");
+         SmartDashboard.putBoolean("Latch Engaged", catapult.isLatched());
+         SmartDashboard.putString("Arm mode", intake.getModeName());
+         SmartDashboard.putBoolean("Compressed", compressor.getPressureSwitchValue());
     }
     
     /** Called on robot boot. */

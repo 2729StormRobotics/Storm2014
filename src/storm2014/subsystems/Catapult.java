@@ -158,6 +158,10 @@ public class Catapult extends Subsystem {
         _latch.set(true);
     }
     
+    public boolean isLatched(){
+        return !_latch.get();
+    }
+    
     public void setRatchetLatched(){
         _winch.set(0);
         _ratchet.set(false);
@@ -192,6 +196,18 @@ public class Catapult extends Subsystem {
     
     public void setPresetIndex(int newIndex){
         presetIndex = Math.max(0, Math.min(newIndex,pullBackPresets.length-1));
+    }
+    
+    public String getIndexName(){
+        if(presetIndex == 0){
+            return "Reset";
+        }else{
+            if(presetIndex == 1){
+                return "Short distance";
+            }else{
+                return "Long distane";
+            }
+        }
     }
 
     public int getCurrentIndex(){
