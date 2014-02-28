@@ -78,7 +78,7 @@ public class Robot extends IterativeRobot {
         prevAngle = catapult.getPivotAngle();
         
         // The names, and corresponding Commands of our autonomous modes
-        autonomiceNames = new String[]{"Drive Forward","Drive and shoot","Drive and shoot blind","2 Ball"};
+        autonomiceNames = new String[]{"Drive Forward","1 Ball Hot","1 Ball Blind","2 Ball"};
         autonomice = new Command[]{new DriveForward(0.8, 4700),new DriveAndShoot(),new DriveAndShootNoWait(),new DriveAndShoot2Ball()};
         
         // Configure and send the SendableChooser, which allows autonomous modes
