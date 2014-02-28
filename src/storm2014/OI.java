@@ -134,9 +134,6 @@ public class OI {
         return _zeroDeadzone(-shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_TENSION),0.15);
     }
 
-    public double getTilt() {
-        return _zeroDeadzone(-shootJoystick.getRawAxis(RobotMap.JOYSHOOT_AXIS_TILT),0.15);
-    }
     public boolean isContinueButton() {
         return continueProcess.get();
     }

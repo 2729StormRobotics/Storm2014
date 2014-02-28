@@ -21,7 +21,6 @@ import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDRing;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.StaticLEDStrip;
-import storm2014.subsystems.Tilter;
 
 /**
  * This is the robot's "Main class" which is run by the VM. 
@@ -34,7 +33,6 @@ public class Robot extends IterativeRobot {
     public static LEDStrip       leds;
     public static Intake         intake;
     public static Catapult       catapult;
-    public static Tilter         tilter;
     public static LEDRing        ledring;
     public static StaticLEDStrip staticleds;
     Compressor compressor;
@@ -67,7 +65,6 @@ public class Robot extends IterativeRobot {
         driveTrain = new DriveTrain();
         leds       = new LEDStrip();
         intake     = new Intake();
-        tilter     = new Tilter();
         ledring    = new LEDRing();
         staticleds = new StaticLEDStrip();
         compressor = new Compressor(RobotMap.PORT_SWITCH_COMPRESSO, RobotMap.PORT_RELAY_COMPRESSOR);
