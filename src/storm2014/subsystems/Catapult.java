@@ -200,7 +200,7 @@ public class Catapult extends Subsystem {
     
     public String getIndexName(){
         if(presetIndex == 0){
-            return "Reset";
+            return "Ready";
         }else{
             if(presetIndex == 1){
                 return "Short distance";
