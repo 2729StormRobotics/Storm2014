@@ -6,12 +6,17 @@
 
 package storm2014.commands.autonomous;
 
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import storm2014.commands.DriveForward;
 import storm2014.commands.LaunchWhenReady;
 import storm2014.commands.SetArmPosition;
+import storm2014.commands.SetWinchPreset;
+import storm2014.commands.Shift;
 import storm2014.commands.SpinRoller;
+import storm2014.subsystems.Catapult;
 
 /**
  *
@@ -19,20 +24,33 @@ import storm2014.commands.SpinRoller;
  */
 public class DriveAndShoot2Ball extends CommandGroup{
     
-    public DriveAndShoot2Ball(){
-        addSequential(new DriveForward(0.75, 4700));
-        addSequential(new SetArmPosition(2));
-        addSequential(new WaitCommand(0.4));
-        addSequential(new LaunchWhenReady());
-        addSequential(new SetArmPosition(0));
-        addSequential(new WaitCommand(0.4));
-        addSequential(new SpinRoller(1));
-        addSequential(new SetArmPosition(1));
-        addSequential(new WaitCommand(0.4));
-        addSequential(new SetArmPosition(2));
-        addSequential(new WaitCommand(0.4));
-        addSequential(new LaunchWhenReady());
+    private Command _driveShoot() {
+        CommandGroup driveShoot = new CommandGroup("Drive & shoot for 2 ball");
         
+        driveShoot.addSequential(new DriveForward(1, 1500));
+        driveShoot.addSequential(new SetArmPosition(2));
+        driveShoot.addSequential(new WaitCommand(1));
+        driveShoot.addSequential(new SetWinchPreset(Catapult.WINCH_FAR));
+        driveShoot.addSequential(new PrintCommand("Firing"));
+        driveShoot.addSequential(new LaunchWhenReady());
+        
+        return driveShoot;
+    }
+    
+    public DriveAndShoot2Ball() {
+        addSequential(new Shift(true));
+        
+        addSequential(_driveShoot());
+        
+        addSequential(new SpinRoller(1));
+        addSequential(new SetArmPosition(2));
+        addSequential(new DriveForward(-1, 1600));
+        addSequential(new WaitCommand(1));
+        addSequential(new SpinRoller(0));
+        addSequential(new SetArmPosition(0));
+        addSequential(new DriveForward(1, 100));
+        
+        //addSequential(_driveShoot());
     }
     
 }
