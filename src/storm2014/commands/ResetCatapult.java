@@ -29,7 +29,7 @@ public class ResetCatapult extends CommandGroup {
             }
             protected void initialize() {
                 _prevAngle = Robot.catapult.getPivotAngle();
-                _unlatch = (Robot.catapult.getCurrentIndex() == 0 ||
+                _unlatch = ((Robot.catapult.getCurrentIndex() == 0 && Robot.catapult.getWinchDistance() < Robot.catapult.getCurrentPreset() + 50) ||
                             Robot.catapult.isCatapultOut()        ||
                             Robot.catapult.getPivotAngle() > Catapult.BASE_ANGLE + 5);
                 Robot.catapult.setPresetIndex(0);

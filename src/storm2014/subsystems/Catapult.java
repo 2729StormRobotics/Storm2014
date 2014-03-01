@@ -36,7 +36,6 @@ public class Catapult extends Subsystem {
     private static final double ANGLE_RATCHET_ENGAGED    = 170;
     private static final double ANGLE_RATCHET_DISENGAGED = 0;
     
-    // dead zone @ 740
     public final double [] pullBackPresets = new double[]{50,720,890};
     public int presetIndex = 0;
     private boolean _isPawlEngaged = true;
@@ -203,9 +202,9 @@ public class Catapult extends Subsystem {
             return "Ready";
         }else{
             if(presetIndex == 1){
-                return "Short distance";
+                return "Close";
             }else{
-                return "Long distane";
+                return "Far";
             }
         }
     }

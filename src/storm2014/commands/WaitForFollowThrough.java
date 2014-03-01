@@ -6,6 +6,7 @@ import storm2014.Robot;
  * Waits for catapult follow thru.
  */
 public class WaitForFollowThrough extends Command {
+    private static final double STOPPED_SPEED = 50;
     private double _prevDiff  = 0,
             _prevAngle = 0;
     
@@ -23,10 +24,12 @@ public class WaitForFollowThrough extends Command {
             diff -= sgn(diff) * 360;
                     }
         double product = diff * _prevDiff;
+        double minDiff = STOPPED_SPEED*(1.0/50.0);
+        boolean bigEnough = Math.abs(diff) >= minDiff || Math.abs(_prevDiff) >= minDiff;
         if(diff != 0){
             _prevDiff = diff;
         }
-        return product < 0;
+        return product < 0 && bigEnough;
     }
     
     protected void end() {}
