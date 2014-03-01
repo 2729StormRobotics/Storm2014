@@ -34,6 +34,8 @@ public class SetLEDMode extends Command {
             _mode = LEDStrip.AutonomousMode;
         } else if (DriverStation.getInstance().isOperatorControl()) {
             _mode = LEDStrip.TeleopMode;
+        } else if (DriverStation.getInstance().isTest()){
+            _mode = LEDStrip.StormSpiritMode;
         } else {
             _mode = LEDStrip.DisabledMode; //Shouldn't be possible, but just in case
         }

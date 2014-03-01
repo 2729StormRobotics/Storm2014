@@ -33,8 +33,6 @@ public class Catapult extends Subsystem {
     private final DigitalInput    _winchZero    = new DigitalInput(RobotMap.PORT_SENSOR_WINCH_ZERO);
     
     private boolean preLaunchFinished;
-    private static final double ANGLE_RATCHET_ENGAGED    = 170;
-    private static final double ANGLE_RATCHET_DISENGAGED = 0;
     
     public final double [] pullBackPresets = new double[]{50,720,890};
     public int presetIndex = 0;

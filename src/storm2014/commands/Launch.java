@@ -11,6 +11,7 @@ import storm2014.subsystems.LEDStrip;
 public class Launch extends CommandGroup {
     public Launch(){
         setInterruptible(false);
+        addSequential(new SetLEDMode(LEDStrip.RainbowDancePartyMode));
         addSequential(new Command() {
             protected void initialize() {
                 Robot.catapult.setFinishedPreLaunch(false);
@@ -23,12 +24,9 @@ public class Launch extends CommandGroup {
             protected void end() {}
             protected void interrupted() {}
         });
-        addSequential(new SetLEDMode(LEDStrip.PileMode));
         addSequential(new SetArmPosition(2));
         addSequential(new SetLatched(false));
-        addSequential(new SetLEDMode(LEDStrip.RainbowDancePartyMode));
         addSequential(new WaitForFollowThrough(),3);
-        addSequential(new SetLEDMode(LEDStrip.USAMode));
         addSequential(new SetEngagedRatchet(false));
         addSequential(new ResetCatapult());
         addSequential(new SetLEDMode()); //Back to whatever the default is
