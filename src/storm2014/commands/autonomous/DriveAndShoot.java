@@ -25,17 +25,19 @@ public class DriveAndShoot extends CommandGroup{
     private boolean foundHotTarget;
     
     public DriveAndShoot(){
-        addSequential(new Command() {
+        addParallel(new Command() {
             protected void initialize() {
                 foundHotTarget = VisionSystem.foundHotTarget();
             }
-            protected void execute() {}
+            protected void execute() {
+                foundHotTarget = foundHotTarget || VisionSystem.foundHotTarget();
+            }
             protected boolean isFinished() {
-                return true;
+                return false;
             }
             protected void end() {}
             protected void interrupted() {}
-        });
+        },2);
         addSequential(new DriveForward(0.75, 4700));
         addSequential(new SetArmPosition(2));
         addSequential(new Conditional(new WaitCommand(.4), new WaitCommand(5)) { //may lower wait time on the waitcommand
