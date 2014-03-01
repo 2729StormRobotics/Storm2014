@@ -16,6 +16,7 @@ import javax.microedition.io.SocketConnection;
  */
 public class LEDStrip extends Subsystem implements NamedSendable {
 
+    public static final int DefaultMode           = -1;
     public static final int DisabledMode          =  0;
     public static final int MarqueeMode           =  1;
     public static final int TeleopMode            =  2;
@@ -65,21 +66,32 @@ public class LEDStrip extends Subsystem implements NamedSendable {
      */
     public void setMode(final int mode, final byte red, final byte green, final byte blue){
         new Thread() {
-
+            int realmode;
             public void run() {
                 System.out.println("Changing LED mode...");
+                realmode = mode;
+                if (mode == DefaultMode){
+                    if (DriverStation.getInstance().isAutonomous()){
+                        realmode = LEDStrip.AutonomousMode;
+                    } else if (DriverStation.getInstance().isOperatorControl()) {
+                        realmode = LEDStrip.TeleopMode;
+                    } else if (DriverStation.getInstance().isTest()){
+                        realmode = LEDStrip.StormSpiritMode;
+                    } else {
+                        realmode = LEDStrip.DisabledMode;
+                    }
+                }
                 try {
                     _socket = (SocketConnection) Connector.open(_serverIP);
                     _outstream = _socket.openOutputStream();
                     //_instream  = _socket.openInputStream();
 
-                    _outstream.write(mode);
-                    if (mode == SetColorMode){
+                    _outstream.write(realmode);
+                    if (realmode == SetColorMode){
                         _outstream.write(red);
                         _outstream.write(green);
                         _outstream.write(blue);
-                    }
-                    else if (mode == TeleopMode){
+                    } else if (realmode == TeleopMode){
                         DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
                         if (color == DriverStation.Alliance.kBlue){
                             _outstream.write(_allianceBlue);
@@ -110,7 +122,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
                     //_instream.close();
                     _socket.close();
 
-                    _currentMode = mode;
+                    _currentMode = realmode;
                     _table.putNumber("Mode", _currentMode);
                     System.out.println("LEDMode was set to " + _currentMode);
 

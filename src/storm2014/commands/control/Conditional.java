@@ -3,6 +3,7 @@ package storm2014.commands.control;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.PublicCommand;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import java.util.Enumeration;
 /**
  * Used by command groups for if statements.
@@ -42,31 +43,42 @@ public abstract class Conditional extends Command {
             _running = _ifFalse;
         }
         if(_running != null) {
-            _running._initialize();
-            _running.initialize();
+            if(_running.getCommand() instanceof WaitCommand) {
+                _running.start();
+            } else {
+                _running._initialize();
+                _running.initialize();
+            }
         }
     }
 
     protected void execute() {
-        if(_running != null) {
+        if(_running != null && !(_running.getCommand() instanceof WaitCommand)) {
             _running._execute();
             _running.execute();
         }
     }
 
     protected boolean isFinished() {
-        return _running == null || _running.isFinished();
+        if(_running == null) {
+            return false;
+        }
+        if(_running.getCommand() instanceof WaitCommand) {
+            return !_running.isRunning();
+        } else {
+            return _running.isFinished();
+        }
     }
 
     protected void end() {
-        if(_running != null) {
+        if(_running != null && !(_running.getCommand() instanceof WaitCommand)) {
             _running._end();
             _running.end();
         }
     }
 
     protected void interrupted() {
-        if(_running != null) {
+        if(_running != null && !(_running.getCommand() instanceof WaitCommand)) {
             _running._interrupted();
             _running.interrupted();
         }

@@ -25,21 +25,6 @@ public class SetLEDMode extends Command {
         _g = g;
         _b = b;
     }
-    
-    /**
-     * Sets to the default LED mode (Teleop, autonomous, or disabled, as applicable.)
-     */
-    public SetLEDMode(){
-        if (DriverStation.getInstance().isAutonomous()){
-            _mode = LEDStrip.AutonomousMode;
-        } else if (DriverStation.getInstance().isOperatorControl()) {
-            _mode = LEDStrip.TeleopMode;
-        } else if (DriverStation.getInstance().isTest()){
-            _mode = LEDStrip.StormSpiritMode;
-        } else {
-            _mode = LEDStrip.DisabledMode; //Shouldn't be possible, but just in case
-        }
-    }
     protected void initialize() {
         Robot.leds.setMode(_mode, _r, _g, _b);
     }

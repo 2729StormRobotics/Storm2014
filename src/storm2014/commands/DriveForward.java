@@ -7,7 +7,7 @@ import storm2014.Robot;
  *Drives the robot forward by a certain distance and speed
  */
 public class DriveForward extends Command {
-    private static final double P_GAIN = 0;
+    private static final double P_GAIN = 0.01;
     static {
         SmartDashboard.putNumber("Encoder feedback gain", P_GAIN);
     }

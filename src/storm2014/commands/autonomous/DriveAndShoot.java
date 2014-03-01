@@ -8,12 +8,16 @@ package storm2014.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import storm2014.commands.DriveForward;
 import storm2014.commands.LaunchWhenReady;
 import storm2014.commands.SetArmPosition;
+import storm2014.commands.SetWinchPreset;
+import storm2014.commands.Shift;
 import storm2014.commands.control.Conditional;
 import storm2014.commands.control.DoNothing;
+import storm2014.subsystems.Catapult;
 import storm2014.subsystems.VisionSystem;
 
 /**
@@ -38,13 +42,19 @@ public class DriveAndShoot extends CommandGroup{
             protected void end() {}
             protected void interrupted() {}
         },2);
-        addSequential(new DriveForward(0.75, 4700));
+        addSequential(new SetWinchPreset(Catapult.WINCH_CLOSE));
+        addSequential(new Shift(true));
+        addSequential(new DriveForward(1, 4700));
         addSequential(new SetArmPosition(2));
-        addSequential(new Conditional(new WaitCommand(.4), new WaitCommand(5)) { //may lower wait time on the waitcommand
+        addSequential(new Conditional(new WaitCommand(.5), new WaitCommand(3)) { //may lower wait time on the waitcommand
             protected boolean condition() {
                 return foundHotTarget;
             }
         });
+        addSequential(new PrintCommand("Firing"));
+        addSequential(new LaunchWhenReady());
+        addSequential(new DriveForward(0.75, 4700));
+        addSequential(new SetArmPosition(2));
         addSequential(new LaunchWhenReady());
     
     }

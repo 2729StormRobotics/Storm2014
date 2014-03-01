@@ -29,6 +29,6 @@ public class Launch extends CommandGroup {
         addSequential(new WaitForFollowThrough(),3);
         addSequential(new SetEngagedRatchet(false));
         addSequential(new ResetCatapult());
-        addSequential(new SetLEDMode()); //Back to whatever the default is
+        addSequential(new SetLEDMode(LEDStrip.DefaultMode)); //Back to whatever the default is
     }
 }

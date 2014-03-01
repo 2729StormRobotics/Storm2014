@@ -14,6 +14,7 @@ import storm2014.commands.DriveForward;
 import storm2014.commands.LaunchWhenReady;
 import storm2014.commands.SetArmPosition;
 import storm2014.commands.SetWinchPreset;
+import storm2014.commands.Shift;
 import storm2014.commands.control.Conditional;
 import storm2014.subsystems.Catapult;
 import storm2014.subsystems.VisionSystem;
@@ -26,6 +27,7 @@ public class DriveAndShootNoWait extends CommandGroup{
     
     public DriveAndShootNoWait(){
         addSequential(new SetWinchPreset(Catapult.WINCH_CLOSE));
+        addSequential(new Shift(true));
         addSequential(new DriveForward(1, 4700));
         addSequential(new SetArmPosition(2));
         addSequential(new WaitCommand(1));

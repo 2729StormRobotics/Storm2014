@@ -63,5 +63,7 @@ public class PublicCommand extends Command {
             _c._interrupted();
         }
     }
-    
+    public Command getCommand() {
+        return _c;
+    }
 }

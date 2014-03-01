@@ -66,6 +66,6 @@ public class ResetCatapult extends CommandGroup {
         addSequential(new SetWinchPreset(Catapult.WINCH_READY));
         addSequential(new WaitCommand(0.25));
         addSequential(new SetLatched(true));
-        addSequential(new SetLEDMode());
+        addSequential(new SetLEDMode(LEDStrip.DefaultMode));
     }
 }
