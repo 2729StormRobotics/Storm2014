@@ -2,6 +2,7 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import storm2014.Robot;
 import storm2014.subsystems.Catapult;
@@ -63,9 +64,12 @@ public class ResetCatapult extends CommandGroup {
                 end();
             }
         },3);
+        addSequential(new PrintCommand("Done winching out"));
         addSequential(new SetWinchPreset(Catapult.WINCH_READY));
         addSequential(new WaitCommand(0.25));
+        addSequential(new PrintCommand("Winch ready"));
         addSequential(new SetLatched(true));
         addSequential(new SetLEDMode(LEDStrip.DefaultMode));
+        addSequential(new PrintCommand("Done reset"));
     }
 }

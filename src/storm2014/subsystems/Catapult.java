@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import storm2014.Robot;
@@ -55,6 +56,7 @@ public class Catapult extends Subsystem {
     
     protected void initDefaultCommand() {
        CommandGroup wait = new CommandGroup("Prep for Launch");
+       wait.addSequential(new PrintCommand("Prepping"));
        wait.addSequential(new Conditional(new Command() {
            {
                setInterruptible(false);
@@ -96,7 +98,9 @@ public class Catapult extends Subsystem {
                return _firstRun;
            }
        });
+       wait.addSequential(new PrintCommand("Done pre-reset"));
        wait.addSequential(new PreLaunch());
+       wait.addSequential(new PrintCommand("Done pre-launch, tensioning"));
        wait.addSequential(new TensionWinch());
         setDefaultCommand(wait);
     }
