@@ -42,15 +42,15 @@ public class DriveAndShoot extends CommandGroup{
             protected void end() {}
             protected void interrupted() {}
         },2);
-        addSequential(new SetWinchPreset(Catapult.WINCH_CLOSE));
         addSequential(new Shift(true));
-        addSequential(new DriveForward(1, 4700));
+        addSequential(new DriveForward(1, 4900));
         addSequential(new SetArmPosition(2));
         addSequential(new Conditional(new WaitCommand(.5), new WaitCommand(3)) { //may lower wait time on the waitcommand
             protected boolean condition() {
                 return foundHotTarget;
             }
         });
+        addSequential(new SetWinchPreset(Catapult.WINCH_CLOSE));
         addSequential(new PrintCommand("Firing"));
         addSequential(new LaunchWhenReady());
         addSequential(new DriveForward(0.75, 4700));
