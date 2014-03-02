@@ -44,7 +44,7 @@ public abstract class Conditional extends Command {
         }
         if(_running != null) {
             if(_running.getCommand() instanceof WaitCommand) {
-                _running.start();
+                _running.getCommand().start();
             } else {
                 _running._initialize();
                 _running.initialize();
@@ -64,7 +64,7 @@ public abstract class Conditional extends Command {
             return true;
         }
         if(_running.getCommand() instanceof WaitCommand) {
-            return !_running.isRunning();
+            return !_running.getCommand().isRunning();
         } else {
             return _running.isFinished();
         }
