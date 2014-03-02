@@ -43,17 +43,17 @@ public abstract class Conditional extends Command {
             _running = _ifFalse;
         }
         if(_running != null) {
-//            if(_running.getCommand() instanceof WaitCommand) {
-//                _running.start();
-//            } else {
+            if(_running.getCommand() instanceof WaitCommand) {
+                _running.start();
+            } else {
                 _running._initialize();
                 _running.initialize();
-//            }
+            }
         }
     }
 
     protected void execute() {
-        if(_running != null) {// && !(_running.getCommand() instanceof WaitCommand)) {
+        if(_running != null && !(_running.getCommand() instanceof WaitCommand)) {
             _running._execute();
             _running.execute();
         }
@@ -63,22 +63,22 @@ public abstract class Conditional extends Command {
         if(_running == null) {
             return true;
         }
-//        if(_running.getCommand() instanceof WaitCommand) {
-//            return !_running.isRunning();
-//        } else {
+        if(_running.getCommand() instanceof WaitCommand) {
+            return !_running.isRunning();
+        } else {
             return _running.isFinished();
-//        }
+        }
     }
 
     protected void end() {
-        if(_running != null) {// && !(_running.getCommand() instanceof WaitCommand)) {
+        if(_running != null && !(_running.getCommand() instanceof WaitCommand)) {
             _running._end();
             _running.end();
         }
     }
 
     protected void interrupted() {
-        if(_running != null) { // && !(_running.getCommand() instanceof WaitCommand)) {
+        if(_running != null && !(_running.getCommand() instanceof WaitCommand)) {
             _running._interrupted();
             _running.interrupted();
         }

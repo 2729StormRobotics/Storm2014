@@ -35,7 +35,7 @@ public class Catapult extends Subsystem {
     
     private boolean preLaunchFinished;
     
-    public final double [] pullBackPresets = new double[]{50,720,890};
+    public final double [] pullBackPresets = new double[]{50,665,890};
     public int presetIndex = 0;
     private boolean _isPawlEngaged = true;
     private boolean _firstRun = true;
