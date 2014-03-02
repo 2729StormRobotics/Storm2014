@@ -16,7 +16,7 @@ public class ResetCatapult extends CommandGroup {
 //    private int timesRun = 0;
     public ResetCatapult() {
         setInterruptible(false);
-        addSequential(new SetWinchPreset(Catapult.WINCH_READY));
+//        addSequential(new SetWinchPreset(Catapult.WINCH_READY));
         addSequential(new SetLEDMode(LEDStrip.PileMode));
         addSequential(new SetEngagedRatchet(false));
         // Wait for catapult to return
@@ -66,7 +66,7 @@ public class ResetCatapult extends CommandGroup {
             }
         },3);
         addSequential(new PrintCommand("Done winching out"));
-//        addSequential(new SetWinchPreset(Catapult.WINCH_READY));
+        addSequential(new SetWinchPreset(Catapult.WINCH_READY));
         addSequential(new WaitCommand(0.25));
         addSequential(new PrintCommand("Latching"));
         addSequential(new SetLatched(true));
