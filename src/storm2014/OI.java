@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import storm2014.commands.ChangeArmPosition;
 import storm2014.commands.NextWinchPreset;
 import storm2014.commands.Launch;
+import storm2014.commands.PistonLaunch;
+import storm2014.commands.PistonPreFire;
+import storm2014.commands.PistonReset;
 import storm2014.commands.PreLaunch;
 import storm2014.commands.ResetCatapult;
 import storm2014.commands.Shift;
@@ -41,7 +44,7 @@ public class OI {
 //                         prefire   = new JoystickButton(shootJoystick, 3),
                          resetCat  = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_RESET),
                          fire      = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_FIRE),
-                         safety    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_SAFETY),
+                         prefire    = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_PREFIRE),
                          tension   = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_TENSION),
             
                          preconfig = new JoystickButton(debugJoystick, RobotMap.JOYDEBUG_BUTTON_PRECONFIG);
@@ -104,12 +107,9 @@ public class OI {
         armsIn   .whenPressed (new ChangeArmPosition(-1));
         armsOut  .whenPressed (new ChangeArmPosition(1));
 //        prefire  .whenPressed (new PreLaunch());
-        resetCat .whenPressed (new ResetCatapult());
-        fire     .whenPressed (new Conditional(new Launch(),null) {
-            protected boolean condition() {
-                return safety.get();
-            }
-        });
+        resetCat .whenPressed (new PistonReset());
+        fire     .whenPressed (new PistonLaunch());
+        prefire  .whileHeld(new PistonPreFire());
         tension  .whenPressed (new NextWinchPreset());
         
         preconfig.whenPressed(Robot.catapult._getPreconfigureCommand());

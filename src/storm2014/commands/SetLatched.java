@@ -9,7 +9,7 @@ Latches/Unlatches the latch.
 public class SetLatched extends Command {
 
     public final boolean _latched;
-
+//true latches, false unlatches
     public SetLatched(boolean engaged) {
         requires(Robot.catapult);
         _latched = engaged;

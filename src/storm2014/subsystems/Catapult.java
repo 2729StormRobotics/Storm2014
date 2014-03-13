@@ -1,6 +1,7 @@
 package storm2014.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
@@ -32,6 +33,7 @@ public class Catapult extends Subsystem {
     private final Solenoid        _ratchet      = new Solenoid(RobotMap.PORT_SOLENOID_RATCHET);
     private final MagneticEncoder _magEnc       = new MagneticEncoder(RobotMap.PORT_SENSOR_MAG_ENCODER);
     private final DigitalInput    _winchZero    = new DigitalInput(RobotMap.PORT_SENSOR_WINCH_ZERO);
+    private final DoubleSolenoid _solCatapult = new DoubleSolenoid(RobotMap.PORT_SOLENOID_CATAPULT_IN, RobotMap.PORT_SOLENOID_CATAPULT_OUT);
     
     private boolean preLaunchFinished;
     
@@ -235,5 +237,12 @@ public class Catapult extends Subsystem {
             protected void end() {}
             protected void interrupted() {}
         };
+    }
+    
+    public void fireCatapult(){
+        _solCatapult.set(DoubleSolenoid.Value.kReverse);
+    }
+    public void resetCatapult(){
+        _solCatapult.set(DoubleSolenoid.Value.kForward);
     }
 }
