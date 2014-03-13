@@ -62,7 +62,7 @@ public class RobotMap {
     public static final int MODULE_SENSOR_ACCELEROMETER = 1;
         
     // Solenoid Ports
-    public static final int PORT_SOLENOID_RATCHET           = 1;
+    public static final int PORT_SOLENOID_CATAPULT           = 1;
     public static final int PORT_SOLENOID_SHIFT_HIGH        = 2;
     public static final int PORT_SOLENOID_SHIFT_LOW         = 3;
     public static final int PORT_SOLENOID_LATCH             = 4;
@@ -70,6 +70,4 @@ public class RobotMap {
     public static final int PORT_SOLENOID_INTAKE_TOP_OUT    = 6;
     public static final int PORT_SOLENOID_INTAKE_BOTTOM_IN  = 7;
     public static final int PORT_SOLENOID_INTAKE_BOTTOM_OUT = 8;
-    public static final int PORT_SOLENOID_CATAPULT_IN       = 9;
-    public static final int PORT_SOLENOID_CATAPULT_OUT       = 10;
 }

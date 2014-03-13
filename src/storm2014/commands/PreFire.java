@@ -13,7 +13,7 @@ import storm2014.Robot;
  *
  * @author Tim
  */
-public class PistonPreFire extends Command{
+public class PreFire extends Command{
 
     protected void initialize() {
         if(Robot.catapult.isLatched()) Robot.catapult.fireCatapult();

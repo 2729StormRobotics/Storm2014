@@ -1,10 +1,13 @@
 package storm2014;
 
+import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 
 import storm2014.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -15,7 +18,6 @@ import storm2014.commands.DriveForward;
 import storm2014.commands.autonomous.DriveAndShoot;
 import storm2014.commands.autonomous.DriveAndShoot2Ball;
 import storm2014.commands.autonomous.DriveAndShootNoWait;
-import storm2014.commands.autonomous.OneBallDynamic;
 import storm2014.subsystems.Catapult;
 import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDRing;
@@ -41,22 +43,24 @@ public class Robot extends IterativeRobot {
     Command[] autonomice;
     SendableChooser chooser = new SendableChooser();
     Command autonomouse;
+    Victor magicBoxVictor = new Victor(5);
+    AnalogChannel magicBoxCurrentSensor = new AnalogChannel(5);
+    ADXL345_I2C accel = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
     
     double prevAngle;
     
     private void sendSensorData() {
-         SmartDashboard.putNumber("Winch Encoder",catapult.getWinchDistance());
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
          SmartDashboard.putNumber("Catapult Angle", catapult.getPivotAngle());
          SmartDashboard.putNumber("Left Distance", driveTrain.getLeftDistance());
          SmartDashboard.putNumber("Right Distance", driveTrain.getRightDistance());
-         SmartDashboard.putBoolean("Pawl Engaged", catapult.isRatchetEngaged());
-         SmartDashboard.putBoolean("Ready to fire", catapult.isFinishedPreLaunch());
-         SmartDashboard.putString("Winch Preset", catapult.getIndexName());
          SmartDashboard.putString("Gear", driveTrain.isHighgear() ? "High gear" : "Low gear");
          SmartDashboard.putBoolean("Latch Engaged", catapult.isLatched());
          SmartDashboard.putString("Arm mode", intake.getModeName());
          SmartDashboard.putBoolean("Compressed", compressor.getPressureSwitchValue());
+         SmartDashboard.putNumber("X Accel", accel.getAccelerations().XAxis);
+         SmartDashboard.putNumber("Y Accel", accel.getAccelerations().YAxis);
+         SmartDashboard.putNumber("Z Accel", accel.getAccelerations().ZAxis);
     }
     
     /** Called on robot boot. */
@@ -69,6 +73,10 @@ public class Robot extends IterativeRobot {
         staticleds = new StaticLEDStrip();
         compressor = new Compressor(RobotMap.PORT_SWITCH_COMPRESSO, RobotMap.PORT_RELAY_COMPRESSOR);
         compressor.start();
+        
+        LiveWindow.addActuator("Magic Box", "Speed Controller", magicBoxVictor);
+        LiveWindow.addSensor("Magic Box", "Current Sensor", magicBoxCurrentSensor);
+        
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         

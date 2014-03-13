@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  *
  * @author Tim
  */
-public class PistonReset extends CommandGroup{
-    public PistonReset(){
+public class Reset extends CommandGroup{
+    public Reset(){
         addSequential(new FireCatapult(false));
         addSequential(new WaitCommand(.4));
         addSequential(new SetLatched(true));

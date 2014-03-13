@@ -6,13 +6,9 @@ import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.commands.ChangeArmPosition;
-import storm2014.commands.NextWinchPreset;
 import storm2014.commands.Launch;
-import storm2014.commands.PistonLaunch;
-import storm2014.commands.PistonPreFire;
-import storm2014.commands.PistonReset;
-import storm2014.commands.PreLaunch;
-import storm2014.commands.ResetCatapult;
+import storm2014.commands.PreFire;
+import storm2014.commands.Reset;
 import storm2014.commands.Shift;
 import storm2014.commands.SpinRoller;
 import storm2014.commands.control.Conditional;
@@ -107,12 +103,10 @@ public class OI {
         armsIn   .whenPressed (new ChangeArmPosition(-1));
         armsOut  .whenPressed (new ChangeArmPosition(1));
 //        prefire  .whenPressed (new PreLaunch());
-        resetCat .whenPressed (new PistonReset());
-        fire     .whenPressed (new PistonLaunch());
-        prefire  .whileHeld(new PistonPreFire());
-        tension  .whenPressed (new NextWinchPreset());
+        resetCat .whenPressed (new Reset());
+        fire     .whenPressed (new Launch());
+        prefire  .whileHeld(new PreFire());
         
-        preconfig.whenPressed(Robot.catapult._getPreconfigureCommand());
     }
     
     // When a joystick is in its zero position, it will not necessarily read

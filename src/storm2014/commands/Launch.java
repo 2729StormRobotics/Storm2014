@@ -1,34 +1,23 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package storm2014.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import storm2014.Robot;
-import storm2014.subsystems.LEDStrip;
+import edu.wpi.first.wpilibj.command.WaitCommand;
+
 /**
- *Launches the catapult thru a series of steps.
+ *
+ * @author Tim
  */
-// Tested by Joe Doyle (mostly) on 2014 Robot on 2/15/14
-public class Launch extends CommandGroup {
+public class Launch extends CommandGroup{
     public Launch(){
-        setInterruptible(false);
-        addSequential(new SetLEDMode(LEDStrip.RainbowDancePartyMode));
-        addSequential(new Command() {
-            protected void initialize() {
-                Robot.catapult.setFinishedPreLaunch(false);
-                Robot.catapult.setCatapultOut(true);
-            }
-            protected void execute() {}
-            protected boolean isFinished() {
-                return true;
-            }
-            protected void end() {}
-            protected void interrupted() {}
-        });
         addSequential(new SetArmPosition(2));
         addSequential(new SetLatched(false));
-        addSequential(new WaitForFollowThrough(),3);
-        addSequential(new SetEngagedRatchet(false));
-        addSequential(new ResetCatapult());
-        addSequential(new SetLEDMode(LEDStrip.DefaultMode)); //Back to whatever the default is
+        addSequential(new WaitCommand(0.2));
+        addSequential(new FireCatapult(true));
     }
 }

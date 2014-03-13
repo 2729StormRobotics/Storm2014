@@ -12,11 +12,9 @@ import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import storm2014.commands.DriveForward;
 import storm2014.commands.FireCatapult;
-import storm2014.commands.LaunchWhenReady;
-import storm2014.commands.PistonLaunch;
-import storm2014.commands.PistonPreFire;
+import storm2014.commands.Launch;
+import storm2014.commands.PreFire;
 import storm2014.commands.SetArmPosition;
-import storm2014.commands.SetWinchPreset;
 import storm2014.commands.Shift;
 import storm2014.commands.control.Conditional;
 import storm2014.commands.control.DoNothing;
@@ -53,8 +51,9 @@ public class DriveAndShoot extends CommandGroup{
             }
         });
         addSequential(new SetArmPosition(2));
-        addSequential(new PistonPreFire());
-        addSequential(new PistonLaunch());
+        addSequential(new PreFire());
+        addSequential(new WaitCommand(1));
+        addSequential(new Launch());
     }
     
 }
