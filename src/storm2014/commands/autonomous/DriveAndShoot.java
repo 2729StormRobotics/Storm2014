@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import storm2014.commands.DriveForward;
+import storm2014.commands.FireCatapult;
 import storm2014.commands.LaunchWhenReady;
+import storm2014.commands.PistonLaunch;
+import storm2014.commands.PistonPreFire;
 import storm2014.commands.SetArmPosition;
 import storm2014.commands.SetWinchPreset;
 import storm2014.commands.Shift;
@@ -44,19 +47,14 @@ public class DriveAndShoot extends CommandGroup{
         },2);
         addSequential(new Shift(true));
         addSequential(new DriveForward(1, 4900));
-        //addSequential(new SetArmPosition(2));
         addSequential(new Conditional(new WaitCommand(.5), new WaitCommand(3)) { //may lower wait time on the waitcommand
             protected boolean condition() {
                 return foundHotTarget;
             }
         });
-        /*addSequential(new SetWinchPreset(Catapult.WINCH_CLOSE));
-        addSequential(new PrintCommand("Firing"));
-        addSequential(new LaunchWhenReady());*/
-        //addSequential(new DriveForward(0.75, 4700));
         addSequential(new SetArmPosition(2));
-        //addSequential(new LaunchWhenReady());
-    
+        addSequential(new PistonPreFire());
+        addSequential(new PistonLaunch());
     }
     
 }

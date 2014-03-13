@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import storm2014.commands.DriveForward;
 import storm2014.commands.LaunchWhenReady;
+import storm2014.commands.PistonLaunch;
+import storm2014.commands.PistonPreFire;
 import storm2014.commands.SetArmPosition;
 import storm2014.commands.SetWinchPreset;
 import storm2014.commands.Shift;
@@ -30,9 +32,9 @@ public class DriveAndShoot2Ball extends CommandGroup{
         driveShoot.addSequential(new DriveForward(1, 1500));
         driveShoot.addSequential(new SetArmPosition(2));
         driveShoot.addSequential(new WaitCommand(1));
-        driveShoot.addSequential(new SetWinchPreset(Catapult.WINCH_FAR));
         driveShoot.addSequential(new PrintCommand("Firing"));
-        driveShoot.addSequential(new LaunchWhenReady());
+        driveShoot.addSequential(new PistonPreFire());
+        driveShoot.addSequential(new PistonLaunch());
         
         return driveShoot;
     }
@@ -49,8 +51,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
         addSequential(new SpinRoller(0));
         addSequential(new SetArmPosition(0));
         addSequential(new DriveForward(1, 100));
-        
-        //addSequential(_driveShoot());
+        addSequential(_driveShoot());
     }
     
 }
