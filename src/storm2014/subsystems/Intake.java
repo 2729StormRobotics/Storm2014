@@ -79,16 +79,16 @@ public final class Intake extends Subsystem {
     public String getModeName() {
         switch (_mode) {
             case 0:
-                return "Low";
+                return "High";
             case 1:
                 return "Middle";
             case 2:
-                return "High";
+                return "Low";
         }
         return "";
     }
     
     public boolean armSafe() {
-        return getMode() == 0;
+        return getMode() == 2;
     }
 }
