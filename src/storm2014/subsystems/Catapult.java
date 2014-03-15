@@ -20,13 +20,14 @@ public class Catapult extends Subsystem {
     
     public Catapult(){
         LiveWindow.addActuator("Catapult", "Latch", _latch);
-        _solCatapult.set(true);
+        LiveWindow.addActuator("Catapult", "Piston", _solCatapult);
+        _solCatapult.set(false);
     }
     
     protected void initDefaultCommand() {}
     
     public void latch() {
-        if(_solCatapult.get())
+        if(!_solCatapult.get())
             _latch.set(false);
     }
     
@@ -40,10 +41,10 @@ public class Catapult extends Subsystem {
     
     public void fireCatapult(){
         if(Robot.intake.armSafe())
-            _solCatapult.set(false);
+            _solCatapult.set(true);
     }
     public void resetCatapult(){
         if(Robot.intake.armSafe())
-            _solCatapult.set(true);
+            _solCatapult.set(false);
     }
 }

@@ -223,6 +223,6 @@ public class Robot extends IterativeRobot {
             staticleds.setBlue((short) (255 * Math.sin(pulseCount)));
         }
         
-        pulseCount += Math.PI / 400; //Should take 8 seconds to pulse on and off
+        pulseCount += Math.PI / 200; //Should take 8 seconds to pulse on and off
     }
 }

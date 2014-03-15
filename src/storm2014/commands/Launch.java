@@ -17,7 +17,7 @@ public class Launch extends CommandGroup{
     public Launch(){
         setInterruptible(false);
         addSequential(new SetLatched(false));
-        addSequential(new WaitCommand(1.5));
+        addSequential(new WaitCommand(1.0));
         addSequential(new FireCatapult(true));
     }
 }
