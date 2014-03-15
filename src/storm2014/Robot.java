@@ -23,6 +23,9 @@ import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDRing;
 import storm2014.subsystems.LEDStrip;
 import storm2014.subsystems.StaticLEDStrip;
+import storm2014.utilities.pipeline.FilterTask;
+import storm2014.utilities.pipeline.ISource;
+import storm2014.utilities.pipeline.LowPassFilter;
 
 /**
  * This is the robot's "Main class" which is run by the VM. 
@@ -46,6 +49,9 @@ public class Robot extends IterativeRobot {
     Victor magicBoxVictor = new Victor(5);
     AnalogChannel magicBoxCurrentSensor = new AnalogChannel(5);
     ADXL345_I2C accel = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
+    FilterTask [] filteredAxis = new FilterTask[3];
+    LowPassFilter [] filters = new LowPassFilter[3];
+    ADXL345_I2C.Axes [] axes = new ADXL345_I2C.Axes[3];
     
     double prevAngle;
     
@@ -58,9 +64,10 @@ public class Robot extends IterativeRobot {
          SmartDashboard.putBoolean("Latch Engaged", catapult.isLatched());
          SmartDashboard.putString("Arm mode", intake.getModeName());
          SmartDashboard.putBoolean("Compressed", compressor.getPressureSwitchValue());
-         SmartDashboard.putNumber("X Accel", accel.getAccelerations().XAxis);
-         SmartDashboard.putNumber("Y Accel", accel.getAccelerations().YAxis);
-         SmartDashboard.putNumber("Z Accel", accel.getAccelerations().ZAxis);
+         SmartDashboard.putNumber("X Raw", accel.getAccelerations().XAxis);
+         SmartDashboard.putNumber("Y Raw", accel.getAccelerations().YAxis);
+         SmartDashboard.putNumber("Z Raw", accel.getAccelerations().ZAxis);
+         SmartDashboard.putBoolean("Arms down", intake.armSafe());
     }
     
     /** Called on robot boot. */
@@ -94,6 +101,14 @@ public class Robot extends IterativeRobot {
         }
         SmartDashboard.putData("Which Autonomouse?", chooser);
         SmartDashboard.putData(Scheduler.getInstance());
+        
+        filters[0] = new LowPassFilter(0, 0.05);
+        filteredAxis[0] = new FilterTask(filters[0], new ISource() {
+
+            public double get() {
+                return accel.getAcceleration(ADXL345_I2C.Axes.kX);
+            }
+        }, 0.04);
         
         // Send sensor info to the SmartDashboard periodically
         new Command("Sensor feedback") {
