@@ -208,6 +208,8 @@ public class Robot extends IterativeRobot {
         leds.setMode(LEDStrip.DisabledMode);
         
     }
+    
+    double pulseCount = 0;
     /**
      * Called during disabled whenever a new driver station packet arrives
      * (about every 1/50 of a second). We only have it overridden so we don't
@@ -220,15 +222,17 @@ public class Robot extends IterativeRobot {
         if (color == DriverStation.Alliance.kBlue){           
             staticleds.setRed((short) 0);
             staticleds.setGreen((short) 0);
-            staticleds.setBlue((short) 127);
+            staticleds.setBlue((short) (255 * Math.sin(pulseCount)));
         } else if (color == DriverStation.Alliance.kRed){
-            staticleds.setRed((short) 127);
+            staticleds.setRed((short) (255 * Math.sin(pulseCount)));
             staticleds.setGreen((short) 0);
             staticleds.setBlue((short) 0);
         } else {    
-            staticleds.setRed((short) 127);
+            staticleds.setRed((short) (255 * Math.sin(pulseCount)));
             staticleds.setGreen((short) 0);
-            staticleds.setBlue((short) 127);
+            staticleds.setBlue((short) (255 * Math.sin(pulseCount)));
         }
+        
+        pulseCount += Math.PI / 50; //Should take one second to pulse on and off
     }
 }
