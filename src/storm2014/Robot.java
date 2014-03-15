@@ -47,11 +47,8 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser = new SendableChooser();
     Command autonomouse;
     
-    double prevAngle;
-    
     private void sendSensorData() {
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
-         SmartDashboard.putNumber("Catapult Angle", catapult.getPivotAngle());
          SmartDashboard.putNumber("Left Distance", driveTrain.getLeftDistance());
          SmartDashboard.putNumber("Right Distance", driveTrain.getRightDistance());
          SmartDashboard.putString("Gear", driveTrain.isHighgear() ? "High gear" : "Low gear");
@@ -74,8 +71,6 @@ public class Robot extends IterativeRobot {
         
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
-        
-        prevAngle = catapult.getPivotAngle();
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"Drive Forward","1 Ball Hot","1 Ball Blind","2 Ball"};
