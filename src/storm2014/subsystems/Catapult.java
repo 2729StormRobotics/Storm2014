@@ -20,7 +20,7 @@ public class Catapult extends Subsystem {
     
     public Catapult(){
         LiveWindow.addActuator("Catapult", "Latch", _latch);
-        resetCatapult();
+        _solCatapult.set(true);
     }
     
     protected void initDefaultCommand() {}

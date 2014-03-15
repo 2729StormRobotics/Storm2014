@@ -56,7 +56,6 @@ public class RobotMap {
     // Analog ports
     public static final int PORT_SENSOR_GYRO        = 1;
     public static final int PORT_SENSOR_STRINGPOT   = 2;
-    public static final int PORT_SENSOR_MAG_ENCODER = 4;
     
     // I2C on the Digital Sidecar
     public static final int MODULE_SENSOR_ACCELEROMETER = 1;

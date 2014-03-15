@@ -17,7 +17,7 @@ public class Reset extends CommandGroup{
     public Reset(){
         setInterruptible(false);
         addSequential(new FireCatapult(false));
-        addSequential(new WaitCommand(.4));
+        addSequential(new WaitCommand(1.5));
         addSequential(new SetLatched(true));
     }
 }
