@@ -34,8 +34,6 @@ public class Catapult extends Subsystem {
     
     private boolean _catapultOut = false;
     
-    private static Intake intake;
-    
     public Catapult(){
         _winchEncoder.start();
         LiveWindow.addSensor("Catapult", "Winch Encoder", _winchEncoder);
@@ -71,11 +69,11 @@ public class Catapult extends Subsystem {
     }
     
     public void fireCatapult(){
-        if(intake.armSafe())
+        if(Robot.intake.armSafe())
             _solCatapult.set(false);
     }
     public void resetCatapult(){
-        if(intake.armSafe())
+        if(Robot.intake.armSafe())
             _solCatapult.set(true);
     }
 }
