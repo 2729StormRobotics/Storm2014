@@ -21,7 +21,7 @@ public class RobotMap {
     public static final int JOYSHOOT_BUTTON_SPIN_OUT = 7;
     public static final int JOYSHOOT_BUTTON_CONTINUE = 1;
     public static final int JOYSHOOT_BUTTON_FIRE     = 6;
-    public static final int JOYSHOOT_BUTTON_PREFIRE   = 3;
+    public static final int JOYSHOOT_BUTTON_PREFIRE  = 3;
     public static final int JOYSHOOT_BUTTON_RESET    = 8;
     public static final int JOYSHOOT_BUTTON_TENSION  = 2;
     
@@ -62,7 +62,7 @@ public class RobotMap {
     public static final int MODULE_SENSOR_ACCELEROMETER = 1;
         
     // Solenoid Ports
-    public static final int PORT_SOLENOID_CATAPULT           = 1;
+    public static final int PORT_SOLENOID_CATAPULT          = 1;
     public static final int PORT_SOLENOID_SHIFT_HIGH        = 2;
     public static final int PORT_SOLENOID_SHIFT_LOW         = 3;
     public static final int PORT_SOLENOID_LATCH             = 4;
