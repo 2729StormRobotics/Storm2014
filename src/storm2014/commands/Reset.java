@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class Reset extends CommandGroup{
     public Reset(){
+        setInterruptible(false);
         addSequential(new FireCatapult(false));
         addSequential(new WaitCommand(.4));
         addSequential(new SetLatched(true));

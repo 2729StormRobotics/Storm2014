@@ -15,6 +15,10 @@ import storm2014.Robot;
  */
 public class PreFire extends Command{
 
+    public PreFire(){
+        setInterruptible(false);
+    }
+    
     protected void initialize() {
         if(Robot.catapult.isLatched()) Robot.catapult.fireCatapult();
     }
