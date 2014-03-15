@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class Launch extends CommandGroup{
     public Launch(){
         setInterruptible(false);
-        addSequential(new SetArmPosition(2));
         addSequential(new SetLatched(false));
         addSequential(new WaitCommand(0.2));
         addSequential(new FireCatapult(true));
