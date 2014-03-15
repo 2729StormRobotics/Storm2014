@@ -46,12 +46,6 @@ public class Robot extends IterativeRobot {
     Command[] autonomice;
     SendableChooser chooser = new SendableChooser();
     Command autonomouse;
-    Victor magicBoxVictor = new Victor(5);
-    AnalogChannel magicBoxCurrentSensor = new AnalogChannel(5);
-    ADXL345_I2C accel = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
-    FilterTask [] filteredAxis = new FilterTask[3];
-    LowPassFilter [] filters = new LowPassFilter[3];
-    ADXL345_I2C.Axes [] axes = new ADXL345_I2C.Axes[3];
     
     double prevAngle;
     
@@ -64,9 +58,6 @@ public class Robot extends IterativeRobot {
          SmartDashboard.putBoolean("Latch Engaged", catapult.isLatched());
          SmartDashboard.putString("Arm mode", intake.getModeName());
          SmartDashboard.putBoolean("Compressed", compressor.getPressureSwitchValue());
-         SmartDashboard.putNumber("X Raw", accel.getAccelerations().XAxis);
-         SmartDashboard.putNumber("Y Raw", accel.getAccelerations().YAxis);
-         SmartDashboard.putNumber("Z Raw", accel.getAccelerations().ZAxis);
          SmartDashboard.putBoolean("Arms down", intake.armSafe());
     }
     
@@ -80,9 +71,6 @@ public class Robot extends IterativeRobot {
         staticleds = new StaticLEDStrip();
         compressor = new Compressor(RobotMap.PORT_SWITCH_COMPRESSO, RobotMap.PORT_RELAY_COMPRESSOR);
         compressor.start();
-        
-        LiveWindow.addActuator("Magic Box", "Speed Controller", magicBoxVictor);
-        LiveWindow.addSensor("Magic Box", "Current Sensor", magicBoxCurrentSensor);
         
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
@@ -101,14 +89,6 @@ public class Robot extends IterativeRobot {
         }
         SmartDashboard.putData("Which Autonomouse?", chooser);
         SmartDashboard.putData(Scheduler.getInstance());
-        
-        filters[0] = new LowPassFilter(0, 0.05);
-        filteredAxis[0] = new FilterTask(filters[0], new ISource() {
-
-            public double get() {
-                return accel.getAcceleration(ADXL345_I2C.Axes.kX);
-            }
-        }, 0.04);
         
         // Send sensor info to the SmartDashboard periodically
         new Command("Sensor feedback") {
