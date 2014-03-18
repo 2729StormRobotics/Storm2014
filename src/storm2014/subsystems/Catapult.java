@@ -47,4 +47,7 @@ public class Catapult extends Subsystem {
         if(Robot.intake.armSafe())
             _solCatapult.set(false);
     }
+    public boolean isPrefired(){
+        return _solCatapult.get();
+    }
 }

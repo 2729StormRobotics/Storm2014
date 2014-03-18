@@ -74,7 +74,7 @@ public class Robot extends IterativeRobot {
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"Drive Forward","1 Ball Hot","1 Ball Blind","2 Ball"};
-        autonomice = new Command[]{new DriveForward(0.8, 4700),new DriveAndShoot(),new DriveAndShootNoWait(),new DriveAndShoot2Ball()};
+        autonomice = new Command[]{new DriveForward(0.8, 5250),new DriveAndShoot(),new DriveAndShootNoWait(),new DriveAndShoot2Ball()};
         
         // Configure and send the SendableChooser, which allows autonomous modes
         // to be chosen via radio button on the SmartDashboard

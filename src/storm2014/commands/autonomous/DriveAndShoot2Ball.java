@@ -27,7 +27,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
     private Command _driveShoot() {
         CommandGroup driveShoot = new CommandGroup("Drive & shoot for 2 ball");
         
-        driveShoot.addSequential(new DriveForward(1, 1500));
+        driveShoot.addSequential(new DriveForward(1, 5250));
         driveShoot.addSequential(new SetArmPosition(2));
         driveShoot.addSequential(new WaitCommand(1));
         driveShoot.addSequential(new PrintCommand("Firing"));
@@ -45,7 +45,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
         
         addSequential(new SpinRoller(1));
         addSequential(new SetArmPosition(2));
-        addSequential(new DriveForward(-1, 1600));
+        addSequential(new DriveForward(-1, 5350));
         addSequential(new WaitCommand(1));
         addSequential(new SpinRoller(0));
         addSequential(new SetArmPosition(0));

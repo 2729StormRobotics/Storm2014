@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 import storm2014.commands.DriveForward;
 import storm2014.commands.Launch;
 import storm2014.commands.PreFire;
+import storm2014.commands.Reset;
 import storm2014.commands.SetArmPosition;
 import storm2014.commands.Shift;
 import storm2014.commands.control.Conditional;
@@ -27,13 +28,16 @@ public class DriveAndShootNoWait extends CommandGroup{
     
     public DriveAndShootNoWait(){
         addSequential(new Shift(true));
-        addSequential(new DriveForward(1, 4700));
+        addParallel(new PreFire());
+        addSequential(new DriveForward(1, 4450));
         addSequential(new SetArmPosition(2));
-        addSequential(new WaitCommand(1));
         addSequential(new PrintCommand("Firing"));
-        addSequential(new PreFire());
-        addSequential(new WaitCommand(1));
+        addSequential(new PrintCommand("Waiting"));
+        addSequential(new WaitCommand(0.5));
+        addSequential(new PrintCommand("Before Launch"));
         addSequential(new Launch());
+        addSequential(new PrintCommand("After Launch"));
+        addSequential(new Reset());
     }
     
 }

@@ -19,11 +19,11 @@ public class PreFire extends Command{
         setInterruptible(false);
     }
     
-    protected void initialize() {
+    protected void initialize() {}
+
+    protected void execute() {
         if(Robot.catapult.isLatched()) Robot.catapult.fireCatapult();
     }
-
-    protected void execute() {}
 
     protected boolean isFinished() {
         return !Robot.catapult.isLatched();

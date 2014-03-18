@@ -8,6 +8,8 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import storm2014.Robot;
+import storm2014.commands.control.Conditional;
 
 /**
  *
@@ -16,6 +18,12 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class Reset extends CommandGroup{
     public Reset(){
         setInterruptible(false);
+        addSequential(new Conditional(new SetLatched(false), null) {
+            
+            protected boolean condition() {
+                return !Robot.catapult.isPrefired();
+            }
+        });
         addSequential(new FireCatapult(false));
         addSequential(new WaitCommand(1.0));
         addSequential(new SetLatched(true));

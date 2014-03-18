@@ -44,7 +44,7 @@ public class DriveAndShoot extends CommandGroup{
             protected void interrupted() {}
         },2);
         addSequential(new Shift(true));
-        addSequential(new DriveForward(1, 4900));
+        addSequential(new DriveForward(1, 5250));
         addSequential(new Conditional(new WaitCommand(.5), new WaitCommand(3)) { //may lower wait time on the waitcommand
             protected boolean condition() {
                 return foundHotTarget;
