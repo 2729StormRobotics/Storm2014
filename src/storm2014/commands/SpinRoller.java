@@ -7,20 +7,14 @@ import storm2014.Robot;
  */
 //Not Tested
 public class SpinRoller extends Command {
-    private final int _direction;
-    public SpinRoller(int direction) {
+    private final float _direction;
+    public SpinRoller(float direction) {
         requires(Robot.intake);
         _direction = direction;
     }
     
     protected void initialize() {
-        if(_direction > 0) {
-            Robot.intake.spinIn();
-        } else if(_direction < 0) {
-            Robot.intake.spinOut();
-        } else {
-            Robot.intake.stop();
-        }
+        Robot.intake.setRollerRaw(_direction);
     }
     
     protected void execute() {}

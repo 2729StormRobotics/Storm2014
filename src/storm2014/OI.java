@@ -47,7 +47,7 @@ public class OI {
     
     private final Button continueProcess = new JoystickButton(shootJoystick, RobotMap.JOYSHOOT_BUTTON_CONTINUE);
     
-    private int _intake = 0;
+    private float _intake = 0;
     
     private Command _changeIntake(final int diff) {
         return new DoNothing() {
@@ -106,7 +106,6 @@ public class OI {
         resetCat .whenPressed (new Reset());
         fire     .whenPressed (new Launch());
         prefire  .whileHeld(new PreFire());
-        
     }
     
     // When a joystick is in its zero position, it will not necessarily read

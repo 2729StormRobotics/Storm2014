@@ -25,7 +25,8 @@ public class Reset extends CommandGroup{
             }
         });
         addSequential(new FireCatapult(false));
-        addSequential(new WaitCommand(1.0));
+        addSequential(new WaitCommand(1.25));
         addSequential(new SetLatched(true));
+        addSequential(new WaitCommand(0.25));
     }
 }
