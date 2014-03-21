@@ -36,7 +36,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
     
     private Command _waitAndLetRoll(){
         CommandGroup _waitAndLetRoll = new CommandGroup("rolls ball out of way");
-        _waitAndLetRoll.addSequential(new WaitForEncoder(4300 - 300));
+        _waitAndLetRoll.addSequential(new WaitForEncoder(4000 - 300));
         _waitAndLetRoll.addSequential(new SpinRoller(0));
         return _waitAndLetRoll;
     }
@@ -44,18 +44,18 @@ public class DriveAndShoot2Ball extends CommandGroup{
     public DriveAndShoot2Ball() {
         addSequential(new Shift(true));
         addSequential(new SetArmPosition(2));
-        addParallel(new SpinRoller((float) -0.35));
+        addParallel(new SpinRoller((float) -0.45));
         addSequential(new WaitCommand(0.3));
-        addSequential(new Shift(false));
         addParallel(new PreFire());
         addParallel(_waitAndLetRoll());
-        addSequential(new DriveForward(1, 4300));
+        addSequential(new DriveForward(1, 4000));
         addSequential(new Launch());
         addParallel(_waitAndRoll());
         addSequential(new Reset());
         addParallel(new PreFire());
         addSequential(new WaitCommand(0.5));
         addSequential(new SetArmPosition(1));
+        addSequential(new WaitCommand(0.5));
         addSequential(new SetArmPosition(2));
         //addSequential(new WaitCommand(1.0));
         addSequential(new SpinRoller(0));
