@@ -44,7 +44,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
     public DriveAndShoot2Ball() {
         addSequential(new Shift(true));
         addSequential(new SetArmPosition(2));
-        addParallel(new SpinRoller((float) -0.70));
+        addParallel(new SpinRoller((float) -0.67));
         addSequential(new WaitCommand(0.3));
         addParallel(new PreFire());
         addParallel(_waitAndLetRoll());
