@@ -49,7 +49,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
         addParallel(new PreFire());
         addParallel(_waitAndLetRoll());
         addSequential(new DriveForward(1, 4200));
-        addSequential(new WaitCommand(0.5));
+        addSequential(new WaitCommand(1.0));
         addSequential(new Launch());
         addParallel(_waitAndRoll());
         addSequential(new Reset());
@@ -60,7 +60,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
         addSequential(new SetArmPosition(2));
         //addSequential(new WaitCommand(1.0));
         addSequential(new SpinRoller(0));
-        addSequential(new WaitCommand(0.75));
+        addSequential(new WaitCommand(1.25));
         addSequential(new Launch());
         addSequential(new Reset());
     }
