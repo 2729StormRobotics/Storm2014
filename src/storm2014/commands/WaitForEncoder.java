@@ -26,7 +26,7 @@ public class WaitForEncoder extends Command{
     protected void execute() {}
 
     protected boolean isFinished() {
-        return Robot.driveTrain.getLeftDistance() >= _end;
+        return Math.abs(Robot.driveTrain.getLeftDistance()) >= _end;
     }
 
     protected void end() {}
