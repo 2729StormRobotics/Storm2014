@@ -8,6 +8,7 @@ package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import storm2014.Robot;
+import storm2014.subsystems.LEDStrip;
 
 /**
  *
@@ -18,8 +19,13 @@ public class PreFire extends Command{
     public PreFire(){
         setInterruptible(false);
     }
-    
-    protected void initialize() {}
+   
+    int _mode;
+
+    protected void initialize() {
+        _mode = Robot.leds.getMode();
+        Robot.leds.setMode(LEDStrip.SetColorMode,(byte)255,(byte)0,(byte)0);
+    }
 
     protected void execute() {
         if(Robot.catapult.isLatched()) Robot.catapult.fireCatapult();
@@ -31,6 +37,7 @@ public class PreFire extends Command{
 
     protected void end() {
         if(Robot.catapult.isLatched()) Robot.catapult.resetCatapult();
+        Robot.leds.setMode(_mode);
     }
 
     protected void interrupted() {

@@ -203,4 +203,7 @@ public class LEDStrip extends Subsystem implements NamedSendable {
     public ITable getTable(){
         return _table;
     }
+    public int getMode() {
+        return _currentMode;
+    }
 }
