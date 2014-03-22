@@ -29,7 +29,7 @@ public class DriveAndShootNoWait extends CommandGroup{
     public DriveAndShootNoWait(){
         addSequential(new Shift(true));
         addParallel(new PreFire());
-        addSequential(new DriveForward(1, 3600));
+        addSequential(new DriveForward(1, 4000));
         addSequential(new SetArmPosition(2));
         addSequential(new PrintCommand("Firing"));
         addSequential(new PrintCommand("Waiting"));
