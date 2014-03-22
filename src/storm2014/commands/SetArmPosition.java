@@ -9,20 +9,31 @@ import storm2014.utilities.Debouncer;
 public class SetArmPosition extends Command {
     private final int _mode;
     private int _currMode;
-    private final Debouncer _wait = new Debouncer(1);
+    private int _dir;
+    private final Debouncer _wait = new Debouncer(0.5);
     
     public SetArmPosition(int mode) {
         requires(Robot.intake);
         _mode = mode;
     }
+
+    private double signum(double x) {
+        return x > 0 ?  1 :
+               x < 0 ? -1 :
+                        0;
+    }
     
     private void _nextMode() {
-        _currMode = Math.min(_mode,Robot.intake.getMode()+1);
-        Robot.intake.setMode(_mode);
+        int currMode = Robot.intake.getMode();
+        if(_dir*(_mode-currMode) > 0) {
+            _currMode = currMode + _dir;
+            Robot.intake.setMode(_currMode);
+        }
         _wait.reset();
     }
 
     protected void initialize() {
+        _dir = (int)signum(_mode-Robot.intake.getMode());
         _nextMode();
     }
 
@@ -33,7 +44,7 @@ public class SetArmPosition extends Command {
     }
 
     protected boolean isFinished() {
-        return _currMode >= _mode;
+        return _dir*(_mode-Robot.intake.getMode()) <= 0;
     }
 
     protected void end() {}
