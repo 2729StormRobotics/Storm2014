@@ -28,8 +28,8 @@ public class SetArmPosition extends Command {
         if(_dir*(_mode-currMode) > 0) {
             _currMode = currMode + _dir;
             Robot.intake.setMode(_currMode);
+            _wait.reset();
         }
-        _wait.reset();
     }
 
     protected void initialize() {
@@ -44,7 +44,7 @@ public class SetArmPosition extends Command {
     }
 
     protected boolean isFinished() {
-        return _dir*(_mode-Robot.intake.getMode()) <= 0;
+        return _dir*(_mode-Robot.intake.getMode()) <= 0 && _wait.check(true);
     }
 
     protected void end() {}
