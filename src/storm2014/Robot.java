@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.DriveForward;
+import storm2014.commands.SetArmPosition;
 import storm2014.commands.autonomous.DriveAndShoot;
 import storm2014.commands.autonomous.DriveAndShoot2Ball;
 import storm2014.commands.autonomous.DriveAndShootNoWait;
@@ -71,6 +72,9 @@ public class Robot extends IterativeRobot {
         
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
+        
+        SmartDashboard.putData("Arms out", new SetArmPosition(2));
+        SmartDashboard.putData("Arms in", new SetArmPosition(0));
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"Drive Forward","1 Ball Hot","1 Ball Blind","2 Ball"};
