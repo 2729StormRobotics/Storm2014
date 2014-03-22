@@ -37,9 +37,8 @@ public class DriveAndShoot2Ball extends CommandGroup{
     
     private Command _waitAndLetRoll(){
         CommandGroup _waitAndPrefire = new CommandGroup();
-        _waitAndPrefire.addSequential(new WaitCommand(1.75));
+        _waitAndPrefire.addSequential(new WaitCommand(1.5));
         _waitAndPrefire.addParallel(new PreFire());
-        _waitAndPrefire.addSequential(new WaitCommand(1.25));
         CommandGroup _waitAndLetRoll = new CommandGroup("rolls ball out of way");
         _waitAndLetRoll.addParallel(_waitAndPrefire);
         _waitAndLetRoll.addSequential(new WaitForEncoder(4200 - 300));
@@ -54,7 +53,6 @@ public class DriveAndShoot2Ball extends CommandGroup{
         addSequential(new WaitCommand(0.3));
         addParallel(_waitAndLetRoll());
         addSequential(new DriveForward(1, 4200));
-        addSequential(new WaitForChildren());
         addSequential(new WaitCommand(1.0));
         addSequential(new Launch());
         addParallel(_waitAndRoll());
