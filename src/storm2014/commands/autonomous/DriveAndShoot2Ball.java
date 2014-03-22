@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import edu.wpi.first.wpilibj.command.WaitForChildren;
 import storm2014.Robot;
 import storm2014.commands.DriveForward;
 import storm2014.commands.Launch;
@@ -35,7 +36,12 @@ public class DriveAndShoot2Ball extends CommandGroup{
     }
     
     private Command _waitAndLetRoll(){
+        CommandGroup _waitAndPrefire = new CommandGroup();
+        _waitAndPrefire.addSequential(new WaitCommand(1.75));
+        _waitAndPrefire.addParallel(new PreFire());
+        _waitAndPrefire.addSequential(new WaitCommand(1.25));
         CommandGroup _waitAndLetRoll = new CommandGroup("rolls ball out of way");
+        _waitAndLetRoll.addParallel(_waitAndPrefire);
         _waitAndLetRoll.addSequential(new WaitForEncoder(4200 - 300));
         _waitAndLetRoll.addSequential(new SpinRoller(0));
         return _waitAndLetRoll;
@@ -44,11 +50,11 @@ public class DriveAndShoot2Ball extends CommandGroup{
     public DriveAndShoot2Ball() {
         addSequential(new Shift(true));
         addSequential(new SetArmPosition(2));
-        addParallel(new SpinRoller((float) -0.65));
+        addParallel(new SpinRoller((float) -0.6));
         addSequential(new WaitCommand(0.3));
         addParallel(_waitAndLetRoll());
         addSequential(new DriveForward(1, 4200));
-        addParallel(new PreFire());
+        addSequential(new WaitForChildren());
         addSequential(new WaitCommand(1.0));
         addSequential(new Launch());
         addParallel(_waitAndRoll());
@@ -57,9 +63,9 @@ public class DriveAndShoot2Ball extends CommandGroup{
         addSequential(new WaitCommand(0.5));
         addSequential(new SpinRoller(0));
         addSequential(new SetArmPosition(0));
-        addSequential(new WaitCommand(1.0));
+        addSequential(new WaitCommand(0.75));
         addSequential(new SetArmPosition(2));
-        addSequential(new WaitCommand(1.25));
+        addSequential(new WaitCommand(1.0));
         addSequential(new Launch());
         addSequential(new Reset());
     }

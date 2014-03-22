@@ -196,7 +196,7 @@ public class Robot extends IterativeRobot {
         }
         
         leds.setMode(LEDStrip.DisabledMode);
-        
+        catapult.resetCatapult();
     }
     
     double pulseCount = 0;
