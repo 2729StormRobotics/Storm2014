@@ -24,7 +24,7 @@ public class PreFire extends Command{
 
     protected void initialize() {
         _mode = Robot.leds.getMode();
-        Robot.leds.setMode(LEDStrip.SetColorMode,(byte)255,(byte)0,(byte)0);
+//        Robot.leds.setMode(LEDStrip.SetColorMode,(byte)255,(byte)0,(byte)0);
     }
 
     protected void execute() {
@@ -37,7 +37,7 @@ public class PreFire extends Command{
 
     protected void end() {
         if(Robot.catapult.isLatched()) Robot.catapult.resetCatapult();
-        Robot.leds.setMode(_mode);
+//        Robot.leds.setMode(_mode);
     }
 
     protected void interrupted() {
