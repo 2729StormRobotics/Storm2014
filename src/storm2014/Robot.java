@@ -75,6 +75,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putData("Arms out", new SetArmPosition(2));
         SmartDashboard.putData("Arms in", new SetArmPosition(0));
+        SmartDashboard.putData("Arms in quick", new SetArmPosition(0,false));
         
         // The names, and corresponding Commands of our autonomous modes
         autonomiceNames = new String[]{"Drive Forward","1 Ball Hot","1 Ball Blind","2 Ball"};
