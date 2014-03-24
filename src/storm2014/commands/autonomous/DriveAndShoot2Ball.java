@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.command.WaitForChildren;
 import storm2014.Robot;
 import storm2014.commands.DriveForward;
+import storm2014.commands.FireCatapult;
 import storm2014.commands.Launch;
 import storm2014.commands.PreFire;
 import storm2014.commands.Reset;
@@ -44,7 +45,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
         
         CommandGroup _waitAndPrefire = new CommandGroup();
         _waitAndPrefire.addSequential(new WaitCommand(0.75));
-        _waitAndPrefire.addParallel(new PreFire());
+        _waitAndPrefire.addParallel(new FireCatapult(true));
         
         CommandGroup _waitAndLetRoll = new CommandGroup("rolls ball out of way");
         _waitAndLetRoll.addParallel(_waitAndPrefire);
@@ -62,6 +63,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
         addParallel(_waitAndLetRoll());
         addSequential(new DriveForward(1, 4200));
         addSequential(new WaitCommand(1.0));
+        addSequential(new WaitForChildren());
         addSequential(new Launch());
         addParallel(_waitAndRoll());
         addSequential(new Reset());
