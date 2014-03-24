@@ -54,7 +54,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
             }
             
             protected void initialize() {
-                Robot.catapult.fireCatapult();
+                Robot.catapult.UNSAFEFireCatapult();
             }
 
             protected void execute() {}
