@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.commands.DriveForward;
+import storm2014.commands.PreFire;
 import storm2014.commands.SetArmPosition;
 import storm2014.commands.autonomous.DriveAndShoot;
 import storm2014.commands.autonomous.DriveAndShoot2Ball;
@@ -75,6 +76,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putData("Arms out", new SetArmPosition(2));
         SmartDashboard.putData("Arms in", new SetArmPosition(0));
+        SmartDashboard.putData("Prefire", new PreFire());
         SmartDashboard.putData("Arms in quick", new SetArmPosition(0,false));
         
         // The names, and corresponding Commands of our autonomous modes

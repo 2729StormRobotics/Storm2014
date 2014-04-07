@@ -7,6 +7,7 @@
 package storm2014.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import storm2014.Robot;
 import storm2014.subsystems.LEDStrip;
 
@@ -21,14 +22,18 @@ public class PreFire extends Command{
     }
    
     int _mode;
+    long _currTime, _startTime;
 
     protected void initialize() {
         _mode = Robot.leds.getMode();
+        _startTime = System.currentTimeMillis();
 //        Robot.leds.setMode(LEDStrip.SetColorMode,(byte)255,(byte)0,(byte)0);
     }
 
     protected void execute() {
         if(Robot.catapult.isLatched()) Robot.catapult.fireCatapult();
+        _currTime = System.currentTimeMillis();
+        SmartDashboard.putBoolean("Prefire ready", _currTime - _startTime >= 1.25 * 1000);
     }
 
     protected boolean isFinished() {
@@ -36,6 +41,7 @@ public class PreFire extends Command{
     }
 
     protected void end() {
+        SmartDashboard.putBoolean("PreFire Ready", false);
         if(Robot.catapult.isLatched()) Robot.catapult.resetCatapult();
 //        Robot.leds.setMode(_mode);
     }
