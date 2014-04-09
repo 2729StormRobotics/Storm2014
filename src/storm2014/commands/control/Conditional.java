@@ -11,6 +11,7 @@ import java.util.Enumeration;
 public abstract class Conditional extends Command {
     private final PublicCommand _ifTrue,_ifFalse;
     private PublicCommand _running = null;
+    private boolean _firstRun = true;
 
     public Conditional(final Command ifTrue,final Command ifFalse) {
         super("Condition?" + (ifTrue  == null ? "" : ifTrue .getName()) +
@@ -50,6 +51,7 @@ public abstract class Conditional extends Command {
                 _running.initialize();
             }
         }
+        _firstRun = true;
     }
 
     protected void execute() {
@@ -60,27 +62,37 @@ public abstract class Conditional extends Command {
     }
 
     protected boolean isFinished() {
+        boolean firstRun = _firstRun;
+        _firstRun = false;
         if(_running == null) {
             return true;
         }
         if(_running.getCommand() instanceof WaitCommand) {
-            return !_running.getCommand().isRunning();
+            return !firstRun && !_running.getCommand().isRunning();
         } else {
             return _running.isFinished();
         }
     }
 
     protected void end() {
-        if(_running != null && !(_running.getCommand() instanceof WaitCommand)) {
-            _running._end();
-            _running.end();
+        if(_running != null) {
+            if(!(_running.getCommand() instanceof WaitCommand)) {
+                _running._end();
+                _running.end();
+            } else {
+                _running.cancel();
+            }
         }
     }
 
     protected void interrupted() {
-        if(_running != null && !(_running.getCommand() instanceof WaitCommand)) {
-            _running._interrupted();
-            _running.interrupted();
+        if(_running != null) {
+            if(!(_running.getCommand() instanceof WaitCommand)) {
+                _running._interrupted();
+                _running.interrupted();
+            } else {
+                _running.cancel();
+            }
         }
     }
 }

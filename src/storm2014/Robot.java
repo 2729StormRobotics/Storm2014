@@ -22,6 +22,7 @@ import storm2014.commands.SetArmPosition;
 import storm2014.commands.autonomous.DriveAndShoot;
 import storm2014.commands.autonomous.DriveAndShoot2Ball;
 import storm2014.commands.autonomous.DriveAndShootNoWait;
+import storm2014.commands.control.Conditional;
 import storm2014.subsystems.Catapult;
 import storm2014.subsystems.Intake;
 import storm2014.subsystems.LEDRing;
@@ -76,6 +77,7 @@ public class Robot extends IterativeRobot {
         // Initialize OI last so it doesn't try to access null subsystems
         oi         = new OI();
         
+        //SmartDashboard.putBoolean("Wait longer", true);
         SmartDashboard.putData("Arms out", new SetArmPosition(2));
         SmartDashboard.putData("Arms in", new SetArmPosition(0));
         SmartDashboard.putData("Prefire", new PreFire());
@@ -107,6 +109,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Which Autonomouse?", chooser);
         SmartDashboard.putData(Scheduler.getInstance());
         
+        /*SmartDashboard.putData("Test conditional", new Conditional(new WaitCommand(0.5), new WaitCommand(3.0)) {
+            protected boolean condition() {
+               return SmartDashboard.getBoolean("Wait longer", false);
+            }
+        });*/
         // Send sensor info to the SmartDashboard periodically
         new Command("Sensor feedback") {
             protected void initialize() {}
