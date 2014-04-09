@@ -208,6 +208,9 @@ public class Robot extends IterativeRobot {
     
     /** Called after any of the other modes ends. */
     public void disabledInit() {
+        
+        intake.setRollerRaw(0);
+        
         SmartDashboard.putBoolean("Enabled", false);
         
         if(autonomouse != null) {
@@ -218,7 +221,7 @@ public class Robot extends IterativeRobot {
         }
         
         leds.setMode(LEDStrip.DisabledMode);
-        catapult.resetCatapult();
+        catapult.UNSAFEFireCatapult(false);
     }
     
     double pulseCount = 0;

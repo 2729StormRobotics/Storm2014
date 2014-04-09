@@ -50,7 +50,7 @@ public class Catapult extends Subsystem {
     public boolean isPrefired(){
         return _solCatapult.get();
     }
-    public void UNSAFEFireCatapult(){
-        _solCatapult.set(true);
+    public void UNSAFEFireCatapult(boolean state){
+        _solCatapult.set(state);
     }
 }
