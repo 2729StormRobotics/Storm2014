@@ -23,7 +23,8 @@ public class PreFire extends Command{
    
     int _mode;
     long _currTime, _startTime;
-
+    private static final String prefireReady = "Prefire ready";
+    
     protected void initialize() {
         _mode = Robot.leds.getMode();
         _startTime = System.currentTimeMillis();
@@ -33,7 +34,7 @@ public class PreFire extends Command{
     protected void execute() {
         if(Robot.catapult.isLatched()) Robot.catapult.fireCatapult();
         _currTime = System.currentTimeMillis();
-        SmartDashboard.putBoolean("Prefire ready", _currTime - _startTime >= 1.25 * 1000);
+        SmartDashboard.putBoolean(prefireReady, _currTime - _startTime >= 1.25 * 1000);
     }
 
     protected boolean isFinished() {
@@ -41,7 +42,7 @@ public class PreFire extends Command{
     }
 
     protected void end() {
-        SmartDashboard.putBoolean("PreFire Ready", false);
+        SmartDashboard.putBoolean(prefireReady, false);
         if(Robot.catapult.isLatched()) Robot.catapult.resetCatapult();
 //        Robot.leds.setMode(_mode);
     }
