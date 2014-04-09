@@ -34,6 +34,7 @@ public class PreFire extends Command{
     protected void execute() {
         if(Robot.catapult.isLatched()) Robot.catapult.fireCatapult();
         _currTime = System.currentTimeMillis();
+        if(!Robot.catapult.isPrefired()) _startTime = System.currentTimeMillis();
         SmartDashboard.putBoolean(prefireReady, _currTime - _startTime >= 1.25 * 1000);
     }
 

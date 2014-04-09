@@ -9,7 +9,9 @@ import storm2014.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -77,6 +79,19 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Arms out", new SetArmPosition(2));
         SmartDashboard.putData("Arms in", new SetArmPosition(0));
         SmartDashboard.putData("Prefire", new PreFire());
+        SmartDashboard.putData("Arms move wait", new CommandGroup(){
+            {
+                addSequential(new SetArmPosition(0, false));
+                addSequential(new WaitCommand(0.5));
+                addSequential(new SetArmPosition(2, false));
+            }
+        });
+        SmartDashboard.putData("Arms move no wait", new CommandGroup(){
+            {
+                addSequential(new SetArmPosition(0, false));
+                addSequential(new SetArmPosition(2, false));
+            }
+        });
         SmartDashboard.putData("Arms in quick", new SetArmPosition(0,false));
         
         // The names, and corresponding Commands of our autonomous modes

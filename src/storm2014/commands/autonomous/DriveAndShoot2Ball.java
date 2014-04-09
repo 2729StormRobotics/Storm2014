@@ -18,6 +18,7 @@ import storm2014.commands.Launch;
 import storm2014.commands.PreFire;
 import storm2014.commands.Reset;
 import storm2014.commands.SetArmPosition;
+import storm2014.commands.SetLatched;
 import storm2014.commands.Shift;
 import storm2014.commands.SpinRoller;
 import storm2014.commands.WaitForEncoder;
@@ -29,19 +30,19 @@ import storm2014.subsystems.Catapult;
  */
 public class DriveAndShoot2Ball extends CommandGroup{
     
-    private Command _waitAndRoll() {
-        CommandGroup _waitAndRoll = new CommandGroup("Waits then rolls in the spinner");
-        _waitAndRoll.addSequential(new WaitCommand(1.25));
-        _waitAndRoll.addSequential(new SpinRoller(-1));
-        return _waitAndRoll;
+    private Command _waitAndIntake() {
+        CommandGroup _waitAndIntake = new CommandGroup("Waits then rolls in the spinner");
+        _waitAndIntake.addSequential(new WaitCommand(1.25));
+        _waitAndIntake.addSequential(new SpinRoller(-1));
+        return _waitAndIntake;
     }
     
     private Command _waitAndLetRoll(){
         CommandGroup _waitAndMoveArms = new CommandGroup();
         _waitAndMoveArms.addSequential(new WaitForEncoder(4200 - 1000));
-        _waitAndMoveArms.addSequential(new SetArmPosition(0));
-        _waitAndMoveArms.addSequential(new WaitCommand(0.75));
-        _waitAndMoveArms.addSequential(new SetArmPosition(2));
+        _waitAndMoveArms.addSequential(new SetArmPosition(0, false));
+        _waitAndMoveArms.addSequential(new WaitCommand(0.5)); //if the ball arrives too quickly, remove this line
+        _waitAndMoveArms.addSequential(new SetArmPosition(2, false));
         
         CommandGroup _waitAndPrefire = new CommandGroup();
         _waitAndPrefire.addSequential(new WaitCommand(0.75));
@@ -78,6 +79,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
     
     public DriveAndShoot2Ball() {
         addSequential(new Shift(true));
+        addSequential(new SetLatched(true));
         addSequential(new SetArmPosition(2,false));
         addParallel(new SpinRoller((float) -0.6));
         addSequential(new WaitCommand(0.3));
@@ -86,14 +88,14 @@ public class DriveAndShoot2Ball extends CommandGroup{
         addSequential(new WaitCommand(1.0));
         addSequential(new WaitForChildren());
         addSequential(new Launch());
-        addParallel(_waitAndRoll());
+        addParallel(_waitAndIntake());
         addSequential(new Reset());
         addParallel(new PreFire());
         addSequential(new WaitCommand(0.5));
         addSequential(new SpinRoller(0));
-        addSequential(new SetArmPosition(0));
-        addSequential(new WaitCommand(0.75));
-        addSequential(new SetArmPosition(2));
+        addSequential(new SetArmPosition(0, false));
+        addSequential(new WaitCommand(0.5));
+        addSequential(new SetArmPosition(2, false));
         addSequential(new WaitCommand(1.0));
         addSequential(new Launch());
         addSequential(new Reset());
