@@ -28,8 +28,8 @@ public class RobotMap {
     public static final int JOYDEBUG_BUTTON_PRECONFIG = 1;
     
     // PWM Ports
-    public static final int PORT_MOTOR_DRIVE_LEFT     = 2;
-    public static final int PORT_MOTOR_DRIVE_RIGHT    = 1;
+    public static final int PORT_MOTOR_DRIVE_LEFT     = 1;
+    public static final int PORT_MOTOR_DRIVE_RIGHT    = 2;
     public static final int PORT_MOTOR_ROLLER         = 3;
     public static final int PORT_MOTOR_TILTER         = 4;
     public static final int PORT_MOTOR_WINCH          = 6;
