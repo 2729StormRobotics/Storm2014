@@ -80,7 +80,7 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.putBoolean("Wait longer", true);
         SmartDashboard.putData("Arms out", new SetArmPosition(2));
         SmartDashboard.putData("Arms in", new SetArmPosition(0));
-        SmartDashboard.putData("Prefire", new PreFire());
+//        SmartDashboard.putData("Prefire", new PreFire());
         SmartDashboard.putData("Arms move wait", new CommandGroup(){
             {
                 addSequential(new SetArmPosition(0, false));

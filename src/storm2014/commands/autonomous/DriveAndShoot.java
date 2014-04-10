@@ -44,7 +44,7 @@ public class DriveAndShoot extends CommandGroup{
             }
             protected void end() {}
             protected void interrupted() {}
-        },2);
+        },1.25);
         return _waitAndDetect;
     }   
     
