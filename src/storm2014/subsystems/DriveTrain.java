@@ -64,6 +64,16 @@ public class DriveTrain extends Subsystem {
         return _rightEncoder.get();
     }
     
+    /** Reads the left encoder (+ = forward,- = back). */
+     public double getLeftSpeedEnc() {
+        return -_leftEncoder.getRate();
+    }
+
+     /** Reads the right encoder (+ = forward,- = back). */
+    public double getRightSpeedEnc() {
+        return _rightEncoder.getRate();
+    }
+    
     /** Resets both encoders. */
     public void clearEncoders(){
         _leftEncoder.reset();
@@ -90,7 +100,7 @@ public class DriveTrain extends Subsystem {
     
     /** Reads the [-1,1] value set for the left wheels. */
     public double getLeftSpeed(){
-        return _left.get();
+        return -_left.get();
     }
     
     /** Reads the [-1,1] value set for the right wheels. */

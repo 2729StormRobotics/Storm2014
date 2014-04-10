@@ -89,6 +89,6 @@ public final class Intake extends Subsystem {
     }
     
     public boolean armSafe() {
-        return getMode() == 2;
+        return getMode() != 0;
     }
 }

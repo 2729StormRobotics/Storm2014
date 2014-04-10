@@ -32,7 +32,7 @@ public class SetArmPosition extends Command {
     private void _nextMode() {
         int currMode = Robot.intake.getMode();
         if(!_step) {
-            if(_currMode != _mode) {
+            if(Robot.intake.getMode() != _mode) {
                 _currMode = _mode;
                 Robot.intake.setMode(_mode);
                 _wait.reset();

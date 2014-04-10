@@ -57,6 +57,8 @@ public class Robot extends IterativeRobot {
          SmartDashboard.putNumber("Gyro", driveTrain.getGyroAngle());
          SmartDashboard.putNumber("Left Distance", driveTrain.getLeftDistance());
          SmartDashboard.putNumber("Right Distance", driveTrain.getRightDistance());
+//         SmartDashboard.putNumber("Left speed", driveTrain.getLeftSpeedEnc());
+//         SmartDashboard.putNumber("Right speed", driveTrain.getRightSpeedEnc());
          SmartDashboard.putString("Gear", driveTrain.isHighgear() ? "High gear" : "Low gear");
          SmartDashboard.putBoolean("Latch Engaged", catapult.isLatched());
          SmartDashboard.putString("Arm mode", intake.getModeName());
@@ -85,7 +87,7 @@ public class Robot extends IterativeRobot {
         CommandGroup armsMoveWait = new CommandGroup();
         armsMoveWait.addSequential(new SetArmPosition(0, false));
         armsMoveWait.addSequential(new PrintCommand("Arms up"));
-        armsMoveWait.addSequential(new WaitCommand(0.5));
+        armsMoveWait.addSequential(new WaitCommand(0.25));
         armsMoveWait.addSequential(new PrintCommand("Arms up"));
         armsMoveWait.addSequential(new SetArmPosition(2, false));
         armsMoveWait.addSequential(new PrintCommand("Arms down"));
