@@ -32,7 +32,8 @@ public class SetArmPosition extends Command {
     private void _nextMode() {
         int currMode = Robot.intake.getMode();
         if(!_step) {
-            if(Robot.intake.getMode() != _mode) {
+            if(currMode != _mode) {
+                System.out.println("Setting arm mode");
                 _currMode = _mode;
                 Robot.intake.setMode(_mode);
                 _wait.reset();
@@ -46,6 +47,8 @@ public class SetArmPosition extends Command {
 
     protected void initialize() {
         _dir = (int)signum(_mode-Robot.intake.getMode());
+        _currMode = Robot.intake.getMode();
+        System.out.println("dir: " + _dir + ", mode: " + _currMode);
         _nextMode();
     }
 
@@ -56,7 +59,7 @@ public class SetArmPosition extends Command {
     }
 
     protected boolean isFinished() {
-        return _dir*(_mode-Robot.intake.getMode()) <= 0 && _wait.check(true);
+        return _dir*(_mode-_currMode) <= 0 && _wait.check(true);
     }
 
     protected void end() {}

@@ -85,12 +85,13 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Arms in", new SetArmPosition(0));
 //        SmartDashboard.putData("Prefire", new PreFire());
         CommandGroup armsMoveWait = new CommandGroup();
+        armsMoveWait.addSequential(new PrintCommand("Arms up"));
         armsMoveWait.addSequential(new SetArmPosition(0, false));
-        armsMoveWait.addSequential(new PrintCommand("Arms up"));
-        armsMoveWait.addSequential(new WaitCommand(0.25));
-        armsMoveWait.addSequential(new PrintCommand("Arms up"));
-        armsMoveWait.addSequential(new SetArmPosition(2, false));
+        armsMoveWait.addSequential(new PrintCommand("Arms are up"));
+        armsMoveWait.addSequential(new WaitCommand(0.5));
         armsMoveWait.addSequential(new PrintCommand("Arms down"));
+        armsMoveWait.addSequential(new SetArmPosition(2, false));
+        armsMoveWait.addSequential(new PrintCommand("Arms are down"));
         SmartDashboard.putData("Arms move wait", armsMoveWait);
         CommandGroup armsMoveNoWait = new CommandGroup();
         armsMoveNoWait.addSequential(new SetArmPosition(0, false));
