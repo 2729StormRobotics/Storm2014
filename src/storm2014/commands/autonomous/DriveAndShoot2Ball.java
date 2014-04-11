@@ -41,7 +41,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
         CommandGroup _waitAndMoveArms = new CommandGroup();
         _waitAndMoveArms.addSequential(new WaitForEncoder(4200 - 1000));
         _waitAndMoveArms.addSequential(new SetArmPosition(0, false));
-        _waitAndMoveArms.addSequential(new WaitCommand(0.5)); //if the ball arrives too quickly, remove this line
+        _waitAndMoveArms.addSequential(new WaitCommand(0.25)); //if the ball arrives too quickly, remove this line
         _waitAndMoveArms.addSequential(new SetArmPosition(2, false));
         
         CommandGroup _waitAndPrefire = new CommandGroup();
@@ -74,6 +74,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
         _waitAndLetRoll.addParallel(_waitAndMoveArms);
         _waitAndLetRoll.addSequential(new WaitForEncoder(4200 - 300));
         _waitAndLetRoll.addSequential(new SpinRoller(0));
+        _waitAndLetRoll.addSequential(new WaitForChildren());
         return _waitAndLetRoll;
     }
     
@@ -87,6 +88,7 @@ public class DriveAndShoot2Ball extends CommandGroup{
         addSequential(new DriveForward(1, 4200));
         addSequential(new WaitCommand(1.0));
         addSequential(new WaitForChildren());
+//        addSequential(new );
         addSequential(new Launch());
         addParallel(_waitAndIntake());
         addSequential(new Reset());
