@@ -31,7 +31,7 @@ public class DriveAndShoot extends CommandGroup{
     
     private Command _waitAndDetect(){
         CommandGroup _waitAndDetect = new CommandGroup("Waits for hot goal to switch at start of match, then scans for hot goal");
-        _waitAndDetect.addSequential(new WaitCommand(0.75));
+        _waitAndDetect.addSequential(new WaitCommand(0.25));
         _waitAndDetect.addParallel(new Command() {
             protected void initialize() {
                 foundHotTarget = VisionSystem.foundHotTarget();
@@ -44,22 +44,24 @@ public class DriveAndShoot extends CommandGroup{
             }
             protected void end() {}
             protected void interrupted() {}
-        },1.25);
+        },1.75);
         return _waitAndDetect;
     }   
     
     public DriveAndShoot(){
         addParallel(_waitAndDetect());
         addSequential(new Shift(true));
+        addSequential(new WaitCommand(0.25));
         addSequential(new DriveForward(1, 4200));
-        addSequential(new Conditional(new WaitCommand(.25), new WaitCommand(3)) { //may lower wait time on the waitcommand
+        addSequential(new Conditional(new WaitCommand(.01), new WaitCommand(3)) { //may lower wait time on the waitcommand
             protected boolean condition() {
                 return foundHotTarget;
             }
         });
-        addSequential(new SetArmPosition(2));
+        addSequential(new SetArmPosition(1));
         addParallel(new PreFire());
-        addSequential(new WaitCommand(1.25));
+        addSequential(new SetArmPosition(2));
+        addSequential(new WaitCommand(0.75));
         addSequential(new Launch());
     }
     
