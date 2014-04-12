@@ -14,6 +14,7 @@ import storm2014.commands.DriveForward;
 import storm2014.commands.FireCatapult;
 import storm2014.commands.Launch;
 import storm2014.commands.PreFire;
+import storm2014.commands.Reset;
 import storm2014.commands.SetArmPosition;
 import storm2014.commands.Shift;
 import storm2014.commands.control.Conditional;
@@ -52,7 +53,7 @@ public class DriveAndShoot extends CommandGroup{
         addParallel(_waitAndDetect());
         addSequential(new Shift(true));
         addSequential(new WaitCommand(0.25));
-        addSequential(new DriveForward(1, 4200));
+        addSequential(new DriveForward(1, 2800));
         addSequential(new Conditional(new WaitCommand(.01), new WaitCommand(3)) { //may lower wait time on the waitcommand
             protected boolean condition() {
                 return foundHotTarget;
@@ -61,8 +62,9 @@ public class DriveAndShoot extends CommandGroup{
         addSequential(new SetArmPosition(1));
         addParallel(new PreFire());
         addSequential(new SetArmPosition(2));
-        addSequential(new WaitCommand(0.75));
+        addSequential(new WaitCommand(1));
         addSequential(new Launch());
+        addSequential(new Reset());
     }
     
 }
